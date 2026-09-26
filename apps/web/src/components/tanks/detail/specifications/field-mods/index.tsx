@@ -13,6 +13,7 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
+import { ScrollRail } from "@/components/scroll-rail";
 import {
   Tooltip,
   TooltipContent,
@@ -279,102 +280,108 @@ export function TankFieldModifications({
           <PanelTitle>{tSection("field-mods")}</PanelTitle>
           {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
-        <PanelContent className="overflow-x-auto px-4 py-6">
-          <div className="relative flex items-start gap-6">
-            {/* The rail behind the level nodes. */}
-            <span
-              aria-hidden
-              className="absolute top-6 right-2 left-2 border-t border-fd-border"
-            />
-            {levels.map((lv) => {
-              const steps = fieldMods.steps.filter((s) => s.level === lv);
-              const main = steps.find((s) => s.kind !== "pair");
-              const pair = steps.find((s) => s.kind === "pair")?.pair ?? null;
-              const unlocked = lv <= level;
-              return (
-                <div
-                  key={lv}
-                  className="relative flex min-w-14 flex-col items-center gap-3"
-                >
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <button
-                        type="button"
-                        // Clicking the current level steps back below it, so the
-                        // last node also toggles off.
-                        onClick={() => onLevel(lv === level ? lv - 1 : lv)}
-                        aria-pressed={unlocked}
-                        aria-label={tWidget("level", { n: lv })}
-                        className="cursor-pointer"
-                      >
-                        <span
-                          className={cn(
-                            "relative flex size-12 items-center justify-center rounded-lg border-2 bg-fd-background transition-colors",
-                            unlocked
-                              ? "border-brand/60 bg-brand/10"
-                              : "border-fd-border hover:bg-fd-secondary/30",
-                          )}
+        {/* On the rail like the tech tree above it: the progression is eight
+            levels wide and a phone shows four, and a native scrollbar under a
+            grid of icons says nothing about the ones past the edge. The padding
+            rides the scroller, as it did when the scroller was this box. */}
+        <PanelContent className="p-0">
+          <ScrollRail className="px-4 py-6">
+            <div className="relative flex items-start gap-6">
+              {/* The rail behind the level nodes. */}
+              <span
+                aria-hidden
+                className="absolute top-6 right-2 left-2 border-t border-fd-border"
+              />
+              {levels.map((lv) => {
+                const steps = fieldMods.steps.filter((s) => s.level === lv);
+                const main = steps.find((s) => s.kind !== "pair");
+                const pair = steps.find((s) => s.kind === "pair")?.pair ?? null;
+                const unlocked = lv <= level;
+                return (
+                  <div
+                    key={lv}
+                    className="relative flex min-w-14 flex-col items-center gap-3"
+                  >
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          // Clicking the current level steps back below it, so the
+                          // last node also toggles off.
+                          onClick={() => onLevel(lv === level ? lv - 1 : lv)}
+                          aria-pressed={unlocked}
+                          aria-label={tWidget("level", { n: lv })}
+                          className="cursor-pointer"
                         >
-                          {main?.kind === "feature" && main.feature?.image ? (
-                            <Image
-                              src={main.feature.image}
-                              alt=""
-                              width={40}
-                              height={27}
-                              className="object-contain opacity-90"
-                              style={{ width: 40, height: 27 }}
-                            />
-                          ) : (
-                            <span
-                              className={cn(
-                                "text-sm font-semibold",
-                                unlocked
-                                  ? "text-brand"
-                                  : "text-fd-muted-foreground",
-                              )}
-                            >
-                              {toRoman(lv)}
-                            </span>
-                          )}
-                        </span>
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top" className="max-w-none">
-                      {main?.kind === "modification" && main.modification ? (
-                        <ModTooltip item={main.modification} />
-                      ) : (
-                        <div className="w-48 text-xs">
-                          <div className="font-medium">
-                            {main?.feature?.name ?? tWidget("level", { n: lv })}
+                          <span
+                            className={cn(
+                              "relative flex size-12 items-center justify-center rounded-lg border-2 bg-fd-background transition-colors",
+                              unlocked
+                                ? "border-brand/60 bg-brand/10"
+                                : "border-fd-border hover:bg-fd-secondary/30",
+                            )}
+                          >
+                            {main?.kind === "feature" && main.feature?.image ? (
+                              <Image
+                                src={main.feature.image}
+                                alt=""
+                                width={40}
+                                height={27}
+                                className="object-contain opacity-90"
+                                style={{ width: 40, height: 27 }}
+                              />
+                            ) : (
+                              <span
+                                className={cn(
+                                  "text-sm font-semibold",
+                                  unlocked
+                                    ? "text-brand"
+                                    : "text-fd-muted-foreground",
+                                )}
+                              >
+                                {toRoman(lv)}
+                              </span>
+                            )}
+                          </span>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-none">
+                        {main?.kind === "modification" && main.modification ? (
+                          <ModTooltip item={main.modification} />
+                        ) : (
+                          <div className="w-48 text-xs">
+                            <div className="font-medium">
+                              {main?.feature?.name ?? tWidget("level", { n: lv })}
+                            </div>
+                            <div className="mt-1 text-background/60">
+                              {main?.feature?.description ??
+                                t("no-characteristic-effect")}
+                            </div>
                           </div>
-                          <div className="mt-1 text-background/60">
-                            {main?.feature?.description ??
-                              t("no-characteristic-effect")}
-                          </div>
-                        </div>
-                      )}
-                    </TooltipContent>
-                  </Tooltip>
-                  {pair ? (
-                    <div className="flex flex-col gap-2">
-                      <PairTile
-                        item={pair.first}
-                        mounted={unlocked && pairChoices[pair.key] === "first"}
-                        locked={!unlocked}
-                        onPick={() => onTogglePair(pair.key, "first")}
-                      />
-                      <PairTile
-                        item={pair.second}
-                        mounted={unlocked && pairChoices[pair.key] === "second"}
-                        locked={!unlocked}
-                        onPick={() => onTogglePair(pair.key, "second")}
-                      />
-                    </div>
-                  ) : null}
-                </div>
-              );
-            })}
-          </div>
+                        )}
+                      </TooltipContent>
+                    </Tooltip>
+                    {pair ? (
+                      <div className="flex flex-col gap-2">
+                        <PairTile
+                          item={pair.first}
+                          mounted={unlocked && pairChoices[pair.key] === "first"}
+                          locked={!unlocked}
+                          onPick={() => onTogglePair(pair.key, "first")}
+                        />
+                        <PairTile
+                          item={pair.second}
+                          mounted={unlocked && pairChoices[pair.key] === "second"}
+                          locked={!unlocked}
+                          onPick={() => onTogglePair(pair.key, "second")}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          </ScrollRail>
         </PanelContent>
       </Panel>
     </TooltipProvider>
