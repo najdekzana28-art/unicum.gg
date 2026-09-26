@@ -407,6 +407,12 @@ async function PlayerProfileServer({
         .catch(() => null)
     : null;
 
+  // The panel names everything on the server (the catalogues that do it never
+  // cross the wire) and hands finished text to the client boxes that draw it.
+  const loadoutPanel = loadout ? (
+    <PlayerTankLoadoutPanel loadout={loadout} region={region} locale={locale} />
+  ) : null;
+
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
 
@@ -448,11 +454,7 @@ async function PlayerProfileServer({
         initialData={detail}
         initialTanks={initialTanks}
         tankDetail={tankDetail}
-        tankLoadout={
-          loadout ? (
-            <PlayerTankLoadoutPanel loadout={loadout} locale={locale} />
-          ) : null
-        }
+        tankLoadout={loadoutPanel}
         initialSessions={initialSessions}
         initialAchievements={initialAchievements}
         initialTournaments={initialTournaments}

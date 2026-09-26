@@ -185,15 +185,16 @@ export function PlayerTankDetailPanel({
           )}
         </div>
 
-        {/* Last, the way the game orders its own vehicle record. Rendered
-            straight from the payload: the medals come stored, so there is
-            nothing to wait for and nothing to defer. */}
-        {awards ? <TankAwards awards={awards} locale={locale} /> : null}
-
-        {/* After the game's own sections, because it is the one thing here the
-            client has no screen for: the record above is Wargaming's, this is
-            what the player built. */}
+        {/* Above the medals, which is not the game's own order and is the
+            right one here: the record above is what Wargaming counted, this
+            is what the player chose, and it is the half somebody reads a
+            stranger's vehicle page for. A cabinet of medals is a nice thing
+            to have seen, not a thing anybody came to copy. */}
         {loadout}
+
+        {/* Rendered straight from the payload: the medals come stored, so
+            there is nothing to wait for and nothing to defer. */}
+        {awards ? <TankAwards awards={awards} locale={locale} /> : null}
 
         <p className={`text-xs ${styles.mutedText}`}>
           {t("updated")} <RelativeTime date={new Date(detail.updatedAt)} />

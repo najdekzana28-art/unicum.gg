@@ -29,7 +29,7 @@ export function categoryColor(cat: string | null): string | null {
 // returns the plain artefact image, same as the standard device, so the marker
 // is this in-game overlay). Served straight from our wot.assets mirror (WG
 // branch) rather than committed into the repo, like every other game asset.
-const GRADE_OVERLAY: Record<string, string> = {
+export const GRADE_OVERLAY: Record<string, string> = {
   bond: iconUrl("artefact/equipmentPlus_overlay.png"),
   bounty: iconUrl("artefact/equipmentTrophyBasic_overlay.png"),
   bountyUpgraded: iconUrl("artefact/equipmentTrophyUpgraded_overlay.png"),
