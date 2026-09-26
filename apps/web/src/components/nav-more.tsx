@@ -42,6 +42,7 @@ export function NavMore() {
 
   return (
     <NavMoreMenu
+      id="more"
       text={t("label")}
       // Eight cards, so four across (see NavMoreMenu): each family is one
       // row, the same cards as every other menu, ordered rather than titled.

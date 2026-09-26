@@ -83,6 +83,7 @@ export function NavSectionMenu({ section }: { section: NavSectionId }) {
 
   return (
     <NavMoreMenu
+      id={section}
       text={data.label}
       active={active}
       items={data.links.map((link) => ({
