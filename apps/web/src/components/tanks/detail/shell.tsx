@@ -191,7 +191,21 @@ export function TankShell({
             separate tokens and not the same colour, rgb(22) against rgb(18), so
             the `fd-` one made the hero a shade darker than the page it sits in
             rather than continuous with it. */}
-                <TankHero className="dark relative min-h-[300px] overflow-hidden bg-background text-fd-foreground sm:min-h-0">
+                {/* **Three layers on a desk, three blocks on a phone.** The title,
+            the studio and the cost are stacked on top of each other here, which
+            is the whole design at 1280 and unreadable at 390: a 300px band held
+            a 210px dial, an 84px control bar, a 125px cost panel and the title,
+            and every one of them was drawn over the others (the dial ended up
+            63px ABOVE the hero, in the nav). Below `sm` the hero is a flex
+            column instead and each of the three takes its own turn, in the
+            order they read: what the tank is, what it looks like, what it
+            costs. Above `sm` nothing moves: the column is `block` again and
+            every layer goes back to `absolute inset-0`. */}
+                <TankHero className="dark relative flex flex-col overflow-hidden bg-background text-fd-foreground sm:block sm:min-h-0">
+                  {/* The studio: the picture, its light, and the controls that
+              belong to it. One box, so it is one band on a phone and the full
+              hero on a desk. */}
+                  <div className="relative order-2 h-80 w-full shrink-0 sm:absolute sm:inset-0 sm:h-auto">
                   {/* Soft spotlight behind the vehicle. It is what lights the plate
               once the model has replaced the photograph. */}
                   <div
@@ -286,29 +300,15 @@ export function TankShell({
                         favoriteItem={favoriteItem}
                       />
                     </div>
-                    {specs && (
-                      /* Marked so the viewer's dial can stand clear of it. The two
-                  share this corner from different components, one of them
-                  rendered on the server with no ref to hand over, and the dial
-                  used to guess a height that fits a tech-tree tank's five lines
-                  and floats a long way above a premium's one. */
-                      <div
-                        data-hero-cost
-                        className="pointer-events-auto absolute bottom-4 right-4 z-10 sm:bottom-6 sm:right-6"
-                      >
-                        <TankCost
-                          specs={specs}
-                          region={region}
-                          isReward={meta.isReward}
-                        />
-                      </div>
-                    )}
                   </div>
-                  {/* Left in flow rather than positioned with the rest: on a narrow
-              screen the hero has no aspect to give it a height and this block is
-              what sets one, so taking it out of the flow would collapse it. */}
+                  </div>
+                  {/* Left in flow rather than positioned with the rest: on a wide
+              screen this block is what gives the hero its height, through the
+              band's aspect, so taking it out of the flow would collapse it.
+              First of the three on a phone: the reader wants to know which tank
+              they opened before they are shown it. */}
                   <div
-                    className={`pointer-events-none relative z-10 ${HERO_COLUMN} ${HERO_BAND}`}
+                    className={`pointer-events-none relative order-1 z-10 ${HERO_COLUMN} ${HERO_BAND}`}
                   >
                     {/* **The words let the vehicle through.** They sit over the studio
               and they are not a surface anyone means to touch, so catching the
@@ -389,6 +389,34 @@ export function TankShell({
                       </div>
                     </div>
                   </div>
+                  {specs && (
+                    /* Marked so the viewer's dial can stand clear of it. The two
+                share this corner from different components, one of them
+                rendered on the server with no ref to hand over, and the dial
+                used to guess a height that fits a tech-tree tank's five lines
+                and floats a long way above a premium's one. The measurement is
+                what makes the phone layout free: with the panel below the
+                studio rather than inside it, the gap to clear comes out
+                negative and the dial drops back to its own corner.
+
+                Its own layer rather than sitting with the actions, because the
+                two want different things on a phone: the actions stay over the
+                picture, and the cost is a table to read under it. */
+                    <div
+                      className={`relative order-3 z-10 ${HERO_COLUMN} sm:pointer-events-none sm:absolute sm:inset-0`}
+                    >
+                      <div
+                        data-hero-cost
+                        className="px-6 pb-8 sm:pointer-events-auto sm:absolute sm:right-6 sm:bottom-6 sm:p-0"
+                      >
+                        <TankCost
+                          specs={specs}
+                          region={region}
+                          isReward={meta.isReward}
+                        />
+                      </div>
+                    </div>
+                  )}
                   {/* Covers everything above while a battle is playing, so the hero
               doubles as the player instead of the page growing a second one. */}
                   <TankVideoHeroPlayer />

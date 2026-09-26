@@ -310,7 +310,10 @@ export function TankViewer({
             that wants them asks for itself. Without this the dial is drawn,
             reads correctly, and cannot be pointed at. */}
           <div
-            className="pointer-events-auto absolute right-3 z-10"
+            // Not on a phone: the dial is a fixed 210px square, which is more
+            // than half the width of the screen and all of the studio's height,
+            // so it covers the vehicle it reads the gun of.
+            className="pointer-events-auto absolute right-3 z-10 max-sm:hidden"
             style={{
               // Filling the window or the screen leaves the cost behind on the
               // page, so there is nothing left to clear.
