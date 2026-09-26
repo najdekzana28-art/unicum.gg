@@ -62,15 +62,24 @@ export function PlayersOnline() {
     recorded?.clusters ?? [],
   );
 
+  const count = total == null ? "—" : num(FMT_FORMAT).format(total);
+
   // The count is the shortest way into the servers page, which is this number
   // over time: the tooltip answers "who is where right now", the link answers
   // everything after that.
+  //
+  // Both wordings ship and CSS picks one, like the leaderboards' three metrics:
+  // this is the chrome of every page, most of them prerendered, so the width
+  // available is not something the server can read. The short one is what makes
+  // the strip fit a phone once a signed-in reader's nickname and clan tag sit
+  // at the other end of it.
   const label = (
     <Link
       href={ROUTES.SERVERS(region)}
       className="shrink-0 font-medium tabular-nums text-fd-muted-foreground transition-colors hover:text-fd-foreground"
     >
-      {t("count", { count: total == null ? "—" : num(FMT_FORMAT).format(total) })}
+      <span className="hidden sm:inline">{t("count", { count })}</span>
+      <span className="sm:hidden">{t("count-short", { count })}</span>
     </Link>
   );
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { SignOutIcon } from "@phosphor-icons/react";
 import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { useEffect, useState } from "react";
@@ -62,17 +63,21 @@ export function LoginWidget() {
       ? ROUTES.PLAYER(wg.region, session.user.name)
       : null;
     const clanTag = clan?.userId === session.user.id ? clan.tag : null;
+    // The nickname is the one thing here with no bound: a player names
+    // themselves, and the top strip is the same 36 pixels on a phone as on a
+    // desktop. So it is what gives way first, truncating rather than pushing
+    // the tag and the log out off the edge, which is what it did.
     const name = (
-      <span className="flex items-baseline gap-1">
+      <span className="flex min-w-0 items-baseline gap-1">
         {profileHref ? (
           <Link
             href={profileHref}
-            className="font-medium tabular-nums text-fd-foreground hover:underline"
+            className="truncate font-medium tabular-nums text-fd-foreground hover:underline"
           >
             {session.user.name}
           </Link>
         ) : (
-          <span className="font-medium tabular-nums text-fd-foreground">
+          <span className="truncate font-medium tabular-nums text-fd-foreground">
             {session.user.name}
           </span>
         )}
@@ -80,19 +85,19 @@ export function LoginWidget() {
           (wg ? (
             <Link
               href={ROUTES.CLAN(wg.region, clanTag.tag)}
-              className="tabular-nums text-fd-foreground hover:underline"
+              className="shrink-0 tabular-nums text-fd-foreground hover:underline"
             >
               <ClanTag tag={clanTag.tag} color={clanTag.color} />
             </Link>
           ) : (
-            <span className="tabular-nums text-fd-foreground">
+            <span className="shrink-0 tabular-nums text-fd-foreground">
               <ClanTag tag={clanTag.tag} color={clanTag.color} />
             </span>
           ))}
       </span>
     );
     return (
-      <span className="flex shrink-0 items-center gap-2">
+      <span className="flex min-w-0 items-center gap-2">
         {name}
         <button
           type="button"
@@ -101,9 +106,14 @@ export function LoginWidget() {
               fetchOptions: { onSuccess: () => window.location.reload() },
             })
           }
-          className="cursor-pointer text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+          title={t("logout")}
+          aria-label={t("logout")}
+          className="shrink-0 cursor-pointer text-fd-muted-foreground transition-colors hover:text-fd-foreground"
         >
-          {t("logout")}
+          {/* An icon on a phone, where the words would cost a third of the
+              strip. The label stays the accessible name either way. */}
+          <span className="hidden sm:inline">{t("logout")}</span>
+          <SignOutIcon className="size-4 sm:hidden" aria-hidden />
         </button>
       </span>
     );

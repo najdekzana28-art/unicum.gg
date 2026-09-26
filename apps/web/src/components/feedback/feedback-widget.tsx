@@ -1,5 +1,6 @@
 "use client";
 
+import { ChatCircleTextIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -32,8 +33,9 @@ import {
 const TOPICS = Object.values(FeedbackTopic);
 
 /**
- * Top-bar feedback affordance: a small "Feedback" trigger that opens a popover
- * with a topic selector, a free-text field and an optional sentiment emoji row.
+ * Top-bar feedback affordance: a small "Feedback" trigger (a speech bubble on a
+ * phone, where the strip has no room for the word) that opens a popover with a
+ * topic selector, a free-text field and an optional sentiment emoji row.
  * On submit it POSTs to `/api/feedback`, which forwards it to our private
  * Discord channel (attaching the sender's WG identity server-side when signed
  * in). Rendered only when the feature is configured (see the top-bar).
@@ -88,9 +90,15 @@ export function FeedbackWidget() {
       <PopoverTrigger asChild>
         <button
           type="button"
+          title={t("trigger")}
+          aria-label={t("trigger")}
           className="shrink-0 cursor-pointer font-medium text-fd-muted-foreground transition-colors hover:text-fd-foreground"
         >
-          {t("trigger")}
+          {/* A speech bubble on a phone: the word is the widest thing on the
+              strip in several languages, and this one is understood without
+              it. The label stays the accessible name. */}
+          <span className="hidden sm:inline">{t("trigger")}</span>
+          <ChatCircleTextIcon className="size-4 sm:hidden" aria-hidden />
         </button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80 p-3">

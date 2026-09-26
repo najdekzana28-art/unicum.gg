@@ -24,9 +24,12 @@ export function TopBar({ feedbackEnabled }: { feedbackEnabled: boolean }) {
   return (
     <div className="border-b border-fd-border bg-fd-background">
       <div className="mx-auto w-full max-w-7xl">
-        <div className="relative flex h-9 items-center justify-between gap-3 border-x border-fd-border px-4 text-xs">
+        <div className="relative flex h-9 items-center justify-between gap-2 border-x border-fd-border px-4 text-xs sm:gap-3">
           <PlayersOnline />
-          <div className="flex items-center gap-3">
+          {/* `min-w-0` so the signed-in nickname is what truncates when the
+              strip runs out of room, rather than the row overflowing the page
+              and taking the horizontal scrollbar with it. */}
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             {/* /support is also linked from the footer; the persistent
                 top-bar CTA doesn't need to prefetch it too. It is the only
                 place the navigation offers it, the "More" menu included. */}
