@@ -3,12 +3,27 @@
 import { forwardRef, type ReactNode } from "react";
 import { Slot } from "radix-ui";
 
+import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";
 
 // A segmented row of pills: the site's filter control, used by the tank and
 // map galleries, the leaderboards and the glossary index. A primitive rather
 // than part of any one of them, which is also where the Radix import belongs.
 
+/**
+ * The row itself, which scrolls rather than wraps and says so with the rail's
+ * arrow, like the tab bars.
+ *
+ * It had a native scrollbar, and that is what a reader is told nothing by: the
+ * tank catalogue's eleven nations hide 168px of themselves on a phone, the
+ * overlay bar appears only once you are already scrolling, and on Windows the
+ * permanent one is drawn straight through the chips. `compact` because the row
+ * is a single line of them, where the full-size button is taller than the row.
+ *
+ * `overflow-hidden` on the frame rather than the scroller, since the two are no
+ * longer the same box: the rounded corners are here and the chips slide past
+ * them.
+ */
 export function ChipRow({
   children,
   className,
@@ -17,14 +32,16 @@ export function ChipRow({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "flex w-fit max-w-full overflow-x-auto rounded-md border border-fd-border",
+    <ScrollRail
+      compact
+      containerClassName={cn(
+        "w-fit max-w-full overflow-hidden rounded-md border border-fd-border",
         className,
       )}
+      className="flex"
     >
       {children}
-    </div>
+    </ScrollRail>
   );
 }
 
