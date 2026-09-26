@@ -169,13 +169,25 @@ export function LiveStreams({
     <>
       <h1 className="sr-only">{t("heading", { name: APP.NAME })}</h1>
       <Panel className="flex flex-col">
-        <PanelHeader className="flex items-center justify-between gap-3">
+        {/* Wrapping rather than squeezing: `justify-between` alone gave the
+            title whatever the buttons left it, which on a phone was 131px of
+            a 356px row and a heading four lines tall. */}
+        <PanelHeader className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <PanelTitle>
             <span className="mr-2 text-[#eb0400]">●</span>
-            {t("title")}{" "}
+            {/* One word on a phone. The row has 356px for a 20px heading, a
+                period pill whose longest translation is 196px of it, and two
+                buttons, so the full sentence cannot fit beside them in any
+                language: it wrapped to three lines, or to two once shortened
+                to "Streaming now". Both ship and CSS picks one. */}
+            <span className="hidden sm:inline">{t("title")}</span>
+            <span className="sm:hidden">{t("title-short")}</span>{" "}
             <PeriodSelect period={period} onChange={setPeriod} />
           </PanelTitle>
-          <div className="flex items-center gap-1.5">
+          {/* `ms-auto` for the languages where even this wraps: the buttons
+              then sit at the right of their own line rather than under the
+              title, which reads as a row rather than as an accident. */}
+          <div className="ms-auto flex items-center gap-1.5">
             <AddChannelCta />
             {onHide ? (
               <button

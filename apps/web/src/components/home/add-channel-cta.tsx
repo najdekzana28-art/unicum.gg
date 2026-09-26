@@ -50,10 +50,13 @@ export function AddChannelCta() {
   if (!hydrated || isPending) return null;
   if (loggedIn && twitchLinked === true) return null;
 
+  // The glyph alone on a phone: this sits beside a panel title in a 356px row,
+  // and the words are wider than everything else in it put together. The label
+  // stays the accessible name on both buttons below.
   const label = (
     <>
-      <TwitchLogoIcon weight="bold" className="mr-1.5 size-4" />
-      {t("label")}
+      <TwitchLogoIcon weight="bold" className="size-4 sm:mr-1.5" />
+      <span className="hidden sm:inline">{t("label")}</span>
     </>
   );
 
@@ -64,7 +67,9 @@ export function AddChannelCta() {
         type="button"
         variant="outline"
         size="sm"
-        className="shrink-0"
+        title={t("label")}
+        aria-label={t("label")}
+        className="shrink-0 max-sm:px-2"
         onClick={() =>
           authClient.linkSocial({ provider: "twitch", callbackURL: "/" })
         }
@@ -78,7 +83,13 @@ export function AddChannelCta() {
   // `/api/connect/twitch` endpoint which chains straight into the Twitch link.
   return (
     <LoginButton callbackURL="/api/connect/twitch">
-      <Button variant="outline" size="sm" className="shrink-0">
+      <Button
+        variant="outline"
+        size="sm"
+        title={t("label")}
+        aria-label={t("label")}
+        className="shrink-0 max-sm:px-2"
+      >
         {label}
       </Button>
     </LoginButton>
