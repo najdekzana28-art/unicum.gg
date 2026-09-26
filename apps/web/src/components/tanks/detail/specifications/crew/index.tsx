@@ -285,10 +285,15 @@ export function TankCrew({
   return (
     <TooltipProvider delayDuration={100}>
       <Panel screenLines={screenLines}>
+        {/* Wrapping, alone among the tab's panels, because alone among them it
+            carries a slider: the label, the track and the figure are 276px of
+            a 356px row, so on a phone `justify-between` left the title 128 and
+            it broke over two lines while the row still ran 47px past the panel.
+            Below the title the control has the width it needs. */}
         <PanelHeader
           screenLines={screenLines}
           className={cn(
-            "flex items-center justify-between gap-4",
+            "flex flex-wrap items-center justify-between gap-x-4 gap-y-2",
             headerBorder && "border-b border-fd-border",
           )}
         >
@@ -296,7 +301,7 @@ export function TankCrew({
             <PanelTitle>{tSection("crew-skills")}</PanelTitle>
             {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
           </div>
-          <div className="flex items-center gap-2 text-xs text-fd-muted-foreground">
+          <div className="ms-auto flex items-center gap-2 text-xs text-fd-muted-foreground">
             <span className="whitespace-nowrap">{tSection("crew-level")}</span>
             <Slider
               // In game the major qualification never drops below 50%
