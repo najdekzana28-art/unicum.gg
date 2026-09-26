@@ -9,6 +9,7 @@ import {
 } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { styles } from "@/lib/styles";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   Select,
@@ -47,7 +48,7 @@ export function RatingSelector() {
       <SelectTrigger
         size="sm"
         aria-label={t("label")}
-        className="h-8 w-fit gap-1.5 rounded-full border-fd-border bg-fd-secondary/50 px-2.5 text-xs font-medium uppercase"
+        className={styles.navPill}
       >
         <SelectValue>{RATING_METRIC_LABEL[metric]}</SelectValue>
       </SelectTrigger>

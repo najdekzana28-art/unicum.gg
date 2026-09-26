@@ -36,4 +36,18 @@ export const styles = {
    * figures gave the table 77px of horizontal scroll over nothing at all.
    */
   hiddenFixedColumn: "max-sm:invisible max-sm:overflow-hidden",
+
+  /**
+   * The small round control the rating, region and language pickers all wear,
+   * in the navbar, in the mobile menu and in the footer. It was the same string
+   * written out in each of the three.
+   *
+   * Tighter below `sm` because of where they sit: fumadocs lays the mobile
+   * menu's secondary row out with no wrapping, and the three pills plus the two
+   * icon links and the theme switch came to eight pixels more than a 390px
+   * phone had. The padding is what pays for that, rather than a control
+   * leaving the row.
+   */
+  navPill:
+    "h-8 w-fit gap-1 rounded-full border-fd-border bg-fd-secondary/50 px-2 text-xs font-medium uppercase sm:gap-1.5 sm:px-2.5",
 } as const;

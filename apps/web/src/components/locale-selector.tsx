@@ -12,6 +12,7 @@ import {
   localizePath,
   type Locale,
 } from "@/lib/translations";
+import { styles } from "@/lib/styles";
 import {
   Select,
   SelectContent,
@@ -58,7 +59,7 @@ export function LocaleSelector() {
       <SelectTrigger
         size="sm"
         aria-label={t("label")}
-        className="h-8 w-fit gap-1.5 rounded-full border-fd-border bg-fd-secondary/50 px-2.5 text-xs font-medium uppercase"
+        className={styles.navPill}
       >
         <SelectValue>{locale}</SelectValue>
       </SelectTrigger>

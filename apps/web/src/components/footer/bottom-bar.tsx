@@ -46,7 +46,11 @@ export function FooterBottomBar() {
         </button>
       </div>
 
-      <div className="flex shrink-0 items-center gap-2">
+      {/* Wraps on a phone, where the four controls are 290px of a 288px line
+          and `shrink-0` alone pushed the language picker off the edge. Above
+          `sm` they share the line with the notice on the left, and there the
+          notice is what gives way, so the row keeps its old behaviour. */}
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:shrink-0 sm:flex-nowrap">
         <ThemeSwitch />
         <RatingSelector />
         <RegionSelector />

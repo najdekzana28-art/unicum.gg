@@ -9,6 +9,8 @@ import {
   mapsTabHref,
 } from "@/components/maps/list/tabs";
 import { useRegion } from "@/hooks/use-region";
+import { styles } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   Select,
@@ -134,10 +136,13 @@ export function RegionSelector() {
       <SelectTrigger
         size="sm"
         aria-label={t("label")}
-        className="h-8 w-fit gap-1.5 rounded-full border-fd-border bg-fd-secondary/50 px-2.5 text-xs font-medium uppercase"
+        className={styles.navPill}
       >
         <SelectValue>
-          <RegionItem region={region} />
+          {/* The globe is decoration next to a label that already names the
+              realm, and on a phone it is the width that keeps the mobile
+              menu's control row on one line. The menu keeps it. */}
+          <RegionItem region={region} emojiClassName="max-sm:hidden" />
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
@@ -168,10 +173,20 @@ export function RegionSelector() {
   );
 }
 
-function RegionItem({ region }: { region: Region }) {
+function RegionItem({
+  region,
+  emojiClassName,
+}: {
+  region: Region;
+  /** Lets the trigger drop the globe where it cannot afford the width. */
+  emojiClassName?: string;
+}) {
   return (
     <span className="inline-flex items-center gap-2">
-      <span aria-hidden className="text-base leading-none">
+      <span
+        aria-hidden
+        className={cn("text-base leading-none", emojiClassName)}
+      >
         {REGION_EMOJI[region]}
       </span>
       {REGION_LABEL[region]}

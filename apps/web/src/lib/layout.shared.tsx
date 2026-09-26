@@ -6,9 +6,7 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { NavLogo } from "@/components/nav-logo";
 import { NavMore } from "@/components/nav-more";
 import { NavSectionMenu } from "@/components/nav-section-menu";
-import { LocaleSelector } from "@/components/locale-selector";
-import { RatingSelector } from "@/components/rating-selector";
-import { RegionSelector } from "@/components/region-selector";
+import { NavSelectors } from "@/components/nav-selectors";
 import APP from "@/constants/app";
 
 // `sections` toggles the Players/Clans/Tanks + "More" site-navigation links, and
@@ -58,20 +56,12 @@ export async function baseOptions({
         : []),
       ...(selectors
         ? ([
+            // One entry, not three: see `NavSelectors` for why the mobile
+            // menu's row cannot hold them side by side on a phone.
             {
               type: "custom",
               secondary: true,
-              children: <RatingSelector />,
-            },
-            {
-              type: "custom",
-              secondary: true,
-              children: <RegionSelector />,
-            },
-            {
-              type: "custom",
-              secondary: true,
-              children: <LocaleSelector />,
+              children: <NavSelectors />,
             },
           ] satisfies BaseLayoutProps["links"])
         : []),
