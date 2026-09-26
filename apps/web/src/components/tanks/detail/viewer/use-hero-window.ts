@@ -54,6 +54,9 @@ export function usePresentation(
   held: RefObject<HTMLElement | null>,
   recentre: RefObject<((on?: boolean) => void) | null>,
   framing: RefObject<boolean>,
+  /** Whether the studio is a band of its own rather than a layer under the
+   * page's own column. See the centring rule below. */
+  narrow: boolean,
 ) {
   const [presentation, setPresentation] = useState(Presentation.Inline);
   // Read by the draw loop's `resize`, which runs from a ResizeObserver and so
@@ -67,11 +70,18 @@ export function usePresentation(
    * none of that on the page, so the tank sat in a corner of an empty room.
    * Driven off the size rather than off the click, since the browser hands the
    * screen back on its own and by the escape key.
+   *
+   * **A phone is the same case.** There the hero stacks rather than layers: the
+   * title is above the studio and the cost below it, so nothing is holding the
+   * side the vehicle was standing clear of, and it sat in the corner of an
+   * empty band for no one. The reader's own framing is untouched by this and
+   * comes back the moment the window is wide enough to have a side worth
+   * keeping.
    */
   useEffect(() => {
     const big = presentation !== Presentation.Inline;
-    recentre.current?.(big ? true : framing.current);
-  }, [framing, presentation, recentre]);
+    recentre.current?.(big || narrow ? true : framing.current);
+  }, [framing, narrow, presentation, recentre]);
 
   useEffect(() => {
     // What the browser did, which is the only account of it worth keeping.

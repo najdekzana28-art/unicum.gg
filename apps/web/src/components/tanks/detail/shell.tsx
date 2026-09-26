@@ -205,7 +205,7 @@ export function TankShell({
                   {/* The studio: the picture, its light, and the controls that
               belong to it. One box, so it is one band on a phone and the full
               hero on a desk. */}
-                  <div className="relative order-2 h-80 w-full shrink-0 sm:absolute sm:inset-0 sm:h-auto">
+                  <div className="relative order-2 h-[26rem] w-full shrink-0 sm:absolute sm:inset-0 sm:h-auto">
                   {/* Soft spotlight behind the vehicle. It is what lights the plate
               once the model has replaced the photograph. */}
                   <div
@@ -407,7 +407,7 @@ export function TankShell({
                     >
                       <div
                         data-hero-cost
-                        className="px-6 pb-8 sm:pointer-events-auto sm:absolute sm:right-6 sm:bottom-6 sm:p-0"
+                        className="px-6 pt-6 pb-8 sm:pointer-events-auto sm:absolute sm:right-6 sm:bottom-6 sm:p-0"
                       >
                         <TankCost
                           specs={specs}

@@ -65,6 +65,7 @@ const CINEMATIC_ICON: Record<
  */
 export function CameraControls({
   centred,
+  recentrable,
   onRecentre,
   resettable,
   onReset,
@@ -83,6 +84,8 @@ export function CameraControls({
   onRolling,
 }: {
   centred: boolean;
+  /** Whether the framing is the reader's to choose here. */
+  recentrable: boolean;
   onRecentre: () => void;
   resettable: boolean;
   onReset: () => void;
@@ -118,18 +121,25 @@ export function CameraControls({
         to the middle of the band, where a hull can be read rather than looked
         at. It stays offered once centred, marked as the state it is in, so the
         pair never swaps meaning under the cursor.
+
+        Absent where the hero keeps nothing beside the vehicle (a phone, and
+        the two bigger sizes): it is centred there because there is no side to
+        stand clear of, and offering to move it off would be offering a corner
+        of an empty band.
       */}
-      <Mark
-        on={centred}
-        onClick={onRecentre}
-        says={tView(centred ? "centre.off" : "centre.on")}
-      >
-        {centred ? (
-          <AlignHorizontalDistributeStart className="size-4" aria-hidden />
-        ) : (
-          <AlignHorizontalDistributeCenter className="size-4" aria-hidden />
-        )}
-      </Mark>
+      {recentrable ? (
+        <Mark
+          on={centred}
+          onClick={onRecentre}
+          says={tView(centred ? "centre.off" : "centre.on")}
+        >
+          {centred ? (
+            <AlignHorizontalDistributeStart className="size-4" aria-hidden />
+          ) : (
+            <AlignHorizontalDistributeCenter className="size-4" aria-hidden />
+          )}
+        </Mark>
+      ) : null}
       {/*
         And undoing, which is the other thing entirely: back to the angle and
         the framing the page opened on. Offered only once there is something to

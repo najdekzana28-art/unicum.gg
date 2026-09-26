@@ -19,6 +19,7 @@ import {
   usePublishedHero,
 } from "@/components/tanks/detail/viewer/use-hero-link";
 import { useHeroDesk } from "@/components/tanks/detail/viewer/use-hero-desk";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { useHeroStage } from "@/components/tanks/detail/viewer/use-hero-stage";
 import { useHeroShot } from "@/components/tanks/detail/viewer/use-hero-shot";
 import type { Shot } from "@/services/tank-viewer/armour";
@@ -154,7 +155,11 @@ export function TankViewer({
   const { aim, watch, takeAim, aimed } = aiming;
 
   const held = useRef<HTMLDivElement>(null);
-  const desk = useHeroDesk({ held, sharp: dressing.sharp });
+  // The hero stacks below `sm` rather than layering, which changes two things
+  // the picture owns: where the vehicle stands in the band, and whether the
+  // reader is offered a say in it.
+  const narrow = useMediaQuery("max-sm");
+  const desk = useHeroDesk({ held, sharp: dressing.sharp, narrow });
   const { liked, centred, presentation } = desk;
   usePublishedHero({ view, dressing, firing, hullDown, aimed });
   /** Take the 3D style off, for the one case the reader did not ask for. */
@@ -265,10 +270,19 @@ export function TankViewer({
         the picture already there, so it takes the hardness off the first frame
         without putting a wait back on the page.
       */}
+      {/*
+        **The picture stops above the controls on a phone.** They are a row of
+        chips over the plate on a desk, where the band is 600 tall and they
+        cover nothing; stacked into two rows at the foot of a 416px band they
+        sat across the hull. The canvas is what is shortened rather than the
+        controls being moved, because the camera reads its own box: the vehicle
+        is centred in the picture that is left, which is the whole of what the
+        reader sees of it.
+      */}
       <canvas
         ref={canvas}
         aria-hidden
-        className={`absolute inset-0 h-full w-full ${
+        className={`absolute inset-0 h-full w-full max-sm:h-[calc(100%-6rem)] ${
           stage.crossing ? "" : "transition-opacity duration-700"
         } ${shown ? "opacity-100" : "opacity-0"}`}
       />
@@ -280,7 +294,7 @@ export function TankViewer({
       <canvas
         ref={ghost}
         aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full opacity-0"
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-0 max-sm:h-[calc(100%-6rem)]"
       />
       <VehicleWaiting show={!shown && !absent} />
       {shown ? (
@@ -335,6 +349,10 @@ export function TankViewer({
           <div className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-21rem)]">
             <ViewerControls
               centred={centred}
+              // Not offered on a phone: there the vehicle is centred because
+              // nothing stands beside it, so the control would only put it
+              // back in a corner of an empty band.
+              recentrable={!narrow}
               onRecentre={() => desk.recentring(!centred)}
               // Offered for anything that can be undone, which is not only the
               // camera: a reader who has done nothing but point the gun still

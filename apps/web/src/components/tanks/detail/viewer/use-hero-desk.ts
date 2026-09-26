@@ -32,11 +32,15 @@ import {
 export function useHeroDesk({
   held,
   sharp,
+  narrow,
 }: {
   /** The box the picture is drawn in, which the two sizes are measured from. */
   held: RefObject<HTMLElement | null>;
   /** The texture set, remembered with the rest though it is set elsewhere. */
   sharp: boolean;
+  /** A phone, where the studio is a band of its own: the vehicle is centred in
+   * it and the framing is not the reader's to choose. */
+  narrow: boolean;
 }) {
   /**
    * How this reader likes to be shown a tank, read once at the top.
@@ -84,6 +88,7 @@ export function useHeroDesk({
     held,
     recentre,
     framing,
+    narrow,
   );
   /** Put the vehicle in the middle of the frame, or back off to its side. */
   const recentring = useCallback(

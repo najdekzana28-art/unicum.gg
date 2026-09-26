@@ -43,6 +43,7 @@ import {
  */
 export function ViewerControls({
   centred,
+  recentrable,
   onRecentre,
   resettable,
   onReset,
@@ -95,6 +96,8 @@ export function ViewerControls({
   onView,
 }: {
   centred: boolean;
+  /** Whether the framing is the reader's to choose here. */
+  recentrable: boolean;
   onRecentre: () => void;
   resettable: boolean;
   onReset: () => void;
@@ -202,6 +205,7 @@ export function ViewerControls({
         ) : null}
         <CameraControls
           centred={centred}
+          recentrable={recentrable}
           onRecentre={onRecentre}
           resettable={resettable}
           onReset={onReset}
