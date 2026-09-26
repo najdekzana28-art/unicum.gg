@@ -45,7 +45,12 @@ export const Chip = forwardRef<
         // sets `svg { display: block }`, so a chip carrying an icon (the
         // Featured star) stacked it above its own label and grew taller than
         // every chip beside it. Text-only chips are unaffected.
-        "inline-flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap border-r border-fd-border px-3 py-1.5 font-medium transition-colors last:border-r-0",
+        //
+        // `shrink-0` because the row is a scroller: a flex child shrinks by
+        // default, so eleven nation flags in a phone-width row were squeezed to
+        // under half their width instead of scrolling, and a flag whose height
+        // is fixed and whose width is squeezed is simply the wrong picture.
+        "inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap border-r border-fd-border px-3 py-1.5 font-medium transition-colors last:border-r-0",
         active
           ? "bg-fd-secondary/50 text-fd-foreground"
           : "text-fd-muted-foreground hover:bg-fd-secondary/25 hover:text-fd-foreground",
