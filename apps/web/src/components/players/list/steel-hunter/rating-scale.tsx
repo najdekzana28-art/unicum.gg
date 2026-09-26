@@ -78,7 +78,12 @@ export function SteelHunterRatingScale() {
               <TableRow key={band.color}>
                 <TableCell
                   className={cn(
-                    "pl-4! font-semibold whitespace-nowrap",
+                    // Wraps on a phone, like the home page's own scale: held
+                    // on one line, the longest translation of a band name
+                    // widens the column past the table and gives the panel a
+                    // horizontal scroll over nothing. The figures beside it
+                    // still never break.
+                    "pl-4! font-semibold sm:whitespace-nowrap",
                     RATING_COLOR_CLASS[band.color],
                   )}
                 >

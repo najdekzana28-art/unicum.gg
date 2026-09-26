@@ -88,7 +88,13 @@ export function RatingScale() {
                 <TableRow key={row.color}>
                   <TableCell
                     className={cn(
-                      "pl-4! font-semibold whitespace-nowrap",
+                      // The band's name may break on a phone. Kept on one
+                      // line, the longest translation of it ("En dessous de
+                      // la moyenne") holds the column at 214px of a 388px
+                      // table and gave the panel 16px of horizontal scroll
+                      // over nothing. The figures beside it still never
+                      // break: a range split across two lines is unreadable.
+                      "pl-4! font-semibold sm:whitespace-nowrap",
                       colorClass,
                     )}
                   >
