@@ -846,7 +846,13 @@
     "ladder": "classement",
     "number": "nombre",
     "pace": "rythme",
-    "Crew skills": "Compétences de l'équipage"
+    "Crew skills": "Compétences de l'équipage",
+    "equipment": "équipement",
+    "keep": "garder",
+    "public": "public",
+    "sent": "envoyé",
+    "shown": "affiché",
+    "well": "bien"
   },
   "es": {
     "Battles": "Batallas",
@@ -1692,7 +1698,13 @@
     "ladder": "clasificación",
     "number": "número",
     "pace": "ritmo",
-    "Crew skills": "Habilidades de la tripulación"
+    "Crew skills": "Habilidades de la tripulación",
+    "equipment": "equipamiento",
+    "keep": "mantener",
+    "public": "público",
+    "sent": "enviado",
+    "shown": "mostrado",
+    "well": "bien"
   },
   "ru": {
     "Battles": "Бои",
@@ -2532,7 +2544,13 @@
     "ladder": "таблица лидеров",
     "number": "номер",
     "pace": "темп",
-    "Crew skills": "Навыки экипажа"
+    "Crew skills": "Навыки экипажа",
+    "equipment": "оборудование",
+    "keep": "сохранить",
+    "public": "публичный",
+    "sent": "отправлено",
+    "shown": "показано",
+    "well": "хорошо"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3391,7 +3409,13 @@
     "ladder": "ranking",
     "number": "liczba",
     "pace": "tempo",
-    "Crew skills": "Umiejętności załogi"
+    "Crew skills": "Umiejętności załogi",
+    "equipment": "wyposażenie",
+    "keep": "zachowaj",
+    "public": "publiczny",
+    "sent": "wysłano",
+    "shown": "wyświetlono",
+    "well": "dobrze"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4260,7 +4284,13 @@
     "ladder": "ランキング",
     "number": "番号",
     "pace": "ペース",
-    "Crew skills": "搭乗員スキル"
+    "Crew skills": "搭乗員スキル",
+    "equipment": "拡張パーツ",
+    "keep": "維持",
+    "public": "公開",
+    "sent": "送信済み",
+    "shown": "表示済み",
+    "well": "良好"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4909,7 +4939,13 @@
     "ladder": "سُلّم الترتيب",
     "number": "رقم",
     "pace": "الوتيرة",
-    "Crew skills": "مهارات الطاقم"
+    "Crew skills": "مهارات الطاقم",
+    "equipment": "معدات",
+    "keep": "الاحتفاظ",
+    "public": "عام",
+    "sent": "مُرسَل",
+    "shown": "معروض",
+    "well": "جيدًا"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5775,7 +5811,13 @@
     "ladder": "ljestvica",
     "number": "broj",
     "pace": "tempo",
-    "Crew skills": "Vještine posade"
+    "Crew skills": "Vještine posade",
+    "equipment": "oprema",
+    "keep": "zadrži",
+    "public": "javno",
+    "sent": "poslano",
+    "shown": "prikazano",
+    "well": "dobro"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6642,7 +6684,13 @@
     "ladder": "ranglista",
     "number": "szám",
     "pace": "tempó",
-    "Crew skills": "Legénységi készségek"
+    "Crew skills": "Legénységi készségek",
+    "equipment": "felszerelés",
+    "keep": "megtartás",
+    "public": "nyilvános",
+    "sent": "elküldve",
+    "shown": "megjelenítve",
+    "well": "jól"
   },
   "ko": {
     "Battles": "전투",
@@ -7516,7 +7564,13 @@
     "ladder": "순위표",
     "number": "번호",
     "pace": "페이스",
-    "Crew skills": "승무원 스킬"
+    "Crew skills": "승무원 스킬",
+    "equipment": "장비",
+    "keep": "유지",
+    "public": "공개",
+    "sent": "전송됨",
+    "shown": "표시됨",
+    "well": "잘"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8387,7 +8441,13 @@
     "ladder": "ranglijst",
     "number": "nummer",
     "pace": "tempo",
-    "Crew skills": "Bemanningsvaardigheden"
+    "Crew skills": "Bemanningsvaardigheden",
+    "equipment": "uitrusting",
+    "keep": "behouden",
+    "public": "openbaar",
+    "sent": "verzonden",
+    "shown": "weergegeven",
+    "well": "goed"
   },
   "cs": {
     "Battles": "Bitev",
@@ -9249,7 +9309,13 @@
     "ladder": "žebříček",
     "number": "číslo",
     "pace": "tempo",
-    "Crew skills": "Dovednosti posádky"
+    "Crew skills": "Dovednosti posádky",
+    "equipment": "vybavení",
+    "keep": "ponechat",
+    "public": "veřejné",
+    "sent": "odesláno",
+    "shown": "zobrazeno",
+    "well": "dobře"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -10113,7 +10179,13 @@
     "ladder": "sıralama",
     "number": "sayı",
     "pace": "tempo",
-    "Crew skills": "Mürettebat becerileri"
+    "Crew skills": "Mürettebat becerileri",
+    "equipment": "donanım",
+    "keep": "sakla",
+    "public": "herkese açık",
+    "sent": "gönderildi",
+    "shown": "gösterildi",
+    "well": "iyi"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10761,7 +10833,13 @@
     "ladder": "табліца лідараў",
     "number": "колькасць",
     "pace": "тэмп",
-    "Crew skills": "Навыкі экіпажа"
+    "Crew skills": "Навыкі экіпажа",
+    "equipment": "абсталяванне",
+    "keep": "захоўваць",
+    "public": "публічны",
+    "sent": "адпраўлена",
+    "shown": "паказана",
+    "well": "добра"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -11416,7 +11494,13 @@
     "ladder": "rebríček",
     "number": "číslo",
     "pace": "tempo",
-    "Crew skills": "Spretnosti posadke"
+    "Crew skills": "Spretnosti posadke",
+    "equipment": "oprema",
+    "keep": "obdrži",
+    "public": "javno",
+    "sent": "poslano",
+    "shown": "prikazano",
+    "well": "dobro"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -12072,7 +12156,13 @@
     "ladder": "ljestvica",
     "number": "broj",
     "pace": "tempo",
-    "Crew skills": "Vještine posade"
+    "Crew skills": "Vještine posade",
+    "equipment": "oprema",
+    "keep": "zadrži",
+    "public": "javno",
+    "sent": "poslano",
+    "shown": "prikazano",
+    "well": "dobro"
   },
   "th": {
     "Battles": "การรบ",
@@ -12939,7 +13029,13 @@
     "ladder": "ตารางจัดอันดับ",
     "number": "หมายเลข",
     "pace": "อัตราความคืบหน้า",
-    "Crew skills": "ทักษะพลรถ"
+    "Crew skills": "ทักษะพลรถ",
+    "equipment": "อุปกรณ์",
+    "keep": "เก็บไว้",
+    "public": "สาธารณะ",
+    "sent": "ส่งแล้ว",
+    "shown": "แสดงแล้ว",
+    "well": "ดี"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13806,7 +13902,13 @@
     "ladder": "天梯",
     "number": "数量",
     "pace": "节奏",
-    "Crew skills": "乘员技能"
+    "Crew skills": "乘员技能",
+    "equipment": "配件",
+    "keep": "保留",
+    "public": "公开",
+    "sent": "已发送",
+    "shown": "显示",
+    "well": "良好"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14658,7 +14760,13 @@
     "ladder": "classificação",
     "number": "número",
     "pace": "ritmo",
-    "Crew skills": "Habilidades da tripulação"
+    "Crew skills": "Habilidades da tripulação",
+    "equipment": "equipamento",
+    "keep": "manter",
+    "public": "público",
+    "sent": "enviado",
+    "shown": "exibido",
+    "well": "bem"
   },
   "vi": {
     "Battles": "Số trận",
@@ -15504,7 +15612,13 @@
     "ladder": "bảng xếp hạng",
     "number": "số",
     "pace": "tốc độ",
-    "Crew skills": "Kỹ năng kíp lái"
+    "Crew skills": "Kỹ năng kíp lái",
+    "equipment": "trang bị",
+    "keep": "giữ",
+    "public": "công khai",
+    "sent": "đã gửi",
+    "shown": "hiển thị",
+    "well": "tốt"
   },
   "de": {
     "Battles": "Gefechte",
@@ -16364,7 +16478,13 @@
     "ladder": "Rangliste",
     "number": "Anzahl",
     "pace": "Tempo",
-    "Crew skills": "Besatzungsfertigkeiten"
+    "Crew skills": "Besatzungsfertigkeiten",
+    "equipment": "ausrüstung",
+    "keep": "behalten",
+    "public": "öffentlich",
+    "sent": "gesendet",
+    "shown": "angezeigt",
+    "well": "gut"
   },
   "uk": {
     "Battles": "Бої",
@@ -17221,7 +17341,13 @@
     "ladder": "таблиця лідерів",
     "number": "номер",
     "pace": "темп",
-    "Crew skills": "Навички екіпажу"
+    "Crew skills": "Навички екіпажу",
+    "equipment": "обладнання",
+    "keep": "зберегти",
+    "public": "публічний",
+    "sent": "надіслано",
+    "shown": "показано",
+    "well": "добре"
   },
   "it": {
     "Battles": "Battaglie",
@@ -18083,7 +18209,13 @@
     "ladder": "classifica",
     "number": "numero",
     "pace": "ritmo",
-    "Crew skills": "Abilità dell'equipaggio"
+    "Crew skills": "Abilità dell'equipaggio",
+    "equipment": "equipaggiamento",
+    "keep": "mantieni",
+    "public": "pubblico",
+    "sent": "inviato",
+    "shown": "mostrato",
+    "well": "bene"
   },
   "sv": {
     "Battles": "Strider",
@@ -18954,7 +19086,13 @@
     "ladder": "stege",
     "number": "nummer",
     "pace": "tempo",
-    "Crew skills": "Besättningsfärdigheter"
+    "Crew skills": "Besättningsfärdigheter",
+    "equipment": "utrustning",
+    "keep": "behåll",
+    "public": "offentlig",
+    "sent": "skickat",
+    "shown": "visad",
+    "well": "väl"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19821,7 +19959,13 @@
     "ladder": "lestvica",
     "number": "broj",
     "pace": "tempo",
-    "Crew skills": "Veštine posade"
+    "Crew skills": "Veštine posade",
+    "equipment": "oprema",
+    "keep": "zadrži",
+    "public": "javno",
+    "sent": "poslato",
+    "shown": "prikazano",
+    "well": "dobro"
   },
   "el": {
     "Battles": "Μάχες",
@@ -20687,7 +20831,13 @@
     "ladder": "κατάταξη",
     "number": "αριθμός",
     "pace": "ρυθμός",
-    "Crew skills": "Ικανότητες πληρώματος"
+    "Crew skills": "Ικανότητες πληρώματος",
+    "equipment": "εξοπλισμός",
+    "keep": "διατήρηση",
+    "public": "δημόσιο",
+    "sent": "απεσταλμένο",
+    "shown": "εμφανιζόμενο",
+    "well": "καλά"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -21542,7 +21692,13 @@
     "ladder": "reitingu tabula",
     "number": "numurs",
     "pace": "temps",
-    "Crew skills": "Apkalpes prasmes"
+    "Crew skills": "Apkalpes prasmes",
+    "equipment": "aprīkojums",
+    "keep": "saglabāt",
+    "public": "publisks",
+    "sent": "nosūtīts",
+    "shown": "parādīts",
+    "well": "labi"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -22191,7 +22347,13 @@
     "ladder": "लीडरबोर्ड",
     "number": "संख्या",
     "pace": "गति",
-    "Crew skills": "क्रू कौशल"
+    "Crew skills": "क्रू कौशल",
+    "equipment": "उपकरण",
+    "keep": "रखें",
+    "public": "सार्वजनिक",
+    "sent": "भेजा गया",
+    "shown": "दिखाया गया",
+    "well": "अच्छी तरह"
   },
   "bg": {
     "Battles": "Битки",
@@ -23042,7 +23204,13 @@
     "ladder": "класация",
     "number": "номер",
     "pace": "темпо",
-    "Crew skills": "Умения на екипажа"
+    "Crew skills": "Умения на екипажа",
+    "equipment": "оборудване",
+    "keep": "запазване",
+    "public": "публичен",
+    "sent": "изпратен",
+    "shown": "показан",
+    "well": "добре"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -23913,7 +24081,13 @@
     "ladder": "reitingų lentelė",
     "number": "numeris",
     "pace": "tempas",
-    "Crew skills": "Įgulos įgūdžiai"
+    "Crew skills": "Įgulos įgūdžiai",
+    "equipment": "įranga",
+    "keep": "išlaikyti",
+    "public": "viešas",
+    "sent": "išsiųsta",
+    "shown": "rodoma",
+    "well": "gerai"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -24566,7 +24740,13 @@
     "ladder": "көшбасшылар тақтасы",
     "number": "нөмір",
     "pace": "қарқын",
-    "Crew skills": "Экипаж дағдылары"
+    "Crew skills": "Экипаж дағдылары",
+    "equipment": "жабдық",
+    "keep": "сақтау",
+    "public": "ашық",
+    "sent": "жіберілді",
+    "shown": "көрсетілді",
+    "well": "жақсы"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -25437,7 +25617,13 @@
     "ladder": "tulostaulukko",
     "number": "numero",
     "pace": "tahti",
-    "Crew skills": "Miehistön taidot"
+    "Crew skills": "Miehistön taidot",
+    "equipment": "varusteet",
+    "keep": "säilytä",
+    "public": "julkinen",
+    "sent": "lähetetty",
+    "shown": "näytetty",
+    "well": "hyvin"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -26091,7 +26277,13 @@
     "ladder": "leaderboard",
     "number": "numero",
     "pace": "bilis",
-    "Crew skills": "Mga kasanayan ng crew"
+    "Crew skills": "Mga kasanayan ng crew",
+    "equipment": "kagamitan",
+    "keep": "panatilihin",
+    "public": "pampubliko",
+    "sent": "ipinadala",
+    "shown": "ipinakita",
+    "well": "maayos"
   },
   "no": {
     "Battles": "Kamper",
@@ -26954,7 +27146,13 @@
     "ladder": "rangering",
     "number": "nummer",
     "pace": "tempo",
-    "Crew skills": "Mannskapsferdigheter"
+    "Crew skills": "Mannskapsferdigheter",
+    "equipment": "utstyr",
+    "keep": "behold",
+    "public": "offentlig",
+    "sent": "sendt",
+    "shown": "vist",
+    "well": "godt"
   },
   "ro": {
     "Battles": "Lupte",
@@ -27806,7 +28004,13 @@
     "ladder": "clasament",
     "number": "număr",
     "pace": "ritm",
-    "Crew skills": "Abilitățile echipajului"
+    "Crew skills": "Abilitățile echipajului",
+    "equipment": "echipament",
+    "keep": "păstrează",
+    "public": "public",
+    "sent": "trimis",
+    "shown": "afișat",
+    "well": "bine"
   },
   "da": {
     "Battles": "Kampe",
@@ -28673,6 +28877,12 @@
     "ladder": "rangliste",
     "number": "nummer",
     "pace": "tempo",
-    "Crew skills": "Besætningsfærdigheder"
+    "Crew skills": "Besætningsfærdigheder",
+    "equipment": "udstyr",
+    "keep": "behold",
+    "public": "offentlig",
+    "sent": "sendt",
+    "shown": "vist",
+    "well": "godt"
   }
 }
