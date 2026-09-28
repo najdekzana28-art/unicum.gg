@@ -5,6 +5,7 @@
   "consumables": "Vật phẩm",
   "ammo": "Đạn",
   "crew": "Kỹ năng kíp lái",
+  "seat-empty": "Không có thành viên kíp lái ở vị trí này",
   "field-mods": "Sửa đổi hiện trường",
   "slot-empty": "Trống",
   "second-setup": "Người chơi này giữ thêm một thiết lập cho xe tăng này."

@@ -5,6 +5,7 @@
   "consumables": "Spotřební doplňky",
   "ammo": "Munice",
   "crew": "Dovednosti posádky",
+  "seat-empty": "Na tomto místě není žádný člen posádky",
   "field-mods": "Úpravy pole",
   "slot-empty": "Prázdné",
   "second-setup": "Tento hráč má pro toto vozidlo druhou konfiguraci."

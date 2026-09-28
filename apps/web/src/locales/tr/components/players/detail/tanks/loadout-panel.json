@@ -5,6 +5,7 @@
   "consumables": "Sarf Malzemeleri",
   "ammo": "Mühimmat",
   "crew": "Mürettebat becerileri",
+  "seat-empty": "Bu koltukta mürettebat üyesi yok",
   "field-mods": "Saha Modifikasyonları",
   "slot-empty": "Boş",
   "second-setup": "Bu oyuncu bu araçta ikinci bir kurulum bulunduruyor."

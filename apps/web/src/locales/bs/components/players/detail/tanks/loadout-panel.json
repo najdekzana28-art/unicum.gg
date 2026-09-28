@@ -5,6 +5,7 @@
   "consumables": "Sredstva",
   "ammo": "Municija",
   "crew": "Vještine posade",
+  "seat-empty": "Na ovom mjestu nema člana posade",
   "field-mods": "Terenske modifikacije",
   "slot-empty": "Prazno",
   "second-setup": "Ovaj igrač ima drugu postavku na ovom vozilu."

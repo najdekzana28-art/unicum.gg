@@ -5,6 +5,7 @@
   "consumables": "Verbrauchsmaterial",
   "ammo": "Munition",
   "crew": "Besatzungsfertigkeiten",
+  "seat-empty": "Kein Besatzungsmitglied auf diesem Platz",
   "field-mods": "Feldmodifikationen",
   "slot-empty": "Leer",
   "second-setup": "Dieser Spieler verwendet eine zweite Ausstattung für dieses Fahrzeug."

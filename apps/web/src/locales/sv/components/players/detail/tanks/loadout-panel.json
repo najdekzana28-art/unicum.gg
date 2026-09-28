@@ -5,6 +5,7 @@
   "consumables": "Förnödenheter",
   "ammo": "Ammunition",
   "crew": "Besättningsfärdigheter",
+  "seat-empty": "Ingen medlem i besättningen på denna plats",
   "field-mods": "Fältmodifieringar",
   "slot-empty": "Tom",
   "second-setup": "Den här spelaren har en andra uppsättning på detta fordon."

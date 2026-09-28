@@ -5,6 +5,7 @@
   "consumables": "Kulutustarvikkeet",
   "ammo": "Ammukset",
   "crew": "Miehistön taidot",
+  "seat-empty": "Tässä paikassa ei ole miehistön jäsentä",
   "field-mods": "Kenttämuutokset",
   "slot-empty": "Tyhjä",
   "second-setup": "Tällä pelaajalla on tässä ajoneuvossa toinen varustus."

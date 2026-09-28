@@ -5,6 +5,7 @@
   "consumables": "Forbruksmateriell",
   "ammo": "Ammunisjon",
   "crew": "Mannskapsferdigheter",
+  "seat-empty": "Ingen mannskapsmedlem på denne plassen",
   "field-mods": "Feltmodifikasjoner",
   "slot-empty": "Tomt",
   "second-setup": "Denne spilleren har et ekstra oppsett på dette kjøretøyet."

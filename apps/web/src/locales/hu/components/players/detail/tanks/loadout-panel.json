@@ -5,6 +5,7 @@
   "consumables": "Fogyócikkek",
   "ammo": "Lőszer",
   "crew": "Legénységi készségek",
+  "seat-empty": "Ezen a helyen nincs legénységi tag",
   "field-mods": "Mezőmódosítások",
   "slot-empty": "Üres",
   "second-setup": "Ez a játékos ennél a járműnél egy további beállítást tart fenn."
