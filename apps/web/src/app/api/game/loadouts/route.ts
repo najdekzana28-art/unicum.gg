@@ -2,6 +2,7 @@ import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { accountBehindGameToken } from "@unicum.gg/core/auth/game-client-account";
 import { wargamingAccountOf } from "@unicum.gg/core/game-link";
 import {
+  forgetAllTankLoadouts,
   forgetTankLoadouts,
   listLoadoutStamps,
   saveTankLoadouts,
@@ -107,6 +108,39 @@ export async function GET(req: Request): Promise<Response> {
     },
     { headers: { "cache-control": "no-store" } },
   );
+}
+
+/**
+ * Withdraw: forget every loadout we hold for this account.
+ *
+ * The mod calls this once, when the player unticks the setting that shares
+ * them. Without it that tick only stopped the next upload, and the carousel
+ * already sent stayed on the player's page for good, which is not what the
+ * words on the box say.
+ *
+ * Proven the same way as an upload and, like it, only ever a statement about
+ * the caller's own account: this deletes rows and nothing else would be
+ * acceptable. No quota, deliberately. A player withdrawing consent is not a
+ * cost to manage, and a request refused here leaves their data published.
+ */
+export async function DELETE(req: Request): Promise<Response> {
+  const account = await provenAccount(req);
+  if (!account) {
+    return Response.json({ error: "not_authenticated" }, { status: 401 });
+  }
+  try {
+    const forgotten = await forgetAllTankLoadouts(
+      account.region,
+      account.accountId,
+    );
+    return Response.json(
+      { forgotten },
+      { headers: { "cache-control": "no-store" } },
+    );
+  } catch (err) {
+    console.error("[api/game/loadouts] delete failed:", err);
+    return Response.json({ error: "delete_failed" }, { status: 502 });
+  }
 }
 
 type ProvenAccount = { region: Region; accountId: number };

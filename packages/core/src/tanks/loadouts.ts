@@ -126,6 +126,32 @@ export async function forgetTankLoadouts(
   return rows.length;
 }
 
+/**
+ * Forget everything we hold for this account.
+ *
+ * What a player means when they turn sharing off. Stopping the uploads alone
+ * left the carousel they had already sent on their page for good, which is
+ * the opposite of what unticking a box that says "share" promises: they would
+ * have frozen their page rather than withdrawn from it.
+ *
+ * A hard delete rather than a flag. The rows are a statement the player has
+ * withdrawn, so keeping them and hiding them would leave us holding data we
+ * have been told to stop holding, and the aggregates would still be counting
+ * it. What survives is the mod's own file in the player's game folder, which
+ * is theirs; ticking the box again uploads the carousel afresh.
+ */
+export async function forgetAllTankLoadouts(
+  region: Region,
+  accountId: number,
+): Promise<number> {
+  const table = tankLoadoutsByRegion[region];
+  const rows = await db
+    .delete(table)
+    .where(eq(table.accountId, accountId))
+    .returning({ tankId: table.tankId });
+  return rows.length;
+}
+
 /** One player's setup on one vehicle, or null when we have never seen it. */
 export async function getTankLoadout(
   region: Region,
