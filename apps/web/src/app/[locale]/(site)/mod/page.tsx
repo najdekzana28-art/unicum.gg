@@ -89,7 +89,7 @@ const INSTALL_STEPS = ["install-step-1", "install-step-2"];
 // than a key every locale would have to copy unchanged.
 const SETTINGS_MOD = { name: "modsSettingsApi", url: APP.EXTERNAL.MODS_SETTINGS_API };
 
-const DATA = ["data-ratings", "data-linking", "data-twitch"];
+const DATA = ["data-ratings", "data-linking", "data-loadouts", "data-twitch"];
 
 export default async function ModPage({
   params,
