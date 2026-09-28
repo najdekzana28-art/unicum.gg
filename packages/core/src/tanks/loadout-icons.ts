@@ -1,6 +1,9 @@
 import type { Region } from "@unicum.gg/wargaming";
 import { assetsRefFor, iconUrl } from "@unicum.gg/shared";
-import { getTankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
+import {
+  getTankLoadout,
+  type LoadoutEquipment,
+} from "@unicum.gg/core/wargaming/wot/tanks/loadout";
 
 /**
  * The picture and the proper name behind each key a loadout carries.
@@ -26,7 +29,14 @@ import { getTankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
 export interface LoadoutIcon {
   /** The catalogue key, which an experimental device's level is read from. */
   key: string;
-  /** The game's own name for it, in the language the catalogue was read in. */
+  /**
+   * The game's own name for it, in the language the catalogue was read in.
+   *
+   * Empty on an entry recovered from a device family (see below): that route
+   * finds the picture but not the name, and the device's own name is not the
+   * directive's. The caller falls back to the client's dictionary, which has
+   * the right one.
+   */
   name: string;
   /** The picture, or null when Wargaming publishes none. */
   image: string | null;
@@ -73,7 +83,45 @@ export async function loadoutIcons(
       });
     }
   }
+  addMissingDirectives(catalogue.equipment, icons);
   return icons;
+}
+
+/**
+ * The directives the catalogue left out, recovered from the device they boost.
+ *
+ * The vehicle's directive list is built for the tank page's configurator,
+ * which drops any directive whose effect moves no characteristic the table
+ * shows: toggling one there would look like a no-op. Ventilation Purge is the
+ * clearest case, since Improved Ventilation raises the crew's level rather
+ * than a listed statistic, so it is filtered out on every vehicle.
+ *
+ * That filter is right for a control and wrong for a record. This page is not
+ * offering the player a switch, it is reporting what they mounted, and a
+ * directive they are carrying has to draw whatever it does to the spec sheet.
+ * A text box with the directive's name in it was the visible symptom.
+ *
+ * A directive is named after the device family it enhances plus the suffix
+ * Wargaming uses for it, which is how the catalogue joins the two itself, so
+ * the key gives the family and the family gives the picture. The picture only:
+ * the name comes from the client's own dictionary, because the device is not
+ * the directive and the two are not called the same thing.
+ */
+function addMissingDirectives(
+  equipment: LoadoutEquipment[],
+  icons: Map<string, LoadoutIcon>,
+): void {
+  const SUFFIX = "BattleBooster";
+  for (const device of equipment) {
+    if (!device.icon) continue;
+    const key = `${device.icon}${SUFFIX}`;
+    const held = icons.get(key);
+    // The standard grade wins: a family's picture should not come from its
+    // bond variant when the ordinary device is right there.
+    if (held?.image && held.name) continue;
+    if (held && device.grade !== "standard") continue;
+    icons.set(key, { key, name: "", image: device.image });
+  }
 }
 
 /**
