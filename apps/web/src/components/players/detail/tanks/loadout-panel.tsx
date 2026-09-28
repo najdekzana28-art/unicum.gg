@@ -1,8 +1,8 @@
 import {
-  activeLayout,
   iconUrl,
   isSkillTree,
   premiumShellShare,
+  type LoadoutCrewMember,
   type StoredPlayerLoadout,
 } from "@unicum.gg/shared";
 import { crewRoleBadgeUrl, isRegion, type Region } from "@unicum.gg/wargaming";
@@ -11,6 +11,7 @@ import {
   loadoutIcons,
   type LoadoutIcon,
 } from "@unicum.gg/core/tanks/loadout-icons";
+import { getTankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
 import {
   CrewGroup,
   Group,
@@ -18,7 +19,6 @@ import {
   ShellGroup,
   SlotGroup,
   type LoadoutCrewView,
-  type LoadoutShellView,
   type LoadoutSlotView,
 } from "@/components/players/detail/tanks/loadout-boxes";
 import { gradeOverlay } from "@/components/players/detail/tanks/loadout-marks";
@@ -64,6 +64,7 @@ export async function PlayerTankLoadoutPanel({
     { t: tGame },
     { t },
     icons,
+    seats,
   ] = await Promise.all([
     getTranslation("game/equipment", locale),
     getTranslation("game/crew-perks", locale),
@@ -73,11 +74,24 @@ export async function PlayerTankLoadoutPanel({
     isRegion(region)
       ? loadoutIcons(region as Region, loadout.tankId)
       : Promise.resolve(new Map<string, LoadoutIcon>()),
+    // The seats this vehicle HAS, which is a fact about the tank rather than
+    // about the player. Without it an unmanned vehicle draws no crew at all,
+    // and "nobody in it" reads exactly like "we were never told".
+    isRegion(region)
+      ? getTankCrew(region as Region, loadout.tankId).then(
+          (crew) => crew?.members.map((member) => member.roles[0] ?? "crew") ?? [],
+        )
+      : Promise.resolve([] as string[]),
   ]);
 
-  const ammo = activeLayout(loadout.setups?.ammo);
-  const devices = activeLayout(loadout.setups?.devices);
-  const gold = premiumShellShare(ammo);
+  // Every setup, not only the one in use: a second setup is a build the
+  // player deliberately keeps, and showing one of two said nothing about
+  // which. The groups carry their own active index because the client lets
+  // them switch independently.
+  const ammoGroup = loadout.setups?.ammo;
+  const devicesGroup = loadout.setups?.devices;
+  const ammoLayouts = ammoGroup?.layouts ?? [];
+  const deviceLayouts = devicesGroup?.layouts ?? [];
 
   /**
    * One slot, named and pictured.
@@ -98,22 +112,56 @@ export async function PlayerTankLoadoutPanel({
     };
   };
 
-  const shells: LoadoutShellView[] = (ammo?.shells ?? []).map((shell) => ({
-    id: shell.id,
-    // AP, APCR, HEAT, HE, in the reader's language. The same block the tank
-    // page's own module nodes read, so the two pages call a round the same.
-    kind: tGame(`shells.${shell.type}`) || shell.type,
-    count: shell.count,
-    premium: shell.premium,
-    image: `${AMMO_ICONS}/${shell.type}.png`,
+  const shellRows = ammoLayouts.map((layout) => ({
+    shells: layout.shells.map((shell) => ({
+      id: shell.id,
+      // AP, APCR, HEAT, HE, in the reader's language. The same block the tank
+      // page's own module nodes read, so the two pages call a round the same.
+      kind: tGame(`shells.${shell.type}`) || shell.type,
+      count: shell.count,
+      premium: shell.premium,
+      image: `${AMMO_ICONS}/${shell.type}.png`,
+    })),
+    goldPercent: (() => {
+      const share = premiumShellShare(layout);
+      return share === null ? null : Math.round(share * 100);
+    })(),
   }));
 
-  const crew: LoadoutCrewView[] = (loadout.crew ?? []).map((member) => ({
-    role: tRoles(member.role),
+  /**
+   * One row per seat the vehicle has, whoever is sitting in it.
+   *
+   * Joined by role rather than by position: what the mod sends is the members
+   * it found, and a vehicle with a gap in its crew sends a shorter list than
+   * it has seats, so index two on one side is not index two on the other. A
+   * role names a seat well enough, and where two seats share one (a second
+   * loader) either of them will do, since both draw the same badge.
+   *
+   * An unclaimed seat is drawn rather than dropped. The mod already fills the
+   * seats of a vehicle whose crew is off driving another one, reading the
+   * crew that last took it into battle, so a seat still empty here is a seat
+   * the player has genuinely never put anybody in.
+   */
+  const waiting = new Map<string, LoadoutCrewMember[]>();
+  for (const member of loadout.crew ?? []) {
+    const queue = waiting.get(member.role);
+    if (queue) queue.push(member);
+    else waiting.set(member.role, [member]);
+  }
+  const rows = seats.length
+    ? seats.map((role) => ({ role, member: waiting.get(role)?.shift() }))
+    : // A vehicle whose composition we cannot read: fall back to what the
+      // player sent, which is the only thing we know about its crew.
+      (loadout.crew ?? []).map((member) => ({ role: member.role, member }));
+
+  const crew: LoadoutCrewView[] = rows.map(({ role, member }) => ({
+    role: tRoles(role),
+    empty: !member,
+    emptyLabel: t("seat-empty"),
     roleImage: isRegion(region)
-      ? crewRoleBadgeUrl(region as Region, member.role)
+      ? crewRoleBadgeUrl(region as Region, role)
       : null,
-    skills: member.skills.map((name) => ({
+    skills: (member?.skills ?? []).map((name) => ({
       name: tPerks(name),
       image: crewSkillIcon(name),
     })),
@@ -133,10 +181,6 @@ export async function PlayerTankLoadoutPanel({
         }
       : null;
 
-  const hasSecondSetup = [loadout.setups?.ammo, loadout.setups?.devices].some(
-    (group) => group && group.layouts.length > 1,
-  );
-
   return (
     <LoadoutTooltips>
       {/* No padding of its own: the panel's body already carries `p-4` and
@@ -155,10 +199,13 @@ export async function PlayerTankLoadoutPanel({
             filled the panel with more label than content. Wraps group by
             group on a narrow screen. */}
         <div className="mb-4 flex flex-wrap items-start gap-x-5 gap-y-3">
-          {devices ? (
+          {deviceLayouts.length > 0 ? (
             <SlotGroup
               label={t("equipment")}
-              slots={devices.optDevices.map(slot)}
+              layouts={deviceLayouts.map((layout) =>
+                layout.optDevices.map(slot),
+              )}
+              active={devicesGroup?.active ?? 0}
             />
           ) : null}
           {/* Whenever the vehicle HAS the slots, not whenever the player
@@ -166,28 +213,33 @@ export async function PlayerTankLoadoutPanel({
               standard AP, and hiding the row made "they run none" look
               exactly like "this vehicle takes none". The only reason to draw
               nothing is a vehicle with no such slot at all. */}
-          {devices && devices.boosters.length > 0 ? (
+          {deviceLayouts.some((layout) => layout.boosters.length > 0) ? (
             <SlotGroup
               label={t("directives")}
-              slots={devices.boosters.map(slot)}
+              layouts={deviceLayouts.map((layout) => layout.boosters.map(slot))}
+              active={devicesGroup?.active ?? 0}
             />
           ) : null}
-          {ammo ? (
+          {ammoLayouts.length > 0 ? (
             <SlotGroup
               label={t("consumables")}
-              slots={ammo.consumables.map(slot)}
+              layouts={ammoLayouts.map((layout) =>
+                layout.consumables.map(slot),
+              )}
+              active={ammoGroup?.active ?? 0}
             />
           ) : null}
-          {shells.length > 0 ? (
+          {shellRows.some((row) => row.shells.length > 0) ? (
             <ShellGroup
               label={t("ammo")}
-              shells={shells}
-              goldPercent={gold === null ? null : Math.round(gold * 100)}
+              layouts={shellRows}
+              active={ammoGroup?.active ?? 0}
             />
           ) : null}
         </div>
 
         {crew.length > 0 ? <CrewGroup label={t("crew")} crew={crew} /> : null}
+
         {fieldMods ? (
           <div className="mt-4">
             <Group label={fieldMods.label}>
@@ -203,15 +255,6 @@ export async function PlayerTankLoadoutPanel({
           </div>
         ) : null}
 
-        {/* Named rather than drawn: the groups move independently, so saying
-            that the player switches is the useful half, and drawing a second
-            full loadout under the first doubles the panel to show what is
-            mostly the same tank. */}
-        {hasSecondSetup ? (
-          <p className="mt-3 text-xs text-fd-muted-foreground">
-            {t("second-setup")}
-          </p>
-        ) : null}
       </section>
     </LoadoutTooltips>
   );

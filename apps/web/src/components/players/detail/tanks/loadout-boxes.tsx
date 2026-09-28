@@ -48,79 +48,141 @@ export interface LoadoutShellView {
   image: string;
 }
 
-/** One crew member: who they are, then what they were taught. */
+/** One seat: who is in it, then what they were taught. */
 export interface LoadoutCrewView {
   role: string;
   roleImage: string | null;
+  /** The vehicle has this seat and the player has never put anybody in it. */
+  empty?: boolean;
+  /** What the tooltip says about an empty one. */
+  emptyLabel?: string;
   skills: { name: string; image: string }[];
 }
 
 export function SlotGroup({
   label,
-  slots,
+  layouts,
+  active,
 }: {
   label: string;
-  slots: LoadoutSlotView[];
+  /** One entry per setup the vehicle carries; usually one. */
+  layouts: LoadoutSlotView[][];
+  active: number;
 }) {
   return (
     <Group label={label}>
-      {slots.map((slot, index) => (
-        <Box
-          key={index}
-          tip={slot.name ?? undefined}
-          filled={!!slot.name}
-          overlay={slot.overlay}
-          categories={slot.categories}
-        >
-          {slot.name && slot.image ? (
-            <Picture src={slot.image} alt={slot.name} size={26} />
-          ) : slot.name ? (
-            // Wargaming publishes no picture for this one. Its name is still
-            // the answer, so the box carries it rather than a hole.
-            <span className="px-0.5 text-center text-[8px] leading-tight text-fd-muted-foreground">
-              {slot.name}
-            </span>
-          ) : null}
-        </Box>
-      ))}
+      <Layouts count={layouts.length} active={active}>
+        {layouts.map((slots, layout) => (
+          <Row key={layout}>
+            {slots.map((slot, index) => (
+              <Box
+                key={index}
+                tip={slot.name ?? undefined}
+                filled={!!slot.name}
+                overlay={slot.overlay}
+                categories={slot.categories}
+              >
+                {slot.name && slot.image ? (
+                  <Picture src={slot.image} alt={slot.name} size={26} />
+                ) : slot.name ? (
+                  // Wargaming publishes no picture for this one. Its name is
+                  // still the answer, so the box carries it rather than a hole.
+                  <span className="px-0.5 text-center text-[8px] leading-tight text-fd-muted-foreground">
+                    {slot.name}
+                  </span>
+                ) : null}
+              </Box>
+            ))}
+          </Row>
+        ))}
+      </Layouts>
     </Group>
   );
 }
 
 export function ShellGroup({
   label,
-  shells,
-  goldPercent,
+  layouts,
+  active,
 }: {
   label: string;
-  shells: LoadoutShellView[];
-  goldPercent: number | null;
+  layouts: { shells: LoadoutShellView[]; goldPercent: number | null }[];
+  active: number;
 }) {
   return (
     <Group label={label}>
-      {shells.map((shell) => (
-        <Box
-          key={shell.id}
-          tip={`${shell.kind} x ${shell.count}`}
-          filled
-          accent={shell.premium && shell.count > 0}
-          dimmed={shell.count === 0}
-        >
-          <Picture src={shell.image} alt={shell.kind} size={26} />
-          {/* The count on the box rather than beside it, which is where the
-              game itself puts it. */}
-          <span className="absolute -right-1 -bottom-1.5 rounded bg-fd-background px-0.5 text-[10px] leading-tight font-medium tabular-nums">
-            {shell.count}
-          </span>
-        </Box>
-      ))}
-      {goldPercent !== null && goldPercent > 0 ? (
-        <span className="self-center pl-1 text-xs font-medium tabular-nums text-amber-600 dark:text-amber-400">
-          {goldPercent}%
-        </span>
-      ) : null}
+      <Layouts count={layouts.length} active={active}>
+        {layouts.map((layout, index) => (
+          <Row key={index}>
+            {layout.shells.map((shell) => (
+              <Box
+                key={shell.id}
+                tip={`${shell.kind} x ${shell.count}`}
+                filled
+                accent={shell.premium && shell.count > 0}
+                dimmed={shell.count === 0}
+              >
+                <Picture src={shell.image} alt={shell.kind} size={26} />
+                {/* The count on the box rather than beside it, which is
+                    where the game itself puts it. */}
+                <span className="absolute -right-1 -bottom-1.5 rounded bg-fd-background px-0.5 text-[10px] leading-tight font-medium tabular-nums">
+                  {shell.count}
+                </span>
+              </Box>
+            ))}
+            {layout.goldPercent !== null && layout.goldPercent > 0 ? (
+              <span className="self-center pl-1 text-xs font-medium tabular-nums text-amber-600 dark:text-amber-400">
+                {layout.goldPercent}%
+              </span>
+            ) : null}
+          </Row>
+        ))}
+      </Layouts>
     </Group>
   );
+}
+
+/**
+ * A group's setups, one row each, numbered only when there are two.
+ *
+ * The number appears solely to tell them apart, so a vehicle with one setup
+ * (most of a carousel) draws exactly as it did before, with no column of
+ * ones down the panel. The one in use is marked rather than the other
+ * dimmed: dimming already means "carries none" on a round, and a setup the
+ * player is not on is still a setup they built.
+ */
+function Layouts({
+  count,
+  active,
+  children,
+}: {
+  count: number;
+  active: number;
+  children: React.ReactNode[];
+}) {
+  if (count < 2) return <>{children}</>;
+  return (
+    <div className="flex flex-col gap-1">
+      {children.map((row, index) => (
+        <div key={index} className="flex items-center gap-1.5">
+          <span
+            className={cn(
+              "w-2.5 shrink-0 text-center text-[9px] leading-none font-semibold tabular-nums",
+              index === active ? "text-brand" : "text-fd-muted-foreground/60",
+            )}
+          >
+            {index + 1}
+          </span>
+          {row}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** The boxes of one setup. */
+function Row({ children }: { children: React.ReactNode }) {
+  return <div className="flex flex-wrap items-start gap-1">{children}</div>;
 }
 
 export function CrewGroup({
@@ -135,7 +197,14 @@ export function CrewGroup({
       <div className="flex w-full flex-col gap-1">
         {crew.map((member, index) => (
           <div key={index} className="flex flex-wrap items-center gap-1">
-            <Box tip={member.role} filled>
+            {/* A seat nobody sits in is drawn dashed, like a free equipment
+                slot and for the same reason: a row that quietly disappears
+                makes "this player crews nothing here" look like "we know
+                nothing about this vehicle". The two are not the same answer. */}
+            <Box
+              tip={member.empty ? (member.emptyLabel ?? member.role) : member.role}
+              filled={!member.empty}
+            >
               {member.roleImage ? (
                 <Picture
                   src={member.roleImage}
@@ -145,7 +214,7 @@ export function CrewGroup({
                   // badge is a near-black glyph (rgb 36,37,35) drawn to sit
                   // on the crew member's own light portrait, so it all but
                   // vanishes on a dark panel.
-                  className="dark:invert"
+                  className={cn("dark:invert", member.empty && "opacity-40")}
                 />
               ) : (
                 <span className="text-[8px] text-fd-muted-foreground">

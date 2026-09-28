@@ -5,6 +5,7 @@
   "consumables": "Consumables",
   "ammo": "Ammunition",
   "crew": "Crew skills",
+  "seat-empty": "No crew member in this seat",
   "field-mods": "Field modifications",
   "slot-empty": "Empty",
   "second-setup": "This player keeps a second setup on this vehicle."
