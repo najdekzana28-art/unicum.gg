@@ -56,7 +56,14 @@ export function TanksTab({
           reads: the list on the left, the selected vehicle on the right. They
           stack below `xl`, record first, since a reader who just picked a tank
           is looking for it rather than for the list they came from. */}
-      <div className="flex flex-col-reverse gap-0 xl:flex-row xl:items-start">
+      {/* At least a screen tall, and both columns filling it. The record is
+          a screen high by design, while the list is only as tall as its rows:
+          filter the table down to one tank and the record overflowed a
+          wrapper shorter than itself, so the list's own bottom border cut
+          straight across it. A floor on the row, and stretch rather than
+          start, keeps the two columns ending on the same line whichever of
+          them is the longer. */}
+      <div className="flex flex-col-reverse gap-0 xl:min-h-[calc(100vh-3.5rem)] xl:flex-row xl:items-stretch">
         <Panel className="min-w-0 flex-1">
           {/* `screenLines={false}` + a real border: the site's screen line is
               200vw wide, so beside the record it ran across the panel too. */}
