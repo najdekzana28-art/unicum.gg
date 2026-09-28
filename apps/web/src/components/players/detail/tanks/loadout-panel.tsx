@@ -64,7 +64,7 @@ export async function PlayerTankLoadoutPanel({
     { t: tGame },
     { t },
     icons,
-    seats,
+    tankCrew,
   ] = await Promise.all([
     getTranslation("game/equipment", locale),
     getTranslation("game/crew-perks", locale),
@@ -74,15 +74,20 @@ export async function PlayerTankLoadoutPanel({
     isRegion(region)
       ? loadoutIcons(region as Region, loadout.tankId)
       : Promise.resolve(new Map<string, LoadoutIcon>()),
-    // The seats this vehicle HAS, which is a fact about the tank rather than
-    // about the player. Without it an unmanned vehicle draws no crew at all,
-    // and "nobody in it" reads exactly like "we were never told".
+    // The vehicle's own crew, which is a fact about the tank rather than about
+    // the player: the seats it HAS, and which role each perk belongs to. Both
+    // are needed. Without the seats an unmanned vehicle draws no crew at all,
+    // and "nobody in it" reads exactly like "we were never told"; without the
+    // perks' roles a member's skills run on as one undifferentiated row.
     isRegion(region)
-      ? getTankCrew(region as Region, loadout.tankId).then(
-          (crew) => crew?.members.map((member) => member.roles[0] ?? "crew") ?? [],
-        )
-      : Promise.resolve([] as string[]),
+      ? getTankCrew(region as Region, loadout.tankId)
+      : Promise.resolve(null),
   ]);
+
+  const seats = tankCrew?.members.map((member) => member.roles) ?? [];
+  // Which role owns each perk: `common` for the three every member can learn,
+  // otherwise the role that teaches it.
+  const perkRole = new Map(tankCrew?.skills.map((skill) => [skill.key, skill.role]));
 
   // Every setup, not only the one in use: a second setup is a build the
   // player deliberately keeps, and showing one of two said nothing about
@@ -149,22 +154,60 @@ export async function PlayerTankLoadoutPanel({
     else waiting.set(member.role, [member]);
   }
   const rows = seats.length
-    ? seats.map((role) => ({ role, member: waiting.get(role)?.shift() }))
+    ? seats.map((roles) => ({
+        roles,
+        member: waiting.get(roles[0] ?? "crew")?.shift(),
+      }))
     : // A vehicle whose composition we cannot read: fall back to what the
       // player sent, which is the only thing we know about its crew.
-      (loadout.crew ?? []).map((member) => ({ role: member.role, member }));
+      (loadout.crew ?? []).map((member) => ({
+        roles: [member.role],
+        member,
+      }));
 
-  const crew: LoadoutCrewView[] = rows.map(({ role, member }) => ({
-    role: tRoles(role),
+  /**
+   * A member's perks, broken into lines the way the tank page breaks them.
+   *
+   * The three universal perks first, then one line per role the member fills
+   * (a commander who also works the radio gets a commander line and a radio
+   * line), then anything the catalogue did not place, so nothing is dropped.
+   * Run together on one line they read as a single undifferentiated pile,
+   * which is not how the game presents them or how a player thinks of them.
+   */
+  const perkLines = (skills: string[] | undefined, roles: string[]) => {
+    const placed = new Set<string>();
+    const take = (role: string) => {
+      const keys = (skills ?? []).filter(
+        (key) => !placed.has(key) && perkRole.get(key) === role,
+      );
+      keys.forEach((key) => placed.add(key));
+      return keys;
+    };
+    const lines: { key: string; skills: string[] }[] = [];
+    for (const role of ["common", ...roles]) {
+      const keys = take(role);
+      if (keys.length) lines.push({ key: role, skills: keys });
+    }
+    const rest = (skills ?? []).filter((key) => !placed.has(key));
+    if (rest.length) lines.push({ key: "other", skills: rest });
+    return lines.map((line) => ({
+      key: line.key,
+      skills: line.skills.map((name) => ({
+        name: tPerks(name),
+        image: crewSkillIcon(name),
+      })),
+    }));
+  };
+
+  const crew: LoadoutCrewView[] = rows.map(({ roles, member }) => ({
+    // Both roles, as the garage names the seat: "Commander / Radio Operator".
+    role: roles.map((role) => tRoles(role)).join(" / "),
     empty: !member,
     emptyLabel: t("seat-empty"),
     roleImage: isRegion(region)
-      ? crewRoleBadgeUrl(region as Region, role)
+      ? crewRoleBadgeUrl(region as Region, roles[0] ?? "crew")
       : null,
-    skills: (member?.skills ?? []).map((name) => ({
-      name: tPerks(name),
-      image: crewSkillIcon(name),
-    })),
+    skillLines: perkLines(member?.skills, roles),
   }));
 
   const progression = loadout.progression;
@@ -183,10 +226,12 @@ export async function PlayerTankLoadoutPanel({
 
   return (
     <LoadoutTooltips>
-      {/* No padding of its own: the panel's body already carries `p-4` and
-          spaces its sections with `gap-4`, so a second inset here pushed this
-          one block further in than every block above it. */}
-      <section className="border-t border-fd-border pt-4">
+      {/* No padding and no rule of its own: the panel's body already carries
+          `p-4` and spaces its sections with `gap-4`, so a second inset here
+          pushed this one block further in than every block above it, and a
+          separator drawn on top of that spacing read as a stray line rather
+          than as a division. The heading is what opens the section. */}
+      <section>
         <header className="mb-3 flex items-baseline justify-between gap-2">
           <h3 className="text-sm font-semibold">{t("title")}</h3>
           <span className="text-xs text-fd-muted-foreground">

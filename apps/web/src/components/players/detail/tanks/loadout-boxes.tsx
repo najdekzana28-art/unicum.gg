@@ -56,7 +56,8 @@ export interface LoadoutCrewView {
   empty?: boolean;
   /** What the tooltip says about an empty one. */
   emptyLabel?: string;
-  skills: { name: string; image: string }[];
+  /** Perks in lines: the universal ones, then one line per role of the seat. */
+  skillLines: { key: string; skills: { name: string; image: string }[] }[];
 }
 
 export function SlotGroup({
@@ -194,9 +195,12 @@ export function CrewGroup({
 }) {
   return (
     <Group label={label}>
-      <div className="flex w-full flex-col gap-1">
+      <div className="flex w-full flex-col gap-2">
         {crew.map((member, index) => (
-          <div key={index} className="flex flex-wrap items-center gap-1">
+          // `items-start`, not `items-center`: a member with perks from two
+          // roles carries several lines, and the badge belongs beside the
+          // first of them rather than floating in the middle of the stack.
+          <div key={index} className="flex items-start gap-1">
             {/* A seat nobody sits in is drawn dashed, like a free equipment
                 slot and for the same reason: a row that quietly disappears
                 makes "this player crews nothing here" look like "we know
@@ -222,11 +226,22 @@ export function CrewGroup({
                 </span>
               )}
             </Box>
-            {member.skills.map((skill) => (
-              <Box key={skill.name} tip={skill.name} filled subdued>
-                <Picture src={skill.image} alt={skill.name} size={24} />
-              </Box>
-            ))}
+            {/* One line per group, as the tank page lays a member's skills
+                out: the three universal perks, then the ones each role of the
+                seat teaches. Run together they read as one undifferentiated
+                pile, which is neither how the game shows them nor how a
+                player thinks about them. */}
+            <div className="flex min-w-0 flex-col gap-1">
+              {member.skillLines.map((line) => (
+                <div key={line.key} className="flex flex-wrap items-center gap-1">
+                  {line.skills.map((skill) => (
+                    <Box key={skill.name} tip={skill.name} filled subdued>
+                      <Picture src={skill.image} alt={skill.name} size={24} />
+                    </Box>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
