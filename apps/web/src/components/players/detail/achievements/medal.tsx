@@ -20,7 +20,30 @@ const INT_FORMAT = { maximumFractionDigits: 0 } as const;
  * count (or the tier reached) badged on the corner; unearned ones are drained
  * of colour so the cabinet reads at a glance without hiding what is left.
  */
-export function Medal({ achievement, locale }: { achievement: PlayerAchievement ; locale: string }) {
+/**
+ * How big a tile is drawn.
+ *
+ * `cabinet` is the profile's own Achievements tab, where the medals ARE the
+ * page and the artwork is worth the room. `compact` is a panel that has other
+ * things to say: on a vehicle record, medals at the cabinet's size dwarfed the
+ * build beside them and read as the main event, which they are not.
+ */
+export type MedalSize = "cabinet" | "compact";
+
+const TILE: Record<MedalSize, string> = {
+  cabinet: "size-16 sm:size-20",
+  compact: "size-11",
+};
+
+export function Medal({
+  achievement,
+  locale,
+  size = "cabinet",
+}: {
+  achievement: PlayerAchievement;
+  locale: string;
+  size?: MedalSize;
+}) {
   const { t } = useTranslation("components/players/detail/achievements/medal");
   const face = achievementFace(achievement);
   const earned = achievement.count > 0;
@@ -49,7 +72,8 @@ export function Medal({ achievement, locale }: { achievement: PlayerAchievement 
               : t("aria-not-earned", { name: face.name })
           }
           className={cn(
-            "relative flex size-16 items-center justify-center transition-opacity outline-none focus-visible:ring-2 focus-visible:ring-ring sm:size-20",
+            "relative flex items-center justify-center transition-opacity outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            TILE[size],
             // Drained but still legible: an unearned medal has to read as a
             // target, and at 25% the artwork was too faint to recognise which
             // one it was.
@@ -73,7 +97,12 @@ export function Medal({ achievement, locale }: { achievement: PlayerAchievement 
               that is more than once — "×1" is noise). Tiered ones badge nothing:
               the tier is already what the artwork shows. */}
           {earned && face.tierName === null && achievement.count > 1 && (
-            <span className="absolute right-0 bottom-0 rounded-sm bg-background/90 px-1 text-[10px] font-semibold tabular-nums">
+            <span
+              className={cn(
+                "absolute right-0 bottom-0 rounded-sm bg-background/90 px-1 font-semibold tabular-nums",
+                size === "compact" ? "text-[9px]" : "text-[10px]",
+              )}
+            >
               {numberFormat(locale, INT_FORMAT).format(achievement.count)}
             </span>
           )}

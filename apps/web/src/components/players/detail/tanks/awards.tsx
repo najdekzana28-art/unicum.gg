@@ -35,7 +35,15 @@ export function TankAwards({ awards, locale }: { awards: PlayerAchievement[] ; l
         <TooltipProvider delayDuration={150}>
           <div className="flex flex-wrap gap-1">
             {awards.map((a) => (
-              <Medal key={a.id} achievement={a}  locale={locale} />
+              <Medal
+                key={a.id}
+                achievement={a}
+                locale={locale}
+                // Smaller than the profile's cabinet: here the medals sit
+                // under the build, in a column 30rem wide, and at the
+                // cabinet's size they read as the main event.
+                size="compact"
+              />
             ))}
           </div>
         </TooltipProvider>
