@@ -90,6 +90,7 @@ export function BoostConsolePreview({
 }) {
   const { t: tCopy } = useTranslation("components/clans/detail/boost-console-preview");
   const { t } = useTranslation("components/clans/detail/boost-console-preview");
+  const { t: tGame } = useTranslation("game/vocabulary");
   const uid = useId();
   const tz = browserTz();
   const scheduleReserves = SAMPLE_RESERVES.filter(
@@ -110,7 +111,7 @@ export function BoostConsolePreview({
         <Panel screenLines={false}>
           <PanelHeader className="flex min-h-14 flex-wrap items-center justify-between gap-x-3 gap-y-1">
             <PanelTitle className="flex items-center gap-2">
-              {t("stronghold-boosts")}
+              {t("stronghold-boosts", { stronghold: tGame("features.stronghold") })}
               <span className="rounded-full bg-brand/10 px-2 py-0.5 text-xs font-medium text-brand">
                 {t("officers")}</span>
             </PanelTitle>

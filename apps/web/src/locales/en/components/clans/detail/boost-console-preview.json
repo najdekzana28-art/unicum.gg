@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Only an officer of this clan can set this up.",
   "schedule-preview": "Schedule preview",
   "set-your-hours-and-reserves": "Set your hours and reserves once; the boosts fire on time on their own, even when nobody is around to press the button.",
-  "stronghold-boosts": "Stronghold boosts",
+  "stronghold-boosts": "{stronghold} boosts",
   "times-are-in-your-timezone": "Times are in {tz}, your timezone.",
   "to": "To"
 }
