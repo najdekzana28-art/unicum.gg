@@ -14,6 +14,7 @@
     "exit": "Выйсці з рэжыму тэатра"
   },
   "title": "Лепшыя гульцы, якія цяпер вядуць стрым ·",
+  "title-short": "Жывы ·",
   "viewer-count": "{count} гледачоў",
   "viewers": "Гледачы",
   "watch": "Глядзець {nickname} на Twitch"

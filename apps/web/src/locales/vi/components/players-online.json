@@ -1,3 +1,4 @@
 {
-  "count": "{count} người chơi trực tuyến"
+  "count": "{count} người chơi trực tuyến",
+  "count-short": "{count} trực tuyến"
 }

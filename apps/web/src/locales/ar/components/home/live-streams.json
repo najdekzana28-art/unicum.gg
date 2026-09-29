@@ -14,6 +14,7 @@
     "exit": "الخروج من وضع المسرح"
   },
   "title": "أفضل اللاعبين الذين يبثون الآن ·",
+  "title-short": "مباشر ·",
   "viewer-count": "{count} مشاهدًا",
   "viewers": "المشاهدون",
   "watch": "مشاهدة {nickname} على Twitch"

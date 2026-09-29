@@ -1,3 +1,4 @@
 {
-  "count": "{count} играча на мрежи"
+  "count": "{count} играча на мрежи",
+  "count-short": "{count} онлајн"
 }

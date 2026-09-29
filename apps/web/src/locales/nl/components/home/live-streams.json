@@ -14,6 +14,7 @@
     "exit": "Sluiten van theatermodus"
   },
   "title": "Top spelers die nu streamen ·",
+  "title-short": "Live ·",
   "viewer-count": "{count} kijkers",
   "viewers": "Kijkers",
   "watch": "Bekijk {nickname} op Twitch"

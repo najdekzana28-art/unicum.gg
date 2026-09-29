@@ -14,6 +14,7 @@
     "exit": "Theatermodus verlassen"
   },
   "title": "Top-Spieler, die jetzt streamen ·",
+  "title-short": "Live ·",
   "viewer-count": "{count} Zuschauer",
   "viewers": "Zuschauer",
   "watch": "Auf Twitch ansehen: {nickname}"

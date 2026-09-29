@@ -1,3 +1,4 @@
 {
-  "count": "{count} mga manlalarong online"
+  "count": "{count} mga manlalarong online",
+  "count-short": "{count} online"
 }

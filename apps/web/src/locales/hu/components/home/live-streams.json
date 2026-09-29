@@ -14,6 +14,7 @@
     "exit": "Kilépés a mozivászon módból"
   },
   "title": "Legjobb játékosok, akik most streamelnek ·",
+  "title-short": "Élő ·",
   "viewer-count": "{count} néző",
   "viewers": "Nézők",
   "watch": "{nickname} közvetítése · Nézd a Twitchen!"

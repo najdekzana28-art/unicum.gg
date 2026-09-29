@@ -14,6 +14,7 @@
     "exit": "シアターモードを終了"
   },
   "title": "現在配信中のトッププレイヤー ·",
+  "title-short": "ライブ ·",
   "viewer-count": "視聴者{count}人",
   "viewers": "視聴者",
   "watch": "Twitchで{nickname}を見る"

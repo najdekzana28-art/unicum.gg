@@ -14,6 +14,7 @@
     "exit": "Изађи из биоскопског режима"
   },
   "title": "Најбољи играчи који сада стримују ·",
+  "title-short": "Uživo ·",
   "viewer-count": "{count} гледалаца",
   "viewers": "Гледаоци",
   "watch": "Гледај надимак {nickname} на Twitch-у"

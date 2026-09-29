@@ -14,6 +14,7 @@
     "exit": "ออกจากโหมดโรงภาพยนตร์"
   },
   "title": "ผู้เล่นอันดับต้น ๆ ที่กำลังสตรีม ·",
+  "title-short": "สด ·",
   "viewer-count": "ผู้ชม {count} คน",
   "viewers": "ผู้ชม",
   "watch": "ดู {nickname} บน Twitch"

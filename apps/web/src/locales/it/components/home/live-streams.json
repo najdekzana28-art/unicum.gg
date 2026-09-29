@@ -14,6 +14,7 @@
     "exit": "Esci dalla modalità cinema"
   },
   "title": "Migliori giocatori in streaming ora ·",
+  "title-short": "Live ·",
   "viewer-count": "{count} spettatori",
   "viewers": "Spettatori",
   "watch": "Guarda {nickname} su Twitch"

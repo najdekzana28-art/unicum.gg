@@ -1,3 +1,4 @@
 {
-  "count": "{count} oyuncu çevrimiçi"
+  "count": "{count} oyuncu çevrimiçi",
+  "count-short": "{count} çevrimiçi"
 }

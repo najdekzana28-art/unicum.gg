@@ -1,3 +1,4 @@
 {
-  "count": "{count} لاعب متصلون"
+  "count": "{count} لاعب متصلون",
+  "count-short": "{count} متصل"
 }

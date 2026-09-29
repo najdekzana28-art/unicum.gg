@@ -14,6 +14,7 @@
     "exit": "Opustit režim kina"
   },
   "title": "Nejlepší hráči, kteří právě streamují ·",
+  "title-short": "Živě ·",
   "viewer-count": "{count} diváků",
   "viewers": "Diváci",
   "watch": "Sledovat na Twitchi: {nickname}"

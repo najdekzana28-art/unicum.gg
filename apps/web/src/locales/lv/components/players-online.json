@@ -1,3 +1,4 @@
 {
-  "count": "Tiešsaistē: {count} spēlētāji"
+  "count": "Tiešsaistē: {count} spēlētāji",
+  "count-short": "{count} tiešsaistē"
 }

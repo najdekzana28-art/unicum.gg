@@ -1,3 +1,4 @@
 {
-  "count": "オンラインプレイヤー{count}人"
+  "count": "オンラインプレイヤー{count}人",
+  "count-short": "{count} オンライン"
 }

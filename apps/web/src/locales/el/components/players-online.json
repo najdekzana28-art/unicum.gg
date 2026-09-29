@@ -1,3 +1,4 @@
 {
-  "count": "{count} παίκτες online"
+  "count": "{count} παίκτες online",
+  "count-short": "{count} σε σύνδεση"
 }

@@ -14,6 +14,7 @@
     "exit": "Poistu teatteritilasta"
   },
   "title": "Parhaat pelaajat striimaavat nyt ·",
+  "title-short": "Lähetä ·",
   "viewer-count": "{count} katsojaa",
   "viewers": "Katsojat",
   "watch": "Katso nimimerkkiä {nickname} Twitchissä"

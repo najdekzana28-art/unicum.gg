@@ -14,6 +14,7 @@
     "exit": "Lumabas sa theater mode"
   },
   "title": "Mga nangungunang manlalarong nag-i-stream ngayon ·",
+  "title-short": "Live ·",
   "viewer-count": "{count} manonood",
   "viewers": "Mga manonood",
   "watch": "Panoorin si {nickname} sa Twitch"

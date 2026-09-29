@@ -14,6 +14,7 @@
     "exit": "Izađi iz kazališnog načina"
   },
   "title": "Najbolji igrači koji trenutačno prenose ·",
+  "title-short": "Uživo ·",
   "viewer-count": "{count} gledatelja",
   "viewers": "Gledatelji",
   "watch": "Gledaj {nickname} na Twitchu"

@@ -14,6 +14,7 @@
     "exit": "Išeiti iš kino teatro režimo"
   },
   "title": "Geriausi žaidėjai, dabar transliuojantys ·",
+  "title-short": "Tiesiogiai ·",
   "viewer-count": "{count} žiūrovų",
   "viewers": "Žiūrovai",
   "watch": "Žiūrėti {nickname} per Twitch"

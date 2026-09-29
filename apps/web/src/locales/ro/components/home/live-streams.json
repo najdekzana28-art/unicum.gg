@@ -14,6 +14,7 @@
     "exit": "Ieși din modul teatru"
   },
   "title": "Cei mai buni jucători transmit acum ·",
+  "title-short": "Live ·",
   "viewer-count": "{count} spectatori",
   "viewers": "Spectatori",
   "watch": "Urmărește-l pe {nickname} pe Twitch"

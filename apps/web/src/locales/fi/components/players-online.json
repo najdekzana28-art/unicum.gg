@@ -1,3 +1,4 @@
 {
-  "count": "{count} pelaajaa paikalla"
+  "count": "{count} pelaajaa paikalla",
+  "count-short": "{count} paikalla"
 }

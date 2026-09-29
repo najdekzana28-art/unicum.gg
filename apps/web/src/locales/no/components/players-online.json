@@ -1,3 +1,4 @@
 {
-  "count": "{count} spillere pålogget"
+  "count": "{count} spillere pålogget",
+  "count-short": "{count} på nett"
 }

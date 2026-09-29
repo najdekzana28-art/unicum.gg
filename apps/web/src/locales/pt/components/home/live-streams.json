@@ -14,6 +14,7 @@
     "exit": "Sair do modo de cinema"
   },
   "title": "Melhores jogadores em direto agora ·",
+  "title-short": "Ao vivo ·",
   "viewer-count": "{count} espetadores",
   "viewers": "Espetadores",
   "watch": "Ver {nickname} na Twitch"

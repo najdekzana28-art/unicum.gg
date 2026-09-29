@@ -14,6 +14,7 @@
     "exit": "Iziet no teātra režīma"
   },
   "title": "Labākie spēlētāji, kas pašlaik straumē ·",
+  "title-short": "Tiešraidē ·",
   "viewer-count": "{count} skatītāji",
   "viewers": "Skatītāji",
   "watch": "Skatīties {nickname} Twitch platformā"

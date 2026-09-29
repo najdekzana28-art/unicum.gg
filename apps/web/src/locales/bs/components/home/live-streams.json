@@ -14,6 +14,7 @@
     "exit": "Izađi iz kino režima"
   },
   "title": "Najbolji igrači koji trenutno streamaju ·",
+  "title-short": "Uživo ·",
   "viewer-count": "{count} gledalaca",
   "viewers": "Gledaoci",
   "watch": "Gledaj {nickname} na Twitchu"

@@ -14,6 +14,7 @@
     "exit": "Quitter le mode cinéma"
   },
   "title": "Meilleurs joueurs en streaming actuellement ·",
+  "title-short": "En direct ·",
   "viewer-count": "{count} spectateurs",
   "viewers": "Spectateurs",
   "watch": "Regarder {nickname} sur Twitch"

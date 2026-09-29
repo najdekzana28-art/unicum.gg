@@ -1,3 +1,4 @@
 {
-  "count": "{count}名玩家在线"
+  "count": "{count}名玩家在线",
+  "count-short": "{count} 在线"
 }

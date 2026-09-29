@@ -1,3 +1,4 @@
 {
-  "count": "{count} spieler Online"
+  "count": "{count} spieler Online",
+  "count-short": "{count} Online"
 }
