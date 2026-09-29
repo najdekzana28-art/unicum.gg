@@ -2,7 +2,14 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import test, { describe } from "node:test";
-import { LOCALES_DIR, SOURCE_LOCALE, jsonFiles, keysOf, readLocale } from ".";
+import {
+  LOCALES_DIR,
+  SOURCE_LOCALE,
+  jsonFiles,
+  keysOf,
+  readLocale,
+  valueAt,
+} from ".";
 
 /** The placeholders that hold a name nobody chose: a vehicle, a map, a player,
  * a clan. Their contents are proper nouns, so nothing about their spelling or
@@ -72,16 +79,4 @@ export function articlesTests() {
       );
     });
   });
-}
-
-function valueAt(
-  source: Record<string, unknown>,
-  key: string,
-): string | undefined {
-  let current: unknown = source;
-  for (const segment of key.split(".")) {
-    if (current === null || typeof current !== "object") return undefined;
-    current = (current as Record<string, unknown>)[segment];
-  }
-  return typeof current === "string" ? current : undefined;
 }

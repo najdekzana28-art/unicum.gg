@@ -11,6 +11,7 @@ import {
   readLocale,
   SOURCE_LOCALE,
   targetLocales,
+  valueAt,
 } from ".";
 
 const TAG = /<[^>]+>/g;
@@ -78,18 +79,6 @@ function placeholders(text: string): string[] {
 }
 
 const tags = (text: string): string[] => text.match(TAG) ?? [];
-
-function valueAt(
-  source: Record<string, unknown>,
-  key: string,
-): string | undefined {
-  let current: unknown = source;
-  for (const segment of key.split(".")) {
-    if (current === null || typeof current !== "object") return undefined;
-    current = (current as Record<string, unknown>)[segment];
-  }
-  return typeof current === "string" ? current : undefined;
-}
 
 /**
  * What a translation is not allowed to lose.

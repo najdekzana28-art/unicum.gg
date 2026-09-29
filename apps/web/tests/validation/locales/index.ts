@@ -48,6 +48,20 @@ export function keysOf(value: Record<string, unknown>, prefix = ""): string[] {
   return out;
 }
 
+/** The string at a dotted key, or nothing where the key is absent or is a group.
+ * Beside `keysOf`, which is what produces the keys it reads. */
+export function valueAt(
+  source: Record<string, unknown>,
+  key: string,
+): string | undefined {
+  let current: unknown = source;
+  for (const segment of key.split(".")) {
+    if (current === null || typeof current !== "object") return undefined;
+    current = (current as Record<string, unknown>)[segment];
+  }
+  return typeof current === "string" ? current : undefined;
+}
+
 export function readLocale(locale: string, file: string) {
   return JSON.parse(
     fs.readFileSync(path.join(LOCALES_DIR, locale, file), "utf-8"),
