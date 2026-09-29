@@ -34,6 +34,12 @@ import type { Region } from "@unicum.gg/wargaming";
  * played under a name is therefore the closest bound available, and it is a
  * lower one: the rename happened at that date or after it. The Onslaught
  * reconciler makes the same approximation with a season's end date.
+ *
+ * Capped at now(), because registration opens before a tournament is played: a
+ * player who renames after signing up for one that starts next week would
+ * otherwise have a former name dated in the future, and the profile rendered it
+ * as such (observed on three rows, the furthest 12 days out). An observation
+ * cannot be later than the moment it was made.
  */
 function insertMissingNames(region: Region, tournamentId?: number) {
   const rosters = tournamentTeamPlayersByRegion[region];
@@ -52,7 +58,7 @@ function insertMissingNames(region: Region, tournamentId?: number) {
     )
     SELECT r.${sql.raw(rosters.accountId.name)},
            MIN(r.${sql.raw(rosters.nickname.name)}),
-           MAX(t.${sql.raw(tournaments.startAt.name)})
+           LEAST(MAX(t.${sql.raw(tournaments.startAt.name)}), NOW())
     FROM ${rosters} r
     JOIN ${players} p
       ON p.${sql.raw(players.accountId.name)} = r.${sql.raw(rosters.accountId.name)}
@@ -60,6 +66,19 @@ function insertMissingNames(region: Region, tournamentId?: number) {
       ON t.${sql.raw(tournaments.id.name)} = r.${sql.raw(rosters.tournamentId.name)}
     WHERE LOWER(r.${sql.raw(rosters.nickname.name)})
           <> LOWER(p.${sql.raw(players.nickname.name)})
+      -- A player row we hold only as an id, with its nickname still to be
+      -- fetched, is not a player who renamed: every roster name would differ
+      -- from the empty placeholder, and one of them is their CURRENT name.
+      --
+      -- This DEFERS those names rather than dropping them, and the deferral is
+      -- covered because the passes repeat: the live pass re-mirrors an open
+      -- tournament every five minutes, and a settled one is re-mirrored once its
+      -- status change clears `detail_synced_at`, by which point the pipeline has
+      -- resolved the placeholder. What it does not cover is a tournament first
+      -- seen already settled, which only happens under the deliberate seeding and
+      -- enumeration runs, so those end with `backfill-roster-names`.
+      AND btrim(p.${sql.raw(players.nickname.name)}) <> ''
+      AND btrim(r.${sql.raw(rosters.nickname.name)}) <> ''
       ${scope}
       AND NOT EXISTS (
         SELECT 1 FROM ${history} h
