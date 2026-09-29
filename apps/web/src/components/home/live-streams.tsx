@@ -16,7 +16,7 @@ import Image from "next/image";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer, languageToCountryCode } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
-import { FeaturedPlayer } from "@/components/home/featured-player";
+import { StreamSurface } from "@/components/home/stream-surface";
 import { usePeriod } from "@/hooks/use-period";
 import { useTranslation } from "@/hooks/use-translation";
 import { PeriodSelect } from "@/components/home/period-select";
@@ -53,10 +53,6 @@ import { StreamChat } from "./stream-chat";
 import type { Region } from "@unicum.gg/wargaming";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
-
-function thumb(url: string, w: number, h: number): string {
-  return url.replace("{width}", String(w)).replace("{height}", String(h));
-}
 
 export function LiveStreams({
   initial,
@@ -207,18 +203,12 @@ export function LiveStreams({
             {/* Featured player */}
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="relative aspect-video w-full bg-black">
-                {parent ? (
-                  <FeaturedPlayer channel={active.twitchLogin} parent={parent} />
-                ) : (
-                  <Image
-                    src={thumb(active.thumbnailUrl, 960, 540)}
-                    alt={active.title}
-                    fill
-                    priority
-                    unoptimized
-                    className="object-cover"
-                  />
-                )}
+                <StreamSurface
+                  channel={active.twitchLogin}
+                  parent={parent}
+                  thumbnailUrl={active.thumbnailUrl}
+                  title={active.title}
+                />
               </div>
               <div className="flex items-center gap-3 border-t border-fd-border p-4">
                 <div className="min-w-0 flex-1">
