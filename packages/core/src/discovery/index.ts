@@ -55,9 +55,18 @@ export async function discoverTopClanPlayers(
       const result = await db
         .insert(players)
         .values(chunk)
+        // The name is written only where we hold none, never over a resolved
+        // one. A clan member list is a secondary source and can lag the
+        // account endpoint, which is the authority everywhere else, so
+        // overwriting made this cron a renamer: the stale name fired the
+        // `_players` rename trigger, which filed the player's CURRENT name as
+        // a former one, and the next pipeline pass wrote the real name back and
+        // filed the stale one. Filling a placeholder is the useful half and
+        // fires nothing, since a nickname that does not move fires no trigger.
         .onConflictDoUpdate({
           target: players.accountId,
           set: { nickname: sql`excluded.nickname` },
+          setWhere: sql`btrim(${players.nickname}) = ''`,
         })
         .returning({ id: players.id });
       upserted += result.length;
