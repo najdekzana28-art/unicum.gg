@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Samo časnik ovog klana može to postaviti.",
   "schedule-preview": "Pregled rasporeda",
   "set-your-hours-and-reserves": "Jednom postavite svoje sate i zalihe. Pojačanja će se aktivirati na vrijeme sama od sebe, čak i kada nikoga nema da pritisne gumb.",
-  "stronghold-boosts": "Pojačanja utvrde {stronghold}",
+  "stronghold-boosts": "Pojačanja za {stronghold}",
   "times-are-in-your-timezone": "Vremena su navedena u vašoj vremenskoj zoni {tz}.",
   "to": "Do"
 }

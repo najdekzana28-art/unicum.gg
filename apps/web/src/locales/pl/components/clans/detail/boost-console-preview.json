@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Tylko oficer tego klanu może to skonfigurować.",
   "schedule-preview": "Podgląd harmonogramu",
   "set-your-hours-and-reserves": "Ustaw godziny i rezerwy tylko raz. Wzmocnienia będą aktywować się automatycznie o właściwej porze, nawet gdy nie będzie nikogo, kto mógłby nacisnąć przycisk.",
-  "stronghold-boosts": "Wzmocnienia dla Twierdzy {stronghold}",
+  "stronghold-boosts": "Wzmocnienia obiektu {stronghold}",
   "times-are-in-your-timezone": "Godziny są podane dla strefy czasowej {tz}, czyli Twojej strefy.",
   "to": "Do"
 }

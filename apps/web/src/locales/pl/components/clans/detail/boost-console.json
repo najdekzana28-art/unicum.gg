@@ -7,7 +7,7 @@
   "online": "Online",
   "recent-activations": "niedawne aktywacje",
   "reserve": "Rezerwa",
-  "stronghold-boosts": "Wzmocnienia dla Twierdzy {stronghold}",
+  "stronghold-boosts": "Wzmocnienia obiektu {stronghold}",
   "when": "Kiedy",
   "workflow": "Workflow"
 }
