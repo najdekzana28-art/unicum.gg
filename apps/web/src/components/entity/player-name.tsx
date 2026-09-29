@@ -74,6 +74,13 @@ export function PlayerName({
         <Link
           href={href ?? ROUTES.PLAYER(region, player.nickname)}
           className={cn("min-w-0 truncate hover:underline", linkClassName)}
+          // **A leaderboard is a list of links, not a link.** These point at
+          // the heaviest pages on the site, and a board puts twenty-five of
+          // them on one screen, so prefetching on sight bought a megabyte of
+          // player pages for the one row a reader actually opens. On intent
+          // the prefetch still lands before the click completes. See
+          // `prefetch` in `@/components/link`.
+          prefetch="intent"
         >
           {body}
         </Link>

@@ -79,6 +79,10 @@ export function TournamentBadge({
               href={href}
               onClick={(e) => e.stopPropagation()}
               className="inline-flex"
+              // A badge is never the click a reader came for, and a table puts
+              // dozens of them on one screen. See `prefetch` in
+              // `@/components/link`.
+              prefetch="intent"
               aria-label={label}
             >
               {crest}

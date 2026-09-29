@@ -93,6 +93,11 @@ export function Footer() {
                     <Link
                       href={link.href}
                       className={`text-sm ${styles.linkHover}`}
+                      // Seven columns of links nobody is about to click, which
+                      // Next was fetching whole because nothing in this tree
+                      // draws a loading boundary. See `prefetch` in
+                      // `@/components/link`.
+                      prefetch="intent"
                       {...(link.external
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}

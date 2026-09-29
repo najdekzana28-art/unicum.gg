@@ -117,6 +117,10 @@ export function ClanRankBadge({
           <Link
             href={boardHref(region, badge.board)}
             className="inline-flex shrink-0"
+            // A badge is never the click a reader came for, and a table puts
+            // dozens of them on one screen. See `prefetch` in
+            // `@/components/link`.
+            prefetch="intent"
             aria-label={label}
           >
             <Crest

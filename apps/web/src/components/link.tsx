@@ -2,16 +2,41 @@
 
 import { useLocale } from "@onruntime/translations/react";
 import NextLink from "next/link";
-import type { ComponentProps, MouseEvent } from "react";
+import type { ComponentProps, FocusEvent, MouseEvent, TouchEvent } from "react";
+import { useState } from "react";
 import STORAGE from "@/constants/storage";
 import { matchesAnyRoute } from "@/lib/route-match";
 import { DEFAULT_LOCALE, isLocale, localizePath } from "@/lib/translations";
 import { UNLOCALIZED_PAGES } from "@/proxy-routes.generated";
 
-export type LinkProps = Omit<ComponentProps<typeof NextLink>, "locale"> & {
+type NextPrefetch = ComponentProps<typeof NextLink>["prefetch"];
+
+export type LinkProps = Omit<ComponentProps<typeof NextLink>, "locale" | "prefetch"> & {
   /** Point at another language's copy of the same page. Setting it also records
    * the choice, so a bare URL sends the reader back to it afterwards. */
   locale?: string;
+  /**
+   * `next/link`'s own values, plus `"intent"`: prefetch when the reader shows
+   * they might go there (hover, focus or touch) rather than when the link comes
+   * near the viewport.
+   *
+   * **For a list of links nobody is about to click, which on this site means the
+   * footer.** Next prefetches a link approaching the viewport, and with no
+   * `loading.tsx` anywhere in the tree what it fetches is the destination's
+   * ENTIRE payload rather than a shell (its own documented rule). The footer
+   * holds seven columns of them, so every page view pulled the whole of
+   * `/tanks/all/specifications`, `/tanks/all/economics`, `/players/onslaught`
+   * and sixteen others: measured on a tank page, 2.5 MB of the 3.9 MB it
+   * transferred, none of it rendered, all of it competing for the bandwidth the
+   * page itself needed.
+   *
+   * It is not `prefetch={false}`, which the docs offer for the same case,
+   * because that makes the footer's own links wait for the server on click. On
+   * intent the prefetch still happens, just for the one link a reader reached
+   * for. Restoring the default once they do is what the `null` here is: it hands
+   * the link back to Next's normal static prefetching.
+   */
+  prefetch?: NextPrefetch | "intent";
 };
 
 /**
@@ -31,10 +56,42 @@ export default function Link({
   href,
   locale,
   onClick,
+  prefetch,
+  onMouseEnter,
+  onFocus,
+  onTouchStart,
   ...props
 }: LinkProps) {
   const { locale: current } = useLocale();
   const target = isLocale(locale) ? locale : isLocale(current) ? current : DEFAULT_LOCALE;
+
+  // One-way: a reader who has reached for this link once is not un-reached for,
+  // and flipping back would throw away a prefetch that has already been paid
+  // for.
+  const [intended, setIntended] = useState(false);
+  const onIntent = prefetch === "intent" ? () => setIntended(true) : undefined;
+  const resolvedPrefetch: NextPrefetch =
+    prefetch === "intent" ? (intended ? null : false) : prefetch;
+  // The caller's own handlers still run: `onMouseEnter` is how a tooltip opens
+  // and `onFocus` is how one is reached by keyboard, so swallowing either to
+  // read the intent would trade a download for a broken control.
+  const intent = {
+    onMouseEnter: (event: MouseEvent<HTMLAnchorElement>) => {
+      onIntent?.();
+      onMouseEnter?.(event);
+    },
+    // Keyboard and screen-reader readers never hover, so focus is their hover.
+    onFocus: (event: FocusEvent<HTMLAnchorElement>) => {
+      onIntent?.();
+      onFocus?.(event);
+    },
+    // And a touch has no hover at all: taking it on `touchstart` buys the
+    // prefetch the hundred-odd milliseconds before the tap completes.
+    onTouchStart: (event: TouchEvent<HTMLAnchorElement>) => {
+      onIntent?.();
+      onTouchStart?.(event);
+    },
+  };
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     // Written on the click rather than by the proxy: the cookie is the reader's
@@ -61,6 +118,8 @@ export default function Link({
       <NextLink
         href={untouched ? href : localizePath(href, target)}
         onClick={handleClick}
+        prefetch={resolvedPrefetch}
+        {...intent}
         {...props}
       />
     );
@@ -75,6 +134,8 @@ export default function Link({
           : href
       }
       onClick={handleClick}
+      prefetch={resolvedPrefetch}
+      {...intent}
       {...props}
     />
   );

@@ -74,6 +74,11 @@ export function GlossaryLabel({
       <TooltipTrigger asChild>
         <Link
           href={ROUTES.GLOSSARY_TERM(term.slug)}
+          // A term is a thing to read about, not a place to go: the label is a
+          // hover affordance (`cursor-help`) and a table head carries one per
+          // column, so on sight this fetched a glossary entry for every
+          // statistic on the page. See `prefetch` in `@/components/link`.
+          prefetch="intent"
           className={cn(
             "cursor-help decoration-dotted underline-offset-4 hover:underline",
             className,

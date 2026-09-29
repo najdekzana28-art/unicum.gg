@@ -48,6 +48,10 @@ export function SupporterBadge({
           <Link
             href={ROUTES.SUPPORT}
             className="inline-flex"
+            // A badge is never the click a reader came for, and a table puts
+            // dozens of them on one screen. See `prefetch` in
+            // `@/components/link`.
+            prefetch="intent"
             aria-label={t("supporter")}
           >
             <Crest kind={CrestKind.Supporter} size={size} muted={!active} />

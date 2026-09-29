@@ -32,9 +32,12 @@ export function TopBar({ feedbackEnabled }: { feedbackEnabled: boolean }) {
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             {/* /support is also linked from the footer; the persistent
                 top-bar CTA doesn't need to prefetch it too. It is the only
-                place the navigation offers it, the "More" menu included. */}
+                place the navigation offers it, the "More" menu included.
+                Said here for years and never actually set, so the page was
+                still fetching the whole of /support on every view. */}
             <Link
               href={ROUTES.SUPPORT}
+              prefetch="intent"
               className="shrink-0 font-medium text-brand-strong transition-opacity hover:opacity-80"
             >
               {t("support")}

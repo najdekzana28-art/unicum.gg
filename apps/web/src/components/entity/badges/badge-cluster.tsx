@@ -129,6 +129,9 @@ export function OverflowCrest({
                   href={b.href}
                   onClick={(e) => e.stopPropagation()}
                   className="flex items-center gap-1.5 hover:underline"
+                  // Inside a popover the reader has already opened, so hover is
+                  // the natural moment. See `prefetch` in `@/components/link`.
+                  prefetch="intent"
                 >
                   {row}
                 </Link>
