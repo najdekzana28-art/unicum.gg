@@ -560,7 +560,15 @@ export async function reconcileOnslaught(
     .map((r) => ({ accountId: Number(r.accountId), recorded: r.name }))
     .filter((c) => {
       const current = currentNames.get(c.accountId);
-      return current != null && current !== c.recorded;
+      // Trimmed and case-folded, like the dedupe two lines below and like the
+      // roster recovery in `tournaments/names.ts`: WG nicknames are unique
+      // case-insensitively, so "PlayerX" resolving as "playerx" is not a former
+      // name, and recording it hands the profile a rename nobody can see.
+      return (
+        current != null &&
+        c.recorded.trim() !== "" &&
+        current.trim().toLowerCase() !== c.recorded.trim().toLowerCase()
+      );
     });
   let formerNames = 0;
   if (candidates.length > 0) {
