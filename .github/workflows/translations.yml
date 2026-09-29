@@ -17,8 +17,17 @@ on:
     paths:
       - "apps/web/src/locales/en/**"
       - "apps/web/scripts/generate-translations.ts"
+      # The rules the writer and the locale suite share. A change here moves
+      # what the suite demands, so it has to start the run that repairs the
+      # tree, or the next unrelated push to main goes red with no commit that
+      # explains it.
+      - "apps/web/scripts/translation-rules.ts"
       - "apps/web/src/lib/translations.ts"
       - "apps/web/src/lib/game-vocabulary.ts"
+      # A hand correction to what the game calls something, in any language.
+      # That file now decides the word every translation naming it has to use,
+      # so correcting one cell has to re-ask for the strings that quote it.
+      - "apps/web/src/locales/*/game/vocabulary.json"
   workflow_dispatch:
 
 concurrency:

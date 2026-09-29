@@ -16,7 +16,15 @@ import {
   writeFileSync,
 } from "node:fs";
 import { createHash } from "node:crypto";
-import { shouts, typographic } from "./translation-rules";
+import {
+  carriesWord,
+  gameNames,
+  isGameNamespace,
+  missingGameName,
+  shouts,
+  typographic,
+  type GameName,
+} from "./translation-rules";
 import { dirname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { config } from "dotenv-flow";
@@ -447,6 +455,55 @@ function officialSheet(locale: Locale): Record<string, string> {
 }
 
 /**
+ * What the game calls its own modes, boards and awards, per language.
+ *
+ * The third authority, beside the client's catalogues above and the model's own
+ * sheet below, and the only one covering the words a player reads most. The
+ * client's gettext files name "Onslaught" and "Skirmish" but never "Stronghold",
+ * "Clan Wars" or "Common Test" on their own, so those three fell through to the
+ * model, which answered a different word in every file it met them in.
+ *
+ * `game/vocabulary` is where the site already writes them down, and it is the
+ * one `game/` namespace a person corrects by hand, so it outranks a guess and
+ * is quoted at every prompt that touches a string naming one.
+ */
+const gameNameSheets = new Map<Locale, GameName[]>();
+
+function gameNamesFor(locale: Locale): GameName[] {
+  const held = gameNameSheets.get(locale);
+  if (held) return held;
+  const read = (target: Locale) =>
+    (readJson(join(localesRoot, target, "game", "vocabulary.json")) ??
+      {}) as Record<string, unknown>;
+  const names = gameNames(read(DEFAULT_LOCALE), read(locale));
+  gameNameSheets.set(locale, names);
+  return names;
+}
+
+/**
+ * The game's own name a string names and its translation does not carry, for
+ * the prose namespaces only.
+ *
+ * `game/` is exempt for the reason the namespace exists: those values ARE the
+ * catalogue this reads, so holding one to itself is circular. `isGameNamespace`
+ * rather than a `startsWith` here, because by the time a batch reaches
+ * `translate` its namespace is the KIND ("game"), not the path, and the first
+ * spelling of this guard was true for neither.
+ *
+ * The term request is exempt too: it decides the sheet a prompt quotes, and
+ * every one of these names is already in it.
+ */
+function missingGameNameIn(
+  source: string,
+  current: string,
+  namespace: string,
+  locale: Locale,
+): GameName | undefined {
+  if (isGameNamespace(namespace) || namespace === "terms") return undefined;
+  return missingGameName(source, current, gameNamesFor(locale));
+}
+
+/**
  * A heading or a column label, as opposed to prose.
  *
  * The distinction exists to widen the term rules exactly where it is safe.
@@ -462,33 +519,6 @@ function officialSheet(locale: Locale): Record<string, string> {
  * own and its braces must not count against the length.
  */
 const LABEL_MAX_WORDS = 5;
-
-/**
- * Whether a translation carries the decided word, allowing for inflection.
- *
- * Full containment is wrong the moment a language declines: the client's
- * Italian noun is "Potenziamento" and a heading needs "Potenziamenti", the
- * Ukrainian "Модернізація" becomes "Модернізації" in the genitive, and neither
- * contains the sheet's own form. Compared on a stem rather than on the whole
- * word, a sheet entry that never matches its own correct inflection would flag
- * the key as undecided on every run and retranslate it forever.
- *
- * The stem is three quarters of the word, floored at four characters, so it
- * still separates the decided term from a different one: "Melhoramentos" and
- * "Melhorias" part company at the fifth letter.
- */
-function carriesDecided(current: string, decided: string): boolean {
-  const text = current.toLowerCase();
-  if (text.includes(decided.toLowerCase())) return true;
-  const words = decided
-    .toLowerCase()
-    .split(/[^\p{L}\p{N}]+/u)
-    .filter((word) => word.length >= 4);
-  if (words.length === 0) return false;
-  return words.every((word) =>
-    text.includes(word.slice(0, Math.max(4, Math.ceil(word.length * 0.75)))),
-  );
-}
 
 /** Whether `term` appears in `text` as whole words. Both already lowercased. */
 function wordIn(text: string, term: string): boolean {
@@ -758,19 +788,33 @@ function isStale(
   const decided = termSheetFor(locale)[source];
   if (decided !== undefined && current !== decided) return true;
   if (carriesUndecidedTerm(source, current, namespace, locale)) return true;
+  // A translation that says something the game does not. The rule above catches
+  // a word left in English, which is a model that gave up; this one catches a
+  // word translated into a synonym, which is a model that tried and had no way
+  // of knowing. Both leave a page saying two things for one mode.
+  if (missingGameNameIn(source, current, namespace, locale)) return true;
   if (seeding) return false;
   const recorded = hashes[`${namespace}:${key}`];
   return recorded !== undefined && recorded !== hashOf(source);
 }
 
 /**
- * Names the site does not translate in any language, and must not be read as a
- * term left in English.
+ * Names that must not be read as a term left in English, because they CONTAIN
+ * one.
  *
  * "World of Tanks" contains "Tanks", which the sheet decides as "Chars", so
  * without this every page title in every language reads as an unapplied term
  * and is rewritten forever (2,774 keys on the first measurement, against 298
  * real ones). A product name is not a word.
+ *
+ * This masks a name out of the TERM comparisons only, and says nothing about
+ * whether it is translated: "Marks of Excellence" is here because it contains
+ * "Marks", and Wargaming's own client renders it "Marques d’excellence",
+ * "Erfolgsmarkierungen" and "Отметки доблести". What decides that is
+ * `game/vocabulary`, through `missingGameNameIn`, which reads the source as
+ * written rather than through `comparable`. The earlier wording here claimed
+ * the site translates none of these in any language, which was never true of
+ * that one.
  */
 const PROTECTED_NAMES = [
   "World of Tanks",
@@ -854,7 +898,7 @@ function carriesUndecidedTerm(
     if (
       word.test(cleanSource) &&
       word.test(cleanCurrent) &&
-      !carriesDecided(cleanCurrent, decided)
+      !carriesWord(cleanCurrent, decided)
     ) {
       return true;
     }
@@ -1197,6 +1241,7 @@ async function translate(
     const value = answer[key];
     if (source === undefined || value === undefined) return false;
     if (shouts(value, source)) return false;
+    if (missingGameNameIn(source, value, namespace, locale)) return false;
     const want = [...markers(source)].sort().join(",");
     return want === [...markers(value)].sort().join(",");
   };
@@ -1246,11 +1291,27 @@ async function translate(
     const caseRule = shouted
       ? " At least one of your previous answers was written in ALL CAPITALS where the English is not. Capitalisation is the interface's job: write the words in your language's normal sentence case."
       : "";
+    // The word is quoted back rather than described. A model told only that its
+    // answer was wrong reaches for a second synonym, and the game has exactly
+    // one name for each of these: naming it is the whole correction.
+    const wanted = new Map<string, string>();
+    for (const key of broken) {
+      const value = answer[key];
+      if (value === undefined) continue;
+      const name = missingGameNameIn(entries[key] ?? "", value, namespace, locale);
+      if (name) wanted.set(name.english, name.own);
+    }
+    const nameRule =
+      wanted.size === 0
+        ? ""
+        : ` These strings name something World of Tanks has its own word for in ${LOCALE_LABEL[locale]}, and your previous answer used a different one. Use exactly ${[...wanted]
+            .map(([english, own]) => `"${own}" for "${english}"`)
+            .join(", ")}, inflected as the sentence needs, and never a synonym of your own.`;
     const retry = await ask(
       retryEntries,
       locale,
       namespace,
-      `\n\nThe previous answer left these out, or changed a placeholder or a tag in them. Answer with EVERY key below, one translation each.${rule}${caseRule}`,
+      `\n\nThe previous answer left these out, or changed a placeholder or a tag in them. Answer with EVERY key below, one translation each.${rule}${caseRule}${nameRule}`,
       model,
     );
     for (const key of broken) {
@@ -1258,6 +1319,7 @@ async function translate(
       if (value === undefined) continue;
       const source = entries[key] ?? "";
       if (shouts(value, source)) continue;
+      if (missingGameNameIn(source, value, namespace, locale)) continue;
       const want = [...markers(source)].sort().join(",");
       if ([...markers(value)].sort().join(",") === want) answer[key] = value;
     }
@@ -1272,16 +1334,41 @@ async function translate(
   // been answered and refused.
   for (const key of outstanding()) {
     const value = answer[key];
+    const source = entries[key] ?? "";
+    const missing =
+      value === undefined
+        ? undefined
+        : missingGameNameIn(source, value, namespace, locale);
+    // A name the model would not use is the one failure here that is KEPT. The
+    // others leave a string a reader cannot use, so English is an improvement
+    // on them; this one leaves a perfectly good sentence that reached for a
+    // synonym, and dropping it would answer a wrong word with no word at all.
+    //
+    // The cost is named rather than hidden: this is the only rule in `isStale`
+    // whose failure is not self-clearing, so a key the model will not write
+    // correctly is asked about again on every run. Nothing bounds that
+    // structurally, which is why the retry quotes the word instead of
+    // describing the mistake, and why the line below says "questioned" rather
+    // than "dropped": a run that ends with any of these has found a string a
+    // person has to settle, in the tree or in the catalogue.
+    const kept =
+      value !== undefined &&
+      missing !== undefined &&
+      !shouts(value, source) &&
+      [...markers(source)].sort().join(",") ===
+        [...markers(value)].sort().join(",");
     const reason =
       value === undefined
         ? "never answered"
-        : shouts(value, entries[key] ?? "")
+        : shouts(value, source)
           ? "answered in capitals"
-          : "lost a placeholder or a tag";
+          : missing
+            ? `kept: says ${JSON.stringify(value)} rather than the game's own ${JSON.stringify(missing.own)} for ${JSON.stringify(missing.english)}`
+            : "lost a placeholder or a tag";
     console.warn(
-      `[translate] ${locale}/${namespace}: dropped ${key} (${reason})${value === undefined ? "" : ` -> ${JSON.stringify(value)}`}`,
+      `[translate] ${locale}/${namespace}: ${kept ? "questioned" : "dropped"} ${key} (${reason})${value === undefined || kept ? "" : ` -> ${JSON.stringify(value)}`}`,
     );
-    delete answer[key];
+    if (!kept) delete answer[key];
   }
   return answer;
 }
@@ -1610,7 +1697,20 @@ async function main(): Promise<void> {
         }
       }
       sheets[locale] = known;
-      termSheets.set(locale, known);
+      // The game's own names are applied to the sheet a prompt quotes and NOT
+      // to the file, which is the record of what a MODEL decided. Last, so they
+      // win: `game/vocabulary` is what the page renders beside the string being
+      // translated, and a prompt quoting a different word than the table header
+      // two rows up is how the tree ended up saying "Bastion" and "forteresse"
+      // on one screen. Written through, they would also outlive their own
+      // catalogue, since `known` is seeded from the previous file and nothing
+      // there is ever removed.
+      termSheets.set(locale, {
+        ...known,
+        ...Object.fromEntries(
+          gameNamesFor(locale).map(({ english, own }) => [english, own]),
+        ),
+      });
       return true;
     });
     await pool(sheetJobs, (job) => job());
