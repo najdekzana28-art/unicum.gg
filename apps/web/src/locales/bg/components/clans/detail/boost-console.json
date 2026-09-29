@@ -7,7 +7,7 @@
   "online": "Онлайн",
   "recent-activations": "последни активации",
   "reserve": "Резерв",
-  "stronghold-boosts": "Бустове на крепостта",
+  "stronghold-boosts": "Бустове за {stronghold}",
   "when": "Когато",
   "workflow": "Работен процес"
 }

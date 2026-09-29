@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Endast en officer i den här klanen kan konfigurera detta.",
   "schedule-preview": "Schemapreview",
   "set-your-hours-and-reserves": "Ställ in tider och reserver en gång. Förstärkningarna aktiveras sedan automatiskt i tid, även när ingen är där för att trycka på knappen.",
-  "stronghold-boosts": "Fästningsbonusar",
+  "stronghold-boosts": "Förstärkningar för {stronghold}",
   "times-are-in-your-timezone": "Tiderna anges i {tz}, din tidszon.",
   "to": "Till"
 }

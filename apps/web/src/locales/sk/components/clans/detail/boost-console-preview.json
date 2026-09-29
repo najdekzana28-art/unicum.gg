@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Toto môže nastaviť iba dôstojník tohto klanu.",
   "schedule-preview": "Náhľad harmonogramu",
   "set-your-hours-and-reserves": "Nastavte časy a zálohy iba raz. Bonusy sa potom aktivujú načas automaticky, aj keď nie je nablízku nikto, kto by stlačil tlačidlo.",
-  "stronghold-boosts": "Posilnenia Pevnosti",
+  "stronghold-boosts": "Pospešitve za {stronghold}",
   "times-are-in-your-timezone": "Časy sa zobrazujú vo vašom časovom pásme {tz}.",
   "to": "K"
 }

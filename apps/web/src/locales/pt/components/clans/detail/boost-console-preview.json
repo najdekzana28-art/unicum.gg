@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Apenas um oficial deste clã pode configurar isto.",
   "schedule-preview": "Pré-visualização da agenda",
   "set-your-hours-and-reserves": "Configure os horários e as reservas uma única vez. Os bónus são ativados automaticamente à hora certa, mesmo quando não está ninguém por perto para carregar no botão.",
-  "stronghold-boosts": "Impulsos de Fortaleza",
+  "stronghold-boosts": "Bônus da {stronghold}",
   "times-are-in-your-timezone": "Os horários são apresentados em {tz}, o seu fuso horário.",
   "to": "Para"
 }

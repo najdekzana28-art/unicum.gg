@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Doar un ofițer al acestui clan poate face configurarea.",
   "schedule-preview": "Previzualizare program",
   "set-your-hours-and-reserves": "Setează o dată orele și rezervele. Bonusurile se activează singure la timp, chiar și când nu este nimeni prezent să apese butonul.",
-  "stronghold-boosts": "Îmbunătățiri de Fortăreață",
+  "stronghold-boosts": "Bonusuri pentru {stronghold}",
   "times-are-in-your-timezone": "Orele sunt afișate în {tz}, fusul tău orar.",
   "to": "Către"
 }

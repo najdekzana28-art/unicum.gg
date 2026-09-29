@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Solo un oficial de este clan puede configurarlo.",
   "schedule-preview": "Vista previa del horario",
   "set-your-hours-and-reserves": "Configura tus horarios y reservas una sola vez. Las bonificaciones se activarán automáticamente a su hora, aunque no haya nadie para pulsar el botón.",
-  "stronghold-boosts": "refuerzos de fortaleza",
+  "stronghold-boosts": "Bonificaciones de {stronghold}",
   "times-are-in-your-timezone": "Las horas se muestran en {tz}, tu zona horaria.",
   "to": "A"
 }

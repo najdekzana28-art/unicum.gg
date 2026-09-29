@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Nur ein Offizier dieses Clans kann dies einrichten.",
   "schedule-preview": "Zeitplanvorschau",
   "set-your-hours-and-reserves": "Lege deine Zeiten und Reserven einmal fest. Die Boosts werden dann selbstständig pünktlich aktiviert, auch wenn niemand da ist, um den Knopf zu drücken.",
-  "stronghold-boosts": "Festungsboni",
+  "stronghold-boosts": "Boosts der {stronghold}",
   "times-are-in-your-timezone": "Zeitangaben erfolgen in {tz}, deiner Zeitzone.",
   "to": "Zu"
 }

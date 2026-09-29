@@ -7,7 +7,7 @@
   "online": "オンライン",
   "recent-activations": "最近のアクティベーション",
   "reserve": "リザーブ",
-  "stronghold-boosts": "ストロングホールドブースト",
+  "stronghold-boosts": "{stronghold}ブースト",
   "when": "いつ",
   "workflow": "ワークフロー"
 }

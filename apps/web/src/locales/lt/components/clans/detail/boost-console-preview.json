@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Tai nustatyti gali tik šio klano karininkas.",
   "schedule-preview": "Tvarkaraščio peržiūra",
   "set-your-hours-and-reserves": "Vieną kartą nustatykite savo valandas ir atsargas. Pastiprinimai įsijungs laiku savaime, net kai nieko nebus šalia, kad paspaustų mygtuką.",
-  "stronghold-boosts": "Tvirtovės didinimai",
+  "stronghold-boosts": "Pastiprinimai, skirti {stronghold}",
   "times-are-in-your-timezone": "Laikas nurodytas pagal {tz}, jūsų laiko juostą.",
   "to": "Iki"
 }

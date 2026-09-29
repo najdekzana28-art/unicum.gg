@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Chỉ sĩ quan của Clan này mới có thể thiết lập.",
   "schedule-preview": "Xem trước lịch trình",
   "set-your-hours-and-reserves": "Thiết lập giờ và lượng dự trữ một lần, các đợt tăng cường sẽ tự hỏa hoạn đúng giờ, ngay cả khi không có ai ở đó để nhấn nút.",
-  "stronghold-boosts": "Tăng cường Fort",
+  "stronghold-boosts": "Tăng cường cho {stronghold}",
   "times-are-in-your-timezone": "Thời gian theo {tz}, múi giờ của bạn.",
   "to": "Đến"
 }

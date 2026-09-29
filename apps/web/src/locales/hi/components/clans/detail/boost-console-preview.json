@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "इसे केवल इस क्लान का अधिकारी सेटअप कर सकता है।",
   "schedule-preview": "अनुसूची पूर्वावलोकन",
   "set-your-hours-and-reserves": "अपने समय और रिज़र्व एक बार सेट करें, बूस्ट अपने आप समय पर सक्रिय होंगे, तब भी जब बटन दबाने के लिए कोई मौजूद न हो।",
-  "stronghold-boosts": "स्ट्रॉन्घोल्ड बूस्ट्स",
+  "stronghold-boosts": "{stronghold} के बूस्ट",
   "times-are-in-your-timezone": "समय {tz}, आपके समय क्षेत्र, के अनुसार है।",
   "to": "से"
 }

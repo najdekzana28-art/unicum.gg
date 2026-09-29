@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Vain tämän klaanin upseeri voi määrittää tämän.",
   "schedule-preview": "Aikataulun esikatselu",
   "set-your-hours-and-reserves": "Määritä aikasi ja reservisi kerran. Boostit aktivoituvat ajallaan itsestään, vaikka kukaan ei olisi painamassa painiketta.",
-  "stronghold-boosts": "Vahvistuksen lisäykset",
+  "stronghold-boosts": "{stronghold}-tehosteet",
   "times-are-in-your-timezone": "Aika on aikavyöhykkeellä {tz}, eli omalla aikavyöhykkeelläsi.",
   "to": "Voittoon"
 }

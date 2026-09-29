@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "只有该军团的军官可以进行设置。",
   "schedule-preview": "日程预览",
   "set-your-hours-and-reserves": "一次设置时间和储备，增益会自行按时开火，即使没人在线点击按钮。",
-  "stronghold-boosts": "要塞增益",
+  "stronghold-boosts": "{stronghold}增益",
   "times-are-in-your-timezone": "时间采用{tz}，即你的时区。",
   "to": "至"
 }

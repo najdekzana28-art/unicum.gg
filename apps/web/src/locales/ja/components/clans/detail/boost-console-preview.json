@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "このクランの役職者だけが設定できます。",
   "schedule-preview": "スケジュールプレビュー",
   "set-your-hours-and-reserves": "時間帯とリザーブを一度設定すれば、誰もボタンを押せない状況でもブーストが自動で時間どおりに発動します。",
-  "stronghold-boosts": "ストロングホールドブースト",
+  "stronghold-boosts": "{stronghold}ブースト",
   "times-are-in-your-timezone": "時刻はあなたのタイムゾーン（{tz}）で表示されます。",
   "to": "対"
 }

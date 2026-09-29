@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "이 클랜의 장교만 설정할 수 있습니다.",
   "schedule-preview": "일정 미리보기",
   "set-your-hours-and-reserves": "시간과 예비 물자를 한 번 설정하면, 아무도 버튼을 누르지 않아도 부스트가 정시에 자동으로 작동합니다.",
-  "stronghold-boosts": "요새 보너스",
+  "stronghold-boosts": "{stronghold} 부스트",
   "times-are-in-your-timezone": "시간은 {tz}, 즉 사용자의 시간대 기준입니다.",
   "to": "대상"
 }

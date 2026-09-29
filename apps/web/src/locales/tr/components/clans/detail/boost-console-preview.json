@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Bunu yalnızca bu klanın bir subayı kurabilir.",
   "schedule-preview": "Program önizleme",
   "set-your-hours-and-reserves": "Saatlerinizi ve rezervlerinizi bir kez ayarlayın. Güçlendirmeler, kimse düğmeye basmasa bile kendi kendine zamanında etkinleşir.",
-  "stronghold-boosts": "Tahkimat destekleri",
+  "stronghold-boosts": "{stronghold} takviyeleri",
   "times-are-in-your-timezone": "Saatler sizin saat diliminiz olan {tz} dilindedir.",
   "to": "Kime"
 }

@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "To var iestatīt tikai šī klana virsnieks.",
   "schedule-preview": "Grafika priekšskatījums",
   "set-your-hours-and-reserves": "Iestatiet savas stundas un rezerves vienreiz, un uzlabojumi tiks aktivizēti laikā paši, pat ja neviena nav, kas nospiež pogu.",
-  "stronghold-boosts": "Cietokšņa uzlabojumi",
+  "stronghold-boosts": "{stronghold} uzlabojumi",
   "times-are-in-your-timezone": "Laiki norādīti jūsu laika joslā {tz}.",
   "to": "līdz"
 }

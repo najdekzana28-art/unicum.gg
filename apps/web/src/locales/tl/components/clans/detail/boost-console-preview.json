@@ -13,7 +13,7 @@
   "only-an-officer-of-this": "Isang opisyal lamang ng klanong ito ang maaaring mag-set up nito.",
   "schedule-preview": "Paunang Tanaw ng Iskedyul",
   "set-your-hours-and-reserves": "Itakda nang isang beses ang mga oras at mga reserba mo. Awtomatikong nagpapaputok ang mga boost sa tamang oras, kahit walang naroon para pindutin ang button.",
-  "stronghold-boosts": "Pagsuporta ng Stronghold",
+  "stronghold-boosts": "Mga boost para sa {stronghold}",
   "times-are-in-your-timezone": "Ang mga oras ay nasa {tz}, ang timezone mo.",
   "to": "Sa"
 }
