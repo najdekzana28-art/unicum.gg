@@ -1,6 +1,6 @@
-import { desc, eq, sql } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 import type { Region } from "@unicum.gg/wargaming";
-import { clanNameHistoryByRegion } from "@unicum.gg/shared";
+import { clanNameHistoryByRegion, clansByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 
 /** A clan's previous tag + name, with when it stopped being current. */
@@ -13,12 +13,25 @@ export type ClanNameHistoryEntry = {
 /**
  * A clan's previous tags + names, newest first. Filled by the `_clans` rename
  * trigger, so it stays empty until a rename is observed.
+ *
+ * An identity equal to the CURRENT one is skipped, the same rule the player
+ * counterpart reads by and for the same reason: a clan that retagged and came
+ * back really does carry that row, and rendering it says FAME used to be called
+ * FAME. Measured when the rule was added: 4 rows across the three regions.
+ *
+ * Compared case-SENSITIVELY, unlike the player one, because the two differ in
+ * where a case-only difference comes from. Both halves of a clan identity are
+ * free text Wargaming stores as the clan typed it, so "4ЕРВОНА КАЛИНА" becoming
+ * "4ервона Калина" is an edit the clan made and belongs in the history. A
+ * nickname cannot move that way: WG holds them unique case-insensitively, so a
+ * case-only difference is two of our sources disagreeing rather than a rename.
  */
 export async function getClanNameHistory(
   region: Region,
   clanId: number,
 ): Promise<ClanNameHistoryEntry[]> {
   const table = clanNameHistoryByRegion[region];
+  const clans = clansByRegion[region];
   return db
     .select({
       tag: table.tag,
@@ -26,7 +39,16 @@ export async function getClanNameHistory(
       recordedAt: table.recordedAt,
     })
     .from(table)
-    .where(eq(table.clanId, clanId))
+    .innerJoin(clans, eq(clans.id, table.clanId))
+    .where(
+      and(
+        eq(table.clanId, clanId),
+        sql`NOT (
+          btrim(${table.tag}) = btrim(${clans.tag})
+          AND btrim(${table.name}) = btrim(${clans.name})
+        )`,
+      ),
+    )
     .orderBy(desc(table.recordedAt));
 }
 
