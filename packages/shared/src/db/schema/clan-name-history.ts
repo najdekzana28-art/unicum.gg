@@ -7,6 +7,13 @@ import { Region } from "@unicum.gg/wargaming";
  * accumulates going forward: a `BEFORE UPDATE` trigger on `${region}_clans`
  * appends the *old* tag + name here whenever a refresh writes a different tag or
  * name, so `recorded_at` is when that pair stopped being current.
+ *
+ * The trigger skips a half-known old row (a blank tag or a blank name), so a
+ * refresh filling either one in is not recorded as a retag. Clans are never
+ * inserted half-known today (one is queued for refresh, never written from an id
+ * alone, unlike a player), so this guards a shape rather than a behaviour, and it
+ * matches the player twin. `getClanNameHistory` additionally skips an identity
+ * equal to the current one.
  */
 export function makeClanNameHistoryTable(region: string) {
   return pgTable(

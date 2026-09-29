@@ -7,6 +7,15 @@ import { Region } from "@unicum.gg/wargaming";
  * accumulates going forward: a `BEFORE UPDATE` trigger on `${region}_players`
  * appends the *old* nickname here whenever a refresh writes a different one, so
  * `recorded_at` is when that name stopped being current.
+ *
+ * The trigger skips an empty old nickname, because discovery inserts an account
+ * id long before it knows the name (the mod's `/resolve` endpoint and a link to
+ * a since-renamed account both hand over ids alone) and the refresh that fills
+ * it in is not a rename. Without that guard the profile drew a previous-names
+ * panel holding a blank row, which for a player discovered that way was their
+ * whole history. `getPlayerNameHistory` skips a blank row too, plus one equal to
+ * the current nickname: several writers feed this table, and the reader is the
+ * one place the rule holds for all of them.
  */
 export function makePlayerNameHistoryTable(region: string) {
   return pgTable(
