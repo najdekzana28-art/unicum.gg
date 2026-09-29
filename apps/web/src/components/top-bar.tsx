@@ -35,7 +35,7 @@ export function TopBar({ feedbackEnabled }: { feedbackEnabled: boolean }) {
                 place the navigation offers it, the "More" menu included. */}
             <Link
               href={ROUTES.SUPPORT}
-              className="shrink-0 font-medium text-brand transition-opacity hover:opacity-80"
+              className="shrink-0 font-medium text-brand-strong transition-opacity hover:opacity-80"
             >
               {t("support")}
             </Link>

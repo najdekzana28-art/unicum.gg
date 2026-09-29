@@ -20,6 +20,9 @@
 
 @theme inline {
   --color-brand: var(--brand);
+  /* The readable variant, for brand-coloured text at small sizes. See
+     `styles/custom.css`. */
+  --color-brand-strong: var(--brand-strong);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);

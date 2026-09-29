@@ -81,6 +81,31 @@
   --color-fd-primary-foreground: #ffffff;
 }
 
+/* Two tokens that exist only because small text has to be READ.
+
+   The brand orange and fumadocs' neutral grey are both right as colours and
+   both land just under WCAG AA where the site uses them at 12px: measured on
+   the top strip, #f25322 on #f5f5f5 is 3.19:1 and #737373 is 4.35:1, against
+   the 4.5:1 small text needs. Neither is a colour to change everywhere, since
+   both are correct as a fill (`bg-brand`) and at larger sizes, so what is
+   defined here is a text-only variant used where the type is small.
+
+   **Both are light-theme only, and the grey is why that matters.** Contrast is
+   a distance from the background, so the two themes need it moved in opposite
+   directions: darker text reads better on white and worse on black. Set on
+   `:root`, the darker grey leaked into the dark theme and made the muted text
+   there harder to read, which is the opposite of the point. The dark theme
+   keeps fumadocs' own value, and the brand keeps its own orange, already 5.69:1
+   against the dark background where the darkened shade would be 4.03:1. */
+:root:not(.dark) {
+  --brand-strong: #c7441c; /* 4.51:1 on #f5f5f5, 4.92:1 on white */
+  --color-fd-muted-foreground: #6b6b6b; /* 4.89:1 on #f5f5f5 */
+}
+
+.dark {
+  --brand-strong: var(--brand); /* 5.69:1 on the dark background */
+}
+
 /* Font configuration */
 :root {
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;

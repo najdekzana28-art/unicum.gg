@@ -46,7 +46,7 @@ export function MiniFundingBar() {
                 style={{ width: `${pct}%` }}
               />
             </span>
-            <span className="shrink-0 font-medium tabular-nums text-brand">
+            <span className="shrink-0 font-medium tabular-nums text-brand-strong">
               {t("funded", { pct })}
             </span>
           </Link>

@@ -60,7 +60,11 @@ export function StreamRow({
   return (
     <TableRow
       onClick={onSelect}
-      aria-pressed={active}
+      // `aria-current`, not `aria-pressed`: a row is not a toggle, and
+      // `aria-pressed` on a `<tr>` is the attribute-vs-role mismatch Lighthouse
+      // fails the page on. What is true here is that this row is the one the
+      // featured player is on, which is what `aria-current` says.
+      aria-current={active ? "true" : undefined}
       className={cn("cursor-pointer", active && "bg-fd-border/50")}
     >
       <TableCell className="pl-4!">

@@ -25,9 +25,9 @@ export function Card({ children, className }: CardProps) {
 
 export function CardTitle({ children, className }: CardTitleProps) {
   return (
-    <h4 className={cn("font-medium mb-1", className)}>
+    <h3 className={cn("font-medium mb-1", className)}>
       {children}
-    </h4>
+    </h3>
   );
 }
 
