@@ -6,7 +6,7 @@
     "onslaught": "天梯战",
     "onslaught_night": "{onslaught}之夜",
     "grand_battle": "战役模式",
-    "clan_wars": "clan 战争",
+    "clan_wars": "军团战",
     "waffentrager": "Waffenträger",
     "last_stand": "背水一战",
     "arcade": "街机模式",
@@ -142,7 +142,7 @@
     "random": "随机战斗",
     "stronghold": "要塞",
     "skirmish": "冲突战",
-    "clan-wars": "clan 战争"
+    "clan-wars": "军团战"
   },
   "features": {
     "stronghold": "要塞",

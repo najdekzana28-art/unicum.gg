@@ -140,12 +140,12 @@
   },
   "clan-modes": {
     "random": "Náhodné bitky",
-    "stronghold": "Trdnjava",
+    "stronghold": "Pevnosť",
     "skirmish": "Šarvátka",
     "clan-wars": "Klanské vojny"
   },
   "features": {
-    "stronghold": "Trdnjava",
+    "stronghold": "Pevnosť",
     "skirmish": "Šarvátka",
     "marks-of-excellence": "Značky excelencie",
     "marks-of-mastery": "Značky majstrovstva",

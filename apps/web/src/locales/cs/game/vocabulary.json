@@ -6,7 +6,7 @@
     "onslaught": "Nápor",
     "onslaught_night": "{onslaught} Noc",
     "grand_battle": "Velká bitva",
-    "clan_wars": "Klanoé války",
+    "clan_wars": "Klanové války",
     "waffentrager": "Waffenträger",
     "last_stand": "Poslední vzdor",
     "arcade": "Arkáda",
@@ -142,7 +142,7 @@
     "random": "Náhodné bitvy",
     "stronghold": "Pevnost",
     "skirmish": "Šarvátka",
-    "clan-wars": "Klanoé války"
+    "clan-wars": "Klanové války"
   },
   "features": {
     "stronghold": "Pevnost",

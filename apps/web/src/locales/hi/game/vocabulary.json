@@ -141,12 +141,12 @@
   "clan-modes": {
     "random": "यादृच्छिक लड़ाई",
     "stronghold": "गढ़",
-    "skirmish": "मुठभेड़",
+    "skirmish": "झड़प",
     "clan-wars": "क्लान युद्ध"
   },
   "features": {
     "stronghold": "गढ़",
-    "skirmish": "मुठभेड़",
+    "skirmish": "झड़प",
     "marks-of-excellence": "उच्चता के मार्क्स",
     "marks-of-mastery": "कौशल के मार्क्स",
     "personal-rating": "व्यक्तिगत रेटिंग",
