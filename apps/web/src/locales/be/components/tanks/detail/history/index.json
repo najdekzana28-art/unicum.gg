@@ -1,7 +1,7 @@
 {
   "before-update": "Да абнаўлення {version}",
   "common-test": "Агульны тест",
-  "in-common-test-not-released": "Яшчэ не выпушчаны ў Агульным тэсце",
+  "in-common-test-not-released": "У Агульным тесте яшчэ не выпушчаны",
   "introduced": "Уведзена",
   "lifecycle": "Цыкл жыцця",
   "n-buffed": "{count} узмоцнена",

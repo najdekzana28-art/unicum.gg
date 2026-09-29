@@ -2,7 +2,7 @@
   "a-battle-map-s-size-timer-team-size-and-game": "Veľkosť bojovej mapy, časový limit, veľkosť tímov a herné režimy spolu s minimapou a typmi bitiek, v ktorých sa používa.",
   "a-clan-s-battle-weighted-member-ratings-plus": "Hodnotenia členov klanu vážené podľa bitiek, spolu s výkonom v Pevnosti a Klanských vojnách, zodpovedajúce hlavičke klanu na stránke.",
   "a-player-reply": "Odpoveď na príkaz {command}",
-  "a-vehicle-s-server-average-performance-acros": "Priemerný výkon vozidla na serveri naprieč sledovanými hráčmi, spolu s aktuálnymi prahovými hodnotami Značiek excelencie a Jazdca elitných tankov.",
+  "a-vehicle-s-server-average-performance-acros": "Výkon vozidla na serveri, povprečne vypočítaný po sledovaných hráčoch, s aktuálnymi prahovými hodnotami pre Značky excelencie a Jazdca elitných tankov.",
   "add-the-bot-to-your": "Pridajte si na svoj server bota s názvom {NAME} a získajte okamžité štatistiky hráčov, klanov, tankov a bojových máp vo World of Tanks. Využíva rovnaké údaje ako web a zahŕňa WN8 aj WNX. Je bezplatný a má otvorený zdrojový kód.",
   "add-to-discord": "Pridať na server Discord",
   "any-player-instantly": "Ľubovoľný hráč, okamžite",

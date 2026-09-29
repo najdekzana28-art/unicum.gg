@@ -1,4 +1,4 @@
 {
   "compare-the-live-and-common": "Palyginti tiesioginę ir Bendro testo versijas",
-  "compare-live-against-common-test": "Palyginti tiesioginę versiją su Bendro testo versija {testVersion}"
+  "compare-live-against-common-test": "Palyginti tiesioginę versiją prieš Bendro testo {testVersion}"
 }

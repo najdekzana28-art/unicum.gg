@@ -1,7 +1,7 @@
 {
   "before-update": "Pirms atjauninājuma {version}",
   "common-test": "Kopējais tests",
-  "in-common-test-not-released": "Kopējā testā vēl nav izlaists",
+  "in-common-test-not-released": "Kopējā testā, vēl nav izlaists",
   "introduced": "Iepazīstināts",
   "lifecycle": "Dzīves cikls",
   "n-buffed": "{count} uzlabots",

@@ -1,8 +1,8 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Kaujas kartes izmērs, taimeris, komandas lielums un spēles režīmi, kā arī tās minikarte un kauju veidi, kuros tā tiek spēlēta.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "Klana biedru kaujās svērtie vērtējumi, kā arī Stronghold un Klanu karu sniegums, kas atspoguļo vietnes klana galveni.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "Klana biedru kaujās svērtie vērtējumi plus tā Stronghold un Klanu kari sniegums, atspoguļojot vietnes klana galveni.",
   "a-player-reply": "Atbilde uz {command}",
-  "a-vehicle-s-server-average-performance-acros": "Transportlīdzekļa servera vidējais sniegums visu izsekoto spēlētāju vidū, ar pašreizējām Izcilības zīmēm un Ace Tankers sliekšņiem.",
+  "a-vehicle-s-server-average-performance-acros": "Transportlīdzekļa servera vidējais sniegums visā izsekoto spēlētāju lokā, ar pašreizējiem Izcilības zīmju un Ace Tankers sliekšņiem.",
   "add-the-bot-to-your": "Pievienojiet {NAME} robotu savam serverim, lai uzreiz iegūtu World of Tanks spēlētāju, klanu, tanku un kauju karšu statistiku. To nodrošina tie paši dati, kas vietnē, ieskaitot WN8 un WNX. Bezmaksas un atvērtā pirmkoda.",
   "add-to-discord": "Pievienot Discord",
   "any-player-instantly": "Jebkurš spēlētājs uzreiz",

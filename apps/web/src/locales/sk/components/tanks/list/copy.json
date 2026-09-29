@@ -24,9 +24,9 @@
     "heading": "<accent>Značky excelencie</accent>"
   },
   "marks-of-mastery": {
-    "intro": "Prahové hodnoty pre Jazdca elitných tankov a odznak majstrovstva pre všetkých {count} vozidiel World of Tanks v regióne {region}. Triediť môžete podľa ľubovoľného stĺpca a potom filtrovať podľa úrovne, národa, triedy a úlohy.",
+    "intro": "Prahové hodnoty XP pre Jazdca elitných tankov a značku majstrovstva pre všetkých {count} vozidiel World of Tanks v regióne {region}. Zoraďte podľa ľubovoľného stĺpca a potom použite filter podľa úrovne, národa, triedy a úlohy.",
     "title": "Požiadavky na odznaky majstrovstva vo World of Tanks ({region})",
-    "description": "Prahové hodnoty pre Jazdca elitných tankov a odznak majstrovstva pre každý tank World of Tanks v regióne {region}, s možnosťou triedenia a filtrovania podľa úrovne, národa, triedy a úlohy.",
+    "description": "Prahové hodnoty XP pre Jazdca elitných tankov a značku majstrovstva pre každý Tank World of Tanks v regióne {region}, zoraditeľné a filtrovateľné podľa úrovne, národa, triedy a úlohy.",
     "heading": "<accent>Značky majstrovstva</accent>"
   },
   "videos": {

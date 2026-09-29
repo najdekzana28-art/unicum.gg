@@ -1,6 +1,6 @@
 {
   "aria-build": "Lue Yhteisen testin asiakasohjelmassa, kokoonpano {version}",
-  "aria-changes": "Muutettu Yhteisellä testillä: {changes} ominaisuutta",
+  "aria-changes": "Muutettu Yhteisessä testissä: {changes} ominaisuutta",
   "aria-described": "Yhteinen testi: {description}",
   "aria-vehicle": "Yhteisen testin ajoneuvo",
   "common-test": "Yhteinen testi",
