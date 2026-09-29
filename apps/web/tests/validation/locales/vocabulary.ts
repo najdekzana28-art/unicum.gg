@@ -4,6 +4,8 @@ import path from "node:path";
 import test, { describe } from "node:test";
 import {
   GAME_NAME_FAMILIES,
+  catalogueFilledPlaceholders,
+  duplicatedGameName,
   gameNames,
   isGameNamespace,
   missingGameName,
@@ -99,6 +101,9 @@ export function vocabularyTests() {
      */
     test("prose calls the game's own things by the game's own name", () => {
       const source = vocabularyOf(SOURCE_LOCALE);
+      const filled = catalogueFilledPlaceholders(
+        tsFiles(SRC_DIR).map((file) => fs.readFileSync(file, "utf-8")),
+      );
       const offenders: string[] = [];
       for (const locale of targetLocales) {
         const names = gameNames(source, vocabularyOf(locale));
@@ -126,6 +131,20 @@ export function vocabularyTests() {
             if (missed)
               offenders.push(
                 `${locale}/${file} :: ${key}: "${value}" does not say "${missed.own}", which is what the game calls "${missed.english}"`,
+              );
+            // The same rule's other half. A heading composed from the catalogue
+            // can no longer say the wrong word, and can now say the right one
+            // twice: the placeholder is filled in before a reader sees the
+            // string, so a translation that also spells the name out prints it
+            // both times. Ukrainian answered "Посилення укріпрайону
+            // {stronghold}", which renders as "Посилення укріпрайону
+            // Укріпрайон", and nothing else here can see it: the placeholder
+            // survived and the name is present, so both of the checks that
+            // would look pass it.
+            const doubled = duplicatedGameName(from, value, names, filled);
+            if (doubled)
+              offenders.push(
+                `${locale}/${file} :: ${key}: "${value}" writes "${doubled.own}" beside the {${doubled.token}} that already holds it`,
               );
           }
         }

@@ -18,6 +18,8 @@ import {
 import { createHash } from "node:crypto";
 import {
   carriesWord,
+  catalogueFilledPlaceholders,
+  duplicatedGameName,
   gameNames,
   isGameNamespace,
   missingGameName,
@@ -505,6 +507,42 @@ function missingGameNameIn(
 }
 
 /**
+ * The other half: a name written out beside the placeholder that supplies it.
+ *
+ * Two failures of one rule, and each is the other's cost. A heading composed
+ * from the catalogue can no longer say the wrong word, and can now say the
+ * right one twice.
+ */
+function duplicatedGameNameIn(
+  source: string,
+  current: string,
+  namespace: string,
+  locale: Locale,
+): GameName | undefined {
+  if (isGameNamespace(namespace) || namespace === "terms") return undefined;
+  return duplicatedGameName(source, current, gameNamesFor(locale), filledHoles());
+}
+
+/** Which placeholders the components fill from the catalogue, read once. */
+let filled: Set<string> | undefined;
+
+function filledHoles(): Set<string> {
+  if (filled) return filled;
+  const root = join(webRoot, "src");
+  const walk = function* (dir: string): Generator<string> {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (entry.name !== "locales" && entry.name !== "generated")
+          yield* walk(full);
+      } else if (/\.tsx?$/.test(entry.name)) yield readFileSync(full, "utf-8");
+    }
+  };
+  filled = catalogueFilledPlaceholders(walk(root));
+  return filled;
+}
+
+/**
  * A heading or a column label, as opposed to prose.
  *
  * The distinction exists to widen the term rules exactly where it is safe.
@@ -794,6 +832,7 @@ function isStale(
   // word translated into a synonym, which is a model that tried and had no way
   // of knowing. Both leave a page saying two things for one mode.
   if (missingGameNameIn(source, current, namespace, locale)) return true;
+  if (duplicatedGameNameIn(source, current, namespace, locale)) return true;
   if (seeding) return false;
   const recorded = hashes[`${namespace}:${key}`];
   return recorded !== undefined && recorded !== hashOf(source);
@@ -1273,6 +1312,7 @@ async function translate(
     if (source === undefined || value === undefined) return false;
     if (shouts(value, source)) return false;
     if (missingGameNameIn(source, value, namespace, locale)) return false;
+    if (duplicatedGameNameIn(source, value, namespace, locale)) return false;
     const want = [...markers(source)].sort().join(",");
     return want === [...markers(value)].sort().join(",");
   };
@@ -1332,6 +1372,19 @@ async function translate(
       const name = missingGameNameIn(entries[key] ?? "", value, namespace, locale);
       if (name) wanted.set(name.english, name.own);
     }
+    const doubled = new Map<string, string>();
+    for (const key of broken) {
+      const value = answer[key];
+      if (value === undefined) continue;
+      const name = duplicatedGameNameIn(entries[key] ?? "", value, namespace, locale);
+      if (name) doubled.set(`{${name.token}}`, name.own);
+    }
+    const doubleRule =
+      doubled.size === 0
+        ? ""
+        : ` A placeholder already holds the name it is called after, and is filled in before a reader sees the string, so writing that name beside it prints it twice. ${[...doubled]
+            .map(([hole, own]) => `${hole} is already "${own}"`)
+            .join(", ")}: build the sentence around the placeholder and do not write the name again.`;
     const nameRule =
       wanted.size === 0
         ? ""
@@ -1362,7 +1415,7 @@ async function translate(
       retryEntries,
       locale,
       namespace,
-      `\n\n${opening}${caseRule}${nameRule}`,
+      `\n\n${opening}${caseRule}${nameRule}${doubleRule}`,
       model,
     );
     for (const key of broken) {
@@ -1371,6 +1424,7 @@ async function translate(
       const source = entries[key] ?? "";
       if (shouts(value, source)) continue;
       if (missingGameNameIn(source, value, namespace, locale)) continue;
+      if (duplicatedGameNameIn(source, value, namespace, locale)) continue;
       const want = [...markers(source)].sort().join(",");
       if ([...markers(value)].sort().join(",") === want) answer[key] = value;
     }
@@ -1390,6 +1444,10 @@ async function translate(
       value === undefined
         ? undefined
         : missingGameNameIn(source, value, namespace, locale);
+    const repeated =
+      value === undefined
+        ? undefined
+        : duplicatedGameNameIn(source, value, namespace, locale);
     // A name the model would not use is the one failure here that is KEPT. The
     // others leave a string a reader cannot use, so English is an improvement
     // on them; this one leaves a perfectly good sentence that reached for a
@@ -1404,7 +1462,7 @@ async function translate(
     // person has to settle, in the tree or in the catalogue.
     const kept =
       value !== undefined &&
-      missing !== undefined &&
+      (missing !== undefined || repeated !== undefined) &&
       !shouts(value, source) &&
       [...markers(source)].sort().join(",") ===
         [...markers(value)].sort().join(",");
@@ -1415,7 +1473,9 @@ async function translate(
           ? "answered in capitals"
           : missing
             ? `kept: says ${JSON.stringify(value)} rather than the game's own ${JSON.stringify(missing.own)} for ${JSON.stringify(missing.english)}`
-            : "lost a placeholder or a tag";
+            : repeated
+              ? `kept: writes ${JSON.stringify(repeated.own)} beside the placeholder that already holds it`
+              : "lost a placeholder or a tag";
     console.warn(
       `[translate] ${locale}/${namespace}: ${kept ? "questioned" : "dropped"} ${key} (${reason})${value === undefined || kept ? "" : ` -> ${JSON.stringify(value)}`}`,
     );

@@ -118,7 +118,14 @@ const AMBIGUOUS_GAME_NAMES = new Set(["Random"]);
  * which is millions of matches per run, and the escaped source and the `u` flag
  * never change.
  */
-export type GameName = { english: string; own: string; pattern: RegExp };
+export type GameName = {
+  english: string;
+  own: string;
+  pattern: RegExp;
+  /** The catalogue key's last segment, which is what a placeholder standing for
+   * this name is called: `features.stronghold` is filled into `{stronghold}`. */
+  token: string;
+};
 
 /** Every leaf of one `game/vocabulary` family, dotted from the family down. */
 function leaves(value: unknown, prefix: string): [string, string][] {
@@ -152,6 +159,7 @@ export function gameNames(
   target: Record<string, unknown>,
 ): GameName[] {
   const byName = new Map<string, Set<string>>();
+  const byToken = new Map<string, string>();
   for (const family of GAME_NAME_FAMILIES) {
     const theirs = Object.fromEntries(leaves(target[family], family));
     for (const [path, english] of leaves(source[family], family)) {
@@ -159,6 +167,7 @@ export function gameNames(
       if (english.includes("{") || english.length < 4) continue;
       if (AMBIGUOUS_GAME_NAMES.has(english)) continue;
       if (!own || own === english) continue;
+      byToken.set(english, path.split(".").pop() ?? "");
       const held = byName.get(english);
       if (held) held.add(own);
       else byName.set(english, new Set([own]));
@@ -172,6 +181,7 @@ export function gameNames(
     settled.push({
       english,
       own,
+      token: byToken.get(english) ?? "",
       pattern: new RegExp(
         `(^|[^\\p{L}\\p{N}])${english.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^\\p{L}\\p{N}]|$)`,
         "u",
@@ -276,5 +286,68 @@ export function missingGameName(
   const bare = source.replace(/\{[^{}]*\}/g, " ");
   return names.find(
     (name) => name.pattern.test(bare) && !carriesName(current, name.own),
+  );
+}
+
+/**
+ * The placeholders a component fills from the game's own catalogue.
+ *
+ * Read from the call sites rather than from the placeholder's name, and that
+ * distinction is the whole check. A placeholder called `{stronghold}` is filled
+ * with `features.stronghold` and holds a NAME; one called `{ranked}` holds a
+ * COUNT, and `player-modes.ranked` is "Ranked Battles". Matching on the name
+ * alone reported twenty-four perfectly good sentences ("{season} ended here,
+ * with {ranked} ranked") against six real ones, so what a component actually
+ * passes is what decides it.
+ *
+ * The shape is the one the codebase writes: `t("key", { stronghold:
+ * tGame("features.stronghold") })`. A call spelled some other way is simply not
+ * covered, which errs towards saying nothing rather than towards reporting a
+ * sentence nobody wrote wrong.
+ */
+export function catalogueFilledPlaceholders(sources: Iterable<string>): Set<string> {
+  const families = GAME_NAME_FAMILIES.join("|");
+  const call = new RegExp(
+    `(\\w+)\\s*:\\s*t[A-Za-z]*\\(\\s*["'\`](?:${families})\\.`,
+    "g",
+  );
+  const found = new Set<string>();
+  for (const source of sources)
+    for (const [, name] of source.matchAll(call)) if (name) found.add(name);
+  return found;
+}
+
+/**
+ * The game's own name a translation spells out beside the placeholder that
+ * already supplies it.
+ *
+ * The cost of composing a heading from the catalogue rather than translating
+ * it, and it is invisible to every other check here: the placeholder survives,
+ * so `holes` passes, and the name is present, so the rule above passes. What a
+ * reader gets is the word twice. Ukrainian answered "Посилення укріпрайону
+ * {stronghold}" and Polish "Wzmocnienia dla Twierdzy {stronghold}", which
+ * render as "Посилення укріпрайону Укріпрайон" and "Wzmocnienia dla Twierdzy
+ * Twierdza", while the other thirty-three built the sentence around the hole
+ * the way they were asked to.
+ *
+ * `filled` is the set of placeholders a component really does fill from the
+ * catalogue, from `catalogueFilledPlaceholders`. Its own braces are removed
+ * from the translation before looking, or every one of these would report
+ * itself.
+ */
+export function duplicatedGameName(
+  source: string,
+  current: string,
+  names: readonly GameName[],
+  filled: ReadonlySet<string>,
+): GameName | undefined {
+  if (filled.size === 0) return undefined;
+  const holes = [...source.matchAll(/\{(\w+)\}/g)]
+    .map(([, name]) => name)
+    .filter((name): name is string => name !== undefined && filled.has(name));
+  if (holes.length === 0) return undefined;
+  const bare = current.replace(/\{[^{}]*\}/g, " ");
+  return names.find(
+    (name) => holes.includes(name.token) && carriesName(bare, name.own),
   );
 }
