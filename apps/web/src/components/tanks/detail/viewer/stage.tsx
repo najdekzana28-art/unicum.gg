@@ -1,11 +1,27 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useCallback, useRef, useState } from "react";
 
 import type { PaintLock } from "@unicum.gg/shared";
 import { HERO_COLUMN } from "@/components/tanks/detail/viewer/column";
-import { TankViewer } from "@/components/tanks/detail/viewer";
 import type { HeroShell } from "@/components/tanks/detail/viewer/shell-rules";
+
+/**
+ * The viewer, fetched beside the page rather than inside it.
+ *
+ * It carries three.js, its GLTF loader and the whole of `services/tank-viewer`:
+ * measured on the built app, 1052 KB of the tank page's JavaScript, a single
+ * 664 KB chunk among it. Bundled in, every reader parsed all of it before the
+ * page could respond to them. Split out, it is requested the moment this
+ * component mounts, so the vehicle still comes up on its own and the page is
+ * interactive while it does. There is nothing for the server to render either
+ * way: it is a canvas and a WebGL loop.
+ */
+const TankViewer = dynamic(
+  () => import("@/components/tanks/detail/viewer").then((m) => m.TankViewer),
+  { ssr: false },
+);
 
 /**
  * The render and the model, one giving way to the other.
