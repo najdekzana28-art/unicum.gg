@@ -183,34 +183,71 @@ export function gameNames(
   return settled.sort((a, b) => b.english.length - a.english.length);
 }
 
+/** The part of a word that survives being declined: a leading slice of it,
+ * floored at four characters, which still separates one name from another
+ * ("Melhoramentos" and "Melhorias" part company at the fifth letter). */
+const stem = (word: string, keep: number): string =>
+  word.slice(0, Math.max(4, Math.ceil(word.length * keep)));
+
+/** The tokens of a word worth comparing: the ones long enough to have a stem. */
+const tokens = (word: string): string[] =>
+  word
+    .toLowerCase()
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter((part) => part.length >= 4);
+
 /**
- * Whether a translation carries a word, allowing for inflection.
+ * Whether a translation carries the decided term, allowing for inflection.
  *
  * Full containment is wrong the moment a language declines: the Italian noun is
  * "Potenziamento" and a heading needs "Potenziamenti", the Ukrainian
  * "Модернізація" becomes "Модернізації" in the genitive, and neither contains
- * the catalogued form. Compared on a stem rather than on the whole word, a word
- * that never matches its own correct inflection would flag the string forever.
+ * the sheet's own form. Compared on a stem rather than on the whole word, a
+ * sheet entry that never matches its own correct inflection would flag the key
+ * as undecided on every run and retranslate it forever.
  *
- * The stem is three quarters of the word, floored at four characters, so it
- * still separates one name from another: "Melhoramentos" and "Melhorias" part
- * company at the fifth letter. A word holding no token of four characters gets
- * no tolerance and is compared whole, which is the right answer where that
- * happens rather than a gap: those are the scripts writing a name in two or
- * three characters and not inflecting it ("要塞", "赛事"), so there is no
- * ending to allow for.
+ * EVERY token has to be there, which is right for a term sheet: those entries
+ * are mined from the corpus, so a rule satisfied by one word of a phrase would
+ * be satisfied by half the tree. `carriesName` below is deliberately looser,
+ * for two dozen names rather than six hundred mined words.
  */
 export function carriesWord(current: string, word: string): boolean {
   const text = current.toLowerCase();
   if (text.includes(word.toLowerCase())) return true;
-  const words = word
-    .toLowerCase()
-    .split(/[^\p{L}\p{N}]+/u)
-    .filter((part) => part.length >= 4);
+  const words = tokens(word);
   if (words.length === 0) return false;
-  return words.every((part) =>
-    text.includes(part.slice(0, Math.max(4, Math.ceil(part.length * 0.75)))),
-  );
+  return words.every((part) => text.includes(stem(part, 0.75)));
+}
+
+/**
+ * Whether a translation carries the game's own name for something.
+ *
+ * Looser than the term rule above on both counts, and both settings were
+ * measured rather than chosen. ONE token is enough, because the names that fail
+ * here are adjective-plus-noun and it is the adjective that agrees: Russian
+ * writes the Common Test as "Общий тест" and a sentence needs "Общего теста" or
+ * "Общем тесте", where the noun survives and the adjective does not. Requiring
+ * both flagged five correct Russian strings, and caught no synonym by the half
+ * that failed. And the stem is three fifths rather than three quarters, because
+ * a language can drop a vowel inside a word as well as change its ending:
+ * Slovak's "Jazdec" is "Jazdca" in the accusative, sharing four letters with it.
+ *
+ * Measured across the tree at each setting: every token at three quarters
+ * flagged 73 strings over 10 English keys, the longest token at three fifths 33
+ * over 7, and this 28 over 2. Those two are one heading, refused in the
+ * languages where a model really did reach for another word.
+ *
+ * A name with no token of four characters is compared whole, which is the right
+ * answer rather than a gap: those are the scripts writing a name in two or
+ * three characters and not inflecting it ("要塞", "赛事"), so there is no
+ * ending to allow for.
+ */
+export function carriesName(current: string, name: string): boolean {
+  const text = current.toLowerCase();
+  if (text.includes(name.toLowerCase())) return true;
+  const words = tokens(name);
+  if (words.length === 0) return false;
+  return words.some((part) => text.includes(stem(part, 0.6)));
 }
 
 /**
@@ -238,6 +275,6 @@ export function missingGameName(
 ): GameName | undefined {
   const bare = source.replace(/\{[^{}]*\}/g, " ");
   return names.find(
-    (name) => name.pattern.test(bare) && !carriesWord(current, name.own),
+    (name) => name.pattern.test(bare) && !carriesName(current, name.own),
   );
 }
