@@ -78,12 +78,23 @@ export function materialShop(
   // definitions: the mesh, the layout and the UVs are one and the same.
   const choose = (entry: MirrorTexture) =>
     definition === "hd" && entry.hd ? entry.hd : entry.path;
-  function texture(entry: MirrorTexture): THREE.Texture;
+  /**
+   * How a texture is waited for, which is not the same as how it is loaded.
+   *
+   * `held` is the default and means the first frame waits for it: a vehicle
+   * shown without its albedo is a white tank, so that is worth waiting for.
+   * `loose` means the picture is honest without it and must not be held back
+   * for it, which is a judgement about the map rather than about its size.
+   */
+  type Wait = "held" | "loose";
+  function texture(entry: MirrorTexture, wait?: Wait): THREE.Texture;
   function texture(
     entry: MirrorTexture | undefined | null,
+    wait?: Wait,
   ): THREE.Texture | null;
   function texture(
     entry: MirrorTexture | undefined | null,
+    wait: Wait = "held",
   ): THREE.Texture | null {
     if (!entry) return null;
     const at = choose(entry);
@@ -96,8 +107,10 @@ export function materialShop(
       const waiting = new Promise<void>((done) => {
         arrived = done;
       });
-      arriving.add(waiting);
-      void waiting.then(() => arriving.delete(waiting));
+      if (wait === "held") {
+        arriving.add(waiting);
+        void waiting.then(() => arriving.delete(waiting));
+      }
       const map = textures.load(fresh(`${root}/${at}`), arrived, undefined, arrived);
       // The mirror stores UVs the way glTF reads them, top down.
       map.flipY = false;
@@ -230,7 +243,20 @@ export function materialShop(
       withDetail(
         built,
         spec?.values ?? {},
-        switched("relief") === "grain" ? null : texture(maps.metallicDetailMap),
+        switched("relief") === "grain"
+          ? null
+          : // **The one map the vehicle is not held back for**, and it is by far
+            // the largest thing a tank page fetches: the nation's shared detail
+            // atlas is 6.19 MB of the 9.58 MB an IS-7 loads, two thirds of the
+            // wait, for a grain the shader samples ONE CHANNEL of
+            // (`detailMap.a`) at about eight repeats across a piece. It
+            // modulates micro-contrast in the gloss, so a second without it is
+            // a surface very slightly cleaner, not a surface that is wrong, and
+            // three already fills the texture in as it lands. It is also shared
+            // by every vehicle of the nation, so it is warm in the cache from
+            // the second tank on. Waiting for it meant every reader watched an
+            // empty studio for the time it took.
+            texture(maps.metallicDetailMap, "loose"),
       ),
     );
   }
