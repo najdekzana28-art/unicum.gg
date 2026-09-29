@@ -73,10 +73,12 @@ function insertMissingNames(region: Region, tournamentId?: number) {
       -- This DEFERS those names rather than dropping them, and the deferral is
       -- covered because the passes repeat: the live pass re-mirrors an open
       -- tournament every five minutes, and a settled one is re-mirrored once its
-      -- status change clears `detail_synced_at`, by which point the pipeline has
+      -- status change clears detail_synced_at, by which point the pipeline has
       -- resolved the placeholder. What it does not cover is a tournament first
       -- seen already settled, which only happens under the deliberate seeding and
-      -- enumeration runs, so those end with `backfill-roster-names`.
+      -- enumeration runs, so those end with the backfill-roster-names script.
+      -- (No backticks in here: this comment sits INSIDE a template literal, and
+      -- one would close it. The worker crashlooped on exactly that.)
       AND btrim(p.${sql.raw(players.nickname.name)}) <> ''
       AND btrim(r.${sql.raw(rosters.nickname.name)}) <> ''
       ${scope}
