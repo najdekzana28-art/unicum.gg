@@ -342,6 +342,7 @@ Rules:
 - That sentence must read the same for EVERY name the placeholder can hold, because it is written once and reused for all of them. You do not know how any given name is pronounced, so nothing in it may depend on that: pick the one form that always works and keep it. French always writes "du {tank}", never "de l'{tank}", because the article agrees with the implied noun (the vehicle) rather than with the name. A language whose ending would have to change with the name puts that ending on a word of its own instead, the way Turkish attaches its suffix to "tank" and Finnish declines "panssarivaunu", so the name itself is never inflected.
 - English marks possession with 's. Almost no other language does. "{nickname}'s sessions" is "Sessions de {nickname}" in French and "Sitzungen von {nickname}" in German: rebuild it the way your language would, and never leave the apostrophe-s on the placeholder.
 - Leave product vocabulary in English: Wargaming, World of Tanks, WN7, WN8, WNX, Discord, GitHub, MCP, API, unicum.gg, and the names of tanks and maps.
+- World of Tanks names its own modes, boards and awards in every language it is published in, and a player reads those names on their own screen. Where one is listed at the end of this request, that name is not a suggestion: use it, inflected as your sentence needs, and never a synonym of your own however natural it sounds. A page that calls one thing two things is the one mistake only a player of this language will notice.
 - Capitalise the way YOUR language capitalises a heading, not the way English does. Most languages capitalise only the first word and proper nouns, so "Tech Tree Branch" is "Branche technologique" in French and "Ramo dell\u2019albero tecnologico" in Italian, never "Branche Technologique". German is the exception and capitalises every noun. English title case is English, and copying it is the most common way a translated interface reads as translated.
 - Write the apostrophe as \u2019, the typographic apostrophe, never as the ASCII quote. It elides in French ("l\u2019IS-7"), contracts in English ("doesn\u2019t") and takes a suffix in Turkish ("3 \u20ac\u2019dan"): one character for all of them, and left to chance the tree carries both spellings in the same sentence.
 - Never answer in ALL CAPS when the English is not. A heading is styled by the interface, not by the string: "Grand Final" is "Grande finale", never "GRANDE FINALE". If your language shouts it in the game, it is the game shouting, not the sentence.
@@ -972,6 +973,36 @@ function termBlock(locale: Locale, entries: Record<string, string>): string {
 }
 
 /**
+ * What the game itself calls the things this batch names, quoted last.
+ *
+ * A block of its own rather than more lines in the one above, and that is the
+ * point rather than tidiness. `termBlock` is capped at eighty and ranked by how
+ * often a batch contains the word, over a sheet mined from the corpus that
+ * holds single letters ("s" matched twenty-three strings of the batch this was
+ * measured on, "d" fourteen), so the handful of names that actually have one
+ * right answer compete for room with noise and can lose. These are at most a
+ * couple of dozen, only the ones the batch names, and they are the words a
+ * reader would catch us getting wrong, so they are never dropped.
+ *
+ * `game/` is exempt, like everywhere else: those values ARE this catalogue.
+ */
+function gameNameBlock(
+  locale: Locale,
+  namespace: string,
+  entries: Record<string, string>,
+): string {
+  if (isGameNamespace(namespace) || namespace === "terms") return "";
+  const values = Object.values(entries);
+  const quoted = gameNamesFor(locale).filter(({ pattern }) =>
+    values.some((value) => pattern.test(value.replace(/\{[^{}]*\}/g, " "))),
+  );
+  if (quoted.length === 0) return "";
+  return `\n\nWorld of Tanks has its own name for these in ${LOCALE_LABEL[locale]}, and a player reads it in their own game. Use it, never a synonym:\n${quoted
+    .map(({ english, own }) => `- ${english} = ${own}`)
+    .join("\n")}`;
+}
+
+/**
  * A global gate on the prose model, independent of the job pool.
  *
  * The pool runs 25 namespace jobs at once and each issues its prose and its
@@ -1063,7 +1094,7 @@ async function ask(
 
 ${instructionsFor(namespace, locale)}${extra}
 
-${JSON.stringify(Object.entries(entries).map(([key, value]) => ({ key, value })))}${termBlock(locale, entries)}`,
+${JSON.stringify(Object.entries(entries).map(([key, value]) => ({ key, value })))}${termBlock(locale, entries)}${gameNameBlock(locale, namespace, entries)}`,
     });
 
   try {
@@ -1307,11 +1338,31 @@ async function translate(
         : ` These strings name something World of Tanks has its own word for in ${LOCALE_LABEL[locale]}, and your previous answer used a different one. Use exactly ${[...wanted]
             .map(([english, own]) => `"${own}" for "${english}"`)
             .join(", ")}, inflected as the sentence needs, and never a synonym of your own.`;
+    // Told the wrong thing, a model fixes the wrong thing. This preamble used
+    // to go out unconditionally, so a string refused purely for the word it
+    // chose was told its placeholders had been lost, and the rule that followed
+    // said in so many words to "translate every word, including the ones that
+    // name a thing" -- which is exactly what it had done and exactly what was
+    // being refused. Measured on the first run to enforce the names: 93 keys
+    // came back with the same synonym after all three attempts, French
+    // answering "Boosts de forteresse" for "Stronghold boosts" every time,
+    // beside a table its own catalogue heads "Bastion". So the request now
+    // describes the failures that actually happened, and carries the
+    // placeholder rules only when a placeholder is one of them.
+    const lost = broken.some(
+      (key) =>
+        answer[key] === undefined ||
+        [...markers(entries[key] ?? "")].sort().join(",") !==
+          [...markers(answer[key])].sort().join(","),
+    );
+    const opening = lost
+      ? `The previous answer left these out, or changed a placeholder or a tag in them. Answer with EVERY key below, one translation each.${rule}`
+      : "Answer with EVERY key below, one translation each. Your previous answers were otherwise correct: keep their wording except for what is named here.";
     const retry = await ask(
       retryEntries,
       locale,
       namespace,
-      `\n\nThe previous answer left these out, or changed a placeholder or a tag in them. Answer with EVERY key below, one translation each.${rule}${caseRule}${nameRule}`,
+      `\n\n${opening}${caseRule}${nameRule}`,
       model,
     );
     for (const key of broken) {
