@@ -1,4 +1,4 @@
 {
-  "compare-the-live-and-common": "Vertaile live- ja Yhteisen testin versioita",
+  "compare-the-live-and-common": "Vertaile live-versiota ja Yhteisen testin versiota",
   "compare-live-against-common-test": "Vertaile live-versiota Yhteisen testin versioon {testVersion}"
 }

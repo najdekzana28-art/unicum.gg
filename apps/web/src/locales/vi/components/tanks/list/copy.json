@@ -21,13 +21,13 @@
     "intro": "Sát thương trung bình trượt cần thiết để đạt một, hai và ba dấu trên tất cả {count} xe tăng World of Tanks tại {region}. Sắp xếp theo bất kỳ cột nào, sau đó lọc theo cấp, quốc gia, hạng và vai trò.",
     "title": "Yêu cầu dấu xuất sắc của World of Tanks ({region})",
     "description": "Sát thương cần thiết để đạt một, hai và ba dấu xuất sắc trên mọi xe tăng World of Tanks tại {region}, có thể sắp xếp và lọc theo cấp, quốc gia, hạng và vai trò.",
-    "heading": "<accent>Các dấu xuất sắc</accent>"
+    "heading": "<accent>Dấu hiệu Thiện chiến</accent>"
   },
   "marks-of-mastery": {
     "intro": "Các ngưỡng X để đạt Ace Tanker và huy hiệu tinh thông cho tất cả {count} xe tăng World of Tanks tại {region}. Sắp xếp theo bất kỳ cột nào, sau đó lọc theo cấp, quốc gia, hạng và vai trò.",
     "title": "Yêu cầu dấu tinh thông của World of Tanks ({region})",
     "description": "Các ngưỡng X để đạt Ace Tanker và huy hiệu tinh thông cho mọi xe tăng World of Tanks tại {region}, có thể sắp xếp và lọc theo cấp, quốc gia, hạng và vai trò.",
-    "heading": "<accent>Các dấu tinh thông</accent>"
+    "heading": "<accent>Dấu ấn thành thạo</accent>"
   },
   "videos": {
     "intro": "{count} trận đấu mà cộng đồng đã liên kết tại {region}, mỗi video mở đúng tại giây bắt đầu trận đấu. Được đề xuất từ các trang xe tăng và kiểm tra trước khi xuất hiện ở đây.",

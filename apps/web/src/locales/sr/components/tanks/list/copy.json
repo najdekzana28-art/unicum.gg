@@ -21,13 +21,13 @@
     "intro": "Покретни просек штете потребан за једну, две и три ознаке на свих {count} World of Tanks возила на {region}. Сортирај по било којој колони, па филтрирај по нивоу, нацији, класи и улози.",
     "title": "Услови за ознаке изврсности на World of Tanks тенковима ({region})",
     "description": "Штета потребна за једну, две и три ознаке изврсности на сваком World of Tanks тенку на {region}, уз сортирање и филтрирање по нивоу, нацији, класи и улози.",
-    "heading": "<accent>Ознаке изврсности</accent>"
+    "heading": "<accent>Ocene Izvrsnosti</accent>"
   },
   "marks-of-mastery": {
     "intro": "Pragovi XP-a za As Tenkista i značku majstorstva za svih {count} vozila World of Tanks na serveru {region}. Sortirajte po bilo kojoj koloni, zatim filtrirajte po nivou, naciji, klasi i ulozi.",
     "title": "Услови за ознаке мајсторства на World of Tanks тенковима ({region})",
     "description": "Pragovi XP-a za As Tenkista i značku majstorstva za svaki tenk igre World of Tanks na serveru {region}, uz sortiranje i filtriranje po nivou, naciji, klasi i ulozi.",
-    "heading": "<accent>Ознаке мајсторства</accent>"
+    "heading": "<accent>Marke majstorstva</accent>"
   },
   "videos": {
     "intro": "{count} битки које је заједница повезала на {region}, свака се отвара у секунди када почиње. Предложене са страница тенкова и проверене пре него што се појаве овде.",

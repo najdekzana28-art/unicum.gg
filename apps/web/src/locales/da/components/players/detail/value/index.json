@@ -20,7 +20,7 @@
   "reward-tanks-label": "Belønnings tanks",
   "skill-premium": "Færdighedspræmie",
   "tanks-3-marked": "{count} kampvogne med 3 mærker",
-  "the-real-driver-based-on": "Den egentlige drivkraft. Baseret på WGs globale vurdering (Personlig vurdering), som kombinerer færdigheder, sejrsrate og aktivitet, og som er det tal, gråmarkedsannoncer angiver. Nul for en gennemsnitlig konto, men stiger kraftigt for stærke konti.",
+  "the-real-driver-based-on": "Den faktiske drivkraft. Baseret på WG’s globale vurdering (Personlig rating), som kombinerer færdighed, sejrsrate og aktivitet, og som er tallet, gråmarkedsannoncer citerer. Nul for en gennemsnitlig konto, stigende stejlt for stærke konti.",
   "the-real-money-cost-to": "De faktiske penge, det koster at undersøge med fri XP og købe alle kampvogne på kontoen, hvor premiumkampvogne prissættes i guld. Langt højere end markedsværdien, da markedet næsten ikke betaler for slibearbejdet, kun for det sjældne eller dokumenterede.",
   "tier": "Niveau {tier}: {count} × {unit}",
   "tier-x-0-25": "{tierXCount} niveau X × €0,25",

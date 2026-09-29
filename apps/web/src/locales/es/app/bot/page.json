@@ -1,6 +1,6 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Tamaño, límite de tiempo, tamaño de los equipos y modos de juego de un mapa de batalla, junto con su minimapa y los tipos de batalla en los que se juega.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "Valoraciones de los miembros de un Clan ponderadas por batallas, además de su rendimiento en Fuerte y Guerras de Clanes, igual que en el encabezado de Clan del sitio.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "Valoraciones de los miembros de un clan ponderadas por batalla, más su rendimiento en Fortaleza y Guerras de Clanes, que reflejan el encabezado del clan del sitio.",
   "a-player-reply": "Una respuesta de {command}",
   "a-vehicle-s-server-average-performance-acros": "Rendimiento medio de un vehículo en el servidor entre los jugadores registrados, con los umbrales actuales de Marcas de excelencia y As del Tanque.",
   "add-the-bot-to-your": "Añade el bot {NAME} a tu servidor para obtener al instante estadísticas de jugadores, clanes, Tanques y mapas de batalla de World of Tanks. Utiliza los mismos datos que el sitio e incluye WN8 y WNX. Gratis y de código abierto.",

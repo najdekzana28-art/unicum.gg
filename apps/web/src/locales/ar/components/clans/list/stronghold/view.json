@@ -3,7 +3,7 @@
   "heading": "أفضل عشائر <accent>{tier}</accent>",
   "blurb": "قائمة المتصدرين في {region}، مصنّفة حسب {sort} بين جميع العشائر المتتبعة في {format}، بحد أدنى {battles} من المعارك.",
   "blurb-period": "قائمة المتصدرين في {region}، مصنّفة حسب {sort} بين جميع العشائر المتتبعة في {format} خلال {period}، بحد أدنى {battles} من المعارك.",
-  "format-advances": "الاندفاعات (15vs15)",
+  "format-advances": "تقدّمات (15 ضد 15)",
   "format-skirmish": "{tier} (7vs7)",
   "panel-title": "أفضل {count} عشائر من {tier} ·"
 }

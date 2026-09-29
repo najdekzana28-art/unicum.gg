@@ -21,13 +21,13 @@
     "intro": "Daunele medii mobile necesare pentru unul, două și trei semne pentru toate cele {count} vehicule World of Tanks de pe {region}. Sortează după orice coloană, apoi filtrează după nivel, națiune, clasă și rol.",
     "title": "Cerințe pentru semnele de excelență în World of Tanks ({region})",
     "description": "Daunele necesare pentru unul, două și trei semne de excelență pentru fiecare tanc World of Tanks de pe {region}, cu sortare și filtrare după nivel, națiune, clasă și rol.",
-    "heading": "<accent>Semne de excelență</accent>"
+    "heading": "<accent>Însemne de Excelenţă</accent>"
   },
   "marks-of-mastery": {
     "intro": "Pragurile de XP pentru Asul tanchiștilor și insignele de măiestrie pentru toate cele {count} vehicule World of Tanks de pe {region}. Sortează după orice coloană, apoi filtrează după nivel, națiune, clasă și rol.",
     "title": "Cerințe pentru semnele de măiestrie în World of Tanks ({region})",
     "description": "Pragurile de XP pentru Asul tanchiștilor și insignele de măiestrie pentru fiecare tanc World of Tanks de pe {region}, cu sortare și filtrare după nivel, națiune, clasă și rol.",
-    "heading": "<accent>Semne de măiestrie</accent>"
+    "heading": "<accent>Marcajele de Măiestrie</accent>"
   },
   "videos": {
     "intro": "{count} bătălii asociate de comunitate pe {region}, fiecare deschizându-se în secunda în care începe. Sugerate de pe paginile tancurilor și verificate înainte să apară aici.",

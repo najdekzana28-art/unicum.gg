@@ -20,7 +20,7 @@
   "reward-tanks-label": "Nagradna tenka",
   "skill-premium": "Premija za vještinu",
   "tanks-3-marked": "{count} tenkova s 3 oznake",
-  "the-real-driver-based-on": "Pravi glavni čimbenik. Temelji se na globalnoj ocjeni WG-a (Osobna ocjena), koja objedinjuje vještinu, postotak pobjeda i aktivnost, a to je brojka koju navode oglasi na sivom tržištu. Za prosječan račun iznosi nula, a za dobre račune naglo raste.",
+  "the-real-driver-based-on": "Stvarni pokretač. Temelji se na globalnom WG rejtingu (Osobni rejting), koji objedinjuje vještinu, stopu pobjeda i aktivnost te predstavlja brojku koju navode oglasi na sivom tržištu. Nula za prosječan račun, a kod snažnih računa naglo raste.",
   "the-real-money-cost-to": "Stvarni novčani trošak istraživanja pomoću slobodnog iskustva i kupnje svakog tenka na računu, pri čemu su premiumi izraženi u zlatu. Znatno je veći od tržišne vrijednosti jer tržište gotovo uopće ne plaća trud, već samo rijetkost ili dokazanu vrijednost.",
   "tier": "Razina {tier}: {count} × {unit}",
   "tier-x-0-25": "{tierXCount} razine X × 0,25 €",

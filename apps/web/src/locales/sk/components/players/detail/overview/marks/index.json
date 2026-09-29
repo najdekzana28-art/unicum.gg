@@ -10,8 +10,8 @@
   "mastery": {
     "title": "Značky majstrovstva",
     "description": "Vozidlá podľa najlepšieho získaného odznaku. Odznak vychádza z jednej bitky, nie z priemeru. Hra ho udeľuje podľa skúseností získaných v jednej bitke v porovnaní s výsledkami regiónu na danom vozidle.",
-    "note": "Počet vozidiel s odznakom Tankové eso: {aces} z {garage}.",
-    "note-share": "Počet vozidiel s odznakom Tankové eso: {aces} z {garage} ({percent} % garáže)."
+    "note": "{aces} z {garage} vozidiel má titul Jazdec elitných tankov.",
+    "note-share": "{aces} z {garage} vozidiel má titul Jazdec elitných tankov ({percent} % garáže)."
   },
   "reach": {
     "heading": "Výkon nad úrovňou znaku na hlavni",

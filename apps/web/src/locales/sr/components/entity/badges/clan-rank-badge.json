@@ -2,8 +2,8 @@
   "aria-rank": "Rang {rank} na tabli {board}",
   "board": {
     "advances": "рејтинг за Napadi у Утврђењу",
-    "t10": "рејтинг Чарки, Nivo X",
-    "t6": "рејтинг Чарки, Nivo VI",
-    "t8": "рејтинг Чарки, Nivo VIII"
+    "t10": "Rejting Čarki, Nivo X",
+    "t6": "Rejting Čarki, Nivo VI",
+    "t8": "Rejting Čarki, Nivo VIII"
   }
 }

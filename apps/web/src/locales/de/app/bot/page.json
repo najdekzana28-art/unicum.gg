@@ -1,6 +1,6 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Größe, Zeitlimit, Teamgröße und Spielmodi einer Gefechtskarte, einschließlich ihrer Minikarte und der Gefechtsarten, in denen sie gespielt wird.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "Für einen Clan werden die nach Gefechten gewichteten Mitgliederwertungen sowie seine Leistung in Stützpunkt und Clan Wars angezeigt, entsprechend der Clan-Kopfzeile der Website.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "Gefechtsgewichtete Wertungen der Mitglieder eines Clans plus dessen Festungs- und Clan-Wars-Leistung, entsprechend der Clan-Kopfzeile der Website.",
   "a-player-reply": "Eine {command}-Antwort",
   "a-vehicle-s-server-average-performance-acros": "Die durchschnittliche Serverleistung eines Panzer über alle erfassten spieler hinweg, einschließlich der aktuellen Schwellenwerte für Erfolgsmarkierungen und Ace Tanker.",
   "add-the-bot-to-your": "Füge den {NAME}-Bot deinem Server hinzu und erhalte sofort World of Tanks-Spieler-, Clan-, Panzer- und Gefechtskartenstatistiken. Basiert auf denselben Daten wie die Website, einschließlich WN8 und WNX. Kostenlos und Open Source.",

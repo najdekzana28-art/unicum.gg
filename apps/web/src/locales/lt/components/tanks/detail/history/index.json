@@ -1,7 +1,7 @@
 {
   "before-update": "Prieš atnaujinimą {version}",
   "common-test": "Bendras testas",
-  "in-common-test-not-released": "Bendrame teste, dar neišleista",
+  "in-common-test-not-released": "Bendrame teste dar neišleista",
   "introduced": "Įvesta",
   "lifecycle": "Gyvavimo ciklas",
   "n-buffed": "{count} sustiprinta",

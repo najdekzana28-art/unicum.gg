@@ -11,7 +11,7 @@
   "min": "Min",
   "max": "Max",
   "none": "Nessuno",
-  "common-test": "Modificati dal Test pubblico: veicoli nuovi e ribilanciati",
+  "common-test": "Cambiato dal Test comune: nuovi veicoli e veicoli ribilanciati",
   "category": {
     "standard": "Standard",
     "premium": "Premium",

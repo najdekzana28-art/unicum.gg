@@ -1,8 +1,8 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Taistelukartan koko, ajastin, joukkueen koko ja pelimuodot sekä sen minimap ja taistelutyypit, joissa sitä pelataan.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "Klaanin taistelupainotetut jäsenten arvosanat sekä sen linnoitus- ja klaanisotien suorituskyky, sivuston klaaniotsakkeen mukaisesti.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "Klaanin jäsenten taistelupainotetut arvosanat plus sen Linnoituksen ja Klaanisotien suorituskyky, sivuston klaaniotsaketta mukaillen.",
   "a-player-reply": "{command}-vastaus",
-  "a-vehicle-s-server-average-performance-acros": "Ajoneuvon palvelimen keskiarvoinen suorituskyky seurattujen pelaajien yli sekä nykyiset Marks of Excellence- ja Ace Tanker -kynnykset.",
+  "a-vehicle-s-server-average-performance-acros": "Ajoneuvon palvelimen keskiarvosuorituskyky yli seurattujen pelaajien, sekä nykyiset Merkit erinomaisuudesta- ja Ace Tanker -kynnysarvot.",
   "add-the-bot-to-your": "Lisää {NAME}-botti palvelimellesi saadaksesi World of Tanks -pelaaja-, klaani-, panssarivaunu- ja taistelukarttatilastot heti. Taustalla ovat samat tiedot kuin sivustolla, WN8 ja WNX mukaan lukien. Ilmainen ja avoin lähdekoodi.",
   "add-to-discord": "Lisää Discordiin",
   "any-player-instantly": "Mikä tahansa pelaaja, heti",

@@ -20,7 +20,7 @@
   "reward-tanks-label": "Ödül tankları",
   "skill-premium": "Beceri primi",
   "tanks-3-marked": "{count} tankta 3 işaret",
-  "the-real-driver-based-on": "Asıl belirleyici. Beceri, galibiyet oranı ve etkinliği birleştiren WG genel puanına (Kişisel Puan) dayanır ve gri piyasa ilanlarında belirtilen rakam budur. Ortalama hesap için sıfırdır, güçlü hesaplarda hızla yükselir.",
+  "the-real-driver-based-on": "Gerçek belirleyici. Beceri, kazanma oranı ve etkinliği harmanlayan WG küresel reytingini (Kişisel Reyting) temel alır ve gri piyasa ilanlarının kullandığı değerdir. Ortalama bir hesap için sıfırdır, güçlü hesaplarda hızla yükselir.",
   "the-real-money-cost-to": "Hesaptaki her tankı araştırmanın (serbest DP) ve satın almanın gerçek para maliyeti, premium tanklar altınla fiyatlandırılmıştır. Piyasa değerinden çok daha yüksektir. Piyasa, kasaya harcanan zamanı neredeyse hiç karşılamaz, yalnızca nadir veya kanıtlanmış şeylere değer verir.",
   "tier": "Seviye {tier}: {count} × {unit}",
   "tier-x-0-25": "{tierXCount} Seviye X × €0.25",

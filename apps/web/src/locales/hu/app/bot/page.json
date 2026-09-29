@@ -1,6 +1,6 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Egy csatatérkép mérete, időkorlátja, csapatmérete és játékmódjai, a minitérképével és az ott játszható csatatípusokkal.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "A Klán tagjainak csaták számával súlyozott értékelései, valamint az Erőd és a Klán Háborúk során elért teljesítménye, a webhely klánfejlécének megfelelően.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "Egy klán csata alapján súlyozott tagértékelései, valamint az Erődítményben és a Klán Háborúkban nyújtott teljesítménye, a webhely klánfejlécét tükrözve.",
   "a-player-reply": "Egy {command} válasz",
   "a-vehicle-s-server-average-performance-acros": "Egy jármű szerverátlagos teljesítménye a nyomon követett játékosok körében, az aktuális Kiválóság jele és Asztali Tankér küszöbértékekkel.",
   "add-the-bot-to-your": "Add hozzá a {NAME} botot a szerveredhez, és azonnal elérheted a World of Tanks játékos-, Klán-, tank- és csatatérkép-statisztikáit. Ugyanazokra az adatokra épül, mint a webhely, beleértve a WN8 és WNX értékeket is. Ingyen és nyílt forráskódú.",

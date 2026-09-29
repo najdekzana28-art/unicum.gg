@@ -16,11 +16,11 @@
     "battle_royale": "boj, v katerem zmaga zadnji preživeli tank",
     "frontline": "obsežni način 30 na 30",
     "onslaught": "način z lestvico 7 na 7",
-    "onslaught_night": "nočni način z lestvico 7 na 7, krajšim dosegom pogleda in trenutno na voljo v Skupnem preizkusu",
+    "onslaught_night": "hodnotený režim 7 na 7 po zotmení s kratším dohľadom, ktorý je momentálne hrateľný vo Všeobecnom teste",
     "grand_battle": "način 30 na 30 z vozili stopnje X",
     "clan_wars": "klanske vojne in napredovanja",
     "waffentrager": "dogodek Waffenträger",
-    "last_stand": "dogodek Zadnji odpor",
+    "last_stand": "udalosť Posledný vzdor",
     "arcade": "arkadni in posebni dogodki",
     "story_mode": "operacije z zgodbo",
     "training": "vadbene sobe in vadnice"

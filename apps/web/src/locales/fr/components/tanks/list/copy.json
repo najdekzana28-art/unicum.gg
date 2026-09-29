@@ -27,7 +27,7 @@
     "intro": "Seuils d’XP pour l’insigne As du char et les autres insignes de maîtrise des {count} véhicules de World of Tanks sur {region}. Triez selon n’importe quelle colonne, puis filtrez par rang, nation, classe et rôle.",
     "title": "Seuils des insignes de maîtrise dans World of Tanks ({region})",
     "description": "Seuils d’XP pour l’insigne As du char et les autres insignes de maîtrise de tous les chars de World of Tanks sur {region}, avec tri et filtres par rang, nation, classe et rôle.",
-    "heading": "<accent>Insignes de maîtrise</accent>"
+    "heading": "<accent>Marques de maîtrise</accent>"
   },
   "videos": {
     "intro": "{count} batailles référencées par la communauté sur {region}, chaque vidéo s’ouvrant à la seconde précise où la bataille commence. Proposées depuis les pages des chars et vérifiées avant leur publication ici.",

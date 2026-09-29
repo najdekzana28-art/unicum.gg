@@ -1,10 +1,10 @@
 {
   "last-days": "Pēdējās {chartDays} dienas",
-  "moe-chart": "Izcilības zīmju prasības tankam {tank} laika gaitā",
-  "mom-chart": "Meistarības atzīmju sliekšņi tankam {tank} laika gaitā",
+  "moe-chart": "Kā laika gaitā mainās Izcilības zīmju prasības transportlīdzeklim {tank}",
+  "mom-chart": "Kā laika gaitā mainās Meistarības atzīmju sliekšņi transportlīdzeklim {tank}",
   "n-players": "{count, plural, zero {# spēlētāju} one {# spēlētājs} other {# spēlētāji}}",
   "rolling-average-combined-damage-to": "Kustīgais vidējais kopējais bojājumu apjoms, lai pārspētu 65 / 85 / 95% spēlētāju.",
   "single-battle-xp-to-beat": "Vienas kaujas XP, lai pārspētu 50 / 80 / 95 / 99% spēlētāju.",
   "tank-marks-of-excellence": "{tank} izcilības zīmes",
-  "tank-marks-of-mastery": "{tank} meistarības zīmes"
+  "tank-marks-of-mastery": "Meistarības atzīmes transportlīdzeklim {tank}"
 }

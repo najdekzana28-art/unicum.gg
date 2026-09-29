@@ -1,12 +1,12 @@
 {
-  "aria-build": "Luettu Yhteisen testin asiakkaalla, koontiversio {version}",
-  "aria-changes": "Yhteisen testin muuttamat {changes} ominaisuutta",
+  "aria-build": "Lue Yhteisen testin asiakasohjelmassa, kokoonpano {version}",
+  "aria-changes": "Muutettu Yhteisellä testillä: {changes} ominaisuutta",
   "aria-described": "Yhteinen testi: {description}",
   "aria-vehicle": "Yhteisen testin ajoneuvo",
   "common-test": "Yhteinen testi",
   "common-test-build": "Yhteinen testi {version}",
   "tip-build": "{label} · nämä ovat testikoontiversion arvot, ja Wargaming voi vielä muuttaa niitä ennen päivityksen julkaisua",
-  "tip-changes": "Yhteisen testin muutokset tässä ajoneuvossa: {changes, plural, one {# ominaisuus} other {# ominaisuutta}}",
+  "tip-changes": "Yhteinen testi muuttaa tämän ajoneuvon {changes, plural, one {# ominaisuuden} other {# ominaisuutta}}",
   "tip-described": "Yhteinen testi · {description}",
   "tip-vehicle": "Yhteinen testi · ei vielä julkaistu, joten sillä ei ole taistelutilastoja ja sen ominaisuudet voivat vielä muuttua"
 }

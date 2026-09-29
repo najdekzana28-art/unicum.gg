@@ -1,7 +1,7 @@
 {
   "before-update": "Pred aktualizáciou {version}",
   "common-test": "Všeobecný test",
-  "in-common-test-not-released": "V spoločnom teste, zatiaľ nevydané",
+  "in-common-test-not-released": "Vo Všeobecnom teste, zatiaľ nevydané",
   "introduced": "Zavedené",
   "lifecycle": "Životný cyklus",
   "n-buffed": "{count} vylepšených",

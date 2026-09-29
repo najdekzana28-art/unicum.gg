@@ -1,6 +1,6 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Stridskartans storlek, tidsgräns, lagstorlek och spellägen, tillsammans med dess minikarta och de stridstyper som den används i.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "Klanens medlemsbetyg viktade efter antal strider, plus dess prestationer i Fäste och Klankrig, precis som i webbplatsens klanrubrik.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "En klans stridsviktade medlemsbetyg plus dess prestation i Befästning och Klankrig, som speglar webbplatsens klanrubrik.",
   "a-player-reply": "Ett {command}-svar",
   "a-vehicle-s-server-average-performance-acros": "Fordonets genomsnittliga prestanda på servern bland spelare som följs, med de aktuella gränsvärdena för Skyttemärken och Ace Tanker.",
   "add-the-bot-to-your": "Lägg till boten {NAME} på din server för omedelbar World of Tanks-statistik om spelare, klaner, tankar och stridskartor. Den använder samma data som webbplatsen, inklusive WN8 och WNX. Gratis och med öppen källkod.",

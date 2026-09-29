@@ -21,7 +21,7 @@
     "intro": "{region} bölgesindeki {count} World of Tanks aracının tamamında bir, iki ve üç işaret için gereken hareketli ortalama hasar. Her sütuna göre sırala, ardından seviye, ülke, sınıf ve role göre filtrele.",
     "title": "World of Tanks üstünlük işareti gereksinimleri ({region})",
     "description": "{region} bölgesindeki her World of Tanks tankında bir, iki ve üç üstünlük işareti için gereken hasar. Seviye, ülke, sınıf ve role göre sıralanabilir ve filtrelenebilir.",
-    "heading": "<accent>Üstünlük İşaretleri</accent>"
+    "heading": "<accent>Mükemmellik İşaretleri</accent>"
   },
   "marks-of-mastery": {
     "intro": "{region} bölgesindeki {count} World of Tanks aracının tamamı için As Tanker ve ustalık rozeti XP eşikleri. Her sütuna göre sırala, ardından seviye, ülke, sınıf ve role göre filtrele.",

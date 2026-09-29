@@ -11,7 +11,7 @@
   "min": "Min.",
   "max": "Maks.",
   "none": "Ei mitään",
-  "common-test": "Yhteisen testin muuttamat: uudet ajoneuvot ja tasapainotetut ajoneuvot",
+  "common-test": "Muutettu Yhteisellä testillä: uudet ajoneuvot ja uudelleen tasapainotetut ajoneuvot",
   "category": {
     "standard": "Standardi",
     "premium": "Premium",

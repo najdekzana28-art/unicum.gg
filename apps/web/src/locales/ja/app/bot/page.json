@@ -1,8 +1,8 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "戦闘マップのサイズ、時間、チーム人数、ゲームモードに加え、ミニマップとプレイされる戦闘形式を確認できます。",
-  "a-clan-s-battle-weighted-member-ratings-plus": "クランの戦闘加重メンバー・レーティングに加え、拠点とクランウォーズの戦績を表示します。サイトのクランヘッダーと同じ内容です。",
+  "a-clan-s-battle-weighted-member-ratings-plus": "クランの戦闘加重メンバー・レーティングに、拠点とクラン戦のパフォーマンスをプラスしたもの。サイトのクランヘッダーを反映しています。",
   "a-player-reply": "{command}への返信",
-  "a-vehicle-s-server-average-performance-acros": "追跡対象プレイヤー全体における車両のサーバー平均戦績と、現在の優秀戦車長およびエース戦車兵の基準値を表示します。",
+  "a-vehicle-s-server-average-performance-acros": "追跡済みプレイヤー全体における車両のサーバー平均パフォーマンス。現在の優等マークとエースタンカーの閾値も表示します。",
   "add-the-bot-to-your": "{NAME}ボットをサーバーに追加すると、World of Tanksのプレイヤー、クラン、戦車、戦闘マップの戦績をすぐに確認できます。サイトと同じデータを使用し、WN8とWNXにも対応しています。無料のオープンソースです。",
   "add-to-discord": "Discordに追加",
   "any-player-instantly": "任意のプレイヤーをすぐに検索",

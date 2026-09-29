@@ -1,7 +1,7 @@
 {
   "before-update": "Ennen päivitystä {version}",
   "common-test": "Yhteinen testi",
-  "in-common-test-not-released": "Yleisessä testissä, ei vielä julkaistu",
+  "in-common-test-not-released": "Yhteisessä testissä, ei vielä julkaistu",
   "introduced": "Esitelty",
   "lifecycle": "Elinkaari",
   "n-buffed": "{count} parannettua",

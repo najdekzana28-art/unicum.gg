@@ -21,13 +21,13 @@
     "intro": "{region}의 World of Tanks 차량 {count}대 전체에서 우수성 증표 1개, 2개, 3개를 획득하는 데 필요한 이동 평균 피해량입니다. 모든 열을 기준으로 정렬한 다음 단계, 국가, 병과, 역할로 필터링하세요.",
     "title": "World of Tanks 우수성 증표 요구 조건 ({region})",
     "description": "{region}의 모든 World of Tanks 탱크에서 우수성 증표 1개, 2개, 3개를 획득하는 데 필요한 피해량입니다. 단계, 국가, 병과, 역할별로 정렬하고 필터링할 수 있습니다.",
-    "heading": "<accent>우수성 증표</accent>"
+    "heading": "<accent>화력의 증표</accent>"
   },
   "marks-of-mastery": {
     "intro": "{region}의 World of Tanks 차량 {count}대 전체의 에이스 탱커 및 숙련도 배지 XP 기준입니다. 모든 열을 기준으로 정렬한 다음 단계, 국가, 병과, 역할로 필터링하세요.",
     "title": "World of Tanks 숙련도 증표 요구 조건 ({region})",
     "description": "{region}의 모든 World of Tanks 탱크에 대한 에이스 탱커 및 숙련도 배지 XP 기준입니다. 단계, 국가, 병과, 역할별로 정렬하고 필터링할 수 있습니다.",
-    "heading": "<accent>숙련도 증표</accent>"
+    "heading": "<accent>숙련도 마크</accent>"
   },
   "videos": {
     "intro": "커뮤니티가 {region}에 링크한 전투 {count}개입니다. 각 영상은 전투가 시작되는 초부터 열립니다. 탱크 페이지에서 제안되며 여기에 표시되기 전에 확인됩니다.",

@@ -10,8 +10,8 @@
   "mastery": {
     "title": "Meistriškumo ženklai",
     "description": "Transporto priemonės pagal geriausią jų ženklelį. Ženklelis priklauso nuo vieno mūšio, o ne nuo vidurkio, žaidimas jį skiria pagal vieno žaidimo patirtį, palygintą su regiono rezultatais naudojant tą transporto priemonę.",
-    "note": "{aces} iš {garage} transporto priemonių turi Tūzo tankisto ženklelį.",
-    "note-share": "{aces} iš {garage} transporto priemonių turi Tūzo tankisto ženklelį, tai sudaro {percent}% garažo."
+    "note": "Auksinį tankistą turi {aces} iš {garage} garažo transporto priemonių.",
+    "note-share": "Auksinį tankistą turi {aces} iš {garage} garažo transporto priemonių ({percent}% garažo)."
   },
   "reach": {
     "heading": "Žaidimas virš patrankos lygio",

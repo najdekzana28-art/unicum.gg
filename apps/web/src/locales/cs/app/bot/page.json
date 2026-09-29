@@ -1,6 +1,6 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Velikost bitevní mapy, časový limit, velikost týmu a herní režimy, včetně minimapy a typů bitev, ve kterých se používá.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "Hodnocení členů klanu vážená podle počtu bitev spolu s jeho výsledky v režimech Hlavní základna a Klanoé války, stejně jako v záhlaví klanu na webu.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "Hodnocení členů klanu vážená podle bitev plus jeho výkon v Pevnosti a Klanových válkách, odpovídající záhlaví klanu na webu.",
   "a-player-reply": "Odpověď hráče na {command}",
   "a-vehicle-s-server-average-performance-acros": "Průměrné výsledky vozidla na serveru mezi sledovanými hráči, včetně aktuálních hranic pro Vítězné znaky a Esence Tankista.",
   "add-the-bot-to-your": "Přidejte si na svůj server Discord bot {NAME} a získejte okamžité statistiky hráčů, klanů, tanků a bitevních map ve World of Tanks. Využívá stejná data jako web, včetně WN8 a WNX. Zdarma a s otevřeným zdrojovým kódem.",

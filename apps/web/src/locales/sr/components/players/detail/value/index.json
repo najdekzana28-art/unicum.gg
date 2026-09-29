@@ -20,7 +20,7 @@
   "reward-tanks-label": "Nagrada tenkovi",
   "skill-premium": "Premijum veštine",
   "tanks-3-marked": "{count} тенкова са 3 ознаке",
-  "the-real-driver-based-on": "Pravi vozač. Zasnovano na globalnoj WG oceni (Lična ocena), koja objedinjuje veštinu, procenat pobeda i aktivnost, a to je brojka koju navode oglasi na sivom tržištu. Nula za prosečan nalog, a kod snažnih naloga naglo raste.",
+  "the-real-driver-based-on": "Pravi pokretač. Zasnovano na WG globalnom rejtingu (Lični rejting), koji objedinjuje veštinu, procenat pobeda i aktivnost, a to je brojka koju navode oglasi na sivom tržištu. Nula za prosečan nalog, a naglo raste kod snažnih naloga.",
   "the-real-money-cost-to": "Стварни новчани трошак истраживања помоћу слободног искуства и куповине сваког тенка на налогу, при чему су премијум тенкови изражени у злату. Много је већи од тржишне вредности, јер тржиште готово не плаћа уложени труд, већ само ретке или доказане вредности.",
   "tier": "Ниво {tier}: {count} × {unit}",
   "tier-x-0-25": "{tierXCount} тенкова нивоа X × €0.25",

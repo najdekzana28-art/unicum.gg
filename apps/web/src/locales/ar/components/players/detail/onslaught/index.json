@@ -1,6 +1,6 @@
 {
   "final": " · نهائي",
-  "has-not-held-a-place": "لم يحتل {nickname} مكانًا في قائمة المتصدرين للهجوم.",
+  "has-not-held-a-place": "لم يُحتفَظ لـ {nickname} بمركز في قائمة المتصدرين لنمط الهجوم.",
   "live-season": "· موسم جارٍ",
   "loading-s-onslaught-record": "جارٍ تحميل سجل الهجوم الخاص بـ {nickname}...",
   "onslaught": "الهجوم",

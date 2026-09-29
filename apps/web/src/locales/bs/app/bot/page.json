@@ -1,6 +1,6 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Veličina mape za bitku, mjerač vremena, veličina tima i režimi igre, s minimapom i vrstama bitaka u kojima se igra.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "Rejtingzi članova klana ponderisani bitkama, plus učinak u Tvrđavi i Klan ratovima, koji odražavaju zaglavlje klana na stranici.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "Rejtingzi članova klana ponderisani prema bitkama, plus njegov učinak u Utvrdi i Klan ratovima, kao u zaglavlju klana na stranici.",
   "a-player-reply": "Odgovor na {command}",
   "a-vehicle-s-server-average-performance-acros": "Prosječan učinak vozila na serveru širom praćenih igrača, s trenutnim pragovima za oznake izvrsnosti i Ace Tanker.",
   "add-the-bot-to-your": "Dodajte {NAME} bota na svoj server za trenutne statistike igrača, klanova, tenkova i mapa za bitke u igri World of Tanks. Podaci su isti kao na stranici, uključujući WN8 i WNX. Besplatno i otvorenog koda.",

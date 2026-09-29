@@ -1,4 +1,4 @@
 {
-  "compare-the-live-and-common": "Porovnať aktuálnu verziu s verziou Spoločného testu",
-  "compare-live-against-common-test": "Porovnať aktuálnu verziu s verziou Spoločného testu {testVersion}"
+  "compare-the-live-and-common": "Porovnať verzie naživo a vo Všeobecnom teste",
+  "compare-live-against-common-test": "Porovnať verziu naživo s Všeobecným testom {testVersion}"
 }

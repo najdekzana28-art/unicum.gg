@@ -10,8 +10,8 @@
   "mastery": {
     "title": "掌握标记",
     "description": "按最佳徽章显示车辆。徽章取决于单场战斗，而不是平均值：游戏会根据单场战斗经验，对比该地区使用该车辆的评分来授予徽章。",
-    "note": "{aces}/{garage}辆车辆带有王牌坦克徽章。",
-    "note-share": "{aces}/{garage}辆车辆带有王牌坦克徽章（车库的{percent}%）。"
+    "note": "车库中的 {garage} 辆车辆中，有 {aces} 辆获得顶尖坦克手。",
+    "note-share": "车库中的 {garage} 辆车辆中，有 {aces} 辆获得顶尖坦克手（占车库的 {percent}%）。"
   },
   "reach": {
     "heading": "火炮表现超越标记",

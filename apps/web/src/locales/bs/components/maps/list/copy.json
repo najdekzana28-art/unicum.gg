@@ -16,11 +16,11 @@
     "battle_royale": "režim posljednjeg preživjelog tenka",
     "frontline": "režim velikih razmjera 30 na 30",
     "onslaught": "rangirano igranje 7 na 7",
-    "onslaught_night": "rangirano igranje 7 na 7 po mraku, s kraćim dometom pogleda, trenutno dostupno na Common Testu",
+    "onslaught_night": "rangirani režim 7v7 nakon mraka, s kraćim rasponom prikaza, koji se trenutno može igrati na Zajedničkom testu",
     "grand_battle": "režim nivoa X, 30 na 30",
     "clan_wars": "klanovski ratovi i ofanzive",
     "waffentrager": "događaj Waffenträger",
-    "last_stand": "događaj Last Stand",
+    "last_stand": "događaj Posljednji otpor",
     "arcade": "arkadne i posebne događaje",
     "story_mode": "operacije vođene pričom",
     "training": "prostorije za trening i tutorijali"

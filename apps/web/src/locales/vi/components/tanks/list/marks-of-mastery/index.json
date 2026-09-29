@@ -2,15 +2,15 @@
   "columns": {
     "class3": {
       "label": "Hạng 3",
-      "tip": "Loại 3: XP cần để vượt qua 50% người chơi"
+      "tip": "Hạng 3: X cần thiết để vượt qua 50% người chơi"
     },
     "class2": {
       "label": "Hạng 2",
-      "tip": "Loại 2: XP cần để vượt qua 80% người chơi"
+      "tip": "Hạng 2: X cần thiết để vượt qua 80% người chơi"
     },
     "class1": {
       "label": "Hạng 1",
-      "tip": "Loại 1: XP cần để vượt qua 95% người chơi"
+      "tip": "Hạng 1: X cần thiết để vượt qua 95% người chơi"
     },
     "ace": {
       "label": "Ace Tanker",

@@ -20,7 +20,7 @@
   "reward-tanks-label": "Apmaksāšanas tvertnes",
   "skill-premium": "Prasmes prēmija",
   "tanks-3-marked": "{count} tanki ar 3 atzīmēm",
-  "the-real-driver-based-on": "Galvenais faktors. Balstīts uz WG globālo vērtējumu (Personīgo vērtējumu), kas apvieno prasmi, uzvaru procentu un aktivitāti un ko norāda pelēkā tirgus sludinājumos. Vidējam kontam tas ir nulle, bet spēcīgiem kontiem strauji pieaug.",
+  "the-real-driver-based-on": "Reālais vadītājs. Balstīts uz WG globālo vērtējumu (Personīgais reitings), kurā apvienota prasme, uzvaru līmenis un aktivitāte, un kas ir skaitlis, ko citē pelēkā tirgus sludinājumi. Vidējam kontam tas ir nulle, bet spēcīgiem kontiem strauji pieaug.",
   "the-real-money-cost-to": "Reālās naudas izmaksas, lai izpētītu ar brīvo XP un iegādātos katru konta tanku, augstākās klases tankus novērtējot zeltā. Daudz vairāk par tirgus vērtību: tirgus gandrīz nemaksā par izpēti, tikai par retām vai pārbaudītām lietām.",
   "tier": "Līmenis {tier}: {count} × {unit}",
   "tier-x-0-25": "{tierXCount} X līmeņa tanki × €0.25",

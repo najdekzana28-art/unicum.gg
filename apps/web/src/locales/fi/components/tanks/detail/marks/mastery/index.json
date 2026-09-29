@@ -1,10 +1,10 @@
 {
   "last-days": "Viimeiset {chartDays} päivää",
-  "moe-chart": "Panssarivaunun {tank} Erinomaisuuden merkkien vaatimukset ajan mittaan",
+  "moe-chart": "Ajoneuvon {tank} Merkit erinomaisuudesta ajan mittaan",
   "mom-chart": "Panssarivaunun {tank} Mestaruusmerkkien kynnysarvot ajan mittaan",
   "n-players": "{count, plural, one {# pelaaja} other {# pelaajat}}",
   "rolling-average-combined-damage-to": "Liukuva yhdistetyn vahingon keskiarvo, jolla päihittää 65 / 85 / 95 % pelaajista.",
   "single-battle-xp-to-beat": "Yhden taistelun XP, jolla päihittää 50 / 80 / 95 / 99 % pelaajista.",
-  "tank-marks-of-excellence": "Panssarivaunun {tank} huippusuorituksen merkit",
+  "tank-marks-of-excellence": "Merkit erinomaisuudesta ajoneuvolle {tank}",
   "tank-marks-of-mastery": "Panssarivaunun {tank} mestaruusmerkit"
 }

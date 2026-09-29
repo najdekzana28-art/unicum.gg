@@ -21,13 +21,13 @@
     "intro": "Kĺzavý priemer poškodenia potrebný na jeden, dva a tri znaky pri všetkých {count} vozidlách World of Tanks v regióne {region}. Zoraďte podľa ľubovoľného stĺpca, potom filtrujte podľa úrovne, národa, triedy a roly.",
     "title": "Požiadavky na znaky výnimočnosti vo World of Tanks ({region})",
     "description": "Poškodenie potrebné na jeden, dva a tri znaky výnimočnosti pri každom tanku World of Tanks v regióne {region} s možnosťou zoradenia a filtrovania podľa úrovne, národa, triedy a roly.",
-    "heading": "<accent>Znaky výnimočnosti</accent>"
+    "heading": "<accent>Značky excelencie</accent>"
   },
   "marks-of-mastery": {
-    "intro": "Hranice XP pre Tankové eso a odznaky majstrovstva pri všetkých {count} vozidlách World of Tanks v regióne {region}. Zoraďte podľa ľubovoľného stĺpca, potom filtrujte podľa úrovne, národa, triedy a roly.",
+    "intro": "Prahové hodnoty pre Jazdca elitných tankov a odznak majstrovstva pre všetkých {count} vozidiel World of Tanks v regióne {region}. Triediť môžete podľa ľubovoľného stĺpca a potom filtrovať podľa úrovne, národa, triedy a úlohy.",
     "title": "Požiadavky na odznaky majstrovstva vo World of Tanks ({region})",
-    "description": "Hranice XP pre Tankové eso a odznaky majstrovstva pri každom tanku World of Tanks v regióne {region} s možnosťou zoradenia a filtrovania podľa úrovne, národa, triedy a roly.",
-    "heading": "<accent>Odznaky majstrovstva</accent>"
+    "description": "Prahové hodnoty pre Jazdca elitných tankov a odznak majstrovstva pre každý tank World of Tanks v regióne {region}, s možnosťou triedenia a filtrovania podľa úrovne, národa, triedy a úlohy.",
+    "heading": "<accent>Značky majstrovstva</accent>"
   },
   "videos": {
     "intro": "Komunita prepojila {count} bitiek v regióne {region}, pričom každá sa otvorí presne v sekunde svojho začiatku. Návrhy pochádzajú zo stránok tankov a pred zobrazením tu prechádzajú kontrolou.",

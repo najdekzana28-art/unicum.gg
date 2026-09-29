@@ -3,7 +3,7 @@
   "heading": "Ең жақсы <accent>{tier}</accent> кландар",
   "blurb": "{region} жетекші таблицасы. {format} ішіндегі барлық бақыланатын кландар арасында {sort} бойынша рейтингтік, ең азы {battles} ұрыс.",
   "blurb-period": "{region} жетекші таблицасы. {format} ішіндегі барлық бақыланатын кландар арасында {period} кезеңіндегі {sort} бойынша рейтингтік, ең азы {battles} ұрыс.",
-  "format-advances": "Алдыңғы (15v15)",
+  "format-advances": "Шабуылдар (15v15)",
   "format-skirmish": "{tier} (7v7)",
   "panel-title": "Ең жақсы {count} {tier} клан ·"
 }

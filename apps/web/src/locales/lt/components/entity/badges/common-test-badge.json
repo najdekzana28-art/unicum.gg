@@ -1,5 +1,5 @@
 {
-  "aria-build": "Skaitykite Bendro testo kliente, versija {version}",
+  "aria-build": "Skaityti Bendro testo kliente, sąranka {version}",
   "aria-changes": "Bendras testas pakeitė {changes} charakteristikas",
   "aria-described": "Bendras testas: {description}",
   "aria-vehicle": "Bendro testo transporto priemonė",

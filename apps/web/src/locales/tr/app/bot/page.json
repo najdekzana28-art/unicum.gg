@@ -1,8 +1,8 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "Bir savaş haritasının boyutu, zamanlayıcısı, takım boyutu ve oyun modları, ayrıca minimap’i ve oynandığı savaş türleri.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "Bir klanın savaşa göre ağırlıklandırılmış üye puanları, ayrıca Kale ve Klan Savaşları performansı, sitenin klan başlığını yansıtır.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "Bir klanın savaş ağırlıklı üye puanları artı Tahkimat ve Klan Savaşları performansı, sitenin klan başlığını yansıtır.",
   "a-player-reply": "Bir {command} yanıtı",
-  "a-vehicle-s-server-average-performance-acros": "Takip edilen oyuncular genelinde bir aracın sunucu ortalaması performansı, mevcut Üstünlük İşaretleri ve Usta Tankçı eşikleriyle birlikte.",
+  "a-vehicle-s-server-average-performance-acros": "Takip edilen oyuncular genelinde bir aracın sunucu ortalaması performansı, mevcut Mükemmellik İşaretleri ve Ace Tanker eşikleriyle birlikte.",
   "add-the-bot-to-your": "Anlık World of Tanks oyuncu, klan, tank ve savaş haritası istatistikleri için {NAME} botunu sunucunuza ekleyin. WN8 ve WNX dahil, sitenin verileriyle desteklenir. Ücretsiz ve açık kaynaklıdır.",
   "add-to-discord": "Discord’a ekle",
   "any-player-instantly": "Her oyuncu, anında",

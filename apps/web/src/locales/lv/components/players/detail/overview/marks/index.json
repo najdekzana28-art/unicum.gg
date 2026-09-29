@@ -10,8 +10,8 @@
   "mastery": {
     "title": "Meistarības atzīmes",
     "description": "Transportlīdzekļi pēc to labākās nozīmītes. Nozīmīte ir viena kauja, nevis vidējais rādītājs: spēle to piešķir par vienas kaujas pieredzi, salīdzinot ar reģiona rezultātiem ar šo transportlīdzekli.",
-    "note": "{aces} no {garage} transportlīdzekļiem ir Tanka dūža nozīmīte.",
-    "note-share": "{aces} no {garage} transportlīdzekļiem ir Tanka dūža nozīmīte ({percent}% garāžas)."
+    "note": "Ace Tankers iznešana: {aces} no {garage} transportlīdzekļiem.",
+    "note-share": "Ace Tankers iznešana: {aces} no {garage} transportlīdzekļiem ({percent}% no garāžas)."
   },
   "reach": {
     "heading": "Spēlē virs lielgabala",

@@ -24,10 +24,10 @@
     "heading": "<accent>Marcas de excelência</accent>"
   },
   "marks-of-mastery": {
-    "intro": "Limiares de XP para Ás do Tanque e distintivos de mestria de todos os {count} veículos de World of Tanks em {region}. Ordene por qualquer coluna e filtre por nível, nação, classe e função.",
+    "intro": "Limites de XP do Distribuidor Ace e do distintivo de maestria para todos os {count} veículos de World of Tanks em {region}. Ordene por qualquer coluna e depois use o filtro por nível, nação, classe e função.",
     "title": "Requisitos das marcas de mestria de World of Tanks ({region})",
-    "description": "Limiares de XP para Ás do Tanque e distintivos de mestria de todos os tanques de World of Tanks em {region}, com ordenação e filtragem por nível, nação, classe e função.",
-    "heading": "<accent>Marcas de mestria</accent>"
+    "description": "Limites de XP do Distribuidor Ace e do distintivo de maestria para cada tanque de World of Tanks em {region}, ordenáveis e filtráveis por nível, nação, classe e função.",
+    "heading": "<accent>Marcas de Maestria</accent>"
   },
   "videos": {
     "intro": "As {count} batalhas associadas pela comunidade em {region}, cada uma abrindo no segundo exato em que começa. São sugeridas nas páginas dos tanques e verificadas antes de aparecerem aqui.",

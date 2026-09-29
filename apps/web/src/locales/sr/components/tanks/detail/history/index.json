@@ -1,7 +1,7 @@
 {
   "before-update": "Pre ažuriranja {version}",
   "common-test": "Zajednički test",
-  "in-common-test-not-released": "U Uobičajenom testu, još nije objavljeno",
+  "in-common-test-not-released": "Na Zajedničkom testu, još nije објављено",
   "introduced": "Uvedeno",
   "lifecycle": "Životni ciklus",
   "n-buffed": "{count} poboljšano",

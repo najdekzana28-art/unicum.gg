@@ -1,10 +1,10 @@
 {
   "last-days": "Последние {chartDays} дней",
-  "moe-chart": "Требования для получения Отличительных отметок на {tank} с течением времени",
+  "moe-chart": "Требования к Отличительным отметкам для {tank} со временем",
   "mom-chart": "Пороги Знаков мастерства на {tank} с течением времени",
   "n-players": "{count, plural, one {# игрок} few {# игрока} many {# игроков} other {# игрока}}",
   "rolling-average-combined-damage-to": "Скользящий средний совокупный урон для превосходства над 65 / 85 / 95% игроков.",
   "single-battle-xp-to-beat": "Опыт за один бой для превосходства над 50 / 80 / 95 / 99% игроков.",
-  "tank-marks-of-excellence": "Отметки доблести танка {tank}",
-  "tank-marks-of-mastery": "Знаки классности танка {tank}"
+  "tank-marks-of-excellence": "Отличительные отметки для {tank}",
+  "tank-marks-of-mastery": "Знаки мастерства для {tank}"
 }

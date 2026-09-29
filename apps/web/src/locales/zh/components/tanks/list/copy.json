@@ -21,13 +21,13 @@
     "intro": "{region}全部{count}辆World of Tanks车辆获得一、二、三个卓越标记所需的移动平均伤害。按任意列排序，然后按等级、国家、类型和角色筛选。",
     "title": "World of Tanks卓越标记要求（{region}）",
     "description": "{region}每辆World of Tanks坦克获得一、二、三个卓越标记所需的伤害，可按等级、国家、类型和角色排序及筛选。",
-    "heading": "<accent>卓越标记</accent>"
+    "heading": "<accent>特级标识</accent>"
   },
   "marks-of-mastery": {
-    "intro": "{region}全部{count}辆World of Tanks车辆的王牌坦克和精通徽章经验门槛。按任意列排序，然后按等级、国家、类型和角色筛选。",
+    "intro": "{region} 上全部 {count} 辆 World of Tanks 车辆的顶尖坦克手和战斗嘉奖徽章 XP 阈值。可按任意列排序，然后按等级、国家、类型和角色筛选。",
     "title": "World of Tanks精通标记要求（{region}）",
-    "description": "{region}每辆World of Tanks坦克的王牌坦克和精通徽章经验门槛，可按等级、国家、类型和角色排序及筛选。",
-    "heading": "<accent>精通标记</accent>"
+    "description": "{region} 上每辆 World of Tanks 坦克的顶尖坦克手和战斗嘉奖徽章 XP 阈值，可按等级、国家、类型和角色排序及筛选。",
+    "heading": "<accent>掌握标记</accent>"
   },
   "videos": {
     "intro": "社区在{region}链接的{count}场战斗，每个视频都会从战斗开始的那一秒播放。视频由坦克页面建议，并在显示于此之前经过检查。",

@@ -17,7 +17,7 @@
   "n-badges": "{count} badges",
   "onslaught-champion": {
     "name": "Champion de l’Offensive",
-    "how": "A atteint le rang Champion en Assaut, le minimum requis pour figurer dans le {standings}. Conservé par la suite : si la cote retombe sous le seuil, c’est la place qui disparaît, pas le fait de l’avoir occupée."
+    "how": "A atteint le rang de Champion en Offensive, condition nécessaire pour apparaître au classement {standings}. Conservé ensuite : une notation qui repasse sous le seuil prend la place, pas le fait de l’avoir obtenu."
   },
   "onslaught-legend": {
     "name": "Légende de l’Offensive",

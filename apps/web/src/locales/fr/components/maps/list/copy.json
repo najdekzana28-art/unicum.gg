@@ -16,11 +16,11 @@
     "battle_royale": "le mode où le dernier char en lice l’emporte",
     "frontline": "le mode à grande échelle en 30 contre 30",
     "onslaught": "le mode classé en 7 contre 7",
-    "onslaught_night": "le mode classé en 7 contre 7 de nuit, avec une portée de vue réduite, actuellement disponible sur le serveur de test public",
+    "onslaught_night": "le mode classé 7v7 après la tombée de la nuit, avec une portée de vue réduite, actuellement jouable sur le Test commun",
     "grand_battle": "le mode de rang X en 30 contre 30",
     "clan_wars": "les guerres de clans et les incursions",
     "waffentrager": "l’événement Waffenträger",
-    "last_stand": "l’événement Last Stand",
+    "last_stand": "l’événement Ultime combat",
     "arcade": "les événements arcade et spéciaux",
     "story_mode": "les opérations scénarisées",
     "training": "les salles d’entraînement et les didacticiels"

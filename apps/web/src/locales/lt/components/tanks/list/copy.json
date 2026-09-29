@@ -21,7 +21,7 @@
     "intro": "Kintamasis vidurkis žalos, reikalingos vienam, dviem ir trims ženklams, visoms {count} World of Tanks transporto priemonėms regione {region}. Rikiuokite pagal bet kurį stulpelį, tada filtruokite pagal lygį, tautą, klasę ir vaidmenį.",
     "title": "World of Tanks meistriškumo ženklų reikalavimai ({region})",
     "description": "Žala, reikalinga vienam, dviem ir trims meistriškumo ženklams su kiekvienu World of Tanks tanku regione {region}. Rikiuokite ir filtruokite pagal lygį, tautą, klasę ir vaidmenį.",
-    "heading": "<accent>Meistriškumo ženklai</accent>"
+    "heading": "<accent>Meistriškumo žymos</accent>"
   },
   "marks-of-mastery": {
     "intro": "Auksinio tankisto ir meistriškumo ženklelio XP slenksčiai visoms {count} World of Tanks transporto priemonėms regione: {region}. Rikiuokite pagal bet kurį stulpelį, tada naudokite filtrą pagal lygį, tautą, klasę ir vaidmenį.",

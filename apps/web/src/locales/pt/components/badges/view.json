@@ -17,7 +17,7 @@
   "n-badges": "{count} distintivos",
   "onslaught-champion": {
     "name": "Campeão de Massacre",
-    "how": "Alcançou a classificação de Campeão em Investida, o requisito mínimo para sequer aparecer em {standings}. Mantido posteriormente: se a pontuação voltar a cair abaixo do limite, perde-se a posição, mas não o facto de a ter alcançado."
+    "how": "Alcançou a posição de Campeão no Massacre, o que é necessário para aparecer em {standings}. Mantida posteriormente, uma classificação que volta a ficar abaixo do limite ocupa o lugar, não o facto de ter sido conquistada."
   },
   "onslaught-legend": {
     "name": "Lenda de Massacre",

@@ -10,8 +10,8 @@
   "mastery": {
     "title": "Marcas de Maestria",
     "description": "Veículos de acordo com o seu melhor distintivo. Um distintivo representa uma batalha, não uma média: o jogo atribui-o com base na experiência obtida numa única batalha, comparada com os resultados da região nesse veículo.",
-    "note": "Dos {garage} veículos, {aces} têm o distintivo Ás dos Tanques.",
-    "note-share": "Dos {garage} veículos, {aces} têm o distintivo Ás dos Tanques ({percent}% da garagem)."
+    "note": "{aces} de {garage} veículos carregam um Distribuidor Ace.",
+    "note-share": "{aces} de {garage} veículos carregam um Distribuidor Ace ({percent}% da garagem)."
   },
   "reach": {
     "heading": "Desempenho acima da marca",

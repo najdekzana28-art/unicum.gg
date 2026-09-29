@@ -1,8 +1,8 @@
 {
   "a-battle-map-s-size-timer-team-size-and-game": "En kampvognskamps kortstørrelse, tid, holdstørrelse og spiltilstande med minimap og de kampvarianter, det spilles i.",
-  "a-clan-s-battle-weighted-member-ratings-plus": "En klans kampvægtede medlemsvurderinger plus dens Bastion- og Klankrigepræstation, som afspejler webstedets klanoverskrift.",
+  "a-clan-s-battle-weighted-member-ratings-plus": "En klans kampvægtede medlemsvurderinger plus dens Højborg- og Klankrigepræstation, der afspejler webstedets klanoverskrift.",
   "a-player-reply": "Et svar på {command}",
-  "a-vehicle-s-server-average-performance-acros": "Et køretøjs gennemsnitlige serverresultater på tværs af registrerede spillere, med de aktuelle grænser for Marks of Excellence og Ace Tanker.",
+  "a-vehicle-s-server-average-performance-acros": "Et køretøjs gennemsnitlige præstation på serveren på tværs af sporede spillere, med de nuværende Fortræffelighedsmærker og Ace Tanker-tærskler.",
   "add-the-bot-to-your": "Føj {NAME}-botten til din server for øjeblikkelig statistik over World of Tanks-spillere, klaner, kampvogne og kampkort. Den bruger de samme data som webstedet, inklusive WN8 og WNX. Gratis og open source.",
   "add-to-discord": "Føj til Discord",
   "any-player-instantly": "Enhver spiller, med det samme",
