@@ -1,17 +1,16 @@
 {
-  "creator-kit": "Kit de création",
-  "your-visuals": "Vos visuels pour <accent>{NAME}</accent>",
+  "creator-kit": "Kit créateur",
+  "your-visuals": "Vos visuels <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Aux dimensions attendues par Twitch, prêts à l’emploi. Votre lien est {URL} et mène à votre propre page sur le site.",
-  "title": "Kit de création de {NAME}",
+  "title": "Kit créateur de {NAME}",
   "description": "Visuels unicum.gg pour {NAME} : superposition de stream, panneau cliquable et écran hors-ligne, prêts à l’emploi.",
-  "overlay": "Superposition",
-  "overlay-hint": "Ajoutez-la dans OBS comme source Image. Arrière-plan transparent. Le coin supérieur droit laisse libres la webcam, la minicarte et le panneau des dégâts.",
-  "overlay-compact": "Superposition, version compacte",
-  "overlay-compact-hint": "La même sans le logo, 36 px plus étroite, si la première prend trop de place.",
+  "overlay": "Overlay",
+  "overlay-hint": "Ajoutez-le dans OBS comme source Image. Arrière-plan transparent. Le coin supérieur droit laisse libres la webcam, la minicarte et le panneau des dégâts.",
+  "overlay-compact": "Overlay, version compacte",
+  "overlay-compact-hint": "Le même sans le logo, 36 px plus étroit, si le premier prend trop de place.",
   "panel": "Panneau",
   "panel-hint": "Utilisez-le comme panneau sous votre stream, pointant vers votre lien. C’est le seul visuel sur lequel n’importe qui peut réellement cliquer.",
   "offline": "Écran hors-ligne",
-  "offline-hint": "Affiché sur votre salon pendant que vous ne streamez pas.",
   "offline-qr": "Écran hors-ligne avec un code QR",
-  "offline-qr-hint": "Le même avec un code QR numérisable. Limitez-le à cet écran : dans la vidéo du stream, la compression rend un code QR illisible."
+  "offline-qr-hint": "Le même avec un code QR scannable. Limitez-le à cet écran : dans la vidéo du stream, la compression rend un code QR illisible."
 }
