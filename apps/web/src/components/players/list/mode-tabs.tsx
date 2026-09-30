@@ -41,20 +41,26 @@ export async function PlayersModeTabs({
     <Panel>
       <PanelHeader className="px-0! py-0!" screenLines={false}>
         <nav className="flex items-center overflow-x-auto text-sm">
+          {/* A tab bar is a row of whole pages, and with no loading boundary in
+            this tree Next prefetched each one in full on sight. See `prefetch`
+            in `@/components/link`. */}
           <Link
             href={ROUTES.PLAYERS(region)}
+            prefetch="intent"
             className={tabClass(active === "overall")}
           >
             {t("modes.overall")}
           </Link>
           <Link
             href={ROUTES.PLAYERS_STEEL_HUNTER(region)}
+            prefetch="intent"
             className={tabClass(active === "steel-hunter")}
           >
             {battleTypeName(BattleType.BattleRoyale, tGame)}
           </Link>
           <Link
             href={ROUTES.PLAYERS_ONSLAUGHT(region)}
+            prefetch="intent"
             className={tabClass(active === "onslaught")}
           >
             {battleTypeName(BattleType.Onslaught, tGame)}

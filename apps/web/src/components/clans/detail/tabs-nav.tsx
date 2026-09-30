@@ -43,6 +43,11 @@ function NavAnchor({
   return (
     <Link
       href={href}
+      // A tab bar is a row of whole pages. Nothing in this tree draws a
+      // loading boundary, so each one Next prefetched on sight was the
+      // destination in full: measured on the tanks index, 1.8 MB of them.
+      // See `prefetch` in `@/components/link`.
+      prefetch="intent"
       onClick={(event) => {
         if (!isPlainClick(event)) return;
         event.preventDefault();

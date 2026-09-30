@@ -35,8 +35,12 @@ export function StrongholdTierTabs({
     <Panel>
       <PanelHeader className="px-0! py-0!" screenLines={false}>
         <nav className="flex items-center overflow-x-auto text-sm">
+          {/* A tab bar is a row of whole pages, and with no loading boundary in
+            this tree Next prefetched each one in full on sight. See `prefetch`
+            in `@/components/link`. */}
           <Link
             href={ROUTES.CLANS(region)}
+            prefetch="intent"
             className={tabClass(activeTier === undefined)}
           >
             {t("overall")}
@@ -45,6 +49,7 @@ export function StrongholdTierTabs({
             <Link
               key={tier}
               href={ROUTES.STRONGHOLD(region, tier)}
+              prefetch="intent"
               className={tabClass(tier === activeTier)}
             >
               {tGame(`stronghold-tiers.${tier}`)}
