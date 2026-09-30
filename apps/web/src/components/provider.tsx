@@ -13,9 +13,15 @@ import { DEFAULT_LOCALE, LOCALES, type Locale } from "@/lib/translations";
 import type { Dictionaries, Namespace } from "@/locales/generated";
 import { swrConfig } from "@/services/swr";
 
-const SearchDialog = dynamic(
-  () => import("@/components/search/dialog"),
-);
+// **`ssr: false` is the half that was missing.** A lazily imported component
+// that still server-renders has to be downloaded to hydrate, so the dialog sat
+// in the initial graph of every page: the fumadocs search chrome it is built
+// from brings a content-processing runtime with it, measured at 180 KB parsed,
+// on a dialog nobody has opened. There is nothing to server-render either way,
+// since it is a modal that renders only once it is opened.
+const SearchDialog = dynamic(() => import("@/components/search/dialog"), {
+  ssr: false,
+});
 
 export function Provider({
   children,
