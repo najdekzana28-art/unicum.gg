@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useCallback, useRef, useState } from "react";
 
 import type { PaintLock } from "@unicum.gg/shared";
+import { useAfterLoad } from "@/hooks/use-after-load";
 import { HERO_COLUMN } from "@/components/tanks/detail/viewer/column";
 import type { HeroShell } from "@/components/tanks/detail/viewer/shell-rules";
 
@@ -77,6 +78,17 @@ export function TankStage({
    */
   const [absent, setAbsent] = useState(false);
   const missing = useCallback(() => setAbsent(true), []);
+  /**
+   * **A vehicle is 9.6 MB across thirty-five files and it was being fetched
+   * while the page was still painting.** Under a throttled phone that was not a
+   * slow page but an unresponsive one: Lighthouse reported the renderer as hung
+   * rather than slow on three of the five tank pages tried, which is a page
+   * Google cannot measure and may not finish rendering either.
+   *
+   * Nothing is gated behind a click. The vehicle still comes up on its own, it
+   * just stops racing the page it is standing on.
+   */
+  const afterLoad = useAfterLoad();
   // **Measured rather than calculated.** The viewer needs where the column
   // falls, and the honest way to know is to put one there and read it: a width
   // restated in pixels would be a second copy of a layout decision, and it would
@@ -112,15 +124,17 @@ export function TankStage({
       {/* The viewer positions itself: it has to be able to leave this band for
         the window or the screen, and a box put around it here could not follow
         it out. */}
-      <TankViewer
-        code={code}
-        shells={shells}
-        builds={builds}
-        mechanic={mechanic}
-        paintLock={paintLock}
-        onAbsent={missing}
-        column={column}
-      />
+      {afterLoad ? (
+        <TankViewer
+          code={code}
+          shells={shells}
+          builds={builds}
+          mechanic={mechanic}
+          paintLock={paintLock}
+          onAbsent={missing}
+          column={column}
+        />
+      ) : null}
     </>
   );
 }
