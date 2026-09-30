@@ -24,9 +24,8 @@ import { SegmentedControl } from "@/components/segmented-control";
 import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
 import { ClustersTable } from "./clusters-table";
-import { PopulationChart } from "./population-chart";
+import { PopulationChart, RegionsChart } from "./charts-lazy";
 import { ServerRecords } from "./records";
-import { RegionsChart } from "./regions-chart";
 import { RhythmHeatmap } from "./rhythm-heatmap";
 
 /**

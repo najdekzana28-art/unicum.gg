@@ -22,7 +22,7 @@ import { REGION_LABEL, type Region } from "@unicum.gg/wargaming";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
-import { DistributionChart } from "./distribution-chart";
+import { DistributionChart } from "./charts-lazy";
 import { formatPlayers } from "./format";
 
 // Whole points, unlike `formatWinrate` in `./format`: these are histogram edges
