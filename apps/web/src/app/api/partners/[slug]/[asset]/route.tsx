@@ -19,6 +19,17 @@ const TEXT = "#f6f6f6";
 const MUTED = "#8a8a8a";
 
 /**
+ * The wordmark, split where the second half takes the brand colour.
+ *
+ * Read off `APP.NAME` rather than written here, like the navbar does: this file
+ * drew it three times, so the site's own name was spelled out in a place nobody
+ * would think to look the day it changes.
+ */
+const DOT = APP.NAME.lastIndexOf(".");
+const WORDMARK = APP.NAME.slice(0, DOT);
+const WORDMARK_TLD = APP.NAME.slice(DOT);
+
+/**
  * A creator's Twitch asset, rendered on demand rather than kept as a file.
  *
  * Same machinery as the OG cards (`next/og`, the shared Figtree buffers and the
@@ -43,7 +54,7 @@ export async function GET(
   // The images carry the creator's language, not the site's: they are pixels,
   // so nothing downstream can translate them for their audience.
   const copy = ASSET_COPY[kit.locale];
-  const url = `unicum.gg/${slug}`;
+  const url = `${APP.NAME}/${slug}`;
   const compact = asset === "overlay-compact";
   const offline = asset === "offline" || asset === "offline-qr";
 
@@ -60,7 +71,7 @@ export async function GET(
 
   const wordmark = (size: number) => (
     <div style={{ display: "flex", fontSize: size, fontWeight: 700, color: TEXT, letterSpacing: -0.5 }}>
-      unicum.gg
+      {APP.NAME}
       {/* Rendered as its own node with a left margin: the tight tracking above
           otherwise runs the slash into the second g. */}
       <div style={{ display: "flex", color: BRAND, marginLeft: size * 0.03 }}>/{slug}</div>
@@ -73,7 +84,7 @@ export async function GET(
       <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 22 }}>
         <img src={logoSrc} width={104} height={142} alt="" />
         <div style={{ display: "flex", fontSize: 78, fontWeight: 700, color: TEXT, letterSpacing: -2.4 }}>
-          unicum<div style={{ display: "flex", color: BRAND }}>.gg</div>
+          {WORDMARK}<div style={{ display: "flex", color: BRAND }}>{WORDMARK_TLD}</div>
         </div>
         <div style={{ display: "flex", fontSize: 24, color: MUTED }}>
           {copy.tagline}
@@ -99,7 +110,7 @@ export async function GET(
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <img src={logoSrc} width={26} height={36} alt="" />
           <div style={{ display: "flex", fontSize: 21, fontWeight: 700, color: TEXT, letterSpacing: -0.4 }}>
-            unicum<div style={{ display: "flex", color: BRAND }}>.gg</div>
+            {WORDMARK}<div style={{ display: "flex", color: BRAND }}>{WORDMARK_TLD}</div>
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 11.5, color: MUTED }}>
