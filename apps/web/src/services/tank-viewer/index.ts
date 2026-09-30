@@ -153,7 +153,7 @@ export async function loadVisual({
     { renderer, model, root, fresh, definition },
     brush,
   );
-  const { texture, material, materials, painted, surfaces, arriving } = shop;
+  const { texture, material, materials, painted, surfaces, arriving, upgradeDetail } = shop;
 
 
   // A vehicle ships several turrets and guns, one per module a player can
@@ -354,6 +354,15 @@ export async function loadVisual({
     kneel: gear.kneel,
     /** Run the gear as though the tank had travelled this far. */
     roll: gear.roll,
+    /**
+     * Fetch the nation's detail atlas, now that the vehicle is standing.
+     *
+     * The 6 MB it weighs is worth nothing at the framing the hero gives (see
+     * `withDetail`), so it is asked for after rather than during: the meshes and
+     * the albedo get the whole connection to themselves, and the grain the
+     * vehicle was raised on is replaced when it lands.
+     */
+    upgradeDetail,
     /** Whether the mirror has a high-definition set for this vehicle. */
     hasHd: model.materials.some((m) =>
       Object.values(m.textures ?? {}).some((t) => t.hd),

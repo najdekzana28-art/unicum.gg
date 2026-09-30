@@ -237,29 +237,42 @@ export function materialShop(
       built.transparent = false;
     }
     materials[materials.length - 1].built = built;
-    // `?relief=grain` puts the invented one back, for comparing the two on the
-    // same vehicle at the same angle.
-    return compile(
-      withDetail(
-        built,
-        spec?.values ?? {},
-        switched("relief") === "grain"
-          ? null
-          : // **The one map the vehicle is not held back for**, and it is by far
-            // the largest thing a tank page fetches: the nation's shared detail
-            // atlas is 6.19 MB of the 9.58 MB an IS-7 loads, two thirds of the
-            // wait, for a grain the shader samples ONE CHANNEL of
-            // (`detailMap.a`) at about eight repeats across a piece. It
-            // modulates micro-contrast in the gloss, so a second without it is
-            // a surface very slightly cleaner, not a surface that is wrong, and
-            // three already fills the texture in as it lands. It is also shared
-            // by every vehicle of the nation, so it is warm in the cache from
-            // the second tank on. Waiting for it meant every reader watched an
-            // empty studio for the time it took.
-            texture(maps.metallicDetailMap, "loose"),
-      ),
-    );
+    /**
+     * **The vehicle is raised on the invented grain, never on the real one.**
+     *
+     * The nation's shared detail atlas is 6.05 MB of the 9.58 MB an IS-7 loads,
+     * by far the largest thing a tank page fetches, and what the shader takes
+     * from it is ONE CHANNEL (`detailMap.a`) of a noise tiled about eight times
+     * across a piece. Worse, `withDetail` measured what it is worth at the
+     * framing a reader actually gets: the hero stands a vehicle at 19.8 m and
+     * the layer reaches 7, so **at rest it contributes nothing at all**. It is
+     * a close-up layer, and only a reader who zooms in ever sees it.
+     *
+     * So the build takes `GRAIN`, the 256 pixel noise this file generates, which
+     * costs no network at all and is what stood here before the atlas was found.
+     * The real one is fetched afterwards by `upgradeDetail`, once the vehicle is
+     * standing, and swapped into the uniform. Nothing about the picture changes
+     * on the way in, because nothing about the picture depended on it yet.
+     */
+    const detailed = withDetail(built, spec?.values ?? {}, null);
+    // `?relief=grain` keeps the invented one for good, for comparing the two on
+    // the same vehicle at the same angle.
+    if (switched("relief") !== "grain" && detailed.userData.detail) {
+      detailing.push(detailed.userData.detail.map as { value: THREE.Texture });
+      // Every material of every vehicle names the same file, its nation's, so
+      // the first one to ask for it is as good as any.
+      detailEntry ??= maps.metallicDetailMap ?? null;
+    }
+    return compile(detailed);
   }
+
+  /**
+   * Every detail uniform waiting for the real atlas, so one fetch serves them
+   * all. A vehicle has dozens of materials and they share the one texture.
+   */
+  const detailing: { value: THREE.Texture }[] = [];
+  /** The atlas those uniforms are waiting for, taken from the first material. */
+  let detailEntry: MirrorTexture | null = null;
   return {
     texture,
     material,
@@ -267,6 +280,25 @@ export function materialShop(
     painted,
     surfaces,
     arriving,
+    /**
+     * Fetch the nation's detail atlas and put it where the grain is.
+     *
+     * Called once the vehicle is on screen, so its 6 MB never competes with the
+     * meshes and the albedo, which are what a reader is actually waiting for.
+     * Assigning the uniform's `value` is enough: the shader already samples it
+     * every frame and nothing is recompiled.
+     *
+     * Deliberately unawaited by the caller and silent on failure. A vehicle
+     * standing under the invented grain is the picture every reader gets for
+     * the first seconds anyway, so a detail map that never arrives is not a
+     * failure worth reporting.
+     */
+    upgradeDetail(): void {
+      if (!detailEntry || detailing.length === 0) return;
+      const map = texture(detailEntry, "loose");
+      if (!map) return;
+      for (const uniform of detailing) uniform.value = map;
+    },
     /**
      * Free every map and every material this cursor made.
      *

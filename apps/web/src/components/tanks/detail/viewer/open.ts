@@ -356,6 +356,12 @@ export async function openStage(
   wake(2000);
   draw();
   handles.setShown(true);
+  // **Now, and not a moment earlier.** The nation's detail atlas is the single
+  // largest file a tank page fetches and it is a close-up layer that contributes
+  // nothing at this framing, so it is asked for once there is a vehicle to look
+  // at rather than while the reader is waiting for one. Unawaited on purpose:
+  // the picture is finished without it.
+  built.upgradeDetail();
   // **And the camera stays exactly where it was.** Standing where the last
   // vehicle was seen from is what makes the two floors land on each other
   // while the tanks cross; sending it on to this vehicle's own framing
