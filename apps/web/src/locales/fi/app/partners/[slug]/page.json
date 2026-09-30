@@ -1,6 +1,6 @@
 {
   "creator-kit": "Sisällöntuottajan paketti",
-  "your-visuals": "Visuaalit, jotka ovat käytössä nimellä {NAME}",
+  "your-visuals": "Omat <accent>{NAME}</accent>-visuaalit",
   "sized-the-way-twitch-expects-them-ready-to-u": "Mitoitettu Twitchin odottamalla tavalla, valmiina käyttöön. Linkkisi on {URL}, ja se johtaa omalle sivullesi sivustossa.",
   "title": "Sisällöntuottajan paketti käyttäjälle {NAME}",
   "description": "unicum.gg:n visuaalit, jotka on tehty käyttäjälle {NAME}: stream-overlay, klikattava paneeli ja offline-tilan näyttö, kaikki valmiina käyttöön.",

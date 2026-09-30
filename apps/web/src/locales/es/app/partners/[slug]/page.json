@@ -1,6 +1,6 @@
 {
   "creator-kit": "Kit de creador",
-  "your-visuals": "Elementos visuales de {NAME}",
+  "your-visuals": "Tus elementos visuales de <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Con el tamaño que Twitch espera, listos para usar. Tu enlace es {URL} y lleva a tu propia página en el sitio.",
   "title": "Kit de creador de {NAME}",
   "description": "Elementos visuales de unicum.gg para {NAME}: superposición para streaming, panel en el que se puede hacer clic y pantalla inactiva, listos para usar.",

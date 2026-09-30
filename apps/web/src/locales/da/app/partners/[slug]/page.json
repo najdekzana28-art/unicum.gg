@@ -1,6 +1,6 @@
 {
   "creator-kit": "Creator-kit",
-  "your-visuals": "Dine visuals til {NAME}",
+  "your-visuals": "Dine visuelle elementer for <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Tilpasset den størrelse, Twitch forventer, klar til brug. Dit link er {URL}, og det fører til din egen side på webstedet.",
   "title": "Creator-kit til {NAME}",
   "description": "unicum.gg-visuals til {NAME}: stream-overlay, klikbart panel og offline-skærm, klar til brug.",

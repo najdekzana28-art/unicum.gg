@@ -1,6 +1,6 @@
 {
   "creator-kit": "创作者工具包",
-  "your-visuals": "您的 {NAME} 视觉素材",
+  "your-visuals": "你的<accent>{NAME}</accent>视觉效果",
   "sized-the-way-twitch-expects-them-ready-to-u": "尺寸符合 Twitch 要求，可直接使用。您的链接是 {URL}，会跳转到网站上的专属页面。",
   "title": "{NAME} 的创作者工具包",
   "description": "unicum.gg 为 {NAME} 提供的视觉素材：直播叠加层、可点击面板和离线屏幕，可直接使用。",

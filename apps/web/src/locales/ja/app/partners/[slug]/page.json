@@ -1,6 +1,6 @@
 {
   "creator-kit": "クリエイターキット",
-  "your-visuals": "{NAME}用ビジュアル",
+  "your-visuals": "あなたの<accent>{NAME}</accent>ビジュアル",
   "sized-the-way-twitch-expects-them-ready-to-u": "Twitchが想定するサイズに調整済みで、すぐに使えます。リンクは{URL}で、サイト上の専用ページに移動します。",
   "title": "{NAME}のクリエイターキット",
   "description": "{NAME}用のunicum.ggビジュアルです。配信オーバーレイ、クリック可能なパネル、オフライン画面をすぐに使えます。",

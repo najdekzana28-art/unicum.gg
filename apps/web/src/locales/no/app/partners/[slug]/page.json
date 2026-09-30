@@ -1,6 +1,6 @@
 {
   "creator-kit": "Skaperpakke",
-  "your-visuals": "Ditt visuelle materiale for {NAME}",
+  "your-visuals": "Ditt visuelle uttrykk for <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Tilpasset størrelsen Twitch forventer, klart til bruk. Lenken din er {URL}, og den leder til din egen side på nettstedet.",
   "title": "Skaperpakken til {NAME}",
   "description": "unicum.gg-visuelt materiale for {NAME}: strømmingsoverlegg, klikkbart panel og frakopla skjerm, klart til bruk.",

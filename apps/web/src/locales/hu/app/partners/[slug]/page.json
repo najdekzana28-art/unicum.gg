@@ -1,6 +1,6 @@
 {
   "creator-kit": "Tartalomkészítői csomag",
-  "your-visuals": "Vizuális elemek {NAME} számára",
+  "your-visuals": "A te <accent>{NAME}</accent> vizuális elemeid",
   "sized-the-way-twitch-expects-them-ready-to-u": "A Twitch által elvárt méretben, használatra készen. A hivatkozásod {URL}, és a webhelyen a saját oldaladra vezet.",
   "title": "Tartalomkészítői csomag {NAME} számára",
   "description": "Az unicum.gg vizuális elemei {NAME} számára: streamoverlay, kattintható panel és offline képernyő, használatra készen.",

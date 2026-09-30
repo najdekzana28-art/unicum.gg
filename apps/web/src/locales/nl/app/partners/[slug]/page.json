@@ -1,6 +1,6 @@
 {
   "creator-kit": "Creatorpakket",
-  "your-visuals": "Jouw visuals voor {NAME}",
+  "your-visuals": "Jouw visuals voor <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Op het formaat dat Twitch verwacht, klaar voor gebruik. Je link is {URL} en leidt naar je eigen pagina op de site.",
   "title": "Creatorpakket van {NAME}",
   "description": "unicum.gg-visuals voor {NAME}: streamoverlay, klikbaar paneel en offline scherm, klaar voor gebruik.",

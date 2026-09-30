@@ -1,6 +1,6 @@
 {
   "creator-kit": "Satura veidotāja komplekts",
-  "your-visuals": "Jūsu {NAME} vizuālie materiāli",
+  "your-visuals": "Jūsu <accent>{NAME}</accent> vizuālie materiāli",
   "sized-the-way-twitch-expects-them-ready-to-u": "Izmēri atbilst Twitch prasībām, un tas ir gatavs lietošanai. Jūsu saite ir {URL}, un tā ved uz jūsu personīgo lapu vietnē.",
   "title": "Satura veidotāja komplekts, kas paredzēts {NAME}",
   "description": "unicum.gg vizuālie materiāli, kas sagatavoti {NAME}: straumes pārklājums, noklikšķināms panelis un ekrāns stāvoklim “nav spēlē”, gatavi lietošanai.",

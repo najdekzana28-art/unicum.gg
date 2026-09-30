@@ -1,6 +1,6 @@
 {
   "creator-kit": "Kit ng creator",
-  "your-visuals": "Mga visual ni {NAME}",
+  "your-visuals": "Mga visual mo para sa <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "May sukat ayon sa inaasahan ng Twitch, handang gamitin. Ang link mo ay {URL}, at humahantong ito sa sarili mong pahina sa website.",
   "title": "Kit ng creator ni {NAME}",
   "description": "Mga visual ng unicum.gg para kay {NAME}: overlay para sa stream, panel na maaaring i-click, at offline screen, handang gamitin.",

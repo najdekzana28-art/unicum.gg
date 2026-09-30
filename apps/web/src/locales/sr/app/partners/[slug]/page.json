@@ -1,6 +1,6 @@
 {
   "creator-kit": "Пакет за креаторе",
-  "your-visuals": "Ваши визуали за {NAME}",
+  "your-visuals": "Vaši vizuelni elementi za <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Димензионисано како Twitch очекује, спремно за употребу. Ваша веза је {URL} и води на вашу страницу на сајту.",
   "title": "Креаторски пакет за {NAME}",
   "description": "Визуали уникум.gg за {NAME}: оверлеј за стрим, панел на који се може кликнути и екран када нисте у игри, спремни за употребу.",

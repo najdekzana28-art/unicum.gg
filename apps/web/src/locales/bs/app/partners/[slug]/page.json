@@ -1,6 +1,6 @@
 {
   "creator-kit": "Kreatorski komplet",
-  "your-visuals": "Vizuelni materijali za {NAME}",
+  "your-visuals": "Vaši vizuelni elementi za <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Dimenzionisani prema očekivanjima Twitcha, spremni za upotrebu. Vaša veza je {URL}, a vodi na vašu ličnu stranicu na stranici.",
   "title": "Kreatorski komplet za {NAME}",
   "description": "Vizuelni materijali unicum.gg za {NAME}: preklopni prikaz za prenos, panel na koji se može kliknuti i ekran van mreže, spremni za upotrebu.",

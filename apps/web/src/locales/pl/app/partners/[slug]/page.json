@@ -1,6 +1,6 @@
 {
   "creator-kit": "Pakiet twórcy",
-  "your-visuals": "Twoje materiały wizualne dla {NAME}",
+  "your-visuals": "Twoje wizualizacje <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Dopasowane rozmiarem do wymagań Twitch, gotowe do użycia. Twój link to {URL}, który prowadzi do Twojej własnej strony w witrynie.",
   "title": "Pakiet twórczy dla {NAME}",
   "description": "Materiały wizualne unikum.gg dla {NAME}: nakładka do transmisji, klikalny panel i ekran odłączonego kanału, gotowe do użycia.",

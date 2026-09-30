@@ -1,6 +1,6 @@
 {
   "creator-kit": "Kit pentru creatori",
-  "your-visuals": "Elementele vizuale pentru {NAME}",
+  "your-visuals": "Elementele tale vizuale <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Dimensionate conform cerințelor Twitch, gata de utilizare. Link: {URL}, iar acesta duce la pagina ta de pe site.",
   "title": "Kit de creator pentru {NAME}",
   "description": "Elemente vizuale unicum.gg pentru {NAME}: suprapunere pentru transmisiune, panou interactiv și ecran deconectat, gata de utilizare.",

@@ -1,6 +1,6 @@
 {
   "creator-kit": "Skapar-kit",
-  "your-visuals": "Din grafik för {NAME}",
+  "your-visuals": "Dina visuella element för <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "Storleksanpassade enligt Twitchs förväntningar, redo att användas. Din länk är {URL}, och den leder till din egen sida på webbplatsen.",
   "title": "Skapar-kit för {NAME}",
   "description": "unicum.gg-grafik för {NAME}: stream-overlay, klickbar panel och skärm för nedkopplad status, redo att användas.",

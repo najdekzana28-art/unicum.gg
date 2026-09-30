@@ -1,6 +1,6 @@
 {
   "creator-kit": "Kūrėjo rinkinys",
-  "your-visuals": "Jūsų {NAME} vaizdai",
+  "your-visuals": "Jūsų <accent>{NAME}</accent> vaizdai",
   "sized-the-way-twitch-expects-them-ready-to-u": "Pritaikyta pagal Twitch reikalaujamą dydį, paruošta naudoti. Jūsų nuoroda yra {URL}, ji nukreipia į jūsų puslapį svetainėje.",
   "title": "{NAME} kūrėjo rinkinys",
   "description": "unicum.gg vaizdai, skirti {NAME}: transliacijos perdanga, spustelėjamas skydelis ir atsijungė ekranas, paruošti naudoti.",

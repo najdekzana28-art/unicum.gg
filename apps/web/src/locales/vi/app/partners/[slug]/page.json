@@ -1,6 +1,6 @@
 {
   "creator-kit": "Bộ công cụ nhà sáng tạo",
-  "your-visuals": "Hình ảnh của {NAME}",
+  "your-visuals": "Hình ảnh <accent>{NAME}</accent> của bạn",
   "sized-the-way-twitch-expects-them-ready-to-u": "Được điều chỉnh kích thước theo yêu cầu của Twitch, sẵn sàng sử dụng. Liên kết của bạn là {URL} và liên kết này dẫn đến trang riêng của bạn trên trang web.",
   "title": "Bộ công cụ sáng tạo của {NAME}",
   "description": "Hình ảnh unicum.gg dành cho {NAME}: lớp phủ luồng phát, bảng điều khiển có thể nhấp và màn hình offline, sẵn sàng sử dụng.",

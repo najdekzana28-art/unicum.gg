@@ -1,6 +1,6 @@
 {
   "creator-kit": "İçerik üretici kiti",
-  "your-visuals": "Görselleriniz, {NAME} için",
+  "your-visuals": "Sizin <accent>{NAME}</accent> görselleriniz",
   "sized-the-way-twitch-expects-them-ready-to-u": "Twitch’in beklediği boyutlarda, kullanıma hazır. Bağlantınız {URL}, sitedeki kendi sayfanıza yönlendirir.",
   "title": "İçerik üretici kiti, {NAME} için",
   "description": "unicum.gg görselleri, {NAME} için: kullanıma hazır yayın kaplaması, tıklanabilir panel ve çevrimdışı ekran.",

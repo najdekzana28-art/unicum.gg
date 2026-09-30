@@ -1,6 +1,6 @@
 {
   "creator-kit": "ชุดเครื่องมือครีเอเตอร์",
-  "your-visuals": "ภาพของ {NAME}",
+  "your-visuals": "ภาพแสดงผล <accent>{NAME}</accent> ของคุณ",
   "sized-the-way-twitch-expects-them-ready-to-u": "ปรับขนาดตามที่ Twitch กำหนด พร้อมใช้งาน ลิงก์ของคุณคือ {URL} และจะนำไปยังหน้าของคุณบนเว็บไซต์โดยตรง",
   "title": "ชุดเครื่องมือครีเอเตอร์ของ {NAME}",
   "description": "ภาพจาก unicum.gg สำหรับ {NAME}: โอเวอร์เลย์สตรีม แผงที่คลิกได้ และหน้าจอออปไลน์ พร้อมใช้งาน",

@@ -1,6 +1,6 @@
 {
   "creator-kit": "Súprava tvorcu",
-  "your-visuals": "Vaše vizuály pre {NAME}",
+  "your-visuals": "Vaši vizualni elementi za <accent>{NAME}</accent>",
   "sized-the-way-twitch-expects-them-ready-to-u": "S rozmermi podľa požiadaviek Twitchu, pripravené na použitie. Váš odkaz je {URL} a vedie na vašu vlastnú stránku na stránke.",
   "title": "Súprava tvorcu pre {NAME}",
   "description": "Vizuály unicum.gg pre {NAME}: prekrytie streamu, panel s odkazom a offline obrazovka, pripravené na použitie.",

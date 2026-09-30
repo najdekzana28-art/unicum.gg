@@ -1,6 +1,6 @@
 {
   "creator-kit": "क्रिएटर किट",
-  "your-visuals": "आपके {NAME} के विज़ुअल्स",
+  "your-visuals": "आपके <accent>{NAME}</accent> विज़ुअल्स",
   "sized-the-way-twitch-expects-them-ready-to-u": "Twitch की अपेक्षाओं के अनुसार आकार में, उपयोग के लिए तैयार। आपका लिंक {URL} है और यह आपको साइट पर आपके अपने पेज पर ले जाता है।",
   "title": "{NAME} का क्रिएटर किट",
   "description": "{NAME} के लिए unicum.gg के विज़ुअल्स: स्ट्रीम ओवरले, क्लिक करने योग्य पैनल और ऑफ़लाइन स्क्रीन, उपयोग के लिए तैयार।",
