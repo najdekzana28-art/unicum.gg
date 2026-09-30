@@ -11,7 +11,6 @@
   "panel": "Panel",
   "panel-hint": "Gamitin ito bilang panel sa ilalim ng iyong stream, na nakaturo sa iyong link. Ito lamang ang visual na maaaring i-click talaga ng sinuman.",
   "offline": "Offline screen",
-  "offline-hint": "Ipinapakita sa iyong channel habang hindi ka nag-i-stream.",
   "offline-qr": "Offline screen na may QR code",
   "offline-qr-hint": "Pareho ito, pero may QR code na maaaring i-scan. Gamitin lamang ito sa screen na ito, dahil sa loob ng video stream, nagiging hindi mababasa ang QR code dahil sa compression."
 }

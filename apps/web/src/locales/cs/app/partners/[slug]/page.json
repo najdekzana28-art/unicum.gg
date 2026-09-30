@@ -11,7 +11,6 @@
   "panel": "Panel",
   "panel-hint": "Použijte ho jako panel pod streamem s vaším odkazem. Je to jediný vizuál, na který může kdokoli ve skutečnosti kliknout.",
   "offline": "Obrazovka při odpojení",
-  "offline-hint": "Zobrazuje se na vašem kanálu, když jste odpojení.",
   "offline-qr": "Obrazovka při odpojení s QR kódem",
   "offline-qr-hint": "Stejná verze s QR kódem, který lze naskenovat. Používejte ji pouze na této obrazovce, protože ve video streamu komprese znemožní QR kód přečíst."
 }

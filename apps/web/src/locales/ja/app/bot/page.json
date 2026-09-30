@@ -23,11 +23,9 @@
   "one-click-adds": "ワンクリックでボットをサーバーに追加し、{discord}にも参加できます。",
   "player-stats": "プレイヤー統計",
   "private-then-shareable": "非公開で取得し、共有も可能",
-  "replies-are-ephemeral-by-default-one-click-s": "返信は初期設定で一時表示です。ワンクリックでカードをチャンネルに共有できます。",
   "see-it-in-action": "動作を見る",
   "something-went-wrong-with-the-install-please": "インストール中に問題が発生しました。もう一度お試しください。",
   "tank-stats": "戦車統計",
-  "the-full-stats-table-ranked": "プレイヤーのWNXランクで順位付け・色分けされた完全な戦績表に加え、サイトが生成する同じ詳細カードと、完全なプロフィールを開くボタンを表示します。返信はチャンネルに共有するまで自分だけに表示されます。",
   "the-same-data-as-the-site": "サイトと同じデータ",
   "title": "World of Tanks Discordボット",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7、WN8、WNXをunicum.ggと正確に同じ方法で計算し、完全なプロフィールへのリンクも表示します。"

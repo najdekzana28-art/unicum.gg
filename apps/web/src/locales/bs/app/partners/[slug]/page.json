@@ -11,7 +11,6 @@
   "panel": "Panel",
   "panel-hint": "Koristite ga kao panel ispod svog prenosa, tako da vodi na vašu vezu. To je jedini vizuelni element na koji bilo ko zapravo može kliknuti.",
   "offline": "Ekran van mreže",
-  "offline-hint": "Prikazuje se na vašem kanalu dok ne prenosite uživo.",
   "offline-qr": "Ekran van mreže s QR kodom",
   "offline-qr-hint": "Isti ekran s QR kodom koji se može skenirati. Koristite ga samo na ovom ekranu, jer kompresija unutar video prenosa čini QR kod nemogućim za pročitano."
 }

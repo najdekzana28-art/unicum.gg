@@ -11,7 +11,6 @@
   "panel": "Panel",
   "panel-hint": "Használd a streamed alatt panelként, amely a hivatkozásodra mutat. Ez az egyetlen vizuális elem, amelyre bárki valójában kattinthat.",
   "offline": "Offline képernyő",
-  "offline-hint": "A csatornádon jelenik meg, amíg nem streamelsz.",
   "offline-qr": "Offline képernyő QR-kóddal",
   "offline-qr-hint": "Ugyanez beolvasható QR-kóddal. Csak ezen a képernyőn használd: a videostreamen belül a tömörítés olvashatatlanná teszi a QR-kódot."
 }

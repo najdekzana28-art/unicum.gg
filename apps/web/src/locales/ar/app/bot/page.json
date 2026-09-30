@@ -23,11 +23,9 @@
   "one-click-adds": "بنقرة واحدة تضيف الروبوت إلى خادمك وتنقلك إلى {discord} الخاص بنا.",
   "player-stats": "إحصائيات اللاعب",
   "private-then-shareable": "خاص أولًا، ثم قابل للمشاركة",
-  "replies-are-ephemeral-by-default-one-click-s": "الردود مؤقتة افتراضيًا، وبنقرة واحدة تشارك البطاقة في القناة.",
   "see-it-in-action": "شاهده أثناء العمل",
   "something-went-wrong-with-the-install-please": "حدث خطأ أثناء التثبيت. يرجى المحاولة مجددًا.",
   "tank-stats": "إحصائيات الدبابة",
-  "the-full-stats-table-ranked": "جدول الإحصائيات الكامل، مرتّب وملوّن حسب فئة WNX للاعب، مع البطاقة الغنية نفسها التي ينشئها الموقع وزر لفتح الملف الشخصي الكامل. تظل الردود خاصة بك حتى تشاركها في القناة.",
   "the-same-data-as-the-site": "البيانات نفسها الموجودة في الموقع",
   "title": "روبوت World of Tanks على Discord",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "يُحسب WN7 وWN8 وWNX بالضبط كما في unicum.gg، مع رابط يعود إلى الملف الشخصي الكامل."

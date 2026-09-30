@@ -11,7 +11,6 @@
   "panel": "Panel",
   "panel-hint": "Yayınınızın altında, bağlantınıza yönlendiren bir panel olarak kullanın. Bu, herkesin aslında tıklayabileceği tek görseldir.",
   "offline": "Çevrimdışı ekran",
-  "offline-hint": "Yayın yapmadığınız sırada kanalınızda gösterilir.",
   "offline-qr": "QR kodlu çevrimdışı ekran",
   "offline-qr-hint": "Taranabilir QR kodu olan aynı ekran. Bunu yalnızca bu ekranda kullanın, video akışının içindeki sıkıştırma QR kodunu okunamaz hâle getirir."
 }

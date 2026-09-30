@@ -11,7 +11,6 @@
   "panel": "Paneel",
   "panel-hint": "Gebruik dit als paneel onder je stream, met een verwijzing naar je link. Het is de enige visual waarop iedereen eigenlijk kan klikken.",
   "offline": "Offline scherm",
-  "offline-hint": "Wordt op je kanaal getoond wanneer je niet aan het streamen bent.",
   "offline-qr": "Offline scherm met QR-code",
   "offline-qr-hint": "Dezelfde met een scanbare QR-code. Beperk deze tot dit scherm, want in de videostream maakt compressie een QR-code onleesbaar."
 }

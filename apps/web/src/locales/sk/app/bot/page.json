@@ -23,11 +23,9 @@
   "one-click-adds": "Jedným kliknutím pridáte bota na svoj server a zároveň sa pripojíte k nášmu serveru {discord}.",
   "player-stats": "Štatistiky hráčov",
   "private-then-shareable": "Najprv súkromné, potom zdieľateľné",
-  "replies-are-ephemeral-by-default-one-click-s": "Odpovede sú predvolene súkromné, jedným kliknutím kartu zdieľate v kanáli.",
   "see-it-in-action": "Pozrieť si ho v akcii",
   "something-went-wrong-with-the-install-please": "Pri inštalácii sa vyskytla chyba. Skúste to znova.",
   "tank-stats": "Štatistiky tankov",
-  "the-full-stats-table-ranked": "Kompletná tabuľka štatistík zoradená a farebne odlíšená podľa úrovne WNX hráča spolu s rovnakou podrobnou kartou, akú vytvára web, a tlačidlom na otvorenie celého profilu. Odpovede vidíte iba vy, kým ich nezdieľate v kanáli.",
   "the-same-data-as-the-site": "Rovnaké údaje ako na webe",
   "title": "Bot World of Tanks pre Discord",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 a WNX vypočítané presne ako na unicum.gg, s odkazom na celý profil."

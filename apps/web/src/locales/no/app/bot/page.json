@@ -23,11 +23,9 @@
   "one-click-adds": "Ett klikk legger boten til serveren din og tar deg inn i vår {discord}.",
   "player-stats": "Spillerstatistikk",
   "private-then-shareable": "Privat, så delbar",
-  "replies-are-ephemeral-by-default-one-click-s": "Svar er midlertidige som standard. Ett klikk deler kortet i kanalen.",
   "see-it-in-action": "Se den i bruk",
   "something-went-wrong-with-the-install-please": "Noe gikk galt under installasjonen. Prøv igjen.",
   "tank-stats": "Kampvogn statisikk",
-  "the-full-stats-table-ranked": "Den fullstendige statistikk tabellen, rangert og fargelagt etter spillerens WNX-nivå, pluss det samme detaljerte kortet som nettstedet lager og en knapp for å åpne hele profilen. Svarene er private for deg til du deler dem i kanalen.",
   "the-same-data-as-the-site": "De samme dataene som på nettstedet",
   "title": "World of Tanks Discord-bot",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 og WNX beregnes nøyaktig som på unicum.gg, med lenke tilbake til hele profilen."

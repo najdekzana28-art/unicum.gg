@@ -11,7 +11,6 @@
   "panel": "Pannello",
   "panel-hint": "Usalo come pannello sotto il tuo streaming, con un link alla tua pagina. È l’unico elemento visivo su cui chiunque può effettivamente fare clic.",
   "offline": "Schermata offline",
-  "offline-hint": "Viene mostrata sul tuo canale quando non stai trasmettendo.",
   "offline-qr": "Schermata offline con codice QR",
   "offline-qr-hint": "La stessa schermata con un codice QR scansionabile. Usala solo su questa schermata: all’interno del video, la compressione rende il codice QR illeggibile."
 }

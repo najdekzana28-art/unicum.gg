@@ -23,11 +23,9 @@
   "one-click-adds": "Mit einem Klick fügst du den Bot deinem Server hinzu und trittst unserem {discord} bei.",
   "player-stats": "Spielerstatistiken",
   "private-then-shareable": "Gefreiter, dann teilbar",
-  "replies-are-ephemeral-by-default-one-click-s": "Antworten sind standardmäßig nur für dich sichtbar. Mit einem Klick kannst du die Karte im Kanal teilen.",
   "see-it-in-action": "In Aktion ansehen",
   "something-went-wrong-with-the-install-please": "Bei der Installation ist etwas schiefgelaufen. Bitte versuche es erneut.",
   "tank-stats": "Panzerstatistiken",
-  "the-full-stats-table-ranked": "Die vollständige Statistiktabelle, nach Rang sortiert und gemäß der WNX-Stufe des Spielers eingefärbt, dazu dieselbe detailreiche Karte wie auf der Website und eine Schaltfläche zum Öffnen des vollständigen Profils. Antworten sind nur für dich sichtbar, bis du sie im Kanal teilst.",
   "the-same-data-as-the-site": "Dieselben Daten wie auf der Website",
   "title": "World of Tanks Discord Bot",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 und WNX werden genau wie bei unicum.gg berechnet, mit einem Link zum vollständigen Profil."

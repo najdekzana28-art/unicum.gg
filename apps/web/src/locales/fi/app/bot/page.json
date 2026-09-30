@@ -23,11 +23,9 @@
   "one-click-adds": "Yksi napsautus lisää botin palvelimellesi ja tuo sinut {discord}imme.",
   "player-stats": "Pelaajatilastot",
   "private-then-shareable": "Yksityinen, sitten jaettavissa",
-  "replies-are-ephemeral-by-default-one-click-s": "Vastaukset ovat oletuksena hetkellisiä. Yhdellä napsautuksella kortin voi jakaa kanavalle.",
   "see-it-in-action": "Katso se toiminnassa",
   "something-went-wrong-with-the-install-please": "Asennuksessa tapahtui jotain. Yritä uudelleen.",
   "tank-stats": "Panssarihyökkäys tilastot",
-  "the-full-stats-table-ranked": "Täysi tilastotaulukko, rankattu ja väritetty pelaajan WNX-tason mukaan, sekä sama monipuolinen kortti, jonka sivusto luo, ja painike täyden profiilin avaamiseen. Vastaukset ovat yksityisiä sinulle, kunnes jaat ne kanavalle.",
   "the-same-data-as-the-site": "Samat tiedot kuin sivustolla",
   "title": "World of Tanks Discord -botti",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 ja WNX laskettuna täsmälleen kuten unicum.gg:ssä, linkillä täyteen profiiliin."

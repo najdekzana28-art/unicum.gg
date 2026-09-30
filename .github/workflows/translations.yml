@@ -28,6 +28,12 @@ on:
       # That file now decides the word every translation naming it has to use,
       # so correcting one cell has to re-ask for the strings that quote it.
       - "apps/web/src/locales/*/game/vocabulary.json"
+      # The site's own decided vocabulary, for the same reason one step up:
+      # every later prompt quotes it verbatim, so removing or correcting a term
+      # changes what the existing translations should have said. Dropping a term
+      # also means deleting the strings it produced, and only a run refills a
+      # missing key, so the edit has to bring its own repair with it.
+      - "apps/web/src/locales/terms.json"
   workflow_dispatch:
 
 concurrency:

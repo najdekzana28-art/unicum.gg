@@ -11,7 +11,6 @@
   "panel": "Panou",
   "panel-hint": "Folosește-l ca panou sub transmisiunea ta, care trimite la link. Este singurul element vizual pe care oricine poate face, de fapt, clic.",
   "offline": "Ecran deconectat",
-  "offline-hint": "Afișat pe canalul tău cât timp nu transmiți.",
   "offline-qr": "Ecran deconectat cu un cod QR",
   "offline-qr-hint": "Același ecran cu un cod QR care poate fi scanat. Păstrează-l doar pe acest ecran: în fluxul video, compresia face codul QR imposibil de citit."
 }
