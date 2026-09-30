@@ -1,0 +1,17 @@
+{
+  "creator-kit": "İçerik üretici kiti",
+  "your-visuals": "Görselleriniz, {NAME} için",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Twitch’in beklediği boyutlarda, kullanıma hazır. Bağlantınız {URL}, sitedeki kendi sayfanıza yönlendirir.",
+  "title": "İçerik üretici kiti, {NAME} için",
+  "description": "unicum.gg görselleri, {NAME} için: kullanıma hazır yayın kaplaması, tıklanabilir panel ve çevrimdışı ekran.",
+  "overlay": "Kaplama",
+  "overlay-hint": "OBS’ye Görüntü kaynağı olarak ekleyin. Şeffaf arka plan. Sağ üst köşe web kameranız, mini haritanız ve hasar paneliniz için boş bırakılmıştır.",
+  "overlay-compact": "Kaplama, kompakt sürüm",
+  "overlay-compact-hint": "İlki çok fazla yer kaplarsa kullanabileceğiniz, logosuz ve 36 piksel daha dar aynı kaplama.",
+  "panel": "Panel",
+  "panel-hint": "Yayınınızın altında, bağlantınıza yönlendiren bir panel olarak kullanın. Bu, herkesin aslında tıklayabileceği tek görseldir.",
+  "offline": "Çevrimdışı ekran",
+  "offline-hint": "Yayın yapmadığınız sırada kanalınızda gösterilir.",
+  "offline-qr": "QR kodlu çevrimdışı ekran",
+  "offline-qr-hint": "Taranabilir QR kodu olan aynı ekran. Bunu yalnızca bu ekranda kullanın, video akışının içindeki sıkıştırma QR kodunu okunamaz hâle getirir."
+}

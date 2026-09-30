@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Kūrėjo rinkinys",
+  "your-visuals": "Jūsų {NAME} vaizdai",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Pritaikyta pagal Twitch reikalaujamą dydį, paruošta naudoti. Jūsų nuoroda yra {URL}, ji nukreipia į jūsų puslapį svetainėje.",
+  "title": "{NAME} kūrėjo rinkinys",
+  "description": "unicum.gg vaizdai, skirti {NAME}: transliacijos perdanga, spustelėjamas skydelis ir atsijungė ekranas, paruošti naudoti.",
+  "overlay": "Perdanga",
+  "overlay-hint": "Pridėkite ją OBS kaip vaizdo šaltinį. Skaidrus fonas. Viršutiniame dešiniajame kampe palikta vietos internetinei kamerai, minižemėlapiui ir žalos skydeliui.",
+  "overlay-compact": "Perdanga, kompaktiška versija",
+  "overlay-compact-hint": "Ta pati perdanga be logotipo, 36 pikseliais siauresnė, jei pirmoji užima per daug vietos.",
+  "panel": "Skydelis",
+  "panel-hint": "Naudokite jį kaip skydelį po savo transliacija, nukreipiantį į jūsų nuorodą. Tai vienintelis vaizdas, kurį bet kas iš tikrųjų gali spustelėti.",
+  "offline": "Atsijungė ekranas",
+  "offline-hint": "Rodomas jūsų kanale, kai netransliuojate.",
+  "offline-qr": "Atsijungė ekranas su QR kodu",
+  "offline-qr-hint": "Tas pats ekranas su nuskaitomu QR kodu. Naudokite jį tik šiame ekrane, nes vaizdo įrašo sraute dėl glaudinimo QR kodo neįmanoma perskaityti."
+}

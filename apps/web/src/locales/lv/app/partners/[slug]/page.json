@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Satura veidotāja komplekts",
+  "your-visuals": "Jūsu {NAME} vizuālie materiāli",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Izmēri atbilst Twitch prasībām, un tas ir gatavs lietošanai. Jūsu saite ir {URL}, un tā ved uz jūsu personīgo lapu vietnē.",
+  "title": "Satura veidotāja komplekts, kas paredzēts {NAME}",
+  "description": "unicum.gg vizuālie materiāli, kas sagatavoti {NAME}: straumes pārklājums, noklikšķināms panelis un ekrāns stāvoklim “nav spēlē”, gatavi lietošanai.",
+  "overlay": "Pārklājums",
+  "overlay-hint": "Pievienojiet to OBS kā attēla avotu. Caurspīdīgs fons. Augšējā labā puse atstāj brīvu tīmekļa kameru, minikarti un bojājumu paneli.",
+  "overlay-compact": "Pārklājums, kompakta versija",
+  "overlay-compact-hint": "Tas pats, tikai bez logotipa un par 36 px šaurāks, ja pirmais aizņem pārāk daudz vietas.",
+  "panel": "Panelis",
+  "panel-hint": "Izmantojiet to kā paneli zem savas straumes, kas norāda uz jūsu saiti. Tas ir vienīgais vizuālais materiāls, uz kura ikviens patiesībā var noklikšķināt.",
+  "offline": "Ekrāns stāvoklim “nav spēlē”",
+  "offline-hint": "Tas tiek rādīts jūsu kanālā, kamēr neveicat straumēšanu.",
+  "offline-qr": "Ekrāns stāvoklim “nav spēlē” ar QR kodu",
+  "offline-qr-hint": "Tas pats ar noskenējamu QR kodu. Izmantojiet to tikai šajā ekrānā, jo video straumes kompresija padara QR kodu neiespējamu lasīt."
+}

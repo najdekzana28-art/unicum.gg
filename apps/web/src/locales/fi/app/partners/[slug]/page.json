@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Sisällöntuottajan paketti",
+  "your-visuals": "Visuaalit, jotka ovat käytössä nimellä {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Mitoitettu Twitchin odottamalla tavalla, valmiina käyttöön. Linkkisi on {URL}, ja se johtaa omalle sivullesi sivustossa.",
+  "title": "Sisällöntuottajan paketti käyttäjälle {NAME}",
+  "description": "unicum.gg:n visuaalit, jotka on tehty käyttäjälle {NAME}: stream-overlay, klikattava paneeli ja offline-tilan näyttö, kaikki valmiina käyttöön.",
+  "overlay": "Overlay",
+  "overlay-hint": "Lisää se OBS:ään kuvalähteenä. Läpinäkyvä tausta. Oikea yläkulma ei peitä webkameraa, minikarttaa eikä vahinkopaneelia.",
+  "overlay-compact": "Overlay, kompakti versio",
+  "overlay-compact-hint": "Sama ilman logoa, 36 pikseliä kapeampi, jos ensimmäinen vaatii liikaa tilaa.",
+  "panel": "Paneeli",
+  "panel-hint": "Käytä sitä streamisi alla olevana paneelina, joka ohjaa linkkiisi. Se on ainoa visuaali, jota kuka tahansa voi itse asiassa klikata.",
+  "offline": "Offline-tilan näyttö",
+  "offline-hint": "Näytetään kanavallasi, kun et suoratoista.",
+  "offline-qr": "Offline-tilan näyttö QR-koodilla",
+  "offline-qr-hint": "Sama näyttö skannattavalla QR-koodilla. Pidä se vain tässä näytössä: videovirrassa pakkaus tekee QR-koodista lukukelvottoman."
+}

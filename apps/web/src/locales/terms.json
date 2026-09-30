@@ -852,7 +852,11 @@
     "public": "public",
     "sent": "envoyé",
     "shown": "affiché",
-    "well": "bien"
+    "well": "bien",
+    "offline": "hors-ligne",
+    "anyone": "n'importe qui",
+    "code": "code",
+    "minimap": "minicarte"
   },
   "es": {
     "Battles": "Batallas",
@@ -1704,7 +1708,11 @@
     "public": "público",
     "sent": "enviado",
     "shown": "mostrado",
-    "well": "bien"
+    "well": "bien",
+    "offline": "inactivo",
+    "anyone": "cualquiera",
+    "code": "código",
+    "minimap": "minimapa"
   },
   "ru": {
     "Battles": "Бои",
@@ -2550,7 +2558,11 @@
     "public": "публичный",
     "sent": "отправлено",
     "shown": "показано",
-    "well": "хорошо"
+    "well": "хорошо",
+    "offline": "не в игре",
+    "anyone": "любой",
+    "code": "код",
+    "minimap": "миникарта"
   },
   "pl": {
     "Battles": "Bitwy",
@@ -3415,7 +3427,11 @@
     "public": "publiczny",
     "sent": "wysłano",
     "shown": "wyświetlono",
-    "well": "dobrze"
+    "well": "dobrze",
+    "offline": "odłączony",
+    "anyone": "każdy",
+    "code": "kod",
+    "minimap": "minimapa"
   },
   "ja": {
     "Battles": "戦闘数",
@@ -4290,7 +4306,11 @@
     "public": "公開",
     "sent": "送信済み",
     "shown": "表示済み",
-    "well": "良好"
+    "well": "良好",
+    "offline": "オフライン",
+    "anyone": "誰でも",
+    "code": "コード",
+    "minimap": "ミニマップ"
   },
   "ar": {
     "1 Mark": "علامة 1",
@@ -4945,7 +4965,10 @@
     "public": "عام",
     "sent": "مُرسَل",
     "shown": "معروض",
-    "well": "جيدًا"
+    "well": "جيدًا",
+    "anyone": "أي شخص",
+    "code": "رمز",
+    "minimap": "الخريطة المصغرة"
   },
   "hr": {
     "Battles": "Bitke",
@@ -5817,7 +5840,11 @@
     "public": "javno",
     "sent": "poslano",
     "shown": "prikazano",
-    "well": "dobro"
+    "well": "dobro",
+    "offline": "nije u igri",
+    "anyone": "bilo tko",
+    "code": "kod",
+    "minimap": "minimapa"
   },
   "hu": {
     "Battles": "Csaták",
@@ -6690,7 +6717,11 @@
     "public": "nyilvános",
     "sent": "elküldve",
     "shown": "megjelenítve",
-    "well": "jól"
+    "well": "jól",
+    "offline": "offline",
+    "anyone": "bárki",
+    "code": "kód",
+    "minimap": "minitérkép"
   },
   "ko": {
     "Battles": "전투",
@@ -7570,7 +7601,11 @@
     "public": "공개",
     "sent": "전송됨",
     "shown": "표시됨",
-    "well": "잘"
+    "well": "잘",
+    "offline": "오프라인",
+    "anyone": "누구나",
+    "code": "코드",
+    "minimap": "미니맵"
   },
   "nl": {
     "Battles": "Gevechten",
@@ -8447,7 +8482,11 @@
     "public": "openbaar",
     "sent": "verzonden",
     "shown": "weergegeven",
-    "well": "goed"
+    "well": "goed",
+    "offline": "offline",
+    "anyone": "iedereen",
+    "code": "code",
+    "minimap": "minimap"
   },
   "cs": {
     "Battles": "Bitev",
@@ -9315,7 +9354,11 @@
     "public": "veřejné",
     "sent": "odesláno",
     "shown": "zobrazeno",
-    "well": "dobře"
+    "well": "dobře",
+    "offline": "odpojen",
+    "anyone": "kdokoli",
+    "code": "kód",
+    "minimap": "minimapa"
   },
   "tr": {
     "Battles": "Savaşlar",
@@ -10185,7 +10228,11 @@
     "public": "herkese açık",
     "sent": "gönderildi",
     "shown": "gösterildi",
-    "well": "iyi"
+    "well": "iyi",
+    "offline": "çevrimdışı",
+    "anyone": "herkes",
+    "code": "kod",
+    "minimap": "mini harita"
   },
   "be": {
     "1 Mark": "1 Марка",
@@ -10839,7 +10886,10 @@
     "public": "публічны",
     "sent": "адпраўлена",
     "shown": "паказана",
-    "well": "добра"
+    "well": "добра",
+    "anyone": "любы",
+    "code": "код",
+    "minimap": "міні-карта"
   },
   "sk": {
     "1 Mark": "1 Mark",
@@ -11500,7 +11550,10 @@
     "public": "javno",
     "sent": "poslano",
     "shown": "prikazano",
-    "well": "dobro"
+    "well": "dobro",
+    "anyone": "kdorkoli",
+    "code": "koda",
+    "minimap": "minizemljevid"
   },
   "bs": {
     "1 Mark": "1 Mark",
@@ -12162,7 +12215,10 @@
     "public": "javno",
     "sent": "poslano",
     "shown": "prikazano",
-    "well": "dobro"
+    "well": "dobro",
+    "anyone": "bilo ko",
+    "code": "kod",
+    "minimap": "minimapa"
   },
   "th": {
     "Battles": "การรบ",
@@ -13035,7 +13091,11 @@
     "public": "สาธารณะ",
     "sent": "ส่งแล้ว",
     "shown": "แสดงแล้ว",
-    "well": "ดี"
+    "well": "ดี",
+    "offline": "ออปไลน์",
+    "anyone": "ใครก็ได้",
+    "code": "โค้ด",
+    "minimap": "แผนที่ย่อ"
   },
   "zh": {
     "Battles": "战斗场次",
@@ -13908,7 +13968,11 @@
     "public": "公开",
     "sent": "已发送",
     "shown": "显示",
-    "well": "良好"
+    "well": "良好",
+    "offline": "离线",
+    "anyone": "任何人",
+    "code": "代码",
+    "minimap": "小地图"
   },
   "pt": {
     "Battles": "Batalhas",
@@ -14766,7 +14830,11 @@
     "public": "público",
     "sent": "enviado",
     "shown": "exibido",
-    "well": "bem"
+    "well": "bem",
+    "offline": "offline",
+    "anyone": "qualquer um",
+    "code": "código",
+    "minimap": "minimapa"
   },
   "vi": {
     "Battles": "Số trận",
@@ -15618,7 +15686,11 @@
     "public": "công khai",
     "sent": "đã gửi",
     "shown": "hiển thị",
-    "well": "tốt"
+    "well": "tốt",
+    "offline": "offline",
+    "anyone": "bất kỳ ai",
+    "code": "mã",
+    "minimap": "bản đồ nhỏ"
   },
   "de": {
     "Battles": "Gefechte",
@@ -16484,7 +16556,11 @@
     "public": "öffentlich",
     "sent": "gesendet",
     "shown": "angezeigt",
-    "well": "gut"
+    "well": "gut",
+    "offline": "offline",
+    "anyone": "jeder",
+    "code": "Code",
+    "minimap": "Minikarte"
   },
   "uk": {
     "Battles": "Бої",
@@ -17347,7 +17423,11 @@
     "public": "публічний",
     "sent": "надіслано",
     "shown": "показано",
-    "well": "добре"
+    "well": "добре",
+    "offline": "не в грі",
+    "anyone": "будь-хто",
+    "code": "код",
+    "minimap": "мінікарта"
   },
   "it": {
     "Battles": "Battaglie",
@@ -18215,7 +18295,11 @@
     "public": "pubblico",
     "sent": "inviato",
     "shown": "mostrato",
-    "well": "bene"
+    "well": "bene",
+    "offline": "offline",
+    "anyone": "chiunque",
+    "code": "codice",
+    "minimap": "minimappa"
   },
   "sv": {
     "Battles": "Strider",
@@ -19092,7 +19176,11 @@
     "public": "offentlig",
     "sent": "skickat",
     "shown": "visad",
-    "well": "väl"
+    "well": "väl",
+    "offline": "nedkopplad",
+    "anyone": "vem som helst",
+    "code": "kod",
+    "minimap": "minikarta"
   },
   "sr": {
     "Battles": "Borbi",
@@ -19965,7 +20053,11 @@
     "public": "javno",
     "sent": "poslato",
     "shown": "prikazano",
-    "well": "dobro"
+    "well": "dobro",
+    "offline": "nije u igri",
+    "anyone": "bilo ko",
+    "code": "kod",
+    "minimap": "mini-mapa"
   },
   "el": {
     "Battles": "Μάχες",
@@ -20837,7 +20929,11 @@
     "public": "δημόσιο",
     "sent": "απεσταλμένο",
     "shown": "εμφανιζόμενο",
-    "well": "καλά"
+    "well": "καλά",
+    "offline": "εκτός σύνδεσης",
+    "anyone": "οποιοσδήποτε",
+    "code": "κώδικας",
+    "minimap": "μίνι χάρτης"
   },
   "lv": {
     "Battles": "Kaujas",
@@ -21698,7 +21794,11 @@
     "public": "publisks",
     "sent": "nosūtīts",
     "shown": "parādīts",
-    "well": "labi"
+    "well": "labi",
+    "offline": "nav spēlē",
+    "anyone": "ikviens",
+    "code": "kods",
+    "minimap": "minikarte"
   },
   "hi": {
     "1 Mark": "1 मार्क",
@@ -22353,7 +22453,10 @@
     "public": "सार्वजनिक",
     "sent": "भेजा गया",
     "shown": "दिखाया गया",
-    "well": "अच्छी तरह"
+    "well": "अच्छी तरह",
+    "anyone": "कोई भी",
+    "code": "कोड",
+    "minimap": "मिनीमैप"
   },
   "bg": {
     "Battles": "Битки",
@@ -23210,7 +23313,11 @@
     "public": "публичен",
     "sent": "изпратен",
     "shown": "показан",
-    "well": "добре"
+    "well": "добре",
+    "offline": "офлайн",
+    "anyone": "всеки",
+    "code": "код",
+    "minimap": "миникарта"
   },
   "lt": {
     "Battles": "Mūšiai",
@@ -24087,7 +24194,11 @@
     "public": "viešas",
     "sent": "išsiųsta",
     "shown": "rodoma",
-    "well": "gerai"
+    "well": "gerai",
+    "offline": "atsijungė",
+    "anyone": "bet kas",
+    "code": "kodas",
+    "minimap": "minižemėlapis"
   },
   "kk": {
     "1 Mark": "1 Mark",
@@ -24746,7 +24857,10 @@
     "public": "ашық",
     "sent": "жіберілді",
     "shown": "көрсетілді",
-    "well": "жақсы"
+    "well": "жақсы",
+    "anyone": "кез келген адам",
+    "code": "код",
+    "minimap": "миникарта"
   },
   "fi": {
     "Battles": "Taisteluita",
@@ -25623,7 +25737,11 @@
     "public": "julkinen",
     "sent": "lähetetty",
     "shown": "näytetty",
-    "well": "hyvin"
+    "well": "hyvin",
+    "offline": "offline-tila",
+    "anyone": "kuka tahansa",
+    "code": "koodi",
+    "minimap": "minikartta"
   },
   "tl": {
     "1 Mark": "1 Mark",
@@ -26283,7 +26401,10 @@
     "public": "pampubliko",
     "sent": "ipinadala",
     "shown": "ipinakita",
-    "well": "maayos"
+    "well": "maayos",
+    "anyone": "sinuman",
+    "code": "code",
+    "minimap": "minimapa"
   },
   "no": {
     "Battles": "Kamper",
@@ -27152,7 +27273,11 @@
     "public": "offentlig",
     "sent": "sendt",
     "shown": "vist",
-    "well": "godt"
+    "well": "godt",
+    "offline": "frakopla",
+    "anyone": "alle",
+    "code": "kode",
+    "minimap": "minikart"
   },
   "ro": {
     "Battles": "Lupte",
@@ -28010,7 +28135,11 @@
     "public": "public",
     "sent": "trimis",
     "shown": "afișat",
-    "well": "bine"
+    "well": "bine",
+    "offline": "deconectat",
+    "anyone": "oricine",
+    "code": "cod",
+    "minimap": "mini-hartă"
   },
   "da": {
     "Battles": "Kampe",
@@ -28883,6 +29012,10 @@
     "public": "offentlig",
     "sent": "sendt",
     "shown": "vist",
-    "well": "godt"
+    "well": "godt",
+    "offline": "offline",
+    "anyone": "enhver",
+    "code": "kode",
+    "minimap": "minikort"
   }
 }

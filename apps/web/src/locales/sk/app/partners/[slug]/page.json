@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Súprava tvorcu",
+  "your-visuals": "Vaše vizuály pre {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "S rozmermi podľa požiadaviek Twitchu, pripravené na použitie. Váš odkaz je {URL} a vedie na vašu vlastnú stránku na stránke.",
+  "title": "Súprava tvorcu pre {NAME}",
+  "description": "Vizuály unicum.gg pre {NAME}: prekrytie streamu, panel s odkazom a offline obrazovka, pripravené na použitie.",
+  "overlay": "Prekrytie",
+  "overlay-hint": "Pridajte ho v OBS ako zdroj obrázka. Priehľadné pozadie. V pravom hornom rohu zostáva miesto pre webkameru, minizemljevid a panel poškodenia.",
+  "overlay-compact": "Prekrytie, kompaktná verzia",
+  "overlay-compact-hint": "Rovnaké prekrytie bez loga, o 36 px užšie, ak prvé zaberá príliš veľa miesta.",
+  "panel": "Panel",
+  "panel-hint": "Použite ho ako panel pod streamom, ktorý smeruje na váš odkaz. Je to jediný vizuál, na ktorý môže kdorkoli pravzaprav kliknúť.",
+  "offline": "Offline obrazovka",
+  "offline-hint": "Zobrazuje sa na vašom kanáli, keď nevysielate.",
+  "offline-qr": "Offline obrazovka s QR koda",
+  "offline-qr-hint": "Rovnaká verzia s QR koda na skenovanie. Ponechajte ju na tejto obrazovke, vo videostreame kompresia spôsobí, že QR koda nebude čitateľná."
+}

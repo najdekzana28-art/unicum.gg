@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Kreatorski komplet",
+  "your-visuals": "Vizuelni materijali za {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Dimenzionisani prema očekivanjima Twitcha, spremni za upotrebu. Vaša veza je {URL}, a vodi na vašu ličnu stranicu na stranici.",
+  "title": "Kreatorski komplet za {NAME}",
+  "description": "Vizuelni materijali unicum.gg za {NAME}: preklopni prikaz za prenos, panel na koji se može kliknuti i ekran van mreže, spremni za upotrebu.",
+  "overlay": "Preklopni prikaz",
+  "overlay-hint": "Dodajte ga u OBS kao izvor slike. Prozirna pozadina. Gornji desni ugao ostavlja slobodan prostor za veb-kameru, minimapu i panel sa štetom.",
+  "overlay-compact": "Preklopni prikaz, kompaktna verzija",
+  "overlay-compact-hint": "Isti prikaz bez logotipa, uži za 36 piksela, ako prvi uzima previše prostora.",
+  "panel": "Panel",
+  "panel-hint": "Koristite ga kao panel ispod svog prenosa, tako da vodi na vašu vezu. To je jedini vizuelni element na koji bilo ko zapravo može kliknuti.",
+  "offline": "Ekran van mreže",
+  "offline-hint": "Prikazuje se na vašem kanalu dok ne prenosite uživo.",
+  "offline-qr": "Ekran van mreže s QR kodom",
+  "offline-qr-hint": "Isti ekran s QR kodom koji se može skenirati. Koristite ga samo na ovom ekranu, jer kompresija unutar video prenosa čini QR kod nemogućim za pročitano."
+}

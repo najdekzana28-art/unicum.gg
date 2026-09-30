@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Creator-kit",
+  "your-visuals": "Dine visuals til {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Tilpasset den størrelse, Twitch forventer, klar til brug. Dit link er {URL}, og det fører til din egen side på webstedet.",
+  "title": "Creator-kit til {NAME}",
+  "description": "unicum.gg-visuals til {NAME}: stream-overlay, klikbart panel og offline-skærm, klar til brug.",
+  "overlay": "Overlay",
+  "overlay-hint": "Tilføj det i OBS som en billedkilde. Gennemsigtig baggrund. Det øverste højre hjørne går fri af webkameraet, minikortet og skadepanelet.",
+  "overlay-compact": "Overlay, kompakt version",
+  "overlay-compact-hint": "Den samme uden logoet, 36 px smallere, hvis den første kræver for meget plads.",
+  "panel": "Panel",
+  "panel-hint": "Brug det som et panel under dit stream, der peger på dit link. Det er den eneste visualisering, enhver faktisk kan klikke på.",
+  "offline": "Offline-skærm",
+  "offline-hint": "Vises på din kanal, mens du ikke streamer.",
+  "offline-qr": "Offline-skærm med en QR-kode",
+  "offline-qr-hint": "Den samme med en QR-kode, der kan scannes. Begræns den til denne skærm, for inde i videostreamen gør komprimering en QR-kode ulæselig."
+}

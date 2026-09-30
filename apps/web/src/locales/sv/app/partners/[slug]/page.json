@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Skapar-kit",
+  "your-visuals": "Din grafik för {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Storleksanpassade enligt Twitchs förväntningar, redo att användas. Din länk är {URL}, och den leder till din egen sida på webbplatsen.",
+  "title": "Skapar-kit för {NAME}",
+  "description": "unicum.gg-grafik för {NAME}: stream-overlay, klickbar panel och skärm för nedkopplad status, redo att användas.",
+  "overlay": "Overlay",
+  "overlay-hint": "Lägg till den i OBS som en bildkälla. Genomskinlig bakgrund. Det övre högra hörnet lämnar plats för webbkameran, minikartan och panelen för skada.",
+  "overlay-compact": "Overlay, kompakt version",
+  "overlay-compact-hint": "Samma utan logotyp, 36 px smalare, om den första versionen kräver för mycket utrymme.",
+  "panel": "Panel",
+  "panel-hint": "Använd den som en panel under din stream, med en länk som leder till din länk. Det är den enda grafiken som vem som helst faktiskt kan klicka på.",
+  "offline": "Nedkopplad skärm",
+  "offline-hint": "Visas på din kanal när du inte streamar.",
+  "offline-qr": "Nedkopplad skärm med en QR-kod",
+  "offline-qr-hint": "Samma med en skanningsbar QR-kod. Använd den bara på den här skärmen, inne i videoströmmen gör komprimeringen en QR-kod oläslig."
+}

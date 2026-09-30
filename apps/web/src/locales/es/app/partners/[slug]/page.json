@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Kit de creador",
+  "your-visuals": "Elementos visuales de {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Con el tamaño que Twitch espera, listos para usar. Tu enlace es {URL} y lleva a tu propia página en el sitio.",
+  "title": "Kit de creador de {NAME}",
+  "description": "Elementos visuales de unicum.gg para {NAME}: superposición para streaming, panel en el que se puede hacer clic y pantalla inactiva, listos para usar.",
+  "overlay": "Superposición",
+  "overlay-hint": "Añádela en OBS como fuente de imagen. Fondo transparente. La esquina superior derecha deja espacio para la cámara web, el minimapa y el panel de daño.",
+  "overlay-compact": "Superposición, versión compacta",
+  "overlay-compact-hint": "La misma, sin el logo y 36 px más estrecha, si la primera ocupa demasiado espacio.",
+  "panel": "Panel",
+  "panel-hint": "Úsalo como panel debajo de tu transmisión, apuntando a tu enlace. Es el único elemento visual en el que cualquiera puede hacer clic realmente.",
+  "offline": "Pantalla inactiva",
+  "offline-hint": "Se muestra en tu canal mientras no estás transmitiendo.",
+  "offline-qr": "Pantalla inactiva con un código QR",
+  "offline-qr-hint": "La misma, con un código QR escaneable. Úsala solo en esta pantalla: dentro del vídeo de la transmisión, la compresión hace que un código QR sea ilegible."
+}

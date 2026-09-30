@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Kit pentru creatori",
+  "your-visuals": "Elementele vizuale pentru {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Dimensionate conform cerințelor Twitch, gata de utilizare. Link: {URL}, iar acesta duce la pagina ta de pe site.",
+  "title": "Kit de creator pentru {NAME}",
+  "description": "Elemente vizuale unicum.gg pentru {NAME}: suprapunere pentru transmisiune, panou interactiv și ecran deconectat, gata de utilizare.",
+  "overlay": "Suprapunere",
+  "overlay-hint": "Adaugă-o în OBS ca sursă de imagine. Fundal transparent. Colțul din dreapta sus lasă liberă zona pentru camera web, mini-hartă și panoul de daune.",
+  "overlay-compact": "Suprapunere, versiune compactă",
+  "overlay-compact-hint": "Aceeași suprapunere fără logo, cu 36 px mai îngustă, dacă prima ocupă prea mult spațiu.",
+  "panel": "Panou",
+  "panel-hint": "Folosește-l ca panou sub transmisiunea ta, care trimite la link. Este singurul element vizual pe care oricine poate face, de fapt, clic.",
+  "offline": "Ecran deconectat",
+  "offline-hint": "Afișat pe canalul tău cât timp nu transmiți.",
+  "offline-qr": "Ecran deconectat cu un cod QR",
+  "offline-qr-hint": "Același ecran cu un cod QR care poate fi scanat. Păstrează-l doar pe acest ecran: în fluxul video, compresia face codul QR imposibil de citit."
+}

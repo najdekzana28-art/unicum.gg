@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Creator-Kit",
+  "your-visuals": "Deine Visuals für {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "In der von Twitch erwarteten Größe, sofort einsatzbereit. Dein Link ist {URL}, und er führt auf deine eigene Seite auf der Website.",
+  "title": "Creator-Kit von {NAME}",
+  "description": "Visuals von unicum.gg für {NAME}: Stream-Overlay, anklickbares Panel und Offline-Bildschirm, sofort einsatzbereit.",
+  "overlay": "Overlay",
+  "overlay-hint": "Füge es in OBS als Bildquelle hinzu. Transparenter Hintergrund. Die obere rechte Ecke lässt Webcam, Minikarte und Schadensanzeige frei.",
+  "overlay-compact": "Overlay, kompakte Version",
+  "overlay-compact-hint": "Dieselbe Version ohne Logo, 36 px schmaler, falls die erste zu viel Platz benötigt.",
+  "panel": "Panel",
+  "panel-hint": "Verwende es als Panel unter deinem Stream, das auf deinen Link verweist. Es ist die einzige Visualisierung, die jeder tatsächlich anklicken kann.",
+  "offline": "Offline-Bildschirm",
+  "offline-hint": "Wird auf deinem Kanal angezeigt, während du nicht streamst.",
+  "offline-qr": "Offline-Bildschirm mit QR-Code",
+  "offline-qr-hint": "Dieselbe Version mit einem scannbaren QR-Code. Verwende ihn nur auf diesem Bildschirm: Innerhalb des Video-Streams macht die Kompression einen QR-Code unlesbar."
+}

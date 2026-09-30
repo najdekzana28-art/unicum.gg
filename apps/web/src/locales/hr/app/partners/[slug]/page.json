@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Kreatorski komplet",
+  "your-visuals": "Vaši vizuali za {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Veličina je prilagođena zahtjevima Twitcha i spremni su za upotrebu. Vaša poveznica je {URL}, a vodi na vašu stranicu na web-mjestu.",
+  "title": "Kreatorski komplet za {NAME}",
+  "description": "Vizuali web-mjesta unicum.gg za {NAME}: grafički sloj za stream, panel na koji se može kliknuti i zaslon kada niste u igri, spremni za upotrebu.",
+  "overlay": "Grafički sloj",
+  "overlay-hint": "Dodajte ga u OBS kao izvor slike. Prozirna pozadina. Gornji desni kut ostavlja slobodnima web-kameru, minimapu i ploču sa štetom.",
+  "overlay-compact": "Grafički sloj, kompaktna verzija",
+  "overlay-compact-hint": "Isti grafički sloj bez logotipa, 36 px uži, ako prvi zauzima previše prostora.",
+  "panel": "Panel",
+  "panel-hint": "Koristite ga kao panel ispod svog streama, koji vodi na vašu poveznicu. To je jedini vizual na koji bilo tko zapravo može kliknuti.",
+  "offline": "Zaslon kada niste u igri",
+  "offline-hint": "Prikazuje se na vašem kanalu dok ne emitirate.",
+  "offline-qr": "Zaslon kada niste u igri s QR kodom",
+  "offline-qr-hint": "Isti zaslon sa skenirajućim QR kodom. Koristite ga samo na ovom zaslonu, jer kompresija unutar videos­treama čini QR kod nečitljivim."
+}

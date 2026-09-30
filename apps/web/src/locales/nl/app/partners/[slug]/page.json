@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Creatorpakket",
+  "your-visuals": "Jouw visuals voor {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Op het formaat dat Twitch verwacht, klaar voor gebruik. Je link is {URL} en leidt naar je eigen pagina op de site.",
+  "title": "Creatorpakket van {NAME}",
+  "description": "unicum.gg-visuals voor {NAME}: streamoverlay, klikbaar paneel en offline scherm, klaar voor gebruik.",
+  "overlay": "Overlay",
+  "overlay-hint": "Voeg deze in OBS toe als afbeeldingsbron. Transparante achtergrond. De rechterbovenhoek houdt de webcam, de minimap en het schadapaneel vrij.",
+  "overlay-compact": "Overlay, compacte versie",
+  "overlay-compact-hint": "Dezelfde zonder logo, 36 px smaller, voor het geval de eerste te veel ruimte inneemt.",
+  "panel": "Paneel",
+  "panel-hint": "Gebruik dit als paneel onder je stream, met een verwijzing naar je link. Het is de enige visual waarop iedereen eigenlijk kan klikken.",
+  "offline": "Offline scherm",
+  "offline-hint": "Wordt op je kanaal getoond wanneer je niet aan het streamen bent.",
+  "offline-qr": "Offline scherm met QR-code",
+  "offline-qr-hint": "Dezelfde met een scanbare QR-code. Beperk deze tot dit scherm, want in de videostream maakt compressie een QR-code onleesbaar."
+}

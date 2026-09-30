@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Pakiet twórcy",
+  "your-visuals": "Twoje materiały wizualne dla {NAME}",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Dopasowane rozmiarem do wymagań Twitch, gotowe do użycia. Twój link to {URL}, który prowadzi do Twojej własnej strony w witrynie.",
+  "title": "Pakiet twórczy dla {NAME}",
+  "description": "Materiały wizualne unikum.gg dla {NAME}: nakładka do transmisji, klikalny panel i ekran odłączonego kanału, gotowe do użycia.",
+  "overlay": "Nakładka",
+  "overlay-hint": "Dodaj ją w OBS jako źródło obrazu. Przezroczyste tło. Prawy górny róg nie zasłania kamery internetowej, minimapy ani panelu uszkodzeń.",
+  "overlay-compact": "Nakładka, wersja kompaktowa",
+  "overlay-compact-hint": "Ta sama wersja bez logo, o 36 pikseli węższa, jeśli pierwsza zajmuje zbyt dużo miejsca.",
+  "panel": "Panel",
+  "panel-hint": "Użyj go jako panelu pod swoją transmisją, kierującego do Twojego linku. To jedyna grafika, którą każdy może rzeczywiście kliknąć.",
+  "offline": "Ekran odłączonego kanału",
+  "offline-hint": "Wyświetlany na Twoim kanale, gdy nie transmitujesz.",
+  "offline-qr": "Ekran odłączonego kanału z kodem QR",
+  "offline-qr-hint": "Ta sama wersja z kodem QR do zeskanowania. Używaj jej tylko na tym ekranie, ponieważ wewnątrz filmu kompresja sprawia, że kod QR staje się nieczytelny."
+}
