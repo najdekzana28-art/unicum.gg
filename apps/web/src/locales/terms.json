@@ -653,7 +653,9 @@
     "… track": "… الجنزير",
     "… turret ring": "… حلقة البرج",
     "… viewport": "… نافذة العرض",
-    "… vs modules": "… ضد الوحدات"
+    "… vs modules": "… ضد الوحدات",
+    "Channel": "القناة",
+    "channel": "القناة"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1308,7 +1310,9 @@
     "… track": "… гусеніца",
     "… turret ring": "… круг башні",
     "… viewport": "… поле агляду",
-    "… vs modules": "… супраць модуляў"
+    "… vs modules": "… супраць модуляў",
+    "Channel": "Канал",
+    "channel": "канал"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2167,7 +2171,9 @@
     "… track": "… верига",
     "… turret ring": "… пръстен на купола",
     "… viewport": "… зрителен прозорец",
-    "… vs modules": "… срещу модули"
+    "… vs modules": "… срещу модули",
+    "Channel": "Канал",
+    "channel": "канал"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -2830,7 +2836,9 @@
     "… track": "… gusjenica",
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidno polje",
-    "… vs modules": "… protiv modula"
+    "… vs modules": "… protiv modula",
+    "Channel": "Kanal",
+    "channel": "kanal"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3700,7 +3708,9 @@
     "… track": "… pás",
     "… turret ring": "… obrušovací kroužek",
     "… viewport": "… zorné pole",
-    "… vs modules": "… vs moduly"
+    "… vs modules": "… vs moduly",
+    "Channel": "Kanál",
+    "channel": "kanál"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4575,7 +4585,9 @@
     "… track": "… bælte",
     "… turret ring": "… tårnring",
     "… viewport": "… synsfelt",
-    "… vs modules": "… vs moduler"
+    "… vs modules": "… vs moduler",
+    "Channel": "Kanal",
+    "channel": "kanal"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5443,7 +5455,9 @@
     "… track": "… Kette",
     "… turret ring": "… Turm-Ring",
     "… viewport": "… Sichtfeld",
-    "… vs modules": "… vs Module"
+    "… vs modules": "… vs Module",
+    "Channel": "Kanal",
+    "channel": "kanal"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6317,7 +6331,9 @@
     "… track": "… ερπυστριο",
     "… turret ring": "… δαχτυλίδι πύργου",
     "… viewport": "… οπτικό πεδίο",
-    "… vs modules": "… εναντίον μονάδων"
+    "… vs modules": "… εναντίον μονάδων",
+    "Channel": "Κανάλι",
+    "channel": "κανάλι"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7171,7 +7187,9 @@
     "… track": "… oruga",
     "… turret ring": "… anillo de torreta",
     "… viewport": "… visor",
-    "… vs modules": "… vs módulos"
+    "… vs modules": "… vs módulos",
+    "Channel": "Canal",
+    "channel": "canal"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8050,7 +8068,9 @@
     "… track": "… ketju",
     "… turret ring": "… tornirenka",
     "… viewport": "… näkymäikkuna",
-    "… vs modules": "… vs moduulit"
+    "… vs modules": "… vs moduulit",
+    "Channel": "Kanava",
+    "channel": "kanava"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -8907,7 +8927,9 @@
     "… track": "… chenille",
     "… turret ring": "… couronne de tourelle",
     "… viewport": "… vitrage",
-    "… vs modules": "… vs modules"
+    "… vs modules": "… vs modules",
+    "Channel": "Chaîne",
+    "channel": "chaîne"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -9563,7 +9585,9 @@
     "… track": "… ट्रैक",
     "… turret ring": "… टॉरट रिंग",
     "… viewport": "… व्यू पोर्ट",
-    "… vs modules": "… बनाम मॉड्यूल्स"
+    "… vs modules": "… बनाम मॉड्यूल्स",
+    "Channel": "चैनल",
+    "channel": "चैनल"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -10437,7 +10461,9 @@
     "… track": "… gusjenica",
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidno polje",
-    "… vs modules": "… protiv modula"
+    "… vs modules": "… protiv modula",
+    "Channel": "Kanal",
+    "channel": "kanal"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -11312,7 +11338,9 @@
     "… track": "… futómű",
     "… turret ring": "… toronygyűrű",
     "… viewport": "… kilátó",
-    "… vs modules": "… vs modulok"
+    "… vs modules": "… vs modulok",
+    "Channel": "Csatorna",
+    "channel": "csatorna"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -12182,7 +12210,9 @@
     "… track": "… cingolo",
     "… turret ring": "… anello della torretta",
     "… viewport": "… finestrino",
-    "… vs modules": "… vs moduli"
+    "… vs modules": "… vs moduli",
+    "Channel": "Canale",
+    "channel": "canale"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -13059,7 +13089,9 @@
     "… track": "… 履帯",
     "… turret ring": "… 砲塔リング",
     "… viewport": "… ビューポート",
-    "… vs modules": "… モジュール対抗"
+    "… vs modules": "… モジュール対抗",
+    "Channel": "チャンネル",
+    "channel": "チャンネル"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -13719,7 +13751,9 @@
     "… track": "… тракт",
     "… turret ring": "… башы сақинасы",
     "… viewport": "… көрініс терезесі",
-    "… vs modules": "… модульдерге қарсы"
+    "… vs modules": "… модульдерге қарсы",
+    "Channel": "Арна",
+    "channel": "арна"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -14601,7 +14635,9 @@
     "… track": "… 트랙",
     "… turret ring": "… 포탑 링",
     "… viewport": "… 뷰포트",
-    "… vs modules": "… 모듈 대"
+    "… vs modules": "… 모듈 대",
+    "Channel": "채널",
+    "channel": "채널"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -15480,7 +15516,9 @@
     "… track": "… pavažą",
     "… turret ring": "… bokštelio žiedas",
     "… viewport": "… vaizdo langas",
-    "… vs modules": "… vs moduliai"
+    "… vs modules": "… vs moduliai",
+    "Channel": "Kanalas",
+    "channel": "kanalas"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -16343,7 +16381,9 @@
     "… track": "… kloķis",
     "… turret ring": "… torvīša gredzens",
     "… viewport": "… skatījuma logs",
-    "… vs modules": "… pret moduļiem"
+    "… vs modules": "… pret moduļiem",
+    "Channel": "Kanāls",
+    "channel": "kanāls"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -17222,7 +17262,9 @@
     "… track": "… rupsband",
     "… turret ring": "… koepelring",
     "… viewport": "… kijkopening",
-    "… vs modules": "… vs modules"
+    "… vs modules": "… vs modules",
+    "Channel": "Kanaal",
+    "channel": "kanaal"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -18093,7 +18135,9 @@
     "… track": "… belte",
     "… turret ring": "… tårnring",
     "… viewport": "… visningsport",
-    "… vs modules": "… vs moduler"
+    "… vs modules": "… vs moduler",
+    "Channel": "Kanal",
+    "channel": "kanal"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -18960,7 +19004,9 @@
     "… track": "… gąsienica",
     "… turret ring": "… pierścień wieży",
     "… viewport": "… wizjer",
-    "… vs modules": "… w porównaniu do modułów"
+    "… vs modules": "… w porównaniu do modułów",
+    "Channel": "Kanał",
+    "channel": "kanał"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -19820,7 +19866,9 @@
     "… track": "… esteira",
     "… turret ring": "… anel da torre",
     "… viewport": "… visor",
-    "… vs modules": "… vs módulos"
+    "… vs modules": "… vs módulos",
+    "Channel": "Canal",
+    "channel": "canal"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -20680,7 +20728,9 @@
     "… track": "… șenile",
     "… turret ring": "… inel turelă",
     "… viewport": "… fereastră de vizualizare",
-    "… vs modules": "… vs module"
+    "… vs modules": "… vs module",
+    "Channel": "Canal",
+    "channel": "canal"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -21528,7 +21578,9 @@
     "… track": "… гусеница",
     "… turret ring": "… обод башни",
     "… viewport": "… обзорное окно",
-    "… vs modules": "… против модулей"
+    "… vs modules": "… против модулей",
+    "Channel": "Канал",
+    "channel": "канал"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -22190,7 +22242,9 @@
     "… track": "… pás",
     "… turret ring": "… kruh veže",
     "… viewport": "… pohľadové okno",
-    "… vs modules": "… vs moduly"
+    "… vs modules": "… vs moduly",
+    "Channel": "Kanál",
+    "channel": "kanál"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -23065,7 +23119,9 @@
     "… track": "… gusenica",
     "… turret ring": "… prsten kupole",
     "… viewport": "… vidni otvor",
-    "… vs modules": "… protiv modula"
+    "… vs modules": "… protiv modula",
+    "Channel": "Kanal",
+    "channel": "kanal"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -23944,7 +24000,9 @@
     "… track": "… kedja",
     "… turret ring": "… tornring",
     "… viewport": "… synfält",
-    "… vs modules": "… vs moduler"
+    "… vs modules": "… vs moduler",
+    "Channel": "Kanal",
+    "channel": "kanal"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -24819,7 +24877,9 @@
     "… track": "… เส้นทาง",
     "… turret ring": "… แหวนหอคอย",
     "… viewport": "… มุมมองภาพ",
-    "… vs modules": "… ปะทะโมดูล"
+    "… vs modules": "… ปะทะโมดูล",
+    "Channel": "ช่อง",
+    "channel": "ช่อง"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -25480,7 +25540,9 @@
     "… track": "… trak",
     "… turret ring": "… singsing ng tore",
     "… viewport": "… viewport",
-    "… vs modules": "… laban sa mga module"
+    "… vs modules": "… laban sa mga module",
+    "Channel": "Channel",
+    "channel": "channel"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -26352,7 +26414,9 @@
     "… track": "… palet",
     "… turret ring": "… kule halka",
     "… viewport": "… görüntü penceresi",
-    "… vs modules": "… modüllere karşı"
+    "… vs modules": "… modüllere karşı",
+    "Channel": "Kanal",
+    "channel": "kanal"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -27217,7 +27281,9 @@
     "… track": "… гусениця",
     "… turret ring": "… кільце башти",
     "… viewport": "… оглядове вікно",
-    "… vs modules": "… проти модулів"
+    "… vs modules": "… проти модулів",
+    "Channel": "Канал",
+    "channel": "канал"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -28071,7 +28137,9 @@
     "… track": "… xích",
     "… turret ring": "… vành tháp pháo",
     "… viewport": "… kính quan sát",
-    "… vs modules": "… so với các mô-đun"
+    "… vs modules": "… so với các mô-đun",
+    "Channel": "Kênh",
+    "channel": "kênh"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -28946,6 +29014,8 @@
     "… track": "… 履带",
     "… turret ring": "… 炮塔环",
     "… viewport": "… 视口",
-    "… vs modules": "… 对模块"
+    "… vs modules": "… 对模块",
+    "Channel": "频道",
+    "channel": "频道"
   }
 }

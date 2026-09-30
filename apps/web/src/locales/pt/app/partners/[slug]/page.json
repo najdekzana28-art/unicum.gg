@@ -11,6 +11,7 @@
   "panel": "Painel",
   "panel-hint": "Use-o como painel abaixo da sua transmissão, apontando para o seu link. É o único visual em que qualquer um pode clicar, na verdade.",
   "offline": "Tela offline",
+  "offline-hint": "Exibido no seu canal enquanto você não estiver transmitindo.",
   "offline-qr": "Tela offline com código QR",
   "offline-qr-hint": "A mesma, com um código QR escaneável. Mantenha-o apenas nesta tela: dentro do vídeo da transmissão, a compressão torna um código QR ilegível."
 }

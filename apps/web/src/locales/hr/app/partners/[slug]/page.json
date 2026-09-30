@@ -11,6 +11,7 @@
   "panel": "Panel",
   "panel-hint": "Koristite ga kao panel ispod svog streama, koji vodi na vašu poveznicu. To je jedini vizual na koji bilo tko zapravo može kliknuti.",
   "offline": "Zaslon kada niste u igri",
+  "offline-hint": "Prikazuje se na vašem kanalu dok ne emitirate.",
   "offline-qr": "Zaslon kada niste u igri s QR kodom",
   "offline-qr-hint": "Isti zaslon sa skenirajućim QR kodom. Koristite ga samo na ovom zaslonu, jer kompresija unutar videos­treama čini QR kod nečitljivim."
 }

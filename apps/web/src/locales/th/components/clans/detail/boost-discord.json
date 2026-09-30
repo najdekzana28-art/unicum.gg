@@ -4,7 +4,7 @@
   "bot-not-in-server": "บอตของเรายังไม่ได้อยู่ใน {server} {link} (เลือกเซิร์ฟเวอร์นี้บนหน้าจอ Discord) แล้วกลับมาอีกครั้ง",
   "cancel": "ยกเลิก",
   "change-channel": "เปลี่ยนช่องทาง",
-  "channel": "ช่องทาง",
+  "channel": "ช่อง",
   "connect-discord": "เชื่อมต่อ Discord",
   "connect-discord-to-post-boost": "เชื่อมต่อ Discord เพื่อโพสต์การเปิดใช้บูสต์ไปยังช่องที่คุณเลือก คุณจะถูกเพิ่มเข้าเซิร์ฟเวอร์ชุมชนของเราด้วย เลือกเซิร์ฟเวอร์ที่จะเพิ่มบอตในหน้าจอ Discord",
   "could-not-remove-the-destination": "ไม่สามารถนำปลายทางออกได้",

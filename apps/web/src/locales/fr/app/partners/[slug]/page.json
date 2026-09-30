@@ -11,6 +11,7 @@
   "panel": "Panneau",
   "panel-hint": "Utilisez-le comme panneau sous votre stream, pointant vers votre lien. C’est le seul visuel sur lequel n’importe qui peut réellement cliquer.",
   "offline": "Écran hors-ligne",
+  "offline-hint": "S’affiche sur votre chaîne lorsque vous ne diffusez pas.",
   "offline-qr": "Écran hors-ligne avec un code QR",
   "offline-qr-hint": "Le même avec un code QR scannable. Limitez-le à cet écran : dans la vidéo du stream, la compression rend un code QR illisible."
 }

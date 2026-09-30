@@ -11,6 +11,7 @@
   "panel": "Panel",
   "panel-hint": "Verwende es als Panel unter deinem Stream, das auf deinen Link verweist. Es ist die einzige Visualisierung, die jeder tatsächlich anklicken kann.",
   "offline": "Offline-Bildschirm",
+  "offline-hint": "Wird auf deinem kanal angezeigt, während du nicht streamst.",
   "offline-qr": "Offline-Bildschirm mit QR-Code",
   "offline-qr-hint": "Dieselbe Version mit einem scannbaren QR-Code. Verwende ihn nur auf diesem Bildschirm: Innerhalb des Video-Streams macht die Kompression einen QR-Code unlesbar."
 }

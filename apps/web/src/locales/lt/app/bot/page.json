@@ -23,9 +23,11 @@
   "one-click-adds": "Vienas spustelėjimas prideda botą prie jūsų serverio ir įtraukia jus į mūsų {discord}.",
   "player-stats": "Žaidėjo statistika",
   "private-then-shareable": "Privatu, vėliau galima bendrinti",
+  "replies-are-ephemeral-by-default-one-click-s": "Atsakymai pagal numatytuosius nustatymus yra laikini, vienu spustelėjimu kortelę galima bendrinti kanale.",
   "see-it-in-action": "Pamatykite, kaip tai veikia",
   "something-went-wrong-with-the-install-please": "Diegiant įvyko klaida. Bandykite dar kartą.",
   "tank-stats": "Tankas statistika",
+  "the-full-stats-table-ranked": "Pilna statistikos lentelė, reitinguojama ir nuspalvinta pagal žaidėjo WNX lygį, taip pat ta pati išsami kortelė, kurią sugeneruoja svetainė, ir mygtukas pilnam profiliui atidaryti. Atsakymai yra privatūs jums, kol nepasidalijate jais kanale.",
   "the-same-data-as-the-site": "Tie patys duomenys kaip svetainėje",
   "title": "World of Tanks Discord botas",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 ir WNX apskaičiuojami tiksliai kaip unicum.gg, su nuoroda atgal į visą profilį."

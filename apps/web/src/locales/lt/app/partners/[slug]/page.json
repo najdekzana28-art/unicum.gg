@@ -11,6 +11,7 @@
   "panel": "Skydelis",
   "panel-hint": "Naudokite jį kaip skydelį po savo transliacija, nukreipiantį į jūsų nuorodą. Tai vienintelis vaizdas, kurį bet kas iš tikrųjų gali spustelėti.",
   "offline": "Atsijungė ekranas",
+  "offline-hint": "Rodoma jūsų kanale, kol nevykdote transliacijos.",
   "offline-qr": "Atsijungė ekranas su QR kodu",
   "offline-qr-hint": "Tas pats ekranas su nuskaitomu QR kodu. Naudokite jį tik šiame ekrane, nes vaizdo įrašo sraute dėl glaudinimo QR kodo neįmanoma perskaityti."
 }

@@ -23,9 +23,11 @@
   "one-click-adds": "Jedan klik dodaje bota na tvoj сервер i uvodi te na naš {discord}.",
   "player-stats": "Statistika igrača",
   "private-then-shareable": "Privatno, pa deljivo",
+  "replies-are-ephemeral-by-default-one-click-s": "Одговори су подразумевано привремени, а једним кликом kartica се дели на kanal.",
   "see-it-in-action": "Pogledaj kako radi",
   "something-went-wrong-with-the-install-please": "Nešto nije u redu sa instalacijom. Pokušaj ponovo.",
   "tank-stats": "Statistika Tenajk",
+  "the-full-stats-table-ranked": "Потпуна табела статистике, рангирана и обојена према WNX нивоу играча, плус иста богата kartica коју сајт генерише и дугме за отварање потпуног профила. Одговори су приватни само за вас док их не поделите на kanal.",
   "the-same-data-as-the-site": "Isti подаци kao na sajtu",
   "title": "World of Tanks Discord bot",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 i WNX izračunati tačno kao na unicum.gg, uz vezu ka potpunom profilu."

@@ -11,6 +11,7 @@
   "panel": "Panel",
   "panel-hint": "Użyj go jako panelu pod swoją transmisją, kierującego do Twojego linku. To jedyna grafika, którą każdy może rzeczywiście kliknąć.",
   "offline": "Ekran odłączonego kanału",
+  "offline-hint": "Wyświetlane na Twoim kanale, gdy nie prowadzisz transmisji.",
   "offline-qr": "Ekran odłączonego kanału z kodem QR",
   "offline-qr-hint": "Ta sama wersja z kodem QR do zeskanowania. Używaj jej tylko na tym ekranie, ponieważ wewnątrz filmu kompresja sprawia, że kod QR staje się nieczytelny."
 }

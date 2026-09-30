@@ -11,6 +11,7 @@
   "panel": "Panelis",
   "panel-hint": "Izmantojiet to kā paneli zem savas straumes, kas norāda uz jūsu saiti. Tas ir vienīgais vizuālais materiāls, uz kura ikviens patiesībā var noklikšķināt.",
   "offline": "Ekrāns stāvoklim “nav spēlē”",
+  "offline-hint": "Tiek rādīts jūsu kanālā, kamēr nestraumējat.",
   "offline-qr": "Ekrāns stāvoklim “nav spēlē” ar QR kodu",
   "offline-qr-hint": "Tas pats ar noskenējamu QR kodu. Izmantojiet to tikai šajā ekrānā, jo video straumes kompresija padara QR kodu neiespējamu lasīt."
 }

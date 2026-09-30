@@ -11,6 +11,7 @@
   "panel": "Panel",
   "panel-hint": "Bruk det som et panel under strømmingen din, med lenken din. Det er det eneste visuelle materialet alle faktisk kan klikke på.",
   "offline": "Frakopla skjerm",
+  "offline-hint": "Vises på kanalen din mens du ikke strømmer.",
   "offline-qr": "Frakopla skjerm med QR-kode",
   "offline-qr-hint": "Det samme med en QR-kode som kan skannes. Begrens den til denne skjermen: Inne i videostrømmen gjør komprimering en QR-kode uleselig."
 }

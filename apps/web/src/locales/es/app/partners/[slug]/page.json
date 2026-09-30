@@ -11,6 +11,7 @@
   "panel": "Panel",
   "panel-hint": "Úsalo como panel debajo de tu transmisión, apuntando a tu enlace. Es el único elemento visual en el que cualquiera puede hacer clic realmente.",
   "offline": "Pantalla inactiva",
+  "offline-hint": "Se muestra en tu canal mientras no estás transmitiendo.",
   "offline-qr": "Pantalla inactiva con un código QR",
   "offline-qr-hint": "La misma, con un código QR escaneable. Úsala solo en esta pantalla: dentro del vídeo de la transmisión, la compresión hace que un código QR sea ilegible."
 }

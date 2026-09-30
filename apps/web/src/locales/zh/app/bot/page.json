@@ -23,9 +23,11 @@
   "one-click-adds": "点击一次即可将机器人添加到你的服务器，并加入我们的{discord}。",
   "player-stats": "玩家统计",
   "private-then-shareable": "默认私密，之后可分享",
+  "replies-are-ephemeral-by-default-one-click-s": "回复默认是临时消息，点击一次即可将卡片分享到频道。",
   "see-it-in-action": "查看实际效果",
   "something-went-wrong-with-the-install-please": "安装时出现问题。请重试。",
   "tank-stats": "坦克统计",
+  "the-full-stats-table-ranked": "完整数据表，按玩家的 WNX 等级排名并着色，加上网站生成的同样丰富的卡片，以及一个打开完整个人资料的按钮。回复在分享至频道前仅你可见。",
   "the-same-data-as-the-site": "与网站相同的数据",
   "title": "World of Tanks Discord 机器人",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7、WN8 和 WNX 的计算方式与 unicum.gg 完全一致，并附有返回完整档案的链接。"

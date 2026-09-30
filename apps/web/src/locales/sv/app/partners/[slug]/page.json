@@ -11,6 +11,7 @@
   "panel": "Panel",
   "panel-hint": "Använd den som en panel under din stream, med en länk som leder till din länk. Det är den enda grafiken som vem som helst faktiskt kan klicka på.",
   "offline": "Nedkopplad skärm",
+  "offline-hint": "Visas på din kanal när du inte streamar.",
   "offline-qr": "Nedkopplad skärm med en QR-kod",
   "offline-qr-hint": "Samma med en skanningsbar QR-kod. Använd den bara på den här skärmen, inne i videoströmmen gör komprimeringen en QR-kod oläslig."
 }

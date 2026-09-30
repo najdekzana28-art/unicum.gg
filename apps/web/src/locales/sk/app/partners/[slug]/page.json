@@ -11,6 +11,7 @@
   "panel": "Panel",
   "panel-hint": "Použite ho ako panel pod streamom, ktorý smeruje na váš odkaz. Je to jediný vizuál, na ktorý môže kdorkoli pravzaprav kliknúť.",
   "offline": "Offline obrazovka",
+  "offline-hint": "Zobrazuje sa na vašom kanáli, keď nevysielate.",
   "offline-qr": "Offline obrazovka s QR koda",
   "offline-qr-hint": "Rovnaká verzia s QR koda na skenovanie. Ponechajte ju na tejto obrazovke, vo videostreame kompresia spôsobí, že QR koda nebude čitateľná."
 }

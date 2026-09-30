@@ -11,6 +11,7 @@
   "panel": "Bảng điều khiển",
   "panel-hint": "Sử dụng làm bảng điều khiển bên dưới luồng phát của bạn, trỏ đến liên kết của bạn. Đây là hình ảnh duy nhất mà bất kỳ ai cũng có thể thực sự nhấp vào.",
   "offline": "Màn hình offline",
+  "offline-hint": "Được hiển thị trên kênh của bạn khi bạn không phát trực tuyến.",
   "offline-qr": "Màn hình offline có mã QR",
   "offline-qr-hint": "Phiên bản tương tự có thêm mã QR có thể quét. Chỉ sử dụng mã này trên màn hình này, vì trong luồng video, việc nén khiến mã QR không thể đọc được."
 }

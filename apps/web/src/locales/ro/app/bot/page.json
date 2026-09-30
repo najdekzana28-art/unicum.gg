@@ -23,9 +23,11 @@
   "one-click-adds": "Un clic adaugă botul pe serverul tău și te aduce în {discord}.",
   "player-stats": "Statistici Jucător",
   "private-then-shareable": "Privat, apoi partajabil",
+  "replies-are-ephemeral-by-default-one-click-s": "Răspunsurile sunt efemere în mod implicit, iar un singur clic distribuie cardul în canal.",
   "see-it-in-action": "Vezi-l în acțiune",
   "something-went-wrong-with-the-install-please": "Ceva nu a funcționat la instalare. Încearcă din nou.",
   "tank-stats": "Statistici Tanc",
+  "the-full-stats-table-ranked": "Tabelul complet de statistici, clasat și colorat în funcție de nivelul WNX al jucătorului, plus același card detaliat generat de site și un buton pentru deschiderea profilului complet. Răspunsurile îți sunt private până când le distribui în canal.",
   "the-same-data-as-the-site": "Aceleași date ca pe site",
   "title": "Bot Discord pentru World of Tanks",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 și WNX calculate exact ca pe unicum.gg, cu un link către profilul complet."

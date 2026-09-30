@@ -11,6 +11,7 @@
   "panel": "Paneeli",
   "panel-hint": "Käytä sitä streamisi alla olevana paneelina, joka ohjaa linkkiisi. Se on ainoa visuaali, jota kuka tahansa voi itse asiassa klikata.",
   "offline": "Offline-tilan näyttö",
+  "offline-hint": "Näytetään kanavallasi, kun et striimaa.",
   "offline-qr": "Offline-tilan näyttö QR-koodilla",
   "offline-qr-hint": "Sama näyttö skannattavalla QR-koodilla. Pidä se vain tässä näytössä: videovirrassa pakkaus tekee QR-koodista lukukelvottoman."
 }
