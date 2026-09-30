@@ -23,11 +23,11 @@
   "one-click-adds": "Sa isang click, maidaragdag ang bot sa iyong server at makakasali ka sa aming {discord}.",
   "player-stats": "Stats ng Manlalaro",
   "private-then-shareable": "Pribado muna, saka maaaring ibahagi",
-  "replies-are-ephemeral-by-default-one-click-s": "Pansamantala ang mga reply bilang default. Isang pindot lang para ibahagi ang card sa channel.",
+  "replies-are-ephemeral-by-default-one-click-s": "Ang mga reply ay panandalian bilang default. Sa isang pag-click, maibabahagi ang card sa channel ng Discord.",
   "see-it-in-action": "Tingnan ito sa aktuwal na paggamit",
   "something-went-wrong-with-the-install-please": "May nangyaring mali sa pag-install. Pakisubukang muli.",
   "tank-stats": "Stats ng Tangke",
-  "the-full-stats-table-ranked": "Ang kumpletong talahanayan ng istatistika, naka-ranked at may kulay ayon sa WNX tier ng manlalaro, dagdag ang parehong rich card na ginagawa ng website at isang pindutan para buksan ang kumpletong profile. Pribado sa iyo ang mga reply hanggang sa ibahagi mo ang mga ito sa channel.",
+  "the-full-stats-table-ranked": "Ang kumpletong talahanayan ng istatistika, ranked at may kulay ayon sa tier ng WNX ng manlalaro, dagdag ang parehong detalyadong card na ginagawa ng website at isang pindutan para buksan ang kumpletong profile. Pribado sa iyo ang mga reply hanggang sa ibahagi mo ang mga ito sa channel ng Discord.",
   "the-same-data-as-the-site": "Parehong datos gaya ng nasa website",
   "title": "Discord bot ng World of Tanks",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "Eksaktong nakalkula ang WN7, WN8 at WNX gaya sa unicum.gg, na may link pabalik sa kumpletong profile."

@@ -23,11 +23,11 @@
   "one-click-adds": "Tek tıklamayla botu sunucunuza ekleyin ve {discord} topluluğumuza katılın.",
   "player-stats": "Oyuncu istatistikleri",
   "private-then-shareable": "Özel, ardından paylaşılabilir",
-  "replies-are-ephemeral-by-default-one-click-s": "Yanıtlar varsayılan olarak geçicidir, tek tıklamayla kartı kanalda paylaşabilirsiniz.",
+  "replies-are-ephemeral-by-default-one-click-s": "Yanıtlar varsayılan olarak geçicidir. Tek tıklamayla kart Discord kanalında paylaşılır.",
   "see-it-in-action": "Nasıl çalıştığını görün",
   "something-went-wrong-with-the-install-please": "Yükleme sırasında bir sorun oluştu. Lütfen tekrar deneyin.",
   "tank-stats": "Tank istatistikleri",
-  "the-full-stats-table-ranked": "Oyuncunun WNX seviyesine göre dereceli ve renklendirilmiş tam istatistikler tablosu, ayrıca sitenin oluşturduğu zengin kart ve tam profili açmak için bir buton. Yanıtlar, siz onları kanalda paylaşana kadar yalnızca size özeldir.",
+  "the-full-stats-table-ranked": "Oyuncunun WNX seviyesine göre dereceli ve renklendirilmiş tam istatistik tablosu, ayrıca sitenin oluşturduğu aynı zengin kart ve tam profili açmak için bir buton. Yanıtlar, onları Discord kanalında paylaşana kadar yalnızca size özeldir.",
   "the-same-data-as-the-site": "Sitedeki verilerin aynısı",
   "title": "World of Tanks Discord botu",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 ve WNX, unicum.gg’dekiyle tam olarak aynı şekilde hesaplanır ve tam profile bağlantı içerir."

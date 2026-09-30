@@ -23,11 +23,11 @@
   "one-click-adds": "Egy kattintással hozzáadhatod a botot a szerveredhez, és csatlakozhatsz a közösségünkhöz itt: {discord}.",
   "player-stats": "Játékos statisztikák",
   "private-then-shareable": "Közlegény, majd megosztható",
-  "replies-are-ephemeral-by-default-one-click-s": "A válaszok alapértelmezés szerint ideiglenesek, egy kattintással megoszthatod a kártyát a csatornára.",
+  "replies-are-ephemeral-by-default-one-click-s": "A válaszok alapértelmezés szerint ideiglenesek. Egyetlen kattintással megoszthatod a kártyát a Discord-csatornában.",
   "see-it-in-action": "Nézd meg működés közben",
   "something-went-wrong-with-the-install-please": "Hiba történt a telepítés során. Próbáld újra.",
   "tank-stats": "Tank statisztikák",
-  "the-full-stats-table-ranked": "A teljes statisztikai táblázat, a játékos WNX-szintje szerint rangsorolva és színezve, plusz ugyanaz a webhely által létrehozott részletes kártya és egy gomb a teljes profil megnyitásához. A válaszok privátok maradnak, amíg meg nem osztod őket a csatornán.",
+  "the-full-stats-table-ranked": "A teljes statisztikai táblázat, rangsorolva és a játékos WNX-szintje szerint színezve, plusz ugyanaz a webhely által generált részletes kártya és egy gomb a teljes profil megnyitásához. A válaszok privátak maradnak számodra, amíg meg nem osztod őket a Discord-csatornában.",
   "the-same-data-as-the-site": "Ugyanazok az adatok, mint a webhelyen",
   "title": "World of Tanks Discord bot",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "A WN7, WN8 és WNX kiszámítása pontosan úgy történik, mint az unicum.gg oldalon, a teljes profilra mutató hivatkozással."

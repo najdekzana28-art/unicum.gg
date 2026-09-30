@@ -23,11 +23,11 @@
   "one-click-adds": "한 번 클릭하면 봇이 서버에 추가되고 우리 {discord}에 참여할 수 있습니다.",
   "player-stats": "플레이어 통계",
   "private-then-shareable": "비공개로 확인한 뒤 공유",
-  "replies-are-ephemeral-by-default-one-click-s": "답변은 기본적으로 일시적으로 표시되며, 한 번 클릭하면 카드를 채널에 공유할 수 있습니다.",
+  "replies-are-ephemeral-by-default-one-click-s": "응답은 기본적으로 사라집니다. 한 번 클릭하면 카드를 Discord 채널에 공유할 수 있습니다.",
   "see-it-in-action": "작동 방식 확인",
   "something-went-wrong-with-the-install-please": "설치 중 문제가 발생했습니다. 다시 시도해 주세요.",
   "tank-stats": "탱크 통계",
-  "the-full-stats-table-ranked": "플레이어의 WNX 단계에 따라 랭크와 색상으로 표시된 전체 통계 표, 사이트가 생성하는 동일한 상세 카드, 전체 프로필을 열기 위한 버튼을 제공합니다. 응답은 채널에 공유하기 전까지 본인에게만 비공개입니다.",
+  "the-full-stats-table-ranked": "플레이어의 WNX 단계에 따라 랭크가 매겨지고 색상이 표시되는 전체 통계 표, 사이트에서 생성하는 동일한 상세 카드, 전체 프로필 열기 버튼을 제공합니다. 응답은 Discord 채널에 공유하기 전까지 본인에게만 비공개로 표시됩니다.",
   "the-same-data-as-the-site": "사이트와 동일한 데이터",
   "title": "World of Tanks Discord 봇",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8, WNX를 unicum.gg와 정확히 동일한 방식으로 계산하며 전체 프로필로 돌아가는 링크를 제공합니다."

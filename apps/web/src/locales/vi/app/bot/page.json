@@ -23,11 +23,11 @@
   "one-click-adds": "Một cú nhấp chuột thêm bot vào máy chủ của bạn và đưa bạn vào {discord} của chúng tôi.",
   "player-stats": "Thống kê người chơi",
   "private-then-shareable": "Riêng tư, sau đó có thể chia sẻ",
-  "replies-are-ephemeral-by-default-one-click-s": "Theo mặc định, các câu trả lời sẽ biến mất, chỉ một lần nhấp để chia sẻ thẻ vào kênh.",
+  "replies-are-ephemeral-by-default-one-click-s": "Phản hồi mặc định sẽ biến mất. Chỉ với một lần nhấp, bạn có thể chia sẻ thẻ vào kênh Discord.",
   "see-it-in-action": "Xem hoạt động thực tế",
   "something-went-wrong-with-the-install-please": "Đã xảy ra lỗi khi cài đặt. Vui lòng thử lại.",
   "tank-stats": "Thống kê xe tăng",
-  "the-full-stats-table-ranked": "Bảng thống kê đầy đủ, được xếp hạng và tô màu theo cấp WNX của người chơi, cộng với thẻ phong phú tương tự mà trang web tạo ra và một nút để mở hồ sơ đầy đủ. Các câu trả lời chỉ riêng bạn xem được cho đến khi bạn chia sẻ chúng vào kênh.",
+  "the-full-stats-table-ranked": "Bảng thống kê đầy đủ, được xếp hạng và tô màu theo cấp WNX của người chơi, cộng với thẻ nhiều thông tin tương tự do trang web tạo ra và một nút để mở hồ sơ đầy đủ. Phản hồi chỉ hiển thị với bạn cho đến khi bạn chia sẻ chúng vào kênh Discord.",
   "the-same-data-as-the-site": "Cùng dữ liệu như trên trang web",
   "title": "Bot World of Tanks trên Discord",
   "wn7-wn8-and-wnx-computed-exactly-like-unicum": "WN7, WN8 và WNX được tính toán chính xác như trên unicum.gg, kèm liên kết quay lại hồ sơ đầy đủ."
