@@ -2,6 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { DownloadSimpleIcon } from "@phosphor-icons/react/dist/ssr";
+import { Interpolate } from "@/components/interpolate";
 import {
   Panel,
   PanelContent,
@@ -77,7 +78,12 @@ export default async function PartnerKitPage({
             {t("creator-kit")}
           </div>
           <h1 className="mx-auto max-w-3xl font-heading text-4xl font-bold tracking-tight text-balance md:text-5xl">
-            {t("your-visuals", { NAME: kit.name })}
+            <Interpolate
+              template={t("your-visuals", { NAME: kit.name })}
+              wrap={{
+                accent: (text) => <span className="text-brand">{text}</span>,
+              }}
+            />
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
             {t("sized-the-way-twitch-expects-them-ready-to-u", {

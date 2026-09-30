@@ -1,6 +1,6 @@
 {
   "creator-kit": "Creator kit",
-  "your-visuals": "Your {NAME} visuals",
+  "your-visuals": "Your <accent>{NAME}</accent> visuals",
   "sized-the-way-twitch-expects-them-ready-to-u": "Sized the way Twitch expects them, ready to use. Your link is {URL}, and it lands on your own page on the site.",
   "title": "{NAME}'s creator kit",
   "description": "unicum.gg visuals for {NAME}: stream overlay, clickable panel and offline screen, ready to use.",
