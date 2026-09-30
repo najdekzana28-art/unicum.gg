@@ -75,7 +75,13 @@ export function useVideoControl({
       }
     };
 
-    const handleCanPlayThrough = () => {
+    // **`canplay`, not `canplaythrough`.** The two differ by the whole file:
+    // `canplaythrough` fires once the browser believes it can play to the end
+    // without stopping, so waiting for it is asking for every byte up front,
+    // which is how a decorative loop came to be 13 MB of a 15 MB page. `canplay`
+    // fires as soon as there is enough to start, and a looping muted background
+    // that buffers as it goes is the same thing to look at.
+    const handleCanPlay = () => {
       setTimeout(() => {
         tryAutoplay();
       }, 100);
@@ -91,10 +97,12 @@ export function useVideoControl({
     
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
-    video.addEventListener('canplaythrough', handleCanPlayThrough);
+    video.addEventListener('canplay', handleCanPlay);
     document.addEventListener('visibilitychange', handleVisibilityChange);
     
-    if (video.readyState >= 4) {
+    // `>= 3` for the same reason: HAVE_FUTURE_DATA is what `canplay` reports,
+    // and the element may already be there when this effect runs.
+    if (video.readyState >= 3) {
       setTimeout(() => {
         tryAutoplay();
       }, 100);
@@ -103,7 +111,7 @@ export function useVideoControl({
     return () => {
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
-      video.removeEventListener('canplaythrough', handleCanPlayThrough);
+      video.removeEventListener('canplay', handleCanPlay);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [isLoading, isPlaying, setSavedPlayingState]);
