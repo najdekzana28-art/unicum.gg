@@ -1,0 +1,17 @@
+{
+  "creator-kit": "Creator kit",
+  "your-visuals": "Your {NAME} visuals",
+  "sized-the-way-twitch-expects-them-ready-to-u": "Sized the way Twitch expects them, ready to use. Your link is {URL}, and it lands on your own page on the site.",
+  "title": "{NAME}'s creator kit",
+  "description": "unicum.gg visuals for {NAME}: stream overlay, clickable panel and offline screen, ready to use.",
+  "overlay": "Overlay",
+  "overlay-hint": "Add it in OBS as an Image source. Transparent background. The top right corner clears the webcam, the minimap and the damage panel.",
+  "overlay-compact": "Overlay, compact version",
+  "overlay-compact-hint": "The same one without the logo, 36px narrower, if the first takes up too much room.",
+  "panel": "Panel",
+  "panel-hint": "Use it as a panel under your stream, pointing at your link. It is the only visual anyone can actually click.",
+  "offline": "Offline screen",
+  "offline-hint": "Shown on your channel while you are not streaming.",
+  "offline-qr": "Offline screen with a QR code",
+  "offline-qr-hint": "The same one with a scannable QR code. Keep it to this screen: inside the video stream, compression makes a QR code unreadable."
+}

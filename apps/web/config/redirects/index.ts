@@ -8,6 +8,7 @@ import { PLAYER_VIEWS } from "../../src/components/players/detail/tabs";
 import { TANK_DETAIL_TABS } from "../../src/components/tanks/detail/tabs";
 import { TANK_TABS } from "../../src/components/tanks/list/tabs";
 import { legacyQueryRedirects, segmentsOf } from "./legacy-query";
+import { partnerRedirects } from "./partners";
 
 /** The map gallery filters by battle type, which is an enum rather than a tab
  * list, so it is shaped like one to go through the same builder. `all` is the
@@ -130,4 +131,8 @@ export const redirects: NextConfig["redirects"] = async () => [
   // one. They are views of their base map now, and the slug is gone with the
   // card, so each old URL keeps its readers by landing on the view it named.
   ...mapVariantRedirects,
+  // Creator vanity URLs (`/remi`). Declared rather than routed so they cannot
+  // shadow a real page: a catch-all `/[slug]` at the root would swallow every
+  // unmatched path on the site.
+  ...partnerRedirects,
 ];
