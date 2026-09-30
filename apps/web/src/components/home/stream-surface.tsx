@@ -4,23 +4,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { FeaturedPlayer } from "@/components/home/featured-player";
+import { useAfterLoad } from "@/hooks/use-after-load";
 
 /** Twitch hands the preview out as a template rather than a URL. */
 function thumb(url: string, w: number, h: number): string {
   return url.replace("{width}", String(w)).replace("{height}", String(h));
 }
-
-/**
- * How long to wait for an idle moment before giving up and loading anyway.
- *
- * A page that never goes idle is the one that most needs the player not to be
- * competing with it, but the stream still has to start: the deadline turns "when
- * the browser is free" into "soon, and free if possible".
- */
-const IDLE_DEADLINE = 2_000;
-
-/** Browsers without `requestIdleCallback` (Safari until recently) wait this. */
-const FALLBACK_DELAY = 800;
 
 /**
  * The featured stream: the preview first, the player a moment later, on its own.
@@ -69,58 +58,23 @@ export function StreamSurface({
    * few hundred milliseconds of the wait. Warming them a beat before the player
    * is built means the player's first request goes out on an open socket.
    */
-  const [warm, setWarm] = useState(false);
+  const afterLoad = useAfterLoad();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    let live = true;
-    let idle: number | undefined;
-    let timer: number | undefined;
-
-    const build = () => {
-      if (!live) return;
-      setWarm(true);
-      // A frame later, so the preconnects are in the document before the SDK
-      // asks for anything.
-      timer = window.requestAnimationFrame(() => {
-        if (live) setMounted(true);
-      });
-    };
-
-    const schedule = () => {
-      if (!live) return;
-      // `typeof`, not `"requestIdleCallback" in window`: the `in` check narrows
-      // `window` to `never` on the else branch, where the fallback lives.
-      if (typeof window.requestIdleCallback === "function") {
-        idle = window.requestIdleCallback(build, { timeout: IDLE_DEADLINE });
-      } else {
-        timer = window.setTimeout(build, FALLBACK_DELAY);
-      }
-    };
-
-    // **After the document has loaded, never before.** The whole point is to
-    // stop the embed competing with the page's own resources, and an idle
-    // callback fired mid-load would do exactly that.
-    if (document.readyState === "complete") schedule();
-    else window.addEventListener("load", schedule, { once: true });
-
-    return () => {
-      live = false;
-      window.removeEventListener("load", schedule);
-      if (idle !== undefined) window.cancelIdleCallback?.(idle);
-      if (timer !== undefined) {
-        window.clearTimeout(timer);
-        window.cancelAnimationFrame(timer);
-      }
-    };
-  }, []);
+    if (!afterLoad) return;
+    // A frame after the preconnects are in the document, so the SDK's first
+    // request goes out on a socket that is already open.
+    const id = window.requestAnimationFrame(() => setMounted(true));
+    return () => window.cancelAnimationFrame(id);
+  }, [afterLoad]);
 
   return (
     <>
       {/* React hoists these into the head. Rendered only once the page is done
           with its own loading, so the handshakes are spent on the player rather
           than taken from the paint. */}
-      {warm ? (
+      {afterLoad ? (
         <>
           <link rel="preconnect" href="https://player.twitch.tv" />
           <link rel="preconnect" href="https://assets.twitch.tv" />
