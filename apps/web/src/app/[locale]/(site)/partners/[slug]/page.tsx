@@ -13,6 +13,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { cn } from "@/lib/utils";
 import {
+  assetSize,
   PARTNER_ASSET_IDS,
   PARTNER_ASSETS,
   PARTNER_KITS,
@@ -89,6 +90,7 @@ export default async function PartnerKitPage({
       <div className="flex flex-col">
         {PARTNER_ASSET_IDS.map((id) => {
           const asset = PARTNER_ASSETS[id];
+          const size = assetSize(id, slug, kit.locale);
           const src = `/api/partners/${slug}/${id}`;
           return (
             <React.Fragment key={id}>
@@ -105,7 +107,7 @@ export default async function PartnerKitPage({
                     )}
                   >
                     <DownloadSimpleIcon className="size-4" />
-                    {asset.width}×{asset.height}
+                    {size.width}×{size.height}
                   </a>
                 </PanelHeader>
                 <PanelContent className="flex flex-col gap-3 px-4 py-6">
@@ -127,8 +129,8 @@ export default async function PartnerKitPage({
                     <Image
                       src={src}
                       alt={t(asset.labelKey)}
-                      width={asset.width}
-                      height={asset.height}
+                      width={size.width}
+                      height={size.height}
                       unoptimized
                       className="h-auto max-w-full"
                       style={{ maxHeight: 300, width: "auto" }}

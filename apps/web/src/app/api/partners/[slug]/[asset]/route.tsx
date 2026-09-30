@@ -3,6 +3,7 @@ import QRCode from "qrcode";
 import APP from "@/constants/app";
 import {
   ASSET_COPY,
+  assetSize,
   PARTNER_ASSETS,
   PARTNER_KITS,
   type PartnerAssetId,
@@ -137,9 +138,12 @@ export async function GET(
     </div>
   );
 
+  // Sized from the creator's own slug: the overlays follow their text so a
+  // short name is not padded with empty space and a long one is not clipped.
+  const size = assetSize(asset as PartnerAssetId, slug, kit.locale);
   return new ImageResponse(body, {
-    width: spec.width,
-    height: spec.height,
+    width: size.width,
+    height: size.height,
     fonts: ogFonts({ regular, bold, logoSrc }),
     headers: { "Cache-Control": OG_CACHE_CONTROL },
   });
