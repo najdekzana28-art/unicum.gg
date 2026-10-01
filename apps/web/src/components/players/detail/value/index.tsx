@@ -1,16 +1,13 @@
 import { useLocale } from "@onruntime/translations/react";
 import { numberFormat } from "@/lib/format";
 import { useTranslation } from "@/hooks/use-translation";
+import { CoinVerticalIcon } from "@phosphor-icons/react/dist/ssr";
 import {
-  CoinVerticalIcon,
-  MedalIcon,
-  StorefrontIcon,
-  TrophyIcon,
-} from "@phosphor-icons/react/dist/ssr";
-import { toRoman } from "roman-numerals";
-import {
+  CREDITS_PER_GOLD,
+  XP_PER_GOLD,
+  type PlayerTankRow,
   type PlayerValuation,
-  type TierContribution,
+  type RebuildLine,
   moneyFmt,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -28,30 +25,30 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TankCostsTable } from "@/components/players/detail/value/tank-costs";
+import { COSTS_SKELETON_COLUMNS } from "@/components/players/detail/value/skeleton-columns";
+import { TableSkeleton } from "@/components/table-skeleton";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
 const INT_FORMAT = { maximumFractionDigits: 0 } as const;
 
-/** One breakdown line; `tip` (if given) shows the calculation on hover. */
+/** One breakdown line; `tip` (if given) spells out the calculation on hover. */
 function Row({
   label,
   value,
   hint,
-  strong,
   tip,
 }: {
   label: string;
   value: string;
   hint?: string;
-  strong?: boolean;
   tip?: React.ReactNode;
 }) {
   const left = (
     <span
       className={cn(
-        "text-sm",
-        strong ? "font-medium text-fd-foreground" : "text-fd-muted-foreground",
+        "text-sm text-fd-muted-foreground",
         tip && "cursor-help decoration-dotted underline-offset-4 hover:underline",
       )}
     >
@@ -72,63 +69,54 @@ function Row({
         left
       )}
       <span className="mx-2 mb-1 flex-1 border-b border-dotted border-fd-border" />
-      <span
-        className={cn(
-          "text-sm tabular-nums",
-          strong ? "font-semibold text-fd-foreground" : "text-fd-foreground/85",
-        )}
-      >
-        {value}
-      </span>
-    </div>
-  );
-}
-
-/** Renders "Tier X: 5 × €150 = €750" lines for a per-tier contribution list. */
-function TierLines({
-  rows,
-  money,
-}: {
-  rows: TierContribution[];
-  money: (n: number) => string;
-}) {
-  const { t } = useTranslation("components/players/detail/value/index");
-  if (rows.length === 0) return <p>{t("no-contribution")}</p>;
-  return (
-    <div className="space-y-0.5">
-      {rows.map((r) => (
-        <div key={r.tier} className="flex justify-between gap-3 tabular-nums">
-          <span>
-            {t("tier", { tier: toRoman(r.tier), count: r.count, unit: money(r.unit) })}</span>
-          <span className="font-medium">{money(r.value)}</span>
-        </div>
-      ))}
+      <span className="text-sm tabular-nums text-fd-foreground/85">{value}</span>
     </div>
   );
 }
 
 /**
- * The account's two estimated values, computed server-side (see the shared
- * `players/valuation` model): grey-market resale estimate (Market value) and
- * reconstruction cost through the store (Rebuild value). Each market line
- * spells out its calculation on hover.
+ * What the account's garage would cost to put together again through the
+ * official store, computed server-side (see the shared `players/valuation`
+ * model), broken into the three things actually paid for.
  */
 export function ValueTab(
   props:
     | { loading: true; nickname: string }
-    | { region: Region; nickname: string; valuation: PlayerValuation },
+    | {
+        region: Region;
+        nickname: string;
+        valuation: PlayerValuation;
+        /** The garage behind the total, for the per-vehicle table. Loaded from
+         * the tanks endpoint when this tab opens, like the Tanks tab does, so
+         * the detail payload stays free of a 500-row list only this table
+         * reads. Empty while it is in flight. */
+        vehicles: PlayerTankRow[];
+        vehiclesLoading: boolean;
+      },
 ) {
   const { locale } = useLocale();
-  const { t: tCopy } = useTranslation("components/players/detail/value/index");
   const { t } = useTranslation("components/players/detail/value/index");
   if ("loading" in props) {
     return <ValueTabSkeleton nickname={props.nickname} />;
   }
 
-  const { region, nickname, valuation } = props;
+  const { region, nickname, valuation, vehicles, vehiclesLoading } = props;
   const fmt = moneyFmt(region);
   const money = (n: number) => (fmt ? fmt.format(n) : `~${n.toFixed(0)}`);
-  const { market, account } = valuation;
+  const { account } = valuation;
+  const num = (n: number) => numberFormat(locale, INT_FORMAT).format(n);
+  const breakdown = account?.breakdown;
+
+  // Each line's own tooltip: how many vehicles it pays for, and the game's own
+  // rate that turns its currency into the gold the store actually sells.
+  const lineTip = (line: RebuildLine, body: string) => (
+    <div className="space-y-1 text-xs">
+      <p className="opacity-80">{body}</p>
+      <p className="tabular-nums opacity-70">
+        {t("that-is-n-gold", { gold: num(line.gold) })}
+      </p>
+    </div>
+  );
 
   return (
     <>
@@ -137,142 +125,83 @@ export function ValueTab(
         <PanelHeader>
           <PanelTitle>{t("account-value", { nickname })}</PanelTitle>
         </PanelHeader>
-        <PanelContent className="grid gap-px p-0 md:grid-cols-2">
-          {/* Market value: the headline, what a comparable account trades for */}
+        <PanelContent className="p-0">
           <TooltipProvider delayDuration={100}>
-            <section className="space-y-3 p-6">
+            {/* One column since the market estimate was removed, so the content
+                carries its own measure: a dotted leader spanning a desktop
+                screen is unreadable, and so is prose at that line length. */}
+            <section className="max-w-2xl space-y-3 p-6">
               <div className="flex items-center gap-2">
-                <StorefrontIcon
+                <CoinVerticalIcon
                   weight="duotone"
-                  className="size-6 text-fd-primary"
+                  className="size-6 text-[#F2D45C]"
                 />
                 <div>
-                  <h3 className="font-semibold">{t("market-value")}</h3>
+                  <h3 className="font-semibold">{t("rebuild-value")}</h3>
                   <p className="text-xs text-fd-muted-foreground">
-                    {t("estimated-worth-of-the-account")}</p>
+                    {t("cost-to-reach-the-same")}</p>
                 </div>
               </div>
-              <div className="font-heading text-4xl font-bold text-fd-primary">
-                {money(market.amount)}
-              </div>
-              <div className="space-y-1 border-t border-fd-border pt-3">
-                <Row
-                  label={t("reward-tanks-label")}
-                  hint={`× ${market.rewardCount}`}
-                  value={money(market.rewards)}
-                  tip={
-                    <div className="space-y-1.5 text-xs">
-                      <p className="opacity-70">
-                        {t("reward-tanks-add-a-little")}</p>
-                      <TierLines rows={market.rewardsByTier} money={money} />
-                    </div>
-                  }
-                />
-                <Row
-                  label={t("marks-of-excellence")}
-                  hint={
-                    market.mark3Count
-                      ? t("n-three-mark-guns", { count: market.mark3Count })
-                      : undefined
-                  }
-                  value={money(market.marks)}
-                  tip={
-                    <div className="space-y-1.5 text-xs">
-                      <p className="opacity-70">
-                        {t("marks-weighted-by-tier-3")}</p>
-                      {market.marks3ByTier.length > 0 && (
-                        <div>
-                          <p className="font-medium">{tCopy("3-marks")}</p>
-                          <TierLines rows={market.marks3ByTier} money={money} />
-                        </div>
-                      )}
-                      {market.marks2ByTier.length > 0 && (
-                        <div>
-                          <p className="font-medium">{tCopy("2-marks")}</p>
-                          <TierLines rows={market.marks2ByTier} money={money} />
-                        </div>
-                      )}
-                    </div>
-                  }
-                />
-                <Row
-                  label={t("tier-x-premiums")}
-                  hint={`${market.tierXCount} + ${market.premiumCount}`}
-                  value={money(market.tierX + market.premiums)}
-                  tip={
-                    <div className="space-y-0.5 text-xs tabular-nums">
-                      <div className="flex justify-between gap-3">
-                        <span>{t("tier-x-0-25", { tierXCount: market.tierXCount })}</span>
-                        <span>{money(market.tierX)}</span>
-                      </div>
-                      <div className="flex justify-between gap-3 opacity-70">
-                        <span>{t("premiums-by-tier", { premiumCount: market.premiumCount })}</span>
-                        <span>{money(market.premiums)}</span>
-                      </div>
-                      <TierLines rows={market.premiumsByTier} money={money} />
-                    </div>
-                  }
-                />
-                <Row label={t("garage-subtotal")} value={money(market.content)} strong />
-                <Row
-                  label={t("skill-premium")}
-                  hint={`WGR ${numberFormat(locale, INT_FORMAT).format(market.wgr)}`}
-                  value={`+ ${money(market.skillPremium)}`}
-                  tip={
-                    <div className="space-y-1 text-xs opacity-80">
-                      <p>
-                        {t("the-real-driver-based-on")}</p>
-                    </div>
-                  }
-                />
-                {market.depthBonus > 0 && (
-                  <Row
-                    label={t("depth-bonus")}
-                    hint={`${numberFormat(locale, INT_FORMAT).format(market.battles)} battles`}
-                    value={`+ ${money(market.depthBonus)}`}
-                    tip={
-                      <div className="text-xs opacity-80">
-                        {t("an-exceptional-battle-count-is")}</div>
-                    }
-                  />
+              <div>
+                <div className="font-heading text-4xl font-bold text-fd-foreground">
+                  {account ? money(account.amount) : "—"}
+                </div>
+                {breakdown && (
+                  <p className="mt-1 text-sm tabular-nums text-fd-muted-foreground">
+                    {t("n-gold-in-total", { gold: num(breakdown.gold) })}
+                  </p>
                 )}
               </div>
+              {/* Absent only while a payload cached under the previous shape is
+                  still being served (60s at most), where the total stands on
+                  its own exactly as it did before. */}
+              {breakdown && (
+                <div className="space-y-1 border-t border-fd-border pt-3">
+                  <Row
+                    label={t("research-label")}
+                    hint={t("n-free-xp", {
+                      units: num(breakdown.research.units),
+                    })}
+                    value={money(breakdown.research.amount)}
+                    tip={lineTip(
+                      breakdown.research,
+                      t("researched-with-free-xp", {
+                        count: num(breakdown.research.count),
+                        rate: XP_PER_GOLD,
+                      }),
+                    )}
+                  />
+                  <Row
+                    label={t("purchase-label")}
+                    hint={t("n-credits", {
+                      units: num(breakdown.credits.units),
+                    })}
+                    value={money(breakdown.credits.amount)}
+                    tip={lineTip(
+                      breakdown.credits,
+                      t("bought-with-credits", {
+                        count: num(breakdown.credits.count),
+                        rate: CREDITS_PER_GOLD,
+                      }),
+                    )}
+                  />
+                  <Row
+                    label={t("premiums-label")}
+                    hint={t("n-gold", { units: num(breakdown.premiums.units) })}
+                    value={money(breakdown.premiums.amount)}
+                    tip={lineTip(
+                      breakdown.premiums,
+                      t("already-priced-in-gold", {
+                        count: num(breakdown.premiums.count),
+                      }),
+                    )}
+                  />
+                </div>
+              )}
+              <p className={styles.mutedDescription}>
+                {t("the-real-money-cost-to-research")}</p>
             </section>
           </TooltipProvider>
-
-          {/* Account value: reconstruction cost through the store */}
-          <section className="space-y-3 p-6">
-            <div className="flex items-center gap-2">
-              <CoinVerticalIcon
-                weight="duotone"
-                className="size-6 text-[#F2D45C]"
-              />
-              <div>
-                <h3 className="font-semibold">{t("rebuild-value")}</h3>
-                <p className="text-xs text-fd-muted-foreground">
-                  {t("cost-to-reach-the-same")}</p>
-              </div>
-            </div>
-            <div className="font-heading text-4xl font-bold text-fd-foreground">
-              {account ? money(account.amount) : "—"}
-            </div>
-            <p className={styles.mutedDescription}>
-              {t("the-real-money-cost-to")}</p>
-            <div className="flex flex-wrap gap-4 border-t border-fd-border pt-3 text-sm">
-              <span className="flex items-center gap-1.5 text-fd-muted-foreground">
-                <TrophyIcon className="size-4 text-fd-primary" />
-                {t("reward-tanks-count", {
-                  count: numberFormat(locale, INT_FORMAT).format(market.rewardCount),
-                })}
-              </span>
-              <span className="flex items-center gap-1.5 text-fd-muted-foreground">
-                <MedalIcon className="size-4 text-[#E8B96A]" />
-                {t("tanks-3-marked", {
-                  count: numberFormat(locale, INT_FORMAT).format(market.mark3Count),
-                })}
-              </span>
-            </div>
-          </section>
         </PanelContent>
       </Panel>
 
@@ -280,14 +209,32 @@ export function ValueTab(
       <Panel>
         <PanelContent className="px-4 py-4">
           <p className="text-xs leading-relaxed text-fd-muted-foreground">
-            {t("indicative-estimates-only-the-market")}</p>
+            {t("an-indicative-estimate-only-store")}</p>
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>{t("every-tank-and-what-it")}</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          {vehiclesLoading ? (
+            <TableSkeleton rail columns={COSTS_SKELETON_COLUMNS} rows={10} />
+          ) : (
+            <TankCostsTable
+              region={region}
+              nickname={nickname}
+              vehicles={vehicles}
+            />
+          )}
         </PanelContent>
       </Panel>
     </>
   );
 }
 
-/** The loading twin: same panels + real title, the two valuation columns and the
+/** The loading twin: same panels + real title, the rebuild column and the
  * disclaimer rendered as placeholders. */
 function ValueTabSkeleton({ nickname }: { nickname: string }) {
   const { t } = useTranslation("components/players/detail/value/index");
@@ -298,44 +245,35 @@ function ValueTabSkeleton({ nickname }: { nickname: string }) {
         <PanelHeader>
           <PanelTitle>{t("account-value", { nickname })}</PanelTitle>
         </PanelHeader>
-        <PanelContent className="grid gap-px p-0 md:grid-cols-2">
-          {(["market", "rebuild"] as const).map((col) => (
-            <section key={col} className="space-y-3 p-6">
-              <div className="flex items-center gap-2">
-                <Skeleton className="size-6 rounded-md" />
-                <div className="space-y-1">
-                  <Skeleton className="h-4 w-24" />
-                  <Skeleton className="h-3 w-56" />
-                </div>
+        <PanelContent className="p-0">
+          <section className="max-w-2xl space-y-3 p-6">
+            <div className="flex items-center gap-2">
+              <Skeleton className="size-6 rounded-md" />
+              <div className="space-y-1">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-3 w-56" />
               </div>
+            </div>
+            <div className="space-y-1.5">
               <Skeleton className="h-10 w-40" />
-              {col === "market" ? (
-                <div className="space-y-2.5 border-t border-fd-border pt-3">
-                  {Array.from({ length: 6 }, (_, i) => (
-                    <div
-                      key={i}
-                      className="flex items-baseline justify-between gap-2"
-                    >
-                      <Skeleton className="h-4 w-32" />
-                      <Skeleton className="h-4 w-16" />
-                    </div>
-                  ))}
+              <Skeleton className="h-4 w-32" />
+            </div>
+            <div className="space-y-2.5 border-t border-fd-border pt-3">
+              {Array.from({ length: 3 }, (_, i) => (
+                <div
+                  key={i}
+                  className="flex items-baseline justify-between gap-2"
+                >
+                  <Skeleton className="h-4 w-44" />
+                  <Skeleton className="h-4 w-16" />
                 </div>
-              ) : (
-                <>
-                  <div className={`space-y-1.5 ${styles.mutedDescription}`}>
-                    <Skeleton className="h-3 w-full max-w-md" />
-                    <Skeleton className="h-3 w-full max-w-sm" />
-                    <Skeleton className="h-3 w-2/3 max-w-xs" />
-                  </div>
-                  <div className="flex flex-wrap gap-4 border-t border-fd-border pt-3">
-                    <Skeleton className="h-4 w-28" />
-                    <Skeleton className="h-4 w-28" />
-                  </div>
-                </>
-              )}
-            </section>
-          ))}
+              ))}
+            </div>
+            <div className={`space-y-1.5 ${styles.mutedDescription}`}>
+              <Skeleton className="h-3 w-full max-w-md" />
+              <Skeleton className="h-3 w-2/3 max-w-xs" />
+            </div>
+          </section>
         </PanelContent>
       </Panel>
       <PanelSeparator />

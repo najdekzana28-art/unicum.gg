@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} reward tanks are not listed: the shop sets no price for them. They are not free either, since Wargaming issues them through its own events, auctions and paid Battle Pass tiers among others, at whatever it asks each time rather than at a published price.",
+  "n-tier-i-vehicles-are": "{count} tier I vehicles are not listed either, being free.",
+  "only-vehicles-this-account-has": "Only vehicles this account has taken into battle can appear here: Wargaming publishes a record per vehicle, never a list of what the garage holds, so a tank owned and never driven is one we cannot see.",
+  "purchase": "Purchase",
+  "research": "Research",
+  "total": "Total"
+}

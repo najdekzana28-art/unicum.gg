@@ -108,8 +108,8 @@ export type PlayerDetailData = {
    * already inside the tab.
    */
   tournamentCount: number;
-  // Estimated account worth (market resale + store rebuild cost), computed from
-  // the garage. See `./valuation`.
+  // What the garage would cost to rebuild at the official store, computed from
+  // the vehicle rows. See `./valuation`.
   valuation: PlayerValuation;
   liftDrag: LiftDragByMetric;
   // Marks of Excellence and Marks of Mastery across the garage, plus the

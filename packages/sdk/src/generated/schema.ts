@@ -3673,31 +3673,17 @@ export interface components {
             tankCount: number;
             achievementCount: number;
             tournamentCount: number;
-            /** @description Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost. */
+            /** @description What this garage would cost to rebuild at the official store, in the region's store currency: every non-reward tank's gold price, or its research XP and credit price converted through gold. Reward tanks are excluded: the shop never prices them, since they are issued through Wargaming's own events (auctions and paid Battle Pass tiers among others) at whatever it asks each time rather than at a published price. Null for a region with no store pricing table. `breakdown` is how that total is reached, in three lines that sum to it exactly, each carrying the raw game currency behind it. */
             valuation: {
-                market: {
-                    amount: number;
-                    content: number;
-                    tierX: number;
-                    premiums: number;
-                    rewards: number;
-                    marks: number;
-                    skillPremium: number;
-                    depthBonus: number;
-                    rewardCount: number;
-                    tierXCount: number;
-                    premiumCount: number;
-                    mark3Count: number;
-                    wgr: number;
-                    battles: number;
-                    rewardsByTier: components["schemas"]["tierContribution"][];
-                    premiumsByTier: components["schemas"]["tierContribution"][];
-                    marks3ByTier: components["schemas"]["tierContribution"][];
-                    marks2ByTier: components["schemas"]["tierContribution"][];
-                };
                 account: {
                     amount: number;
                     currency: string;
+                    breakdown?: {
+                        gold: number;
+                        research: components["schemas"]["rebuildLine"];
+                        credits: components["schemas"]["rebuildLine"];
+                        premiums: components["schemas"]["rebuildLine"];
+                    };
                 } | null;
             };
             liftDrag: {
@@ -4278,6 +4264,12 @@ export interface components {
             battles: number | null;
             /** @description Percentage, 0 to 100, on the same scale `/ratings/scales` publishes. Null when the window holds no battles, which is not a win rate of zero, and null on `recent` for an account whose wins over the window have not been computed yet: that figure is written on an account's next refresh and was introduced after the ratings beside it, so a recent `battles` with a null `winrate` means not yet rather than none. */
             winrate: number | null;
+        };
+        rebuildLine: {
+            count: number;
+            units: number;
+            gold: number;
+            amount: number;
         };
         refreshPolicyBucket: {
             /** @enum {string} */
@@ -5522,12 +5514,6 @@ export interface components {
         tier: {
             name: string;
             image: string;
-        };
-        tierContribution: {
-            tier: number;
-            count: number;
-            unit: number;
-            value: number;
         };
         /** @description What one tier accounts for across the region. */
         TierShare: {

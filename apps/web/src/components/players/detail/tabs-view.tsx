@@ -142,9 +142,14 @@ export function PlayerTabsView({
   // (`initialTanks` seeds the cache), skip the on-mount revalidation.
   const tanksReq = () => unicum.region(region).players(nickname).tanks();
   const seededTanks = initialTanks != null;
+  // Value reads the same list (its per-vehicle cost table prices each row), so
+  // both sections key off one request: opening one then the other is a cache
+  // hit rather than a second fetch of 500 rows.
+  const needsTanks =
+    section === PlayerSection.Tanks || section === PlayerSection.Value;
   const { data: tanks } = useSWR(
-    // Key off the request's own URL; null disables the fetch until Tanks is open.
-    section === PlayerSection.Tanks ? tanksReq().url() : null,
+    // Key off the request's own URL; null disables the fetch until it is needed.
+    needsTanks ? tanksReq().url() : null,
     () => tanksReq().then((r) => r.tanks as unknown as PlayerTankRow[]),
     {
       fallbackData: initialTanks ?? undefined,
@@ -322,6 +327,8 @@ export function PlayerTabsView({
           region={region}
           nickname={nickname}
           valuation={detail.valuation}
+          vehicles={tanks ?? []}
+          vehiclesLoading={!tanks}
         />
       ) : onTanks ? (
         <TanksTab

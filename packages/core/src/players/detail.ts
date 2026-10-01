@@ -259,12 +259,7 @@ export async function buildPlayerDetail(args: {
     tankCount: vehicles.length,
     achievementCount,
     tournamentCount,
-    valuation: computePlayerValuation(
-      vehicles,
-      current.globalRating,
-      current.battles,
-      region,
-    ),
+    valuation: computePlayerValuation(vehicles, region),
     markProgress,
     liftDrag: tracedSync("liftDrag", () => ({
       wn7: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn7),

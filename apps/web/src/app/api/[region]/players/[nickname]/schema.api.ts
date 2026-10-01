@@ -297,12 +297,13 @@ const strongholdMode = z
     description: "One game mode's totals plus 24h/7d/30d period diffs.",
   });
 
-// Per-tier contribution of a valuation group (reward tanks, N-mark tanks).
-const tierContribution = z.object({
-  tier: z.number(),
+// One line of the rebuild cost: the vehicles it pays for, the amount in the game
+// currency it is paid in, that amount in gold, and the store price of that gold.
+const rebuildLine = z.object({
   count: z.number(),
-  unit: z.number(),
-  value: z.number(),
+  units: z.number(),
+  gold: z.number(),
+  amount: z.number(),
 });
 
 export const PlayerDetailResponse = z.object({
@@ -365,33 +366,24 @@ export const PlayerDetailResponse = z.object({
   tournamentCount: z.number(),
   valuation: z
     .object({
-      market: z.object({
-        amount: z.number(),
-        content: z.number(),
-        tierX: z.number(),
-        premiums: z.number(),
-        rewards: z.number(),
-        marks: z.number(),
-        skillPremium: z.number(),
-        depthBonus: z.number(),
-        rewardCount: z.number(),
-        tierXCount: z.number(),
-        premiumCount: z.number(),
-        mark3Count: z.number(),
-        wgr: z.number(),
-        battles: z.number(),
-        rewardsByTier: z.array(tierContribution),
-        premiumsByTier: z.array(tierContribution),
-        marks3ByTier: z.array(tierContribution),
-        marks2ByTier: z.array(tierContribution),
-      }),
       account: z
-        .object({ amount: z.number(), currency: z.string() })
+        .object({
+          amount: z.number(),
+          currency: z.string(),
+          breakdown: z
+            .object({
+              gold: z.number(),
+              research: rebuildLine,
+              credits: rebuildLine,
+              premiums: rebuildLine,
+            })
+            .optional(),
+        })
         .nullable(),
     })
     .meta({
       description:
-        "Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost.",
+        "What this garage would cost to rebuild at the official store, in the region's store currency: every non-reward tank's gold price, or its research XP and credit price converted through gold. Reward tanks are excluded: the shop never prices them, since they are issued through Wargaming's own events (auctions and paid Battle Pass tiers among others) at whatever it asks each time rather than at a published price. Null for a region with no store pricing table. `breakdown` is how that total is reached, in three lines that sum to it exactly, each carrying the raw game currency behind it.",
     }),
   liftDrag: z.object({
     wn7: liftDragByMetricEntry,
