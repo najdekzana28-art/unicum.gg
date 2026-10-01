@@ -3,11 +3,6 @@
 import { useFormat } from "@/hooks/use-format";
 import { statLabel } from "@/components/stat-label";
 
-import {
-  CaretDownIcon,
-  CaretUpDownIcon,
-  CaretUpIcon,
-} from "@phosphor-icons/react";
 import Link from "@/components/link";
 import { useRouter } from "@/hooks/use-router";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -20,7 +15,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
@@ -41,19 +35,16 @@ import { metricLabel } from "@/components/tanks/perf-columns";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
 import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTranslation } from "@/hooks/use-translation";
 import { FilterSubject } from "@/components/filter-subject";
-
-enum SortDirection {
-  Asc = "asc",
-  Desc = "desc",
-}
-
-type SortState = { key: string; direction: SortDirection } | null;
+import {
+  SortDirection,
+  SortableHead,
+  type SortState,
+} from "@/components/tanks/sortable-head";
 
 const TYPE_ABBR: Record<string, string> = {
   heavyTank: "HT",
@@ -97,75 +88,6 @@ function compareRows(
     return mul * av.localeCompare(bv);
   }
   return mul * ((av as number) - (bv as number));
-}
-
-function SortableHead({
-  col,
-  state,
-  onToggle,
-  align = "start",
-  hideOnMobile,
-  headClassName,
-  tooltip,
-  children,
-}: {
-  col: string;
-  state: SortState;
-  onToggle: (key: string) => void;
-  align?: "start" | "center" | "end";
-  hideOnMobile?: boolean;
-  headClassName?: string;
-  tooltip?: string;
-  children: React.ReactNode;
-}) {
-  const active = state?.key === col;
-  const Icon = active
-    ? state.direction === SortDirection.Asc
-      ? CaretUpIcon
-      : CaretDownIcon
-    : CaretUpDownIcon;
-  const button = (
-    <button
-      type="button"
-      onClick={() => onToggle(col)}
-      className={cn(
-        "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
-        align === "center" && "justify-center",
-        align === "end" && "justify-end",
-        active ? "text-foreground" : "",
-      )}
-    >
-      {/* `data-head-label` is what the tooltip measures: it shows the full
-            heading only when the column really cut it. */}
-      <span data-head-label className="truncate">
-        {children}
-      </span>
-      <Icon
-        weight="bold"
-        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
-      />
-    </button>
-  );
-  return (
-    <TableHead
-      className={cn(
-        "p-0",
-        hideOnMobile && styles.hiddenColumn,
-        headClassName,
-      )}
-    >
-      {/* The heading the reader sees when it is words, the tooltip when it is
-          an icon: the nation, class and tier columns show a glyph, and their
-          tip is the one place their name is written. */}
-      <GlossaryHeadTooltip
-        label={typeof children === "string" ? children : undefined}
-        fallbackLabel={tooltip}
-        tip={tooltip}
-      >
-        {button}
-      </GlossaryHeadTooltip>
-    </TableHead>
-  );
 }
 
 export function PlayerTanksTable({
