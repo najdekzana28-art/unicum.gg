@@ -8,5 +8,7 @@
   "seat-empty": "No crew member in this seat",
   "field-mods": "Field modifications",
   "slot-empty": "Empty",
-  "second-setup": "This player keeps a second setup on this vehicle."
+  "second-setup": "This player keeps a second setup on this vehicle.",
+  "empty-blurb": "Wargaming publishes no loadouts. With the {name} mod, your own vehicles show theirs here.",
+  "empty-cta": "Get the mod"
 }

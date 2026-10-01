@@ -21,7 +21,10 @@ import { constructMetadata } from "@/lib/metadata";
 import { getTranslation } from "@/lib/translations.server";
 import { breadcrumbSchema, personSchema } from "@/lib/schema-org";
 import { styles } from "@/lib/styles";
-import { PlayerTankLoadoutPanel } from "@/components/players/detail/tanks/loadout-panel";
+import {
+  PlayerTankLoadoutEmpty,
+  PlayerTankLoadoutPanel,
+} from "@/components/players/detail/tanks/loadout-panel";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import {
@@ -409,9 +412,14 @@ async function PlayerProfileServer({
 
   // The panel names everything on the server (the catalogues that do it never
   // cross the wire) and hands finished text to the client boxes that draw it.
-  const loadoutPanel = loadout ? (
+  // With no setup to show, the section still renders and says where the filled
+  // version comes from, rather than vanishing and leaving the vehicle looking
+  // like it carries nothing.
+  const loadoutPanel = !tankSlug ? null : loadout ? (
     <PlayerTankLoadoutPanel loadout={loadout} region={region} locale={locale} />
-  ) : null;
+  ) : (
+    <PlayerTankLoadoutEmpty locale={locale} />
+  );
 
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;

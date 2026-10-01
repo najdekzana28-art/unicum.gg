@@ -24,6 +24,12 @@ import {
 import { gradeOverlay } from "@/components/players/detail/tanks/loadout-marks";
 import { getTranslation } from "@/lib/translations.server";
 import { RelativeTime } from "@/components/relative-time";
+import { PuzzlePieceIcon } from "@phosphor-icons/react/dist/ssr";
+import { buttonVariants } from "fumadocs-ui/components/ui/button";
+import Link from "@/components/link";
+import APP from "@/constants/app";
+import ROUTES from "@/constants/routes";
+import { styles } from "@/lib/styles";
 
 // WG's own shell-type pictures, from our assets mirror, keyed by the kind of
 // round the client reports. The same ones the tank page's ammo panel draws.
@@ -302,5 +308,47 @@ export async function PlayerTankLoadoutPanel({
 
       </section>
     </LoadoutTooltips>
+  );
+}
+
+/**
+ * The same section, for a vehicle whose setup nobody has shared.
+ *
+ * Shown rather than hidden, because the absence is the interesting part: the
+ * game publishes nothing about how a tank is equipped, so this section exists
+ * at all only because the mod reads it. A panel that simply vanished left the
+ * reader to conclude the vehicle carries nothing, and told nobody where the
+ * filled version comes from.
+ *
+ * One line, deliberately: it stands where a filled panel would, on a page that
+ * is already dense, so it says the one thing and offers the one link. The
+ * house button and a hint of the brand tint are enough to mark it as an offer
+ * rather than an error.
+ */
+export async function PlayerTankLoadoutEmpty({ locale }: { locale: string }) {
+  const { t } = await getTranslation(
+    "components/players/detail/tanks/loadout-panel",
+    locale,
+  );
+  return (
+    <section>
+      <header className="mb-3 flex items-baseline justify-between gap-2">
+        <h3 className="text-sm font-semibold">{t("title")}</h3>
+      </header>
+      <div
+        className={`flex flex-col items-start gap-3 rounded-lg ${styles.cardBorder} bg-fd-primary/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between`}
+      >
+        <p className={`${styles.mutedText} text-xs leading-relaxed`}>
+          {t("empty-blurb", { name: APP.NAME })}
+        </p>
+        <Link
+          href={ROUTES.MOD}
+          className={`${buttonVariants({ variant: "primary", size: "sm" })} shrink-0`}
+        >
+          <PuzzlePieceIcon weight="fill" className="mr-1.5 size-3.5" />
+          {t("empty-cta")}
+        </Link>
+      </div>
+    </section>
   );
 }
