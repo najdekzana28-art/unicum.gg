@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} czołgów-nagród nie jest wymienionych, ponieważ sklep nie ustala dla nich ceny. Nie są one jednak bezpłatne, ponieważ Wargaming udostępnia je przez własne wydarzenia, wśród nich aukcje i płatne poziomy Przepustki Bitewnej, za każdym razem za kwotę ustaloną przez Wargaming, a nie za opublikowaną cenę.",
+  "n-tier-i-vehicles-are": "{count} pojazdów poziomu I również nie jest wymienionych, ponieważ są bezpłatne.",
+  "only-vehicles-this-account-has": "Mogą się tutaj pojawiać tylko pojazdy otrzymane przez konto w bitwie. Wargaming publikuje rekord dla każdego pojazdu, a nigdy listę tego, co znajduje się w garażu, więc czołg posiadany przez konto i nigdy nieużywany to taki, którego nie można zobaczyć.",
+  "purchase": "Kup",
+  "research": "Badaj",
+  "total": "Suma"
+}

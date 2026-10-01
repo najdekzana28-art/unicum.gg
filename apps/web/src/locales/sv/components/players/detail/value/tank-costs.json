@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} belöningsvagnar listas inte: butiken har inget pris för dem. De är inte gratis heller, eftersom Wargaming ger ut dem genom sina egna evenemang, bland annat auktioner och betalda Stridspassnivåer, till det pris Wargaming begär varje tid i stället för till ett publicerat pris.",
+  "n-tier-i-vehicles-are": "{count} fordon på nivå I listas inte heller, eftersom de är gratis.",
+  "only-vehicles-this-account-has": "Endast fordon som det här kontot har tagna i strid kan visas här: Wargaming publicerar ett rekord per fordon, aldrig en lista över vad garaget innehåller, så en vagn som ägs men aldrig har körts är en som vi inte kan se.",
+  "purchase": "Köp",
+  "research": "Forska",
+  "total": "Totalt"
+}

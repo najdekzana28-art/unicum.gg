@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} odmeňovacie tanky nie sú uvedené, pretože obchod pre ne nestanovuje cenu. Nie sú však ani bezplatné, keďže Wargaming ich poskytuje prostredníctvom vlastných udalostí, medzi ktoré patria okrem iného aukcie a platené úrovne Battle Passu, za cenu, ktorú zakaždým požaduje, a nie za zverejnenú cenu.",
+  "n-tier-i-vehicles-are": "Ani {count} vozidlá úrovne I nie sú uvedené, pretože sú bezplatné.",
+  "only-vehicles-this-account-has": "Môžu sa tu objaviť iba vozidlá, ktoré tento račun prijal do bitky. Wargaming zverejňuje záznam pre každé vozidlo, nikdy nie zoznam toho, čo sa nachádza v garáži, takže tank, ktorý je vo vlastníctve računa, ale nikdy nebol použitý v bitke, nie je možné vidieť.",
+  "purchase": "Nákup",
+  "research": "Výskum",
+  "total": "Celkom"
+}

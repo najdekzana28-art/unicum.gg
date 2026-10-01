@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} belønningsstridsvogner er ikke listet: Butikken setter ingen pris på dem. De er heller ikke gratis, siden Wargaming gir dem ut gjennom sine egne hendelser, blant annet auksjoner og betalte Kamp-passnivåer, til den prisen Wargaming ber om hver gang i stedet for en publisert pris.",
+  "n-tier-i-vehicles-are": "{count} kjøretøy på nivå I er heller ikke listet, siden de er gratis.",
+  "only-vehicles-this-account-has": "Bare kjøretøy som denne kontoen har tatt i kamp, kan vises her: Wargaming publiserer en rekord per kjøretøy, aldri en liste over hva garasjen inneholder, så en stridsvogn som eies og aldri er kjørt, er en vi ikke kan se.",
+  "purchase": "Kjøp",
+  "research": "Utvikling",
+  "total": "Totalt"
+}

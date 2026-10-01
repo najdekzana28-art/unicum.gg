@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} belønningskampvogne er ikke opført: Butikken fastsætter ingen pris for dem. De er heller ikke gratis, da Wargaming udsteder dem gennem egne begivenheder, auktioner og betalte Kampagneniveauer blandt andre ting, til den pris Wargaming beder om hver gang i stedet for til en offentliggjort pris.",
+  "n-tier-i-vehicles-are": "{count} køretøjer på niveau I er heller ikke opført, da de er gratis.",
+  "only-vehicles-this-account-has": "Kun køretøjer, som denne konto har taget med i kamp, kan vises her: Wargaming udgiver en rekord pr. køretøj, aldrig en liste over, hvad garagen indeholder, så en kampvogn, der ejes, men aldrig er kørt, er én, vi ikke kan se.",
+  "purchase": "Køb",
+  "research": "Forskning",
+  "total": "I alt"
+}

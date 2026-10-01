@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} palkintopanssarivaunua ei ole luettelossa, koska kauppa ei määritä niille hintaa. Ne eivät kuitenkaan ole ilmaisia, sillä Wargaming jakaa niitä omien tapahtumiensa, huutokauppojen ja maksullisten Taistelu-passin tasojen kautta muiden joukossa, aina kulloinkin pyydettyyn hintaan julkaistun hinnan sijaan.",
+  "n-tier-i-vehicles-are": "Myöskään {count} tason I ajoneuvoa ei ole luettelossa, koska ne ovat ilmaisia.",
+  "only-vehicles-this-account-has": "Tässä voivat näkyä vain ajoneuvot, jotka tämä tili on ottanut taisteluun. Wargaming julkaisee ennätyksen ajoneuvoa kohden, ei koskaan luetteloa tallin sisällöstä, joten omistettua mutta ei koskaan ajettua panssarivaunua emme voi nähdä.",
+  "purchase": "Osta",
+  "research": "Tutki",
+  "total": "Kaikkiaan"
+}

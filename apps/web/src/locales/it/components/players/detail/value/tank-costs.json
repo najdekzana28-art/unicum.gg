@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} carri armati ricompensa non sono elencati: il negozio non assegna loro alcun prezzo. Non sono nemmeno gratuiti, perché Wargaming li assegna attraverso i propri eventi, tra cui aste e livelli del Pass Battaglia a pagamento, al prezzo richiesto di volta in volta anziché a un prezzo pubblicato.",
+  "n-tier-i-vehicles-are": "Anche {count} veicoli di livello I non sono elencati, poiché sono gratuiti.",
+  "only-vehicles-this-account-has": "Qui possono comparire solo i veicoli che questo account ha subito in battaglia: Wargaming pubblica un record per veicolo, mai un elenco di ciò che contiene l’officina, quindi un carro armato posseduto e mai utilizzato è uno che non possiamo vedere.",
+  "purchase": "Acquista",
+  "research": "Ricerca",
+  "total": "Totale"
+}

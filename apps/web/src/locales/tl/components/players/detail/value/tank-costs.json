@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "Hindi nakalista ang {count} reward tank, dahil walang itinakdang presyo ang tindahan para sa mga ito. Hindi rin libre ang mga ito, dahil ipinagkakaloob sila ng Wargaming sa pamamagitan ng sarili nitong mga kaganapan, auction at bayad na tier ng Battle Pass bukod sa iba pa, sa halagang hinihingi nito sa bawat oras sa halip na sa isang na-publish na presyo.",
+  "n-tier-i-vehicles-are": "Hindi rin nakalista ang {count} tier I na mga sasakyan, dahil libre ang mga ito.",
+  "only-vehicles-this-account-has": "Mga sasakyan lamang na natanggap ng account na ito sa labanan ang maaaring lumitaw dito. Nagpa-publish ang Wargaming ng isang rekord para sa bawat sasakyan, hindi kailanman ng listahan ng laman ng garahe, kaya hindi namin makikita ang isang tangke na pagmamay-ari ngunit hindi kailanman ginamit.",
+  "purchase": "Pagbili",
+  "research": "Pananaliksik",
+  "total": "Kabuuan"
+}

@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} apdovanojimų tankai nenurodyti, nes parduotuvė jiems nenustato kainos. Jie taip pat nėra nemokami, nes Wargaming juos suteikia per savo įvykius, tarp jų aukcionus ir mokamus Battle Pass lygius, už tokią kainą, kokios prašoma kiekvieną kartą, o ne už paskelbtą kainą.",
+  "n-tier-i-vehicles-are": "{count} I lygio transporto priemonės taip pat nenurodytos, nes yra nemokamos.",
+  "only-vehicles-this-account-has": "Čia gali pasirodyti tik transporto priemonės, kurias ši paskyra paėmė į mūšį: Wargaming skelbia kiekvienos transporto priemonės rekordą, niekada ne garažo turinio sąrašą, todėl turimo, bet niekada nenaudoto tanko mes nematome.",
+  "purchase": "Pirkti",
+  "research": "Išrasti",
+  "total": "Viso"
+}

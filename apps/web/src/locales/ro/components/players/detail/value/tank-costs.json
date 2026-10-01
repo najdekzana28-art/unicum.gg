@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} tancuri recompensă nu sunt listate: magazinul nu le stabilește niciun preț. Totuși, nu sunt gratuite, deoarece Wargaming le oferă prin propriile evenimente, printre altele prin licitații și niveluri Battle Pass plătite, la suma solicitată de fiecare dată, nu la un preț publicat.",
+  "n-tier-i-vehicles-are": "Nici cele {count} vehicule de nivel I nu sunt listate, fiind gratuite.",
+  "only-vehicles-this-account-has": "Aici pot apărea doar vehiculele pe care acest cont le-a primit în bătălie: Wargaming publică un record pentru fiecare vehicul, niciodată o listă a vehiculelor din garaj, astfel că un tanc deținut, dar condus niciodată, nu poate fi văzut de noi.",
+  "purchase": "Achiziție",
+  "research": "Cercetare",
+  "total": "Total"
+}

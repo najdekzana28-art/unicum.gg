@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} tanques de recompensa não estão listados: a loja não define nenhum preço para eles. Eles também não são gratuitos, pois a Wargaming os distribui por meio dos próprios eventos, leilões e níveis pagos do Passe de Batalha, entre outros, pelo que ela pedir a cada vez, em vez de um preço publicado.",
+  "n-tier-i-vehicles-are": "{count} veículos de nível I também não estão listados, pois são gratuitos.",
+  "only-vehicles-this-account-has": "Somente veículos que esta conta recebeu em batalha podem aparecer aqui: a Wargaming publica um recorde por veículo, nunca uma lista do que a garagem contém, então um tanque comprado e nunca usado é algo que não podemos ver.",
+  "purchase": "Adquirir",
+  "research": "Pesquisa",
+  "total": "Total"
+}

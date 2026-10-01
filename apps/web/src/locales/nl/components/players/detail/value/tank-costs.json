@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} beloningstanks worden niet vermeld: de winkel stelt er geen prijs voor vast. Ze zijn ook niet gratis, omdat Wargaming ze uitgeeft via de eigen evenementen, veilingen en betaalde Battle Pass-niveaus onder anderen, telkens tegen de prijs die Wargaming vraagt in plaats van tegen een gepubliceerde prijs.",
+  "n-tier-i-vehicles-are": "{count} voertuigen van niveau I worden ook niet vermeld, omdat ze gratis zijn.",
+  "only-vehicles-this-account-has": "Alleen voertuigen die dit account in een gevecht heeft genomen, kunnen hier verschijnen: Wargaming publiceert een record per voertuig, nooit een lijst van wat de garage bevat, dus een tank die wel in bezit is maar nooit is gebruikt, kan niet worden gezien.",
+  "purchase": "Kopen",
+  "research": "Onderzoek",
+  "total": "Totaal"
+}

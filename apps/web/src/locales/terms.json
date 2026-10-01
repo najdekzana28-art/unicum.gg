@@ -655,7 +655,17 @@
     "… viewport": "… نافذة العرض",
     "… vs modules": "… ضد الوحدات",
     "Channel": "القناة",
-    "channel": "القناة"
+    "channel": "القناة",
+    "Research": "البحث",
+    "adds": "يضيف",
+    "cannot": "لا يمكن",
+    "costs": "التكاليف",
+    "left": "المتبقي",
+    "others": "أخرى",
+    "price": "السعر",
+    "published": "منشور",
+    "publishes": "ينشر",
+    "taken": "المُتلقّى"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1312,7 +1322,17 @@
     "… viewport": "… поле агляду",
     "… vs modules": "… супраць модуляў",
     "Channel": "Канал",
-    "channel": "канал"
+    "channel": "канал",
+    "Research": "Даследаванне",
+    "adds": "дадае",
+    "cannot": "нельга",
+    "costs": "каштуе",
+    "left": "засталося",
+    "others": "іншыя",
+    "price": "цана",
+    "published": "апублікавана",
+    "publishes": "публікуе",
+    "taken": "атрыманы"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2173,7 +2193,16 @@
     "… viewport": "… зрителен прозорец",
     "… vs modules": "… срещу модули",
     "Channel": "Канал",
-    "channel": "канал"
+    "channel": "канал",
+    "Purchase": "Купи",
+    "adds": "добавя",
+    "cannot": "не може",
+    "costs": "струва",
+    "others": "други",
+    "price": "цена",
+    "published": "публикувано",
+    "publishes": "публикува",
+    "taken": "взети"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -2838,7 +2867,17 @@
     "… viewport": "… vidno polje",
     "… vs modules": "… protiv modula",
     "Channel": "Kanal",
-    "channel": "kanal"
+    "channel": "kanal",
+    "Research": "Istraživanje",
+    "adds": "dodaje",
+    "cannot": "ne može",
+    "costs": "košta",
+    "left": "preostalo",
+    "others": "ostali",
+    "price": "cijena",
+    "published": "objavljeno",
+    "publishes": "objavljuje",
+    "taken": "preuzeto"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3710,7 +3749,16 @@
     "… viewport": "… zorné pole",
     "… vs modules": "… vs moduly",
     "Channel": "Kanál",
-    "channel": "kanál"
+    "channel": "kanál",
+    "Purchase": "Koupit",
+    "adds": "přidává",
+    "cannot": "nelze",
+    "costs": "stojí",
+    "others": "ostatní",
+    "price": "cena",
+    "published": "zveřejněno",
+    "publishes": "zveřejňuje",
+    "taken": "obdržené"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4587,7 +4635,16 @@
     "… viewport": "… synsfelt",
     "… vs modules": "… vs moduler",
     "Channel": "Kanal",
-    "channel": "kanal"
+    "channel": "kanal",
+    "Purchase": "Køb",
+    "adds": "tilføjelser",
+    "cannot": "kan ikke",
+    "costs": "omkostninger",
+    "others": "andre",
+    "price": "pris",
+    "published": "offentliggjort",
+    "publishes": "udgiver",
+    "taken": "taget"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5458,7 +5515,16 @@
     "… viewport": "… Sichtfeld",
     "… vs modules": "… vs Module",
     "Channel": "Kanal",
-    "channel": "kanal"
+    "channel": "kanal",
+    "Purchase": "Kaufen",
+    "adds": "fügt hinzu",
+    "cannot": "kann nicht",
+    "costs": "kostet",
+    "others": "andere",
+    "price": "Preis",
+    "published": "veröffentlicht",
+    "publishes": "veröffentlicht",
+    "taken": "genommen"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6334,7 +6400,16 @@
     "… viewport": "… οπτικό πεδίο",
     "… vs modules": "… εναντίον μονάδων",
     "Channel": "Κανάλι",
-    "channel": "κανάλι"
+    "channel": "κανάλι",
+    "Purchase": "Αγορά",
+    "adds": "προσθέτει",
+    "cannot": "δεν μπορεί",
+    "costs": "κοστίζει",
+    "others": "άλλοι",
+    "price": "τιμή",
+    "published": "δημοσιευμένο",
+    "publishes": "δημοσιεύει",
+    "taken": "ληφθεί"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7190,7 +7265,16 @@
     "… viewport": "… visor",
     "… vs modules": "… vs módulos",
     "Channel": "Canal",
-    "channel": "canal"
+    "channel": "canal",
+    "Purchase": "Comprar",
+    "adds": "añade",
+    "cannot": "no se puede",
+    "costs": "cuesta",
+    "others": "otros",
+    "price": "precio",
+    "published": "publicado",
+    "publishes": "publica",
+    "taken": "recibido"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8071,7 +8155,16 @@
     "… viewport": "… näkymäikkuna",
     "… vs modules": "… vs moduulit",
     "Channel": "Kanava",
-    "channel": "kanava"
+    "channel": "kanava",
+    "Purchase": "Osta",
+    "adds": "lisää",
+    "cannot": "ei voi",
+    "costs": "maksaa",
+    "others": "muut",
+    "price": "hinta",
+    "published": "julkaistu",
+    "publishes": "julkaisee",
+    "taken": "otettu"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -8931,7 +9024,16 @@
     "… viewport": "… vitrage",
     "… vs modules": "… vs modules",
     "Channel": "Chaîne",
-    "channel": "chaîne"
+    "channel": "chaîne",
+    "Purchase": "Acheter",
+    "adds": "ajoute",
+    "cannot": "ne peut pas",
+    "costs": "coûte",
+    "others": "autres",
+    "price": "prix",
+    "published": "publié",
+    "publishes": "publie",
+    "taken": "pris"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -9589,7 +9691,17 @@
     "… viewport": "… व्यू पोर्ट",
     "… vs modules": "… बनाम मॉड्यूल्स",
     "Channel": "चैनल",
-    "channel": "चैनल"
+    "channel": "चैनल",
+    "Research": "शोध",
+    "adds": "जोड़ता है",
+    "cannot": "नहीं कर सकता",
+    "costs": "लागत",
+    "left": "शेष",
+    "others": "अन्य",
+    "price": "कीमत",
+    "published": "प्रकाशित",
+    "publishes": "प्रकाशित करता है",
+    "taken": "लिया गया"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -10465,7 +10577,15 @@
     "… viewport": "… vidno polje",
     "… vs modules": "… protiv modula",
     "Channel": "Kanal",
-    "channel": "kanal"
+    "channel": "kanal",
+    "adds": "dodaci",
+    "cannot": "ne može",
+    "costs": "košta",
+    "others": "ostali",
+    "price": "cijena",
+    "published": "objavljeno",
+    "publishes": "objavljuje",
+    "taken": "uzeto"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -11342,7 +11462,16 @@
     "… viewport": "… kilátó",
     "… vs modules": "… vs modulok",
     "Channel": "Csatorna",
-    "channel": "csatorna"
+    "channel": "csatorna",
+    "Purchase": "Vásárlás",
+    "adds": "hozzáad",
+    "cannot": "nem lehet",
+    "costs": "költségek",
+    "others": "egyéb",
+    "price": "ár",
+    "published": "közzétéve",
+    "publishes": "közzétesz",
+    "taken": "elszenvedett"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -12214,7 +12343,16 @@
     "… viewport": "… finestrino",
     "… vs modules": "… vs moduli",
     "Channel": "Canale",
-    "channel": "canale"
+    "channel": "canale",
+    "Purchase": "Acquista",
+    "adds": "aggiunge",
+    "cannot": "non può",
+    "costs": "costa",
+    "others": "altri",
+    "price": "prezzo",
+    "published": "pubblicato",
+    "publishes": "pubblica",
+    "taken": "subiti"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -13093,7 +13231,16 @@
     "… viewport": "… ビューポート",
     "… vs modules": "… モジュール対抗",
     "Channel": "チャンネル",
-    "channel": "チャンネル"
+    "channel": "チャンネル",
+    "Purchase": "購入",
+    "adds": "追加",
+    "cannot": "不可",
+    "costs": "費用",
+    "others": "その他",
+    "price": "価格",
+    "published": "公開済み",
+    "publishes": "公開",
+    "taken": "取得"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -13755,7 +13902,17 @@
     "… viewport": "… көрініс терезесі",
     "… vs modules": "… модульдерге қарсы",
     "Channel": "Арна",
-    "channel": "арна"
+    "channel": "арна",
+    "Research": "Зерттеу",
+    "adds": "қосады",
+    "cannot": "мүмкін емес",
+    "costs": "шығындар",
+    "left": "қалған",
+    "others": "басқалары",
+    "price": "баға",
+    "published": "жарияланған",
+    "publishes": "жариялайды",
+    "taken": "алынған"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -14639,7 +14796,16 @@
     "… viewport": "… 뷰포트",
     "… vs modules": "… 모듈 대",
     "Channel": "채널",
-    "channel": "채널"
+    "channel": "채널",
+    "Purchase": "구매",
+    "adds": "추가",
+    "cannot": "불가",
+    "costs": "비용",
+    "others": "기타",
+    "price": "가격",
+    "published": "게시됨",
+    "publishes": "게시함",
+    "taken": "받음"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -15520,7 +15686,16 @@
     "… viewport": "… vaizdo langas",
     "… vs modules": "… vs moduliai",
     "Channel": "Kanalas",
-    "channel": "kanalas"
+    "channel": "kanalas",
+    "Purchase": "Pirkti",
+    "adds": "prideda",
+    "cannot": "negali",
+    "costs": "kainuoja",
+    "others": "kiti",
+    "price": "kaina",
+    "published": "paskelbta",
+    "publishes": "skelbia",
+    "taken": "paimta"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -16385,7 +16560,16 @@
     "… viewport": "… skatījuma logs",
     "… vs modules": "… pret moduļiem",
     "Channel": "Kanāls",
-    "channel": "kanāls"
+    "channel": "kanāls",
+    "Purchase": "Nopirkt",
+    "adds": "pievieno",
+    "cannot": "nevar",
+    "costs": "maksā",
+    "others": "citi",
+    "price": "cena",
+    "published": "publicēts",
+    "publishes": "publicē",
+    "taken": "paņemts"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -17266,7 +17450,16 @@
     "… viewport": "… kijkopening",
     "… vs modules": "… vs modules",
     "Channel": "Kanaal",
-    "channel": "kanaal"
+    "channel": "kanaal",
+    "Purchase": "Kopen",
+    "adds": "voegt toe",
+    "cannot": "kan niet",
+    "costs": "kost",
+    "others": "anderen",
+    "price": "prijs",
+    "published": "gepubliceerd",
+    "publishes": "publiceert",
+    "taken": "genomen"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -18139,7 +18332,16 @@
     "… viewport": "… visningsport",
     "… vs modules": "… vs moduler",
     "Channel": "Kanal",
-    "channel": "kanal"
+    "channel": "kanal",
+    "Purchase": "Kjøp",
+    "adds": "tillegg",
+    "cannot": "kan ikke",
+    "costs": "koster",
+    "others": "andre",
+    "price": "pris",
+    "published": "publisert",
+    "publishes": "publiserer",
+    "taken": "tatt"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -19008,7 +19210,16 @@
     "… viewport": "… wizjer",
     "… vs modules": "… w porównaniu do modułów",
     "Channel": "Kanał",
-    "channel": "kanał"
+    "channel": "kanał",
+    "Purchase": "Kup",
+    "adds": "dodatki",
+    "cannot": "nie można",
+    "costs": "kosztuje",
+    "others": "inni",
+    "price": "cena",
+    "published": "opublikowano",
+    "publishes": "publikuje",
+    "taken": "otrzymane"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -19870,7 +20081,16 @@
     "… viewport": "… visor",
     "… vs modules": "… vs módulos",
     "Channel": "Canal",
-    "channel": "canal"
+    "channel": "canal",
+    "Purchase": "Adquirir",
+    "adds": "adiciona",
+    "cannot": "não pode",
+    "costs": "custa",
+    "others": "outros",
+    "price": "preço",
+    "published": "publicado",
+    "publishes": "publica",
+    "taken": "recebido"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -20732,7 +20952,16 @@
     "… viewport": "… fereastră de vizualizare",
     "… vs modules": "… vs module",
     "Channel": "Canal",
-    "channel": "canal"
+    "channel": "canal",
+    "Purchase": "Achiziție",
+    "adds": "adaugă",
+    "cannot": "nu poate",
+    "costs": "costă",
+    "others": "altele",
+    "price": "preț",
+    "published": "publicat",
+    "publishes": "publică",
+    "taken": "primit"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -21582,7 +21811,16 @@
     "… viewport": "… обзорное окно",
     "… vs modules": "… против модулей",
     "Channel": "Канал",
-    "channel": "канал"
+    "channel": "канал",
+    "Purchase": "Купить",
+    "adds": "добавляет",
+    "cannot": "нельзя",
+    "costs": "стоимость",
+    "others": "другие",
+    "price": "цена",
+    "published": "опубликовано",
+    "publishes": "публикует",
+    "taken": "получено"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -22246,7 +22484,17 @@
     "… viewport": "… pohľadové okno",
     "… vs modules": "… vs moduly",
     "Channel": "Kanál",
-    "channel": "kanál"
+    "channel": "kanál",
+    "Research": "Výskum",
+    "adds": "pridáva",
+    "cannot": "nie je možné",
+    "costs": "stojí",
+    "left": "zostáva",
+    "others": "ostatní",
+    "price": "cena",
+    "published": "zverejnené",
+    "publishes": "zverejňuje",
+    "taken": "prijaté"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -23123,7 +23371,16 @@
     "… viewport": "… vidni otvor",
     "… vs modules": "… protiv modula",
     "Channel": "Kanal",
-    "channel": "kanal"
+    "channel": "kanal",
+    "Purchase": "Kupi",
+    "adds": "dodaje",
+    "cannot": "ne može",
+    "costs": "košta",
+    "others": "ostali",
+    "price": "cena",
+    "published": "objavljeno",
+    "publishes": "objavljuje",
+    "taken": "uzeto"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -24004,7 +24261,16 @@
     "… viewport": "… synfält",
     "… vs modules": "… vs moduler",
     "Channel": "Kanal",
-    "channel": "kanal"
+    "channel": "kanal",
+    "Purchase": "Köp",
+    "adds": "lägger till",
+    "cannot": "kan inte",
+    "costs": "kostar",
+    "others": "andra",
+    "price": "pris",
+    "published": "publicerad",
+    "publishes": "publicerar",
+    "taken": "tagna"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -24881,7 +25147,16 @@
     "… viewport": "… มุมมองภาพ",
     "… vs modules": "… ปะทะโมดูล",
     "Channel": "ช่อง",
-    "channel": "ช่อง"
+    "channel": "ช่อง",
+    "Purchase": "ซื้อ",
+    "adds": "เพิ่ม",
+    "cannot": "ไม่สามารถ",
+    "costs": "ค่าใช้จ่าย",
+    "others": "อื่น ๆ",
+    "price": "ราคา",
+    "published": "เผยแพร่แล้ว",
+    "publishes": "เผยแพร่",
+    "taken": "ได้รับ"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -25544,7 +25819,17 @@
     "… viewport": "… viewport",
     "… vs modules": "… laban sa mga module",
     "Channel": "Channel",
-    "channel": "channel"
+    "channel": "channel",
+    "Research": "Pananaliksik",
+    "adds": "nagdaragdag",
+    "cannot": "hindi maaari",
+    "costs": "nagkakahalaga",
+    "left": "natitira",
+    "others": "iba pa",
+    "price": "presyo",
+    "published": "na-publish",
+    "publishes": "nagpa-publish",
+    "taken": "natanggap"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -26418,7 +26703,16 @@
     "… viewport": "… görüntü penceresi",
     "… vs modules": "… modüllere karşı",
     "Channel": "Kanal",
-    "channel": "kanal"
+    "channel": "kanal",
+    "Purchase": "Satın Al",
+    "adds": "ekler",
+    "cannot": "olamaz",
+    "costs": "maliyetler",
+    "others": "diğerleri",
+    "price": "fiyat",
+    "published": "yayınlandı",
+    "publishes": "yayınlar",
+    "taken": "alınan"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -27285,7 +27579,16 @@
     "… viewport": "… оглядове вікно",
     "… vs modules": "… проти модулів",
     "Channel": "Канал",
-    "channel": "канал"
+    "channel": "канал",
+    "Purchase": "Купити",
+    "adds": "додає",
+    "cannot": "не може",
+    "costs": "коштує",
+    "others": "інші",
+    "price": "ціна",
+    "published": "опубліковано",
+    "publishes": "публікує",
+    "taken": "отримано"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -28141,7 +28444,16 @@
     "… viewport": "… kính quan sát",
     "… vs modules": "… so với các mô-đun",
     "Channel": "Kênh",
-    "channel": "kênh"
+    "channel": "kênh",
+    "Purchase": "Mua",
+    "adds": "thêm",
+    "cannot": "không thể",
+    "costs": "chi phí",
+    "others": "khác",
+    "price": "giá",
+    "published": "đã đăng",
+    "publishes": "đăng",
+    "taken": "đã lấy"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -29018,6 +29330,15 @@
     "… viewport": "… 视口",
     "… vs modules": "… 对模块",
     "Channel": "频道",
-    "channel": "频道"
+    "channel": "频道",
+    "Purchase": "购买",
+    "adds": "增加",
+    "cannot": "无法",
+    "costs": "费用",
+    "others": "其他",
+    "price": "价格",
+    "published": "已发布",
+    "publishes": "发布",
+    "taken": "承受"
   }
 }

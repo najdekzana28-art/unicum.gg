@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} atlīdzības tanki nav uzskaitīti: veikals tiem nenosaka cenu. Tie arī nav bezmaksas, jo Wargaming tos piešķir savos notikumos, izsolēs un maksas Kauja Pass līmeņos, kā arī citos veidos, par summu, ko tas katru reizi pieprasa, nevis par publicētu cenu.",
+  "n-tier-i-vehicles-are": "Arī {count} I līmeņa transportlīdzekļi nav uzskaitīti, jo tie ir bezmaksas.",
+  "only-vehicles-this-account-has": "Šeit var parādīties tikai transportlīdzekļi, ko šis konts ir paņēmis kaujā: Wargaming publicē rekordu par katru transportlīdzekli, bet nekad nepublicē sarakstu ar garāžā esošo, tāpēc tanks, kas pieder kontam, bet nekad nav izmantots, ir transportlīdzeklis, ko mēs nevaram redzēt.",
+  "purchase": "Nopirkt",
+  "research": "Izpētīt",
+  "total": "Kopā"
+}

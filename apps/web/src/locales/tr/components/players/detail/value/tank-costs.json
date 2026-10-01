@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} ödül tanklar listelenmez: mağaza bunlar için hiçbir fiyat belirlemez. Bunlar ücretsiz de değildir, çünkü Wargaming bunları kendi etkinlikleri, açık artırmaları ve ücretli Savaş Bileti kademeleri arasında diğerleri aracılığıyla, yayınlanmış bir fiyat yerine her seferinde talep ettiği fiyattan verir.",
+  "n-tier-i-vehicles-are": "Seviye I araçlar ücretsiz olduğu için {count} araç da listelenmez.",
+  "only-vehicles-this-account-has": "Burada yalnızca bu hesabın savaşa aldığı araçlar görünebilir: Wargaming araç başına bir rekor yayınlar, garajda bulunanların listesini asla yayınlamaz. Bu nedenle sahip olunan ancak hiç kullanılmayan bir tankı göremeyiz.",
+  "purchase": "Satın Al",
+  "research": "Araştır",
+  "total": "Toplam"
+}

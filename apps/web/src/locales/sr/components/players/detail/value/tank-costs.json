@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} nagradnih tenkova nije navedeno, jer prodavnica za njih ne određuje cenu. Oni nisu ni besplatni, pošto ih Wargaming dodeljuje kroz sopstvene događaje, aukcije i plaćene nivoe borbene propusnice, među ostalim, po ceni koju traži svaki put, a ne po objavljenoj ceni.",
+  "n-tier-i-vehicles-are": "Ni {count} vozila nivoa I nije navedeno, jer su besplatna.",
+  "only-vehicles-this-account-has": "Ovde se mogu pojaviti samo vozila koja je ovaj nalog uzeo u bitku: Wargaming objavljuje rekord po vozilu, a nikad spisak onoga što garaža sadrži, pa je tenk koji je u vlasništvu naloga, ali nikad nije vožen, nešto što ne možemo da vidimo.",
+  "purchase": "Kupi",
+  "research": "Izučavanje",
+  "total": "Ukupno"
+}

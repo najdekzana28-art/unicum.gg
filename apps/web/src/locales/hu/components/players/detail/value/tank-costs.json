@@ -1,0 +1,8 @@
+{
+  "n-reward-tanks-are-not": "{count} jutalom tank nincs felsorolva, mert az üzlet nem határoz meg számukra árat. Ettől még nem ingyenesek, mivel a Wargaming saját eseményein, többek között aukciókon és fizetős Csata-bérlet szinteken keresztül biztosítja őket, minden alkalommal az éppen kért feltételekkel, nem pedig közzétett áron.",
+  "n-tier-i-vehicles-are": "További {count} I. szintű jármű sincs felsorolva, mivel ingyenes.",
+  "only-vehicles-this-account-has": "Itt csak olyan járművek jelenhetnek meg, amelyeket ez a fiók csatába vitt: a Wargaming járművenként egy rekordot tesz közzé, a garázsban lévő járművek listáját viszont soha, ezért egy megvásárolt, de soha ki nem próbált tankot nem lehet látni.",
+  "purchase": "Vásárlás",
+  "research": "Fejlesztés",
+  "total": "Összesen"
+}
