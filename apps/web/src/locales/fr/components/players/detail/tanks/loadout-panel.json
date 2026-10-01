@@ -8,5 +8,7 @@
   "seat-empty": "Aucun membre d’équipage à ce poste",
   "field-mods": "Modifications de terrain",
   "slot-empty": "Vide",
-  "second-setup": "Ce joueur conserve une seconde configuration sur ce véhicule."
+  "second-setup": "Ce joueur conserve une seconde configuration sur ce véhicule.",
+  "empty-blurb": "Wargaming ne publie aucune configuration. Avec le mod {name}, vos propres véhicules affichent la leur ici.",
+  "empty-cta": "Obtenir le mod"
 }

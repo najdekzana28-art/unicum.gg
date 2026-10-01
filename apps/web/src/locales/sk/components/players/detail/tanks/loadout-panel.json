@@ -8,5 +8,7 @@
   "seat-empty": "Na tem sedežu ni člana posádke",
   "field-mods": "Súťažné úpravy",
   "slot-empty": "Prázdne",
-  "second-setup": "Tento hráč má na tomto vozidle ďalšiu zostavu."
+  "second-setup": "Tento hráč má na tomto vozidle ďalšiu zostavu.",
+  "empty-blurb": "Wargaming nezverejňuje žiadne konfigurácie. S modom {name} tu prikaži konfigurácie svojich vozidiel.",
+  "empty-cta": "Získať mod"
 }

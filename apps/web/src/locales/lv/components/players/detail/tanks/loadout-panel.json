@@ -8,5 +8,7 @@
   "seat-empty": "Šajā vietā nav apkalpes biedra",
   "field-mods": "Lauka modifikācijas",
   "slot-empty": "Tukšs",
-  "second-setup": "Šim spēlētājam šim transportlīdzeklim ir saglabāta otra komplektācija."
+  "second-setup": "Šim spēlētājam šim transportlīdzeklim ir saglabāta otra komplektācija.",
+  "empty-blurb": "Wargaming publicē transportlīdzekļu komplektācijas? Nē. Izmantojot modu {name}, jūsu pašu transportlīdzekļi šeit var rādīt savējās.",
+  "empty-cta": "Iegūt modu"
 }

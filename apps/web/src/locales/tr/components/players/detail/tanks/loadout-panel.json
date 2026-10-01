@@ -8,5 +8,7 @@
   "seat-empty": "Bu koltukta mürettebat üyesi yok",
   "field-mods": "Saha Modifikasyonları",
   "slot-empty": "Boş",
-  "second-setup": "Bu oyuncu bu araçta ikinci bir kurulum bulunduruyor."
+  "second-setup": "Bu oyuncu bu araçta ikinci bir kurulum bulunduruyor.",
+  "empty-blurb": "Wargaming hiçbir donanım düzeni yayınlamaz. {name} moduyla kendi araçlarınız donanım düzenlerini burada gösterir.",
+  "empty-cta": "Modu edin"
 }

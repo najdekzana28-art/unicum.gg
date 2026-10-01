@@ -8,5 +8,7 @@
   "seat-empty": "Niciun membru al echipajului pe acest loc",
   "field-mods": "Modificări de teren",
   "slot-empty": "Gol",
-  "second-setup": "Acest jucător păstrează o configurație secundă pentru acest vehicul."
+  "second-setup": "Acest jucător păstrează o configurație secundă pentru acest vehicul.",
+  "empty-blurb": "Wargaming nu publică configurații. Cu mod-ul {name}, vehiculele tale își afișează configurațiile aici.",
+  "empty-cta": "Descarcă mod-ul"
 }

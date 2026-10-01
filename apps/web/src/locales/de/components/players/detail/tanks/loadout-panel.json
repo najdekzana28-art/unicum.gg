@@ -8,5 +8,7 @@
   "seat-empty": "Kein Besatzungsmitglied auf diesem Platz",
   "field-mods": "Feldmodifikationen",
   "slot-empty": "Leer",
-  "second-setup": "Dieser Spieler verwendet eine zweite Ausstattung für dieses Fahrzeug."
+  "second-setup": "Dieser Spieler verwendet eine zweite Ausstattung für dieses Fahrzeug.",
+  "empty-blurb": "Wargaming veröffentlicht keine Ausrüstungen. Mit dem Mod {name} zeigen Ihre eigenen Fahrzeuge ihre Ausrüstung hier an.",
+  "empty-cta": "Mod herunterladen"
 }

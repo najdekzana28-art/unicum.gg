@@ -8,5 +8,7 @@
   "seat-empty": "Không có thành viên kíp lái ở vị trí này",
   "field-mods": "Sửa đổi hiện trường",
   "slot-empty": "Trống",
-  "second-setup": "Người chơi này giữ thêm một thiết lập cho xe tăng này."
+  "second-setup": "Người chơi này giữ thêm một thiết lập cho xe tăng này.",
+  "empty-blurb": "Wargaming không đăng thiết lập nào. Với mod {name}, xe tăng của bạn sẽ hiển thị thiết lập của chúng tại đây.",
+  "empty-cta": "Tải mod"
 }

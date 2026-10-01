@@ -8,5 +8,7 @@
   "seat-empty": "Brak członka załogi na tym stanowisku",
   "field-mods": "Modyfikacje polowe",
   "slot-empty": "Puste",
-  "second-setup": "Ten gracz ma drugi zestaw na tym pojeździe."
+  "second-setup": "Ten gracz ma drugi zestaw na tym pojeździe.",
+  "empty-blurb": "Wargaming nie publikuje konfiguracji wyposażenia. Dzięki modowi {name} pokaż tutaj konfiguracje swoich pojazdów.",
+  "empty-cta": "Pobierz mod"
 }

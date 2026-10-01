@@ -8,5 +8,7 @@
   "seat-empty": "Geen lid van de bemanning op deze plek",
   "field-mods": "Veldmodificaties",
   "slot-empty": "Leeg",
-  "second-setup": "Deze speler gebruikt een tweede opstelling voor dit voertuig."
+  "second-setup": "Deze speler gebruikt een tweede opstelling voor dit voertuig.",
+  "empty-blurb": "Wargaming publiceert geen uitrustingen. Met de {name}-mod tonen je eigen voertuigen hier hun uitrustingen.",
+  "empty-cta": "Download de mod"
 }

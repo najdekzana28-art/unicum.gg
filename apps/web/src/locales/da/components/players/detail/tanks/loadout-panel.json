@@ -8,5 +8,7 @@
   "seat-empty": "Intet besætningsmedlem på denne plads",
   "field-mods": "Feltmodifikationer",
   "slot-empty": "Tom",
-  "second-setup": "Denne spiller har en ekstra opsætning på dette køretøj."
+  "second-setup": "Denne spiller har en ekstra opsætning på dette køretøj.",
+  "empty-blurb": "Wargaming udgiver ingen opsætninger. Med moddet {name} viser dine egne køretøjer deres opsætninger her.",
+  "empty-cta": "Hent moddet"
 }

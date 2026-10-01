@@ -8,5 +8,7 @@
   "seat-empty": "Nema člana posade na ovom mjestu",
   "field-mods": "Terenske modifikacije",
   "slot-empty": "Prazno",
-  "second-setup": "Ovaj igrač ima drugu konfiguraciju za ovo vozilo."
+  "second-setup": "Ovaj igrač ima drugu konfiguraciju za ovo vozilo.",
+  "empty-blurb": "Wargaming ne objavljuje konfiguracije. S modom {name}, ovdje prikaži konfiguracije svojih vozila.",
+  "empty-cta": "Preuzmi mod"
 }

@@ -8,5 +8,7 @@
   "seat-empty": "Ingen mannskapsmedlem på denne plassen",
   "field-mods": "Feltmodifikasjoner",
   "slot-empty": "Tomt",
-  "second-setup": "Denne spilleren har et ekstra oppsett på dette kjøretøyet."
+  "second-setup": "Denne spilleren har et ekstra oppsett på dette kjøretøyet.",
+  "empty-blurb": "Wargaming publiserer ingen oppsett. Med modden {name} vises oppsettene til dine egne kjøretøy her.",
+  "empty-cta": "Last ned modden"
 }

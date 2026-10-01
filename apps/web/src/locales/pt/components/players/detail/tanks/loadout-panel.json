@@ -8,5 +8,7 @@
   "seat-empty": "Nenhum membro da tripulação neste assento",
   "field-mods": "Modificações de Campo",
   "slot-empty": "Vazio",
-  "second-setup": "Este jogador mantém uma segunda configuração neste veículo."
+  "second-setup": "Este jogador mantém uma segunda configuração neste veículo.",
+  "empty-blurb": "Wargaming não publica configurações. Com o mod {name}, seus próprios veículos podem mostrar suas configurações aqui.",
+  "empty-cta": "Obter o mod"
 }

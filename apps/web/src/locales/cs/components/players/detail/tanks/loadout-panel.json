@@ -8,5 +8,7 @@
   "seat-empty": "Na tomto místě není žádný člen posádky",
   "field-mods": "Úpravy pole",
   "slot-empty": "Prázdné",
-  "second-setup": "Tento hráč má pro toto vozidlo druhou konfiguraci."
+  "second-setup": "Tento hráč má pro toto vozidlo druhou konfiguraci.",
+  "empty-blurb": "Wargaming zveřejňuje sestavy vybavení? Ne. S modem {name} zde můžete zobrazit vlastní vozidla a jejich vybavení.",
+  "empty-cta": "Získat mod"
 }

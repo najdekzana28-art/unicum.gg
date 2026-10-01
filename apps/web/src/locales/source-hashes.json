@@ -1370,6 +1370,8 @@
   "components/players/detail/tanks/loadout-panel:field-mods": "90efdffd20fd",
   "components/players/detail/tanks/loadout-panel:slot-empty": "3159fe421b32",
   "components/players/detail/tanks/loadout-panel:second-setup": "fd57ed78341b",
+  "components/players/detail/tanks/loadout-panel:empty-blurb": "0359ff03c97e",
+  "components/players/detail/tanks/loadout-panel:empty-cta": "9a49a307ce0a",
   "components/players/detail/tanks/rate-prompt:rate-the-tanks-you-play": "17add45becbd",
   "components/players/detail/tanks/rate-prompt:see-what-everyone-thinks": "bb87163619b5",
   "components/players/detail/tanks/table:no-tanks-played-yet": "75fcee04f96c",

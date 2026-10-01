@@ -8,5 +8,7 @@
   "seat-empty": "Walang miyembro ng crew sa upuang ito",
   "field-mods": "Mga Pagbabagong Aksyon",
   "slot-empty": "Walang laman",
-  "second-setup": "May pinananatiling segundong setup ang manlalarong ito sa sasakyang ito."
+  "second-setup": "May pinananatiling segundong setup ang manlalarong ito sa sasakyang ito.",
+  "empty-blurb": "Hindi nagpa-publish ang Wargaming ng mga loadout. Sa mod na {name}, makikita rito ang mga loadout ng sarili mong mga sasakyan.",
+  "empty-cta": "Kunin ang mod"
 }

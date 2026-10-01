@@ -8,5 +8,7 @@
   "seat-empty": "この座席には搭乗員がいません",
   "field-mods": "フィールド改造",
   "slot-empty": "空",
-  "second-setup": "このプレイヤーはこの車両に2つ目の搭載構成を保存しています。"
+  "second-setup": "このプレイヤーはこの車両に2つ目の搭載構成を保存しています。",
+  "empty-blurb": "Wargamingは装備構成を公開していません。{name} MODを使うと、自分の車両の装備構成がここに表示されます。",
+  "empty-cta": "MODを入手"
 }

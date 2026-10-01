@@ -8,5 +8,7 @@
   "seat-empty": "Tässä paikassa ei ole miehistön jäsentä",
   "field-mods": "Kenttämuutokset",
   "slot-empty": "Tyhjä",
-  "second-setup": "Tällä pelaajalla on tässä ajoneuvossa toinen varustus."
+  "second-setup": "Tällä pelaajalla on tässä ajoneuvossa toinen varustus.",
+  "empty-blurb": "Wargaming ei julkaise varustuksia. Näytä {name}-modilla omien ajoneuvojesi varustukset täällä.",
+  "empty-cta": "Hanki modi"
 }
