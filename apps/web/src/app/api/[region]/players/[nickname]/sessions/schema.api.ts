@@ -34,6 +34,7 @@ const sessionVehicle = z
     slug: z.string().nullable(),
     name: z.string(),
     shortName: z.string().nullable(),
+    tag: z.string().nullable(),
     tier: z.number().int().nullable(),
     nation: z.string().nullable(),
     type: z.string().nullable(),

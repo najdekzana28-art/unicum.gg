@@ -3969,6 +3969,7 @@ export interface components {
             slug: string | null;
             name: string;
             shortName: string | null;
+            tag: string | null;
             tier: number | null;
             nation: string | null;
             type: string | null;

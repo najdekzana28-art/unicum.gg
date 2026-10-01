@@ -13,6 +13,7 @@ import { Fragment, useState } from "react";
 import { toRoman } from "roman-numerals";
 import type { PlayerSession, RatingMetric } from "@unicum.gg/shared";
 import { NationFlag } from "@/components/tanks/nation-flag";
+import { TankIcon } from "@/components/tanks/tank-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
   Table,
@@ -175,6 +176,14 @@ export function PlayerSessionsTable({
                           <span className="text-fd-muted-foreground">
                             {v.tier ? toRoman(v.tier) : ""}
                           </span>
+                          {v.tag && v.type ? (
+                            <TankIcon
+                              region={region}
+                              tag={v.tag}
+                              type={v.type}
+                              className="h-3.5 w-auto shrink-0 object-contain"
+                            />
+                          ) : null}
                           {v.slug ? (
                             <Link
                               href={ROUTES.TANK(region, v.slug)}

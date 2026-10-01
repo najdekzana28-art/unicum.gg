@@ -76,6 +76,8 @@ export type SessionVehicle = SessionStats & {
   slug: string | null;
   name: string;
   shortName: string | null;
+  /** Wargaming's own id for the vehicle, which is what its icon is keyed by. */
+  tag: string | null;
   tier: number | null;
   nation: string | null;
   type: string | null;
@@ -287,6 +289,7 @@ export function buildPlayerSessions(
         slug: idToSlug.get(tankId) ?? null,
         name: meta?.name ?? "",
         shortName: meta?.shortName ?? null,
+        tag: meta?.tag ?? null,
         tier: meta?.tier ?? null,
         nation: meta?.nation ?? null,
         type: meta?.type ?? null,
