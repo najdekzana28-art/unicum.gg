@@ -54,7 +54,19 @@ export function TableSkeleton({
 }) {
   const rowIndexes = Array.from({ length: rows }, (_, i) => i);
   return (
-    <Table rail={rail} className="my-0! [&_td]:py-1.5! [&_th]:py-2!">
+    // The first and last columns get their inline padding back, because every
+    // table this stands in for puts it back: `TableCell`/`TableHead` drop it
+    // (`first:ps-0`) so a table can align on the page margin, and inside a panel
+    // there is no page margin to align to. Without it the placeholder sits flush
+    // against the panel edge and the rows jump right the moment they land.
+    //
+    // The leading edge is unanimous at `pl-4`. The trailing one is not: most of
+    // these tables end at `pr-4` and two of them at `pr-3`, so the majority wins
+    // and those two settle by four pixels on the edge nobody is reading.
+    <Table
+      rail={rail}
+      className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_th]:py-2! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!"
+    >
       {header && (
         <TableHeader>
           <TableRow>
