@@ -46,11 +46,13 @@ const DEC1_FORMAT = {
  */
 export function PlayerSessionsTable({
   region,
+  nickname,
   sessions,
   metric,
   dateLabel,
 }: {
   region: Region;
+  nickname: string;
   sessions: PlayerSession[];
   metric: RatingMetric;
   /** How a bucket's date reads, which depends on its size. */
@@ -186,7 +188,10 @@ export function PlayerSessionsTable({
                           ) : null}
                           {v.slug ? (
                             <Link
-                              href={ROUTES.TANK(region, v.slug)}
+                              // This player on the vehicle, like the profile's
+                              // other vehicle lists: the row is one day of
+                              // their own record on it.
+                              href={ROUTES.PLAYER_TANK(region, nickname, v.slug)}
                               className="hover:underline"
                               onClick={(e) => e.stopPropagation()}
                             >

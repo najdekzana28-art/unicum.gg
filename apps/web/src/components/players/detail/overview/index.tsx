@@ -182,6 +182,7 @@ export function OverallTab({
         <PanelContent className="p-0">
           <TanksLiftDrag
             region={region}
+            nickname={nickname}
             liftDrag={liftDrag}
             metric={metric}
             metricLabel={metricLabel}

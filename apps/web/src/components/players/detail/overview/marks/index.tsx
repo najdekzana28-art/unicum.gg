@@ -196,14 +196,24 @@ export function PlayerMarksPanels({
             </div>
             <div className="grid gap-px border-t border-fd-border bg-fd-border md:grid-cols-2">
               <div className="bg-fd-card">
-                <MarksReach region={region} entries={shownReach.left}  locale={locale} />
+                <MarksReach
+                  region={region}
+                  nickname={nickname}
+                  entries={shownReach.left}
+                  locale={locale}
+                />
               </div>
               {/* Only once there is something to put in it: a fixed half would
                   print the empty state beside a populated column whenever the
                   list holds fewer than two rows. */}
               {shownReach.right.length > 0 && (
                 <div className="bg-fd-card">
-                  <MarksReach region={region} entries={shownReach.right}  locale={locale} />
+                  <MarksReach
+                    region={region}
+                    nickname={nickname}
+                    entries={shownReach.right}
+                    locale={locale}
+                  />
                 </div>
               )}
             </div>

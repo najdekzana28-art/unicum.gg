@@ -21,10 +21,12 @@ const INT_FORMAT = { maximumFractionDigits: 0 } as const;
  */
 export function MarksReach({
   region,
+  nickname,
   entries,
   locale,
 }: {
   region: Region;
+  nickname: string;
   entries: MarkReachEntry[];
   locale: string;
 }) {
@@ -51,7 +53,12 @@ export function MarksReach({
           tier={e.tier}
           isPremium={e.isPremium}
           name={e.name}
-          href={e.slug ? ROUTES.TANK(region, e.slug) : undefined}
+          // The player's own record on the vehicle rather than its catalogue
+          // page: this list is about what THIS account is doing on the gun, so
+          // a click goes to the numbers behind that claim.
+          href={
+            e.slug ? ROUTES.PLAYER_TANK(region, nickname, e.slug) : undefined
+          }
           battles={e.battles}
           battlesNote={
             e.window === MarkWindow.Recent ? ` ${t("recent-window")}` : undefined

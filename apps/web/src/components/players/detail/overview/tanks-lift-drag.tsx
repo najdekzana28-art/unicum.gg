@@ -1,3 +1,4 @@
+import ROUTES from "@/constants/routes";
 import { useLocale } from "@onruntime/translations/react";
 import { numberFormat } from "@/lib/format";
 import {
@@ -27,6 +28,7 @@ export function TanksLiftDrag(
     | { loading: true; metricLabel: string }
     | {
         region: Region;
+        nickname: string;
         liftDrag: LiftDrag | null;
         metric: RatingMetric;
         metricLabel: string;
@@ -41,13 +43,14 @@ export function TanksLiftDrag(
     );
   }
 
-  const { region, liftDrag, metric, metricLabel } = props;
+  const { region, nickname, liftDrag, metric, metricLabel } = props;
   if (!liftDrag) return null;
 
   return (
     <div className="grid gap-px bg-fd-border md:grid-cols-2">
       <Column
         region={region}
+        nickname={nickname}
         rows={liftDrag.lift}
         kind="lift"
         metric={metric}
@@ -55,6 +58,7 @@ export function TanksLiftDrag(
       />
       <Column
         region={region}
+        nickname={nickname}
         rows={liftDrag.drag}
         kind="drag"
         metric={metric}
@@ -102,12 +106,14 @@ function ColumnSkeleton({
 
 function Column({
   region,
+  nickname,
   rows,
   kind,
   metric,
   metricLabel,
 }: {
   region: Region;
+  nickname: string;
   rows: LiftDragRow[];
   kind: "lift" | "drag";
   metric: RatingMetric;
@@ -141,7 +147,14 @@ function Column({
       ) : (
         <ul>
           {rows.map((row) => (
-            <Row key={row.tankId} region={region} row={row} metric={metric}  locale={locale} />
+            <Row
+              key={row.tankId}
+              region={region}
+              nickname={nickname}
+              row={row}
+              metric={metric}
+              locale={locale}
+            />
           ))}
         </ul>
       )}
@@ -151,11 +164,13 @@ function Column({
 
 function Row({
   region,
+  nickname,
   row,
   metric,
   locale,
 }: {
   region: Region;
+  nickname: string;
   row: LiftDragRow;
   metric: RatingMetric;
   locale: string;
@@ -177,6 +192,12 @@ function Row({
       tier={row.tier}
       isPremium={row.isPremium}
       name={row.name}
+      // The player's own record on the vehicle, not the catalogue page: this
+      // panel is about what the tank does to THIS account's rating, so the
+      // question a click answers is "how am I doing on it".
+      href={
+        row.slug ? ROUTES.PLAYER_TANK(region, nickname, row.slug) : undefined
+      }
       battles={row.battles}
       badge={
         <span

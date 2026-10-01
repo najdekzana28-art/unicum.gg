@@ -2958,6 +2958,7 @@ export interface components {
         /** @description A tank whose removal would move the overall rating by removalDelta (negative = it lifts the rating, positive = it drags it). */
         LiftDragRow: {
             tankId: number;
+            slug: string | null;
             name: string;
             tag: string;
             type: string;
@@ -3969,7 +3970,6 @@ export interface components {
             slug: string | null;
             name: string;
             shortName: string | null;
-            tag: string | null;
             tier: number | null;
             nation: string | null;
             type: string | null;
@@ -4527,6 +4527,7 @@ export interface components {
             slug: string | null;
             name: string;
             shortName: string | null;
+            tag: string | null;
             tier: number | null;
             nation: string | null;
             type: string | null;

@@ -99,6 +99,7 @@ export const playerVehicle = z
 const liftDragRow = z
   .object({
     tankId: z.number(),
+    slug: z.string().nullable(),
     name: z.string(),
     tag: z.string(),
     type: z.string(),

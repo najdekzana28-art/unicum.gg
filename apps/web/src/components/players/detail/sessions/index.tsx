@@ -125,6 +125,7 @@ export function SessionsTab({
               </div>
               <PlayerSessionsTable
                 region={region}
+                nickname={nickname}
                 sessions={sessions}
                 metric={metric}
                 dateLabel={(p) => sessionLabel(p, granularity, locale, t)}

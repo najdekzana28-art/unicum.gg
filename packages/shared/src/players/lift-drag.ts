@@ -1,4 +1,5 @@
 import { RatingMetric } from "../constants/rating";
+import { buildTankSlugIndex } from "../wot/tanks/slug";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -32,6 +33,9 @@ const TOP_N = 5;
 // is not precomputed per metric like the vehicle rows are.
 export type LiftDragRow = {
   tankId: number;
+  /** Addresses the vehicle in a URL, so a row can link to the player's own
+   * record on it. Null for a vehicle the slug index does not name. */
+  slug: string | null;
   name: string;
   tag: string;
   type: string;
@@ -160,6 +164,7 @@ export function buildLiftDrag(
   metric: RatingMetric,
 ): LiftDrag | null {
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
+  const { idToSlug } = buildTankSlugIndex(encyclopedia);
   const agg = makeMetricAgg(
     metric,
     wn8Expected,
@@ -199,6 +204,7 @@ export function buildLiftDrag(
     if (!Number.isFinite(removalDelta) || removalDelta === 0) continue;
     scored.push({
       tankId: tank.tank_id,
+      slug: idToSlug.get(tank.tank_id) ?? null,
       name: meta.name,
       tag: meta.tag,
       type: meta.type,
