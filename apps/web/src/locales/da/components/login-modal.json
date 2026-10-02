@@ -5,6 +5,7 @@
   "open-source": "{name} er open source. {link} før du stoler på det.",
   "pick-the-region-your-world": "Vælg den region, din World of Tanks-konto er på. Det behøver ikke være den region, du gennemser.",
   "read-the-login-code": "Læs login-koden",
+  "wargamings-own-confirmation-screen": "Wargamings egen bekræftelsesskærm viser et telefonnummer. Det eneste, den fortæller os, er, om et nummer er tilknyttet din konto, aldrig nummeret selv, uanset hvad deres formulering antyder.",
   "what-wargaming-hands-back-is": "Det, Wargaming giver tilbage, er et token, der læser dine egne kontodata. Det gemmes krypteret og fornys, så længe din konto forbliver tilknyttet, og det handler kun på dine vegne dér, hvor du selv har sat det op, f.eks. din klans reserveplan.",
   "you-sign-in-on-wargaming": "Du logger ind på Wargamings egen side, ikke her. Din adgangskode indtastes aldrig på {NAME} og når aldrig frem til os."
 }

@@ -666,7 +666,8 @@
     "published": "منشور",
     "publishes": "ينشر",
     "taken": "المُتلقّى",
-    "setup": "التجهيز"
+    "setup": "التجهيز",
+    "linked": "مرتبط"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1334,7 +1335,8 @@
     "published": "апублікавана",
     "publishes": "публікуе",
     "taken": "атрыманы",
-    "setup": "камплектацыя"
+    "setup": "камплектацыя",
+    "linked": "звязаны"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2205,7 +2207,8 @@
     "published": "публикувано",
     "publishes": "публикува",
     "taken": "взети",
-    "setup": "конфигурация"
+    "setup": "конфигурация",
+    "linked": "свързан"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -2881,7 +2884,8 @@
     "published": "objavljeno",
     "publishes": "objavljuje",
     "taken": "preuzeto",
-    "setup": "konfiguracija"
+    "setup": "konfiguracija",
+    "linked": "povezano"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3763,7 +3767,8 @@
     "published": "zveřejněno",
     "publishes": "zveřejňuje",
     "taken": "obdržené",
-    "setup": "konfigurace"
+    "setup": "konfigurace",
+    "linked": "propojeno"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4650,7 +4655,8 @@
     "published": "offentliggjort",
     "publishes": "udgiver",
     "taken": "taget",
-    "setup": "opsætning"
+    "setup": "opsætning",
+    "linked": "tilknyttet"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5531,7 +5537,8 @@
     "published": "veröffentlicht",
     "publishes": "veröffentlicht",
     "taken": "genommen",
-    "setup": "Konfiguration"
+    "setup": "Konfiguration",
+    "linked": "verknüpft"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6417,7 +6424,8 @@
     "published": "δημοσιευμένο",
     "publishes": "δημοσιεύει",
     "taken": "ληφθεί",
-    "setup": "διαμόρφωση"
+    "setup": "διαμόρφωση",
+    "linked": "συνδεδεμένο"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7283,7 +7291,8 @@
     "published": "publicado",
     "publishes": "publica",
     "taken": "recibido",
-    "setup": "configuración"
+    "setup": "configuración",
+    "linked": "vinculado"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8174,7 +8183,8 @@
     "published": "julkaistu",
     "publishes": "julkaisee",
     "taken": "otettu",
-    "setup": "kokoonpano"
+    "setup": "kokoonpano",
+    "linked": "linkitetty"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9044,7 +9054,8 @@
     "published": "publié",
     "publishes": "publie",
     "taken": "pris",
-    "setup": "configuration"
+    "setup": "configuration",
+    "linked": "lié"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -9713,7 +9724,8 @@
     "published": "प्रकाशित",
     "publishes": "प्रकाशित करता है",
     "taken": "लिया गया",
-    "setup": "सेटअप"
+    "setup": "सेटअप",
+    "linked": "जुड़ा हुआ"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -10598,7 +10610,8 @@
     "published": "objavljeno",
     "publishes": "objavljuje",
     "taken": "uzeto",
-    "setup": "konfiguracija"
+    "setup": "konfiguracija",
+    "linked": "povezano"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -11485,7 +11498,8 @@
     "published": "közzétéve",
     "publishes": "közzétesz",
     "taken": "elszenvedett",
-    "setup": "összeállítás"
+    "setup": "összeállítás",
+    "linked": "összekapcsolva"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -12367,7 +12381,8 @@
     "published": "pubblicato",
     "publishes": "pubblica",
     "taken": "subiti",
-    "setup": "configurazione"
+    "setup": "configurazione",
+    "linked": "collegato"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -13256,7 +13271,8 @@
     "published": "公開済み",
     "publishes": "公開",
     "taken": "取得",
-    "setup": "セットアップ"
+    "setup": "セットアップ",
+    "linked": "連携済み"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -13929,7 +13945,8 @@
     "published": "жарияланған",
     "publishes": "жариялайды",
     "taken": "алынған",
-    "setup": "жинақтама"
+    "setup": "жинақтама",
+    "linked": "байланыстырылған"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -14823,7 +14840,8 @@
     "published": "게시됨",
     "publishes": "게시함",
     "taken": "받음",
-    "setup": "세팅"
+    "setup": "세팅",
+    "linked": "연결됨"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -15714,7 +15732,8 @@
     "published": "paskelbta",
     "publishes": "skelbia",
     "taken": "paimta",
-    "setup": "sąranka"
+    "setup": "sąranka",
+    "linked": "susieta"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -16589,7 +16608,8 @@
     "published": "publicēts",
     "publishes": "publicē",
     "taken": "paņemts",
-    "setup": "konfigurācija"
+    "setup": "konfigurācija",
+    "linked": "saistīts"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -17480,7 +17500,8 @@
     "published": "gepubliceerd",
     "publishes": "publiceert",
     "taken": "genomen",
-    "setup": "configuratie"
+    "setup": "configuratie",
+    "linked": "gekoppeld"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -18363,7 +18384,8 @@
     "published": "publisert",
     "publishes": "publiserer",
     "taken": "tatt",
-    "setup": "oppsett"
+    "setup": "oppsett",
+    "linked": "koblet"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -19242,7 +19264,8 @@
     "published": "opublikowano",
     "publishes": "publikuje",
     "taken": "otrzymane",
-    "setup": "konfiguracja"
+    "setup": "konfiguracja",
+    "linked": "powiązane"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -20114,7 +20137,8 @@
     "published": "publicado",
     "publishes": "publica",
     "taken": "recebido",
-    "setup": "configuração"
+    "setup": "configuração",
+    "linked": "vinculado"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -20986,7 +21010,8 @@
     "published": "publicat",
     "publishes": "publică",
     "taken": "primit",
-    "setup": "configurație"
+    "setup": "configurație",
+    "linked": "asociat"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -21846,7 +21871,8 @@
     "published": "опубликовано",
     "publishes": "публикует",
     "taken": "получено",
-    "setup": "сборка"
+    "setup": "сборка",
+    "linked": "связанный"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -22521,7 +22547,8 @@
     "published": "zverejnené",
     "publishes": "zverejňuje",
     "taken": "prijaté",
-    "setup": "postavitev"
+    "setup": "postavitev",
+    "linked": "povezano"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -23408,7 +23435,8 @@
     "published": "objavljeno",
     "publishes": "objavljuje",
     "taken": "uzeto",
-    "setup": "konfiguracija"
+    "setup": "konfiguracija",
+    "linked": "povezano"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -24299,7 +24327,8 @@
     "published": "publicerad",
     "publishes": "publicerar",
     "taken": "tagna",
-    "setup": "konfiguration"
+    "setup": "konfiguration",
+    "linked": "länkad"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -25186,7 +25215,8 @@
     "published": "เผยแพร่แล้ว",
     "publishes": "เผยแพร่",
     "taken": "ได้รับ",
-    "setup": "การจัดชุด"
+    "setup": "การจัดชุด",
+    "linked": "เชื่อมโยง"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -25860,7 +25890,8 @@
     "published": "na-publish",
     "publishes": "nagpa-publish",
     "taken": "natanggap",
-    "setup": "configurasyon"
+    "setup": "configurasyon",
+    "linked": "naka-link"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -26744,7 +26775,8 @@
     "published": "yayınlandı",
     "publishes": "yayınlar",
     "taken": "alınan",
-    "setup": "kurulum"
+    "setup": "kurulum",
+    "linked": "bağlantılı"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -27621,7 +27653,8 @@
     "published": "опубліковано",
     "publishes": "публікує",
     "taken": "отримано",
-    "setup": "комплектація"
+    "setup": "комплектація",
+    "linked": "прив’язано"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -28487,7 +28520,8 @@
     "published": "đã đăng",
     "publishes": "đăng",
     "taken": "đã lấy",
-    "setup": "cấu hình"
+    "setup": "cấu hình",
+    "linked": "đã liên kết"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -29374,6 +29408,7 @@
     "published": "已发布",
     "publishes": "发布",
     "taken": "承受",
-    "setup": "配置"
+    "setup": "配置",
+    "linked": "已关联"
   }
 }

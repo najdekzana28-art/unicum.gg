@@ -5,6 +5,7 @@
   "open-source": "{name} má otevřený zdrojový kód. Než mu začnete důvěřovat, {link}.",
   "pick-the-region-your-world": "Vyberte oblast, ve které máte účet World of Tanks. Nemusí to být oblast, jejíž stránky si právě prohlížíte.",
   "read-the-login-code": "Přečtěte si přihlašovací kód",
+  "wargamings-own-confirmation-screen": "Vlastní potvrzovací obrazovka Wargamingu uvádí telefonní číslo. Říká nám pouze, zda je propojeno s vaším účtem, nikdy nám nesděluje číslo samo, ať jejich formulace naznačuje cokoli.",
   "what-wargaming-hands-back-is": "Wargaming předá pouze token, který umožňuje číst data vašeho vlastního účtu. Je uložen v zašifrované podobě a obnovuje se, dokud je váš účet propojený. Jedná za vás pouze tam, kde si to sami nastavíte, například u rozvrhu klanových záloh.",
   "you-sign-in-on-wargaming": "Přihlašujete se přímo na stránce Wargaming, ne zde. Web {NAME} po vás nikdy nechce zadat heslo a to se k nám nikdy nedostane."
 }

@@ -5,6 +5,7 @@
   "open-source": "Le projet {name} est open source. {link} avant de lui faire confiance.",
   "pick-the-region-your-world": "Choisissez la région à laquelle votre compte World of Tanks est associé. Elle ne doit pas forcément être celle que vous consultez actuellement.",
   "read-the-login-code": "Lire le code de connexion",
+  "wargamings-own-confirmation-screen": "L’écran de confirmation officiel de Wargaming indique un numéro de téléphone. Tout ce qu’il nous dit, c’est s’il est lié à votre compte, jamais le numéro lui-même, quel que soit ce que leur formulation laisse entendre.",
   "what-wargaming-hands-back-is": "Wargaming nous renvoie un jeton qui permet de lire les données de votre propre compte. Il est stocké sous forme chiffrée et renouvelé tant que votre compte reste lié. Il agit uniquement en votre nom pour les fonctions que vous avez vous-même configurées, comme la programmation des réserves de votre clan.",
   "you-sign-in-on-wargaming": "Vous vous connectez directement sur une page de Wargaming, pas ici. Votre mot de passe n’est jamais saisi sur {NAME} et ne nous parvient jamais."
 }
