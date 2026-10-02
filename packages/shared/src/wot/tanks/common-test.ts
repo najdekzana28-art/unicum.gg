@@ -17,36 +17,3 @@ export enum TankClient {
 export function toTankClient(value: string | null | undefined): TankClient {
   return value === TankClient.CommonTest ? TankClient.CommonTest : TankClient.Live;
 }
-
-/**
- * How a vehicle names the client it is being read on, when one string has to
- * carry both: `amx-13-90@ct`.
- *
- * A comparison addresses its columns by slug, in the path, which leaves no room
- * for a query param per column and no way to tell two columns of the same
- * vehicle apart. Suffixing the slug does both, and stays readable in a link.
- */
-export const TANK_CLIENT_SEPARATOR = "@";
-
-/** A vehicle on a given client: what a comparison column is. */
-export type TankRef = { slug: string; client: TankClient };
-
-/** Read `slug` or `slug@ct`. An unknown suffix reads as live rather than
- * failing: this comes out of a URL anyone can type. */
-export function parseTankRef(raw: string): TankRef {
-  const trimmed = raw.trim().toLowerCase();
-  const at = trimmed.lastIndexOf(TANK_CLIENT_SEPARATOR);
-  if (at <= 0) return { slug: trimmed, client: TankClient.Live };
-  return {
-    slug: trimmed.slice(0, at),
-    client: toTankClient(trimmed.slice(at + 1)),
-  };
-}
-
-/** Write a ref back. Live carries no suffix, so an ordinary comparison keeps
- * the URL it has always had. */
-export function formatTankRef({ slug, client }: TankRef): string {
-  return client === TankClient.CommonTest
-    ? `${slug}${TANK_CLIENT_SEPARATOR}${client}`
-    : slug;
-}

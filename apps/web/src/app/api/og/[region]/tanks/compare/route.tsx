@@ -19,7 +19,12 @@ import {
   applyTestChanges,
   getTestChanges,
 } from "@unicum.gg/core/wargaming/wot/tanks/test-changes";
-import { formatTankRef, parseTankRef, TankClient } from "@unicum.gg/shared";
+import {
+  normalizeTankRefs,
+  parseTankRef,
+  tankRefLabel,
+  TankClient,
+} from "@unicum.gg/shared";
 import { BrandHeaderCell, RegionHeaderCell, StatCard } from "@/components/og";
 import { overallScore } from "@/components/tanks/compare/score";
 import APP from "@/constants/app";
@@ -48,21 +53,6 @@ type Slot = {
   score: number | null;
 };
 
-/** The columns a card is asked for. A column is a vehicle on a game client
- * (`amx-13-90@ct`), so the whole reference is what dedupes, exactly as the page
- * and the comparison endpoint read it. */
-function dedupePreservingOrder(refs: string[]): string[] {
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const raw of refs) {
-    const ref = formatTankRef(parseTankRef(raw));
-    if (seen.has(ref)) continue;
-    seen.add(ref);
-    out.push(ref);
-  }
-  return out;
-}
-
 /** The name size that keeps the longest vehicle on one line in its column. */
 function pickNameFontSize(longest: number, columns: number): number {
   const perColumn = OG_SIZE.width / columns;
@@ -87,14 +77,11 @@ export async function GET(
 ) {
   const { region } = await params;
   const slugsParam = req.nextUrl.searchParams.get("slugs") ?? "";
-  // Deduped before the ceiling applies, and already URL-decoded by
-  // `searchParams`, exactly like the comparison endpoint reads it.
-  const slugs = dedupePreservingOrder(
-    slugsParam
-      .split(",")
-      .map((s) => s.trim())
-      .filter((s) => s.length > 0),
-  ).slice(0, MAX_COMPARE_TANKS);
+  // Normalized exactly as the page and the comparison endpoint read it, and
+  // already URL-decoded by `searchParams`, so the card holds the columns the
+  // board does: a vehicle and its test version, or one vehicle twice under two
+  // setups.
+  const slugs = normalizeTankRefs(slugsParam.split(","), MAX_COMPARE_TANKS);
 
   const [assets, hangarBg] = await Promise.all([
     loadOgAssets(),
@@ -123,7 +110,7 @@ export async function GET(
     slots = await Promise.all(
       slugs.map(async (ref): Promise<Slot> => {
         // The client rides on the reference, the catalogue is keyed by vehicle.
-        const { slug, client } = parseTankRef(ref);
+        const { slug, client, occurrence } = parseTankRef(ref);
         const onTest = client === TankClient.CommonTest;
         const row = bySlug.get(slug) ?? null;
         if (!row) {
@@ -168,9 +155,10 @@ export async function GET(
         return {
           ref,
           slug,
-          // Told apart from its twin when a card holds a vehicle and its test
-          // version, which otherwise print the same name twice.
-          name: onTest ? `${identity.name} (Common Test)` : identity.name,
+          // Told apart from its twins when a card holds a vehicle and its test
+          // version, or the same vehicle under two setups, which otherwise
+          // print the same name twice.
+          name: tankRefLabel(identity.name, { client, occurrence }),
           subtitle: `Tier ${tierLabel} ${identity.nation.toUpperCase()} ${classLabel.toLowerCase()}`,
           tierLabel,
           render,

@@ -828,7 +828,7 @@ export interface paths {
         };
         /**
          * Compare tanks
-         * @description Everything a side-by-side comparison of 2 to 4 vehicles renders (`?slugs=is-7,e-100`): each vehicle's specifications, module combinations, equipment slots, crew and progression, plus its server-average performance. The mountable catalogues (equipment, directives, consumables, crew skills) are hoisted out of the vehicles and described once under `catalog`, referenced by key, and `ranges` carries the catalogue-wide spread of every characteristic so a client can score a vehicle per category. A slug may suffix the game client to read the vehicle on (`?slugs=amx-13-90,amx-13-90@ct`), which is how a vehicle is compared against what the running Common Test makes of it, and every column carries back the `client` it was read on. Duplicate columns collapse, and a slug the catalogue doesn't know is dropped rather than failing the request, as long as two vehicles remain.
+         * @description Everything a side-by-side comparison of 2 to 4 columns renders (`?slugs=is-7,e-100`): each vehicle's specifications, module combinations, equipment slots, crew and progression, plus its server-average performance. The mountable catalogues (equipment, directives, consumables, crew skills) are hoisted out of the vehicles and described once under `catalog`, referenced by key, and `ranges` carries the catalogue-wide spread of every characteristic so a client can score a vehicle per category. A slug may suffix the game client to read the vehicle on (`?slugs=amx-13-90,amx-13-90@ct`), which is how a vehicle is compared against what the running Common Test makes of it, and every column carries back the `client` it was read on. It may also suffix a position (`?slugs=is-7,is-7~2`), which is how the same vehicle is compared under two setups: both columns carry the vehicle's data, told apart by `occurrence`. A repeat spelled the same way twice still collapses, and a slug the catalogue doesn't know is dropped rather than failing the request, as long as two columns remain.
          */
         get: operations["get-{region}-tanks-compare"];
         put?: never;
@@ -4769,6 +4769,8 @@ export interface components {
              * @enum {string}
              */
             client: "live" | "ct";
+            /** @description Which column this is among those showing the same vehicle on the same client, counted from 1. Above 1 when the comparison holds one vehicle more than once, which is how the same tank is compared under two setups: the query asks for it by suffixing the position (`is-7,is-7~2`) and every such column repeats the vehicle's data under its own number. */
+            occurrence: number;
             /** @description The Common Test build available for this vehicle, e.g. `2.4.0.5415`. Null when no test is running or when it leaves the vehicle alone. */
             testVersion: string | null;
             meta: components["schemas"]["VehicleMeta"];
@@ -5342,7 +5344,7 @@ export interface components {
         tankReviewStatusField: "none" | "pending" | "approved" | "rejected";
         /** @description Everything a side-by-side vehicle comparison renders: each vehicle's configurable data, the mountable catalogues they share, and the catalogue-wide spread of every characteristic. */
         TanksCompare: {
-            /** @description The compared vehicles, in the requested order. A slug the catalogue doesn't know is dropped rather than failing the request, so the array can be shorter than the query. */
+            /** @description The compared columns, in the requested order. A slug the catalogue doesn't know is dropped rather than failing the request, so the array can be shorter than the query. It is one entry per column rather than per vehicle, so a vehicle asked for twice appears twice, told apart by `occurrence`. */
             vehicles: components["schemas"]["TankCompareVehicle"][];
             catalog: components["schemas"]["TankCompareCatalog"];
             /** @description Where each specification sits across the whole vehicle catalogue, as its 5th (`low`) and 95th (`high`) percentile, keyed by specification field. Percentiles rather than min/max so a single outlier vehicle doesn't flatten the scale. Lets a client read a value as a position in the catalogue (and score a vehicle per category) rather than as a bare number. */
@@ -5352,7 +5354,7 @@ export interface components {
         };
         /** @description Everything a side-by-side vehicle comparison renders: each vehicle's configurable data, the mountable catalogues they share, and the catalogue-wide spread of every characteristic. */
         TanksCompareResponse: {
-            /** @description The compared vehicles, in the requested order. A slug the catalogue doesn't know is dropped rather than failing the request, so the array can be shorter than the query. */
+            /** @description The compared columns, in the requested order. A slug the catalogue doesn't know is dropped rather than failing the request, so the array can be shorter than the query. It is one entry per column rather than per vehicle, so a vehicle asked for twice appears twice, told apart by `occurrence`. */
             vehicles: components["schemas"]["TankCompareVehicle"][];
             catalog: components["schemas"]["TankCompareCatalog"];
             /** @description Where each specification sits across the whole vehicle catalogue, as its 5th (`low`) and 95th (`high`) percentile, keyed by specification field. Percentiles rather than min/max so a single outlier vehicle doesn't flatten the scale. Lets a client read a value as a position in the catalogue (and score a vehicle per category) rather than as a bare number. */
@@ -7240,7 +7242,7 @@ export interface operations {
     "get-{region}-tanks-compare": {
         parameters: {
             query: {
-                /** @description Vehicle slugs to compare (2 to 4). */
+                /** @description Columns to compare (2 to 4). A slug on its own, or suffixed with the game client to read it on (`is-7@ct`) or with its position among the columns showing that same vehicle (`is-7~2`, one tank under two setups). */
                 slugs: string[];
             };
             header?: never;
@@ -8513,7 +8515,7 @@ export interface operations {
     "get-og-{region}-tanks-compare": {
         parameters: {
             query: {
-                /** @description Vehicle slugs to compare (2 to 4). */
+                /** @description Columns to compare (2 to 4). A slug on its own, or suffixed with the game client to read it on (`is-7@ct`) or with its position among the columns showing that same vehicle (`is-7~2`, one tank under two setups). */
                 slugs: string[];
             };
             header?: never;

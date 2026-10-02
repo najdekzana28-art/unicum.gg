@@ -19,7 +19,7 @@ import {
   MIN_COMPARE_TANKS,
 } from "@/constants/compare";
 import { SETUP_PARAM } from "@/components/tanks/detail/specifications/config-url";
-import { formatTankRef, parseTankRef } from "@unicum.gg/shared";
+import { normalizeTankRefs } from "@unicum.gg/shared";
 import {
   vehicleLabel,
   vehicleRef,
@@ -49,31 +49,16 @@ function decodeSegment(raw: string): string {
   }
 }
 
-function dedupePreservingOrder(refs: string[]): string[] {
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const raw of refs) {
-    const ref = formatTankRef(parseTankRef(decodeSegment(raw)));
-    if (seen.has(ref)) continue;
-    seen.add(ref);
-    out.push(ref);
-  }
-  return out;
-}
-
-/** The columns a path asks for: already decoded by Next, deduped before the
- * ceiling applies (so a repeated column costs itself its slot, never a distinct
- * vehicle further down the path), and null below the two it takes to compare.
+/** The columns a path asks for: decoded, normalized (see `normalizeTankRefs`)
+ * and null below the two it takes to compare.
  *
- * A column is a vehicle on a client, so the whole reference is what dedupes:
- * `amx-13-90/vs/amx-13-90@ct` is a vehicle against its Common Test version, two
- * columns, where the bare slug twice is still one. */
+ * A column is a vehicle on a client at a position, and the whole reference is
+ * what dedupes: `amx-13-90/vs/amx-13-90@ct` is a vehicle against its Common Test
+ * version and `is-7/vs/is-7~2` is one vehicle under two setups, while the bare
+ * slug twice is still one column. */
 function resolveRefs(raw: string[]): string[] | null {
-  const cleaned = raw.map((s) => s.trim()).filter((s) => s.length > 0);
-  if (cleaned.length < MIN_COMPARE_TANKS) return null;
-  const unique = dedupePreservingOrder(cleaned);
-  if (unique.length < MIN_COMPARE_TANKS) return null;
-  return unique.slice(0, MAX_COMPARE_TANKS);
+  const refs = normalizeTankRefs(raw.map(decodeSegment), MAX_COMPARE_TANKS);
+  return refs.length < MIN_COMPARE_TANKS ? null : refs;
 }
 
 /** The comparison payload, or null when the catalogue knows none of the slugs.
@@ -148,7 +133,10 @@ export default async function CompareTanksPage({
 
   // The endpoint answers with canonical slugs and drops what the catalogue
   // doesn't know, so a legacy id, a wrong-case slug, a duplicate or a dead
-  // vehicle in the path lands on the URL this comparison actually is.
+  // vehicle in the path lands on the URL this comparison actually is. Column
+  // positions are numbered there too, over the vehicles as resolved, so two
+  // references that turn out to be the same tank (a slug and a legacy id) land
+  // on the `is-7/vs/is-7~2` spelling that says they are one vehicle twice.
   //
   // Compared as column lists, not as URL strings. The two strings are built by
   // different means (one from the raw path, one through `pathcat`) and a column

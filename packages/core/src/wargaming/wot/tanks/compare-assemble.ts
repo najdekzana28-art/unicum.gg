@@ -1,5 +1,6 @@
 import { WotSrcBranch, type EquipmentSlot, type Region } from "@unicum.gg/wargaming";
 import {
+  formatTankRef,
   parseTankRef,
   TankClient,
   type TankSpec,
@@ -84,6 +85,12 @@ export interface CompareVehicle {
   slug: string;
   /** The game client this column was read from. */
   client: TankClient;
+  /** Which column this is among those showing the same vehicle on the same
+   * client: 1 unless the comparison holds the vehicle more than once, which is
+   * how the same tank is compared under two setups. Computed here, over the
+   * canonical vehicles, so two references that resolve to the same tank (a slug
+   * and a legacy id) are numbered as the repeat they are. */
+  occurrence: number;
   /** The Common Test build available for this vehicle, null when none is. */
   testVersion: string | null;
   meta: VehicleMeta;
@@ -108,6 +115,13 @@ export interface CompareVehicle {
   mastery: MomValues | null;
   wn8Expected: WN8Expected | null;
   wnxExpected: WNXExpected | null;
+}
+
+/** A column reference stripped of its position, which is what actually has to
+ * be assembled: the same vehicle twice is one assembly and two columns. */
+function pairKey(ref: string): string {
+  const { slug, client } = parseTankRef(ref);
+  return formatTankRef({ slug, client });
 }
 
 /** Everything one vehicle contributes on its own, before the catalogues are
@@ -171,10 +185,19 @@ async function assembleVehicle(region: Region, ref: string) {
  * Unknown slugs are dropped rather than failing the request, so a stale link
  * with one renamed vehicle still renders the rest. The returned `slug` on each
  * column is the canonical one, so the caller can redirect a legacy URL onto it.
+ *
+ * `refs` are columns, not vehicles: the same vehicle may appear more than once
+ * (`is-7`, `is-7~2`), which is how one tank is compared under two setups. Each
+ * column comes back with the `occurrence` that says which it is.
  */
 export async function assembleTankCompare(region: Region, refs: string[]) {
+  // A column is a vehicle on a client, and a comparison may hold the same pair
+  // twice (one tank, two setups). The work is per vehicle while the columns are
+  // whatever the caller asked for, so each distinct pair is assembled once and
+  // then handed to every column that asked for it.
+  const pairs = [...new Set(refs.map(pairKey))];
   const [assembled, dataset, wn8Map, wnxMap, ranges] = await Promise.all([
-    Promise.all(refs.map((ref) => assembleVehicle(region, ref))),
+    Promise.all(pairs.map((ref) => assembleVehicle(region, ref))),
     getTankDataset(region),
     getWN8ExpectedValues(),
     getWNXExpectedValues(),
@@ -191,8 +214,9 @@ export async function assembleTankCompare(region: Region, refs: string[]) {
   const consumables = new Map<string, LoadoutConsumable>();
   const crewSkills = new Map<string, CrewSkill>();
 
-  const vehicles: CompareVehicle[] = [];
-  for (const v of assembled) {
+  // One entry per distinct pair, which the columns below are drawn from.
+  const built = new Map<string, CompareVehicle>();
+  for (const [i, v] of assembled.entries()) {
     if (!v) continue;
     for (const e of v.loadout?.equipment ?? [])
       if (!equipment.has(e.key)) equipment.set(e.key, e);
@@ -216,10 +240,11 @@ export async function assembleTankCompare(region: Region, refs: string[]) {
             (await getTestChanges(v.tankId)).changes,
           )
         : (row?.specs ?? null);
-    vehicles.push({
+    built.set(pairs[i], {
       tankId: v.tankId,
       slug: v.slug,
       client: v.client,
+      occurrence: 1,
       testVersion: v.testVersion,
       meta: v.meta,
       specs: specs as CompareVehicle["specs"],
@@ -246,6 +271,25 @@ export async function assembleTankCompare(region: Region, refs: string[]) {
       wn8Expected: wn8Map.get(v.tankId) ?? null,
       wnxExpected: wnxMap.get(v.tankId) ?? null,
     });
+  }
+
+  // The columns, in the order they were asked for. A repeated vehicle is the
+  // same assembled payload under a higher occurrence: a shallow copy, so the
+  // repeat costs a field rather than a second assembly, and the response is
+  // never larger than the four distinct vehicles it is already sized for.
+  //
+  // Numbered over the canonical vehicle rather than over the reference that was
+  // written, so a column reached by a legacy id is the repeat it turns out to
+  // be once resolved, and the caller can redirect onto a spelling that says so.
+  const counts = new Map<string, number>();
+  const vehicles: CompareVehicle[] = [];
+  for (const ref of refs) {
+    const base = built.get(pairKey(ref));
+    if (!base) continue;
+    const canonical = formatTankRef({ slug: base.slug, client: base.client });
+    const occurrence = (counts.get(canonical) ?? 0) + 1;
+    counts.set(canonical, occurrence);
+    vehicles.push(occurrence === 1 ? base : { ...base, occurrence });
   }
 
   return {

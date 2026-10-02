@@ -400,7 +400,8 @@ export const compareTagsQuery = z.object({
 
 export const compareSlugsQuery = z.object({
   slugs: z.array(z.string()).meta({
-    description: "Vehicle slugs to compare (2 to 4).",
+    description:
+      "Columns to compare (2 to 4). A slug on its own, or suffixed with the game client to read it on (`is-7@ct`) or with its position among the columns showing that same vehicle (`is-7~2`, one tank under two setups).",
   }),
 });
 

@@ -45,6 +45,10 @@ const compareVehicle = z
         "The game client this column was read on. `ct` when the query asked for it, and always for a vehicle that exists only on the test client.",
       "x-enum-source": "TANK_CLIENT",
     } as EnumMeta),
+    occurrence: z.number().int().meta({
+      description:
+        "Which column this is among those showing the same vehicle on the same client, counted from 1. Above 1 when the comparison holds one vehicle more than once, which is how the same tank is compared under two setups: the query asks for it by suffixing the position (`is-7,is-7~2`) and every such column repeats the vehicle's data under its own number.",
+    }),
     testVersion: z.string().nullable().meta({
       description:
         "The Common Test build available for this vehicle, e.g. `2.4.0.5415`. Null when no test is running or when it leaves the vehicle alone.",
@@ -128,7 +132,7 @@ export const TanksCompareResponse = z
   .object({
     vehicles: z.array(compareVehicle).meta({
       description:
-        "The compared vehicles, in the requested order. A slug the catalogue doesn't know is dropped rather than failing the request, so the array can be shorter than the query.",
+        "The compared columns, in the requested order. A slug the catalogue doesn't know is dropped rather than failing the request, so the array can be shorter than the query. It is one entry per column rather than per vehicle, so a vehicle asked for twice appears twice, told apart by `occurrence`.",
     }),
     catalog: compareCatalog,
     ranges: z.record(z.string(), specRange).meta({

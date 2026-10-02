@@ -4,6 +4,7 @@ import { useTranslation } from "@/hooks/use-translation";
 import { useState } from "react";
 import Link from "@/components/link";
 import {
+  CopyIcon,
   CopySimpleIcon,
   PushPinIcon,
   SlidersHorizontalIcon,
@@ -39,7 +40,11 @@ import { VehicleModeToggle } from "@/components/tanks/detail/specifications/vehi
 import type { TankBuildData, TankBuild } from "@/hooks/use-tank-build";
 import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
 import { CLIENT_PARAM } from "@/components/tanks/detail/specifications/config-url";
-import { isTestColumn } from "@/components/tanks/compare/column-ref";
+import {
+  columnOccurrence,
+  isRepeatColumn,
+  isTestColumn,
+} from "@/components/tanks/compare/column-ref";
 import { TankClient } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
@@ -101,6 +106,7 @@ export function TankCompareColumnHeader({
   pinned,
   onPin,
   onRemove,
+  onDuplicate,
   onApplyToAll,
 }: {
   region: Region;
@@ -115,6 +121,9 @@ export function TankCompareColumnHeader({
   onPin: () => void;
   /** Absent when the comparison is down to its last two vehicles. */
   onRemove?: () => void;
+  /** Put this vehicle in the comparison a second time, on this setup. Absent
+   * when the comparison is already full. */
+  onDuplicate?: () => void;
   /** Put this column's setup on every other column. */
   onApplyToAll?: (setupToken: string) => void;
 }) {
@@ -123,6 +132,7 @@ export function TankCompareColumnHeader({
   const [open, setOpen] = useState(false);
   const { meta } = vehicle;
   const onTest = isTestColumn(vehicle);
+  const repeat = isRepeatColumn(vehicle);
 
   return (
     <div
@@ -201,6 +211,17 @@ export function TankCompareColumnHeader({
           >
             <PushPinIcon className="size-3.5" weight={pinned ? "fill" : "bold"} />
           </button>
+          {onDuplicate && (
+            <button
+              type="button"
+              onClick={onDuplicate}
+              aria-label={t("duplicate-tank", { tank: meta.name })}
+              title={t("a-second-column-on-the-same")}
+              className="inline-flex size-5 cursor-pointer items-center justify-center rounded text-fd-muted-foreground/60 transition-colors hover:bg-fd-border/50 hover:text-fd-foreground"
+            >
+              <CopyIcon className="size-3.5" weight="bold" />
+            </button>
+          )}
           {onRemove && (
             <button
               type="button"
@@ -231,6 +252,19 @@ export function TankCompareColumnHeader({
             and its test version: they carry the same name. */}
         {onTest && (
           <CommonTestBadge size={13} version={vehicle.testVersion ?? undefined} />
+        )}
+        {/* And what tells them apart when the comparison holds one vehicle more
+            than once: same name, same client, and only the setup differs, so the
+            column has to carry its own number. */}
+        {repeat && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex shrink-0 cursor-help items-center rounded-full border border-fd-border/70 bg-fd-background/40 px-1.5 text-[0.625rem] leading-[1.15rem] font-medium tabular-nums text-fd-muted-foreground">
+                {t("setup-n", { n: columnOccurrence(vehicle) })}
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>{t("the-same-vehicle-under-a-setup")}</TooltipContent>
+          </Tooltip>
         )}
         {/* The comparison's answer to "so which one is better", marked on the
             name the way the player and clan comparisons mark their best rating. */}

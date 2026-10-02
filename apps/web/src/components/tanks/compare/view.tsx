@@ -38,10 +38,18 @@ import ROUTES from "@/constants/routes";
 import { unicumPublic } from "@/services/sdk";
 import { MAX_COMPARE_TANKS } from "@/constants/compare";
 import {
+  columnClient,
+  columnOccurrence,
   vehicleLabel,
   vehicleRef,
 } from "@/components/tanks/compare/column-ref";
 import { useCompareBuilds } from "@/hooks/use-compare-builds";
+import {
+  formatTankRef,
+  normalizeTankRefs,
+  parseTankRef,
+  TankClient,
+} from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
 
 enum CompareTab {
@@ -130,26 +138,72 @@ export function TankCompareView({
   }, [setups, tabQuery]);
 
   /** Navigate to another composition, carrying each surviving column's setup so
-   * adding or removing a vehicle never costs the others their build. */
-  function navigateTo(slugs: string[], keep: (string | null)[]) {
-    if (slugs.length < 2) {
-      router.push(ROUTES.TANK(region, slugs[0] ?? vehicles[0].slug));
+   * adding or removing a vehicle never costs the others their build.
+   *
+   * The refs are normalized here rather than left to the page's canonical
+   * redirect, so a composition change lands on its final URL in one navigation:
+   * taking out the first of two columns on the same vehicle renumbers the one
+   * that stays, and it would otherwise arrive at `is-7~2` alone and bounce.
+   * Normalizing preserves the order, so the setups still line up. */
+  function navigateTo(refs: string[], keep: (string | null)[]) {
+    const columns = normalizeTankRefs(refs, MAX_COMPARE_TANKS);
+    if (columns.length < 2) {
+      // Below two there is nothing to compare, so the survivor gets its own
+      // page. Its slug is read back out of the reference, which may carry a
+      // client or a position that a tank page's URL has no room for.
+      const last = columns[0] ? parseTankRef(columns[0]).slug : null;
+      router.push(ROUTES.TANK(region, last ?? vehicles[0].slug));
       return;
     }
-    const href = ROUTES.COMPARE_TANKS(region, slugs);
+    const href = ROUTES.COMPARE_TANKS(region, columns);
     const carried = encodeSetups(keep);
     router.push(carried ? `${href}?${SETUP_PARAM}=${carried}` : href);
   }
 
+  /** The reference a new column on this vehicle takes: one past the highest
+   * position the comparison already gives it, since a repeat spelled exactly
+   * like a column that is already there collapses instead of being added.
+   * Normalization closes the gap this may leave. */
+  function refForNewColumn(slug: string, client: TankClient): string {
+    const taken = vehicles
+      .filter((v) => v.slug === slug && columnClient(v) === client)
+      .map(columnOccurrence);
+    return formatTankRef({
+      slug,
+      client,
+      occurrence: taken.length ? Math.max(...taken) + 1 : 1,
+    });
+  }
+
   function onRemove(idx: number) {
     navigateTo(
-      vehicles.filter((_, i) => i !== idx).map((v) => v.slug),
+      vehicles.filter((_, i) => i !== idx).map(vehicleRef),
       tokens.filter((_, i) => i !== idx),
     );
   }
 
   function onAdd(slug: string) {
-    navigateTo([...vehicles.map((v) => v.slug), slug], [...tokens, null]);
+    navigateTo(
+      [...vehicles.map(vehicleRef), refForNewColumn(slug, TankClient.Live)],
+      [...tokens, null],
+    );
+  }
+
+  /** The same vehicle again, beside the column it was taken from and carrying
+   * its setup: the two columns start identical and the reader changes one, which
+   * is the comparison a player runs before spending credits.
+   *
+   * Beside rather than appended, because a setup is read against the one it is
+   * being weighed up against, and carrying the setup rather than starting
+   * pristine because the question is almost never "against stock". */
+  function onDuplicate(idx: number) {
+    const source = vehicles[idx];
+    const ref = refForNewColumn(source.slug, columnClient(source));
+    const refs = vehicles.map(vehicleRef);
+    refs.splice(idx + 1, 0, ref);
+    const keep = [...tokens];
+    keep.splice(idx + 1, 0, tokens[idx] ?? null);
+    navigateTo(refs, keep);
   }
 
   /** Put one column's setup on all of them. A real navigation rather than a
@@ -188,13 +242,14 @@ export function TankCompareView({
       pinned={pinned === i}
       onPin={() => setPinned(pinned === i ? null : i)}
       onRemove={vehicles.length > 2 ? () => onRemove(i) : undefined}
+      onDuplicate={canAddMore ? () => onDuplicate(i) : undefined}
       onApplyToAll={onApplyToAll}
     />
   ));
 
   const shareUrl = `${APP.URL}${ROUTES.COMPARE_TANKS(
     region,
-    vehicles.map((v) => v.slug),
+    vehicles.map(vehicleRef),
   )}${setups ? `?${SETUP_PARAM}=${setups}` : ""}`;
 
   return (
@@ -205,10 +260,13 @@ export function TankCompareView({
             {/* The vehicles are the heading: this page is only ever about them,
               and it is the one thing a search result or a shared link shows. */}
             <PanelTitle>{names.join(" vs ")}</PanelTitle>
+            {/* Nothing is excluded: a vehicle already in the comparison is a
+                legitimate pick, since the same tank under two setups is one of
+                the things this board is for. It joins as a column of its own
+                rather than collapsing onto the one that is there. */}
             {canAddMore && (
               <TankSearchPopover
                 region={region}
-                excludeSlugs={new Set(vehicles.map((v) => v.slug))}
                 onPick={(tank) => onAdd(tank.slug)}
                 triggerAriaLabel={t("add-a-vehicle")}
                 tooltip={t("add-a-vehicle")}
@@ -232,7 +290,7 @@ export function TankCompareView({
             })}
             ogImage={unicumPublic.og
               .region(region)
-              .tanks.compare(vehicles.map((v) => v.slug))
+              .tanks.compare(vehicles.map(vehicleRef))
               .url()}
           />
         </PanelHeader>
