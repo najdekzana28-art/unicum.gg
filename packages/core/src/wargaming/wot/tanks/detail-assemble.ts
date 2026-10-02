@@ -6,6 +6,7 @@ import { getTankMoeByRegion } from "@unicum.gg/core/moe";
 import { getResearchPath } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import { getTankBasedOn } from "./based-on";
 import { getTankPaintLock } from "./paint-lock";
+import { getVehicleFirstPaint } from "./mirror";
 import { getTankModules } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import {
   getTankStats,
@@ -103,6 +104,7 @@ export async function assembleTankDetail(
     rating,
     basedOn,
     paintLock,
+    model,
   ] = await Promise.all([
     getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
     getTankStats(region, tankId),
@@ -140,6 +142,13 @@ export async function assembleTankDetail(
     // rather than left to the viewer, which has only the geometry mirror to go
     // on and that mirror answers with a wardrobe either way.
     safe(() => getTankPaintLock(region, tankId, branch), null as PaintLock | null),
+    // The files the hero's first picture is made of, named here so the page can
+    // ask for them in its markup. The viewer works all of this out for itself,
+    // but only once its own JavaScript has arrived and React has handed it a
+    // canvas: measured, the first byte of geometry was asked for a second after
+    // the HTML had landed. Named in the markup instead, the browser fetches
+    // them while it is still parsing, and the viewer finds them waiting.
+    safe(() => getVehicleFirstPaint(meta.tag, branch), null),
   ]);
 
   // The crests, folded into the payload rather than attached per request: this
@@ -191,5 +200,6 @@ export async function assembleTankDetail(
     client: onTest ? TankClient.CommonTest : TankClient.Live,
     testVersion,
     rating,
+    model,
   };
 }

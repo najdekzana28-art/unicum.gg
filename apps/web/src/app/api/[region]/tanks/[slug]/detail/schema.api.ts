@@ -210,6 +210,22 @@ export const TankDetailResponse = z
         description:
           "The community's verdict in three figures, for the hero badge and the page's structured data. The full breakdown is on `/ratings`.",
       }),
+    model: z
+      .object({
+        geometry: z.array(z.string()).meta({
+          description:
+            "The vehicle's meshes, as absolute URLs on the geometry mirror, pinned to the build they were read at.",
+        }),
+        textures: z.array(z.string()).meta({
+          description:
+            "The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it.",
+        }),
+      })
+      .nullable()
+      .meta({
+        description:
+          "Everything the 3D hero reads before it can draw, so a page can ask for it in its markup rather than waiting for the viewer's own JavaScript to work it out. Null for a vehicle the geometry mirror does not carry, which is drawn from a photograph.",
+      }),
   })
   .meta({
     id: "TankDetail",

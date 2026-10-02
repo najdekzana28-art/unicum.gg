@@ -10,6 +10,7 @@ export * from "./client";
 export * from "./region";
 export * from "./language";
 export * from "./assets-mirror";
+export * from "./models-first-paint";
 export * from "./models-mirror";
 export * from "./models-shapes";
 export * from "./cdn";

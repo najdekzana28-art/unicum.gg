@@ -1,7 +1,10 @@
 import {
   MODELS_BRANCH,
   MODELS_REPO,
+  firstPaintFiles,
+  modelsCdn,
   modelUrl,
+  type MirrorModel,
   type WotSrcBranch,
   modelsRefFor,
 } from "@unicum.gg/wargaming";
@@ -102,4 +105,100 @@ export function getModelsMirror(branch?: WotSrcBranch): Promise<MirrorBuild> {
       };
     },
   );
+}
+
+/**
+ * How long a vehicle's manifest is held.
+ *
+ * Keyed by the commit it was read at, so the file behind it can never change:
+ * what expires is only our willingness to keep it, and a build that moves on
+ * writes under a different key anyway. A day is long enough that a tank nobody
+ * opens twice still costs one read, and short enough that a mirror rolled back
+ * does not leave an orphan behind for a week.
+ */
+const MANIFEST_SECONDS = 24 * 60 * 60;
+
+/** A vehicle's own corner of the mirror, resolved for the server to point at. */
+export type VehicleMirror = {
+  /** The root every path below hangs off, pinned where the commit is known. */
+  root: string;
+  /** Where this vehicle's files sit under `vehicles/`. */
+  path: string;
+  /** Its manifest, which names the pieces and the maps they wear. */
+  model: MirrorModel;
+};
+
+/**
+ * One vehicle's manifest, read on the server so a page can name its files.
+ *
+ * **The point is to say what to fetch before anything that could say it
+ * exists.** The viewer learns all of this for itself, but only once its own
+ * JavaScript has arrived and React has handed it a canvas, which is a second
+ * into the page: measured, the first byte of geometry was asked for at 2.5 s on
+ * a page whose HTML had landed at 1.4. A server that knows the tank can name
+ * the same files in the markup and let the browser fetch them while it is still
+ * parsing.
+ *
+ * Null for a vehicle the mirror does not carry, which is a picture rather than
+ * a model and has nothing to preload.
+ */
+export function getVehicleMirror(
+  code: string,
+  branch?: WotSrcBranch,
+): Promise<VehicleMirror | null> {
+  const ref = modelsRefFor(branch) ?? MODELS_BRANCH;
+  return getModelsMirror(branch).then(async ({ sha, vehicles }) => {
+    const path = vehicles[code];
+    if (!path) return null;
+    // The address is pinned to the commit the index was read at, so the
+    // manifest, the files it names and the preload that names them all describe
+    // one build of the mirror. Falling back to the branch keeps that property:
+    // what it loses is only how fast a patch reaches a reader.
+    const root = sha ? modelsCdn(sha) : modelsCdn(ref);
+    const model = await cachedInRedis<MirrorModel | null>(
+      `models:manifest:${sha ?? ref}:${path}`,
+      (held) => (held ? MANIFEST_SECONDS : 60),
+      async () => {
+        try {
+          const r = await fetch(`${root}/vehicles/${path}/model.json`);
+          return r.ok ? ((await r.json()) as MirrorModel) : null;
+        } catch {
+          return null;
+        }
+      },
+    );
+    return model ? { root, path, model } : null;
+  });
+}
+
+/** The addresses a vehicle's first picture is made of, ready to be asked for. */
+export type VehicleFirstPaint = {
+  /** The geometry, which a viewer pulls through `fetch`. */
+  geometry: string[];
+  /** The maps it wears, which arrive as images. */
+  textures: string[];
+};
+
+/**
+ * Where to find everything the hero draws before it draws anything.
+ *
+ * **Absolute, because the caller is markup rather than code.** What reads this
+ * puts the addresses in a `<link rel="preload">` and has no business rebuilding
+ * a path from a root and a folder, and an address assembled twice is an address
+ * that can differ twice.
+ *
+ * Null for a vehicle the mirror does not carry, which is drawn from a
+ * photograph and has nothing to fetch.
+ */
+export async function getVehicleFirstPaint(
+  code: string,
+  branch?: WotSrcBranch,
+): Promise<VehicleFirstPaint | null> {
+  const mirror = await getVehicleMirror(code, branch);
+  if (!mirror) return null;
+  const { geometry, textures } = firstPaintFiles(mirror.model);
+  return {
+    geometry: geometry.map((at) => `${mirror.root}/vehicles/${mirror.path}/${at}`),
+    textures: textures.map((at) => `${mirror.root}/${at}`),
+  };
 }
