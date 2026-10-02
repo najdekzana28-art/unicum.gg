@@ -2408,6 +2408,7 @@ export interface components {
                 color: string;
                 emblem: string;
                 languages: string[];
+                isDisbanded?: boolean;
             };
             /** Format: date-time */
             joinedAt: Date;
