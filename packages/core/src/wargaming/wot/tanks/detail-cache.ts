@@ -59,10 +59,8 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  *     reader would otherwise keep being served the English one, not a crash.
  * v20: why the game refuses to dress this vehicle, which the hero reads to stop
  *     offering a wardrobe on the hundred and eleven that cannot be painted.
- * v21: the addresses the hero's first picture is made of, so the page can name
- *     them in its markup instead of waiting for the viewer to work them out.
  */
-const SHAPE_VERSION = 21;
+const SHAPE_VERSION = 20;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

@@ -2408,7 +2408,6 @@ export interface components {
                 color: string;
                 emblem: string;
                 languages: string[];
-                isDisbanded?: boolean;
             };
             /** Format: date-time */
             joinedAt: Date;
@@ -4940,13 +4939,6 @@ export interface components {
                 votes: number;
                 reviewCount: number;
             };
-            /** @description Everything the 3D hero reads before it can draw, so a page can ask for it in its markup rather than waiting for the viewer's own JavaScript to work it out. Null for a vehicle the geometry mirror does not carry, which is drawn from a photograph. */
-            model: {
-                /** @description The vehicle's meshes, as absolute URLs on the geometry mirror, pinned to the build they were read at. */
-                geometry: string[];
-                /** @description The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it. */
-                textures: string[];
-            } | null;
         };
         /** @description Everything the tank page renders: identity, best players per rating metric, server averages, WN8/WNX expected values, combat specs, Marks of Excellence/Mastery (current and history) and the research path. */
         TankDetailResponse: {
@@ -5043,13 +5035,6 @@ export interface components {
                 votes: number;
                 reviewCount: number;
             };
-            /** @description Everything the 3D hero reads before it can draw, so a page can ask for it in its markup rather than waiting for the viewer's own JavaScript to work it out. Null for a vehicle the geometry mirror does not carry, which is drawn from a photograph. */
-            model: {
-                /** @description The vehicle's meshes, as absolute URLs on the geometry mirror, pinned to the build they were read at. */
-                geometry: string[];
-                /** @description The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it. */
-                textures: string[];
-            } | null;
         };
         /** @description A tank's economics: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1 (cheapest path, prerequisite modules included). */
         TankEconomics: {
