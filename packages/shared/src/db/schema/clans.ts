@@ -29,7 +29,17 @@ export function makeClansTable(region: string) {
       creatorId: bigint("creator_id", { mode: "number" }).notNull(),
       creatorName: text("creator_name").notNull(),
       createdAtWg: timestamp("created_at_wg", { withTimezone: true }).notNull(),
+      // WG reports a clan that has ended with `is_clan_disbanded` set and every
+      // visible field blanked (`tag: ""`, `name: ""`, 0 members), which is a
+      // different answer from the `null` it gives for an id it never issued: one
+      // is a clan that ended, the other a clan that never was. Only the first
+      // lands here, and the row keeps everything we last saw, so the frozen row
+      // IS the archive.
       isDisbanded: boolean("is_disbanded").notNull().default(false),
+      // When we first saw it reported as disbanded, which is not the day it
+      // happened: WG does not say. Kept because it orders two archive rows that
+      // held the same tag, and resolving a tag has to pick the newest of them.
+      disbandedAt: timestamp("disbanded_at", { withTimezone: true }),
       languages: text("languages").array().notNull().default([]),
       firstSeenAt: timestamp("first_seen_at", { withTimezone: true })
         .notNull()
@@ -80,7 +90,18 @@ export function makeClansTable(region: string) {
       tournamentBestAt: timestamp("tournament_best_at", { withTimezone: true }),
     },
     (t) => [
-      uniqueIndex(`${region}_clans_tag_lower_idx`).on(t.tagLower),
+      // Partial on live clans, because a tag is only unique among the clans
+      // still holding one: WG frees a disbanded clan's tag and anyone may take
+      // it. Unconditional, this index refused the new holder's INSERT (the
+      // upsert resolves on `id`, so a `tag_lower` collision is an unhandled
+      // unique violation) and, since the refresh batches every clan into one
+      // statement, took the whole batch down with it. The new holder could then
+      // never enter the table at all, while its tag kept serving the dead
+      // clan's page, and nothing healed: it is the stored row's existence that
+      // stops us asking WG who holds the tag today.
+      uniqueIndex(`${region}_clans_tag_lower_idx`)
+        .on(t.tagLower)
+        .where(sql`${t.isDisbanded} = false`),
       index(`${region}_clans_last_refreshed_at_idx`).on(t.lastRefreshedAt),
       // The stronghold cron's claim: `WHERE stronghold_due_at <= NOW() ORDER BY
       // stronghold_due_at LIMIT n`. Partial on live clans only, a disbanded
@@ -90,7 +111,12 @@ export function makeClansTable(region: string) {
         .on(t.strongholdDueAt)
         .where(sql`${t.isDisbanded} = false`),
       // Tag prefix search (search dialog). `text_pattern_ops` makes
-      // `tag_lower LIKE 'x%'` a range scan regardless of DB collation.
+      // `tag_lower LIKE 'x%'` a range scan regardless of DB collation. It also
+      // serves the equality lookup that resolves a tag, which the partial unique
+      // index above cannot do on its own any more: that one excludes exactly the
+      // archive rows the lookup falls back to. Measured rather than assumed, the
+      // planner picks this index for `tag_lower = 'x'` and sorts the handful of
+      // rows sharing the tag, so the archive needs no index of its own.
       index(`${region}_clans_tag_prefix_idx`).on(
         sql`${t.tagLower} text_pattern_ops`,
       ),
