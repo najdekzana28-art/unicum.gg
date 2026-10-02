@@ -186,10 +186,19 @@ async function enrichMissingOverall(
   );
 }
 
-export async function getClanMembersCached(
+/**
+ * The roster we hold, mapped and enriched. `null` when we hold none, which the
+ * two callers answer differently: the read path queues a fetch, the refresh path
+ * keeps what it has.
+ *
+ * Side-effect free on purpose. The queueing lives in the caller, so the refresh
+ * path can read the stored roster without enqueueing the clan it is in the
+ * middle of refreshing.
+ */
+async function readStoredMembers(
   region: Region,
   clanId: number,
-): Promise<ClanMembersCached> {
+): Promise<ClanMemberStats[] | null> {
   const clanMembers = clanMembersByRegion[region];
   const players = playersByRegion[region];
   // LEFT JOIN players: ratings live on the players row (updated by
@@ -210,34 +219,40 @@ export async function getClanMembersCached(
     .leftJoin(players, eq(clanMembers.accountId, players.accountId))
     .where(eq(clanMembers.clanId, clanId));
 
-  if (rows.length > 0) {
-    const oldest = rows.reduce(
-      (min, r) => Math.min(min, r.member.refreshedAt.getTime()),
-      Number.POSITIVE_INFINITY,
-    );
+  if (rows.length === 0) return null;
+
+  return enrichMissingOverall(
+    region,
+    rows.map((r) =>
+      memberStatsFromRow(r.member, {
+        wn7: r.wn7,
+        wn8: r.wn8,
+        wnx: r.wnx,
+        wn730d: r.wn730d,
+        wn830d: r.wn830d,
+        wnx30d: r.wnx30d,
+        battles30d: r.battles30d,
+      }),
+    ),
+  );
+}
+
+export async function getClanMembersCached(
+  region: Region,
+  clanId: number,
+  /** Set for a clan that has ended, so the stale-while-revalidate below is not
+   * promised on its behalf. Nothing can ever fill its roster: WG serves no
+   * members for it, and the queue refuses it outright (see `liveOnly`), so the
+   * page would show a refresh beacon spinning to its ceiling on every single
+   * visit, and pay a queue round trip each time to be refused again. */
+  isDisbanded = false,
+): Promise<ClanMembersCached> {
+  const stored = await readStoredMembers(region, clanId);
+  if (stored) {
     // No refresh from here: see the note in repository/events.ts. `/enqueue`
     // (real browsers only) and clan-backfill-cron own freshness, and this line
     // used to fire a portal call on every crawler render.
-    const stale = false;
-    const enriched = await enrichMissingOverall(
-      region,
-      rows.map((r) =>
-        memberStatsFromRow(r.member, {
-          wn7: r.wn7,
-          wn8: r.wn8,
-          wnx: r.wnx,
-          wn730d: r.wn730d,
-          wn830d: r.wn830d,
-          wnx30d: r.wnx30d,
-          battles30d: r.battles30d,
-        }),
-      ),
-    );
-    return {
-      members: enriched,
-      fromDb: true,
-      refreshing: stale,
-    };
+    return { members: stored, fromDb: true, refreshing: false };
   }
 
   // Stale-while-revalidate: render the clan page with an empty members
@@ -249,6 +264,10 @@ export async function getClanMembersCached(
   // nothing to serve and the page renders empty until LiveSync pushes the
   // members in — which means nobody is waiting on this call, and it has no
   // business holding a request open against a 1-rps portal.
+  // An ended clan whose roster we never captured has none to show, and saying
+  // "refreshing" would be a promise nothing can keep.
+  if (isDisbanded) return { members: [], fromDb: true, refreshing: false };
+
   enqueueClanRefreshBackground(region, [clanId], { priority: 10 });
   return { members: [], fromDb: false, refreshing: true };
 }
@@ -281,36 +300,50 @@ export async function refreshClanMembers(
         }
       : m;
   });
+  // A roster never legitimately empties. WG disbands a clan that loses its last
+  // member, so an empty answer means either the clan has ended (its `members`
+  // come back null) or WG is contradicting itself: it reports `members_count: 1`
+  // with an empty list on 63 live EU clans, measured. Either way the roster we
+  // hold is the better answer AND one we can never fetch again, so a
+  // replacement that would shrink it to nothing is refused rather than applied.
+  // This is the rule the tournament mirror's bracket already follows, for the
+  // same reason, and its absence is why 446 disbanded EU clans had their last
+  // roster deleted by the first visitor who landed on their page.
+  if (members.length === 0) {
+    // Published even though nothing changed: a browser that asked for this
+    // roster is sitting on LiveSync waiting for it, and the refusal is the
+    // answer. Without it the page spins until its own ceiling.
+    publish(clanChannel(region, clanId), { kind: "members" });
+    return (await readStoredMembers(region, clanId)) ?? [];
+  }
   await db.transaction(async (tx) => {
     await tx.delete(clanMembers).where(eq(clanMembers.clanId, clanId));
-    if (members.length > 0) {
-      await tx.insert(clanMembers).values(
-        members.map((m) => ({
-          clanId,
-          accountId: m.accountId,
-          name: m.name,
-          role: m.role,
-          roleLocalized: m.roleLocalized,
-          roleRank: m.roleRank,
-          daysInClan: m.daysInClan,
-          lastBattleTime: m.lastBattleTime,
-          personalRating: m.personalRating,
-          overallBattles: m.overall?.battles ?? null,
-          overallWinsPct: m.overall?.winsPercentage ?? null,
-          overallDamagePerBattle: m.overall?.damagePerBattle ?? null,
-          overallExpPerBattle: m.overall?.expPerBattle ?? null,
-          overallFragsPerBattle: m.overall?.fragsPerBattle ?? null,
-          overallBattlesPerDay: m.overall?.battlesPerDay ?? null,
-          d28Battles: m.d28?.battles ?? null,
-          d28WinsPct: m.d28?.winsPercentage ?? null,
-          d28DamagePerBattle: m.d28?.damagePerBattle ?? null,
-          d28ExpPerBattle: m.d28?.expPerBattle ?? null,
-          d28FragsPerBattle: m.d28?.fragsPerBattle ?? null,
-          d28BattlesPerDay: m.d28?.battlesPerDay ?? null,
-          refreshedAt: new Date(),
-        })),
-      );
-    }
+    await tx.insert(clanMembers).values(
+      members.map((m) => ({
+        clanId,
+        accountId: m.accountId,
+        name: m.name,
+        role: m.role,
+        roleLocalized: m.roleLocalized,
+        roleRank: m.roleRank,
+        daysInClan: m.daysInClan,
+        lastBattleTime: m.lastBattleTime,
+        personalRating: m.personalRating,
+        overallBattles: m.overall?.battles ?? null,
+        overallWinsPct: m.overall?.winsPercentage ?? null,
+        overallDamagePerBattle: m.overall?.damagePerBattle ?? null,
+        overallExpPerBattle: m.overall?.expPerBattle ?? null,
+        overallFragsPerBattle: m.overall?.fragsPerBattle ?? null,
+        overallBattlesPerDay: m.overall?.battlesPerDay ?? null,
+        d28Battles: m.d28?.battles ?? null,
+        d28WinsPct: m.d28?.winsPercentage ?? null,
+        d28DamagePerBattle: m.d28?.damagePerBattle ?? null,
+        d28ExpPerBattle: m.d28?.expPerBattle ?? null,
+        d28FragsPerBattle: m.d28?.fragsPerBattle ?? null,
+        d28BattlesPerDay: m.d28?.battlesPerDay ?? null,
+        refreshedAt: new Date(),
+      })),
+    );
   });
   discoverPlayersBackground(
     region,

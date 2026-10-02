@@ -6,7 +6,11 @@ import {
   getClanSnapshotPeriods,
   getLatestClanSnapshot,
 } from "@unicum.gg/core/clans/snapshots";
-import { type ClanSnapshot, type ClanMemberStats, type ClanSnapshotPeriods } from "@unicum.gg/shared";
+import {
+  type ClanSnapshot,
+  type ClanMemberStats,
+  type ClanSnapshotPeriods,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import type { ClanRecentEvent } from "@unicum.gg/core/wargaming/wot/clans/event-types";
@@ -47,7 +51,9 @@ export async function loadClanDetail(
     snapshotLatest,
     snapshotPeriods,
   ] = await Promise.all([
-    span("getClanMembersCached", () => getClanMembersCached(region, clan.id)),
+    span("getClanMembersCached", () =>
+      getClanMembersCached(region, clan.id, clan.isDisbanded),
+    ),
     span("getPreviousClans", () => getPreviousClans(region, clan.id)),
     span("getClanEventsCached", () => getClanEventsCached(region, clan.id, 30)),
     span("getLatestClanSnapshot", () => getLatestClanSnapshot(region, clan.id)),

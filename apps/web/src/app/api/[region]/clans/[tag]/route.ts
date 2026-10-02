@@ -66,7 +66,11 @@ export async function GET(
     const [cached, nameHistory, countRow, badges, tournamentCount] =
       await traced("clan batch", () =>
         Promise.all([
-          getClanMembersCached(region, clanCached.info.id).catch(() => null),
+          getClanMembersCached(
+            region,
+            clanCached.info.id,
+            clanCached.info.isDisbanded,
+          ).catch(() => null),
           getClanNameHistory(region, clanCached.info.id),
           db
             .select({
