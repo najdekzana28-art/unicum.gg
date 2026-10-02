@@ -10,7 +10,7 @@ import { useLeaderboardFilter } from "@/hooks/use-leaderboard-filter";
 import { TournamentFacetBar } from "@/components/tournaments/list/facet-bar";
 import { useTournamentFacets } from "@/components/tournaments/list/facets";
 import { tierBand } from "@/components/tournaments/tier-label";
-import { RankMedal } from "@/components/rank-medal";
+import { TournamentResult } from "@/components/tournaments/result";
 import { TablePager, usePagination } from "@/components/table-pager";
 import {
   Table,
@@ -26,7 +26,6 @@ import { teamFormat } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanTournamentEntry } from "./row";
 import { FilterSubject } from "@/components/filter-subject";
-import { useOrdinal } from "@/hooks/use-ordinal";
 import { useTranslation } from "@/hooks/use-translation";
 
 /** The band as this table shows it: the numeral, or its own placeholder. */
@@ -36,28 +35,6 @@ const tierBandOrDash = (from: number | null, to: number | null) =>
 const DASH = "—";
 
 const DATE_PATTERN = "d MMM yyyy" /* UTC */;
-
-/**
- * A placement, weighted by what it took. The top three carry the site's rank
- * medal, everything below reads as a plain ordinal.
- *
- * A null placement is not a last place: a double-elimination bracket records no
- * placement at all, and a team that never made it out of registration was never
- * placed either. Both read as a dash rather than as a result.
- */
-function Result({ position }: { position: number | null }) {
-  const ord = useOrdinal();
-  if (position === null) return <span className="text-fd-muted-foreground">{DASH}</span>;
-  if (position <= 3) {
-    return (
-      <span className="flex items-center justify-end gap-1.5">
-        <RankMedal rank={position as 1 | 2 | 3} className="h-4" />
-        {ord(position)}
-      </span>
-    );
-  }
-  return <span className="tabular-nums">{ord(position)}</span>;
-}
 
 /**
  * Every tournament the clan has fielded a team in.
@@ -89,12 +66,16 @@ export function ClanTournamentsTable({
   // The catalogue ranges over the size of the field, which a clan's entry does
   // not carry. What it does carry, and what a clan actually asks of its own
   // history, is where the team finished: "the ones we placed top 3 in".
+  //
+  // The tournament's own placement, never the group one: a range of 1 to 3 over
+  // the best place reached in ANY pool answered with every qualifier the clan
+  // ever topped a group of, which is most of them.
   const rangeCols = useMemo(
     () => [
       {
         key: "result",
         label: tCol("result"),
-        value: (e: ClanTournamentEntry) => e.bestPosition,
+        value: (e: ClanTournamentEntry) => e.finalPlace,
       },
     ],
     [tCol],
@@ -195,7 +176,10 @@ export function ClanTournamentsTable({
                 {teamFormat(e.minPlayersInTeam)}
               </TableCell>
               <TableCell className="text-end">
-                <Result position={e.bestPosition} />
+                <TournamentResult
+                  finalPlace={e.finalPlace}
+                  groupPlace={e.groupPlace}
+                />
               </TableCell>
             </TableRow>
           ))}

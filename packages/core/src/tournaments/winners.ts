@@ -1,7 +1,8 @@
-import { and, eq, gt, inArray, isNotNull, sql } from "drizzle-orm";
+import { and, eq, gt, inArray, sql } from "drizzle-orm";
 import {
   clansByRegion,
   finalPlacements,
+  placeSpans,
   playersByRegion,
   tournamentGroupsByRegion,
   tournamentStagesByRegion,
@@ -11,8 +12,25 @@ import {
   tournamentsByRegion,
   type PlacementStage,
 } from "@unicum.gg/shared";
-import { TournamentStatus, type Region } from "@unicum.gg/wargaming";
+import { type Region } from "@unicum.gg/wargaming";
 import { db } from "../db";
+import { isArchived } from "./archived";
+
+/** What a tournament is worth naming, for the honour it hands out. */
+type Meta = {
+  title: string;
+  startAt: Date;
+  isFeatured: boolean;
+};
+
+/** A tournament's finishing order: every placed team and where it finished. */
+type Placed = {
+  meta: Meta;
+  /** teamId to the place as a ranking is written, so a tie takes its BEST
+   * place: the knockout stores both beaten semi-finalists at 4 and they are
+   * both 3rd here, which is what the bracket page shows. */
+  places: Map<number, number>;
+};
 
 /** A tournament a team actually won, and what the win is worth naming. */
 type Win = {
@@ -23,7 +41,7 @@ type Win = {
 };
 
 /**
- * Who won a tournament, read by the SAME rule the bracket page draws.
+ * Where every team finished, read by the SAME rule the bracket page draws.
  *
  * `finalPlacements` lives in shared for exactly this: the two used to run on
  * separate copies and disagreed. A third-place match is filed as its own
@@ -32,25 +50,26 @@ type Win = {
  * showed ENIGMA). The shared rule identifies a decider by its shape, not by its
  * title, and uses it to split a tie rather than to replace the ranking.
  *
+ * This is also what the profile and clan tables read, through `final_place` on
+ * the team row. They used to take `min(position)` over every group a team
+ * appears in, which is the best place reached in ANY pool of any stage: EU
+ * published 178,330 first places that way, against 13,170 tournaments.
+ *
  * Only settled tournaments count. This runs on every live mirror, five minutes
  * apart, and a round robin in play has a leader sitting at position 1: without
  * the gate a crest appeared for a tournament nobody had won yet, then moved to
  * whoever led next.
  */
-async function winnersOf(
+async function placementsOf(
   region: Region,
   tournamentIds?: number[],
-): Promise<Win[]> {
+): Promise<Map<number, Placed>> {
   const tournaments = tournamentsByRegion[region];
   const stages = tournamentStagesByRegion[region];
   const groups = tournamentGroupsByRegion[region];
   const standings = tournamentStandingsByRegion[region];
 
-  // Settled the same way the archive pass reads it (`isArchived`): Wargaming
-  // abandons tournaments in a non-terminal state and never returns to them, so
-  // a status alone would leave a 2023 draw forever uncrowned.
-  const settled = sql`(${tournaments.status} = ${TournamentStatus.Complete}
-    OR ${tournaments.endAt} < now() - interval '7 days')`;
+  const settled = isArchived(tournaments);
 
   const rows = await db
     .select({
@@ -77,7 +96,6 @@ async function winnersOf(
   // Rebuilt into the shape the shared rule reads: stages in the order it walks
   // them (by start, then id, the same order the page receives), each holding
   // its groups, each holding its standings.
-  type Meta = { title: string; startAt: Date; isFeatured: boolean };
   const meta = new Map<number, Meta>();
   const byTournament = new Map<
     number,
@@ -103,8 +121,10 @@ async function winnersOf(
     group.push({ teamId: Number(row.teamId), position: row.position });
   }
 
-  const out: Win[] = [];
+  const out = new Map<number, Placed>();
   for (const [tid, stageMap] of byTournament) {
+    const m = meta.get(tid);
+    if (!m) continue;
     const ordered: PlacementStage[] = [...stageMap.entries()]
       .sort(([aId, a], [bId, b]) => {
         const at = a.startAt?.getTime() ?? 0;
@@ -112,9 +132,35 @@ async function winnersOf(
         return at === bt ? aId - bId : at - bt;
       })
       .map(([, stage]) => ({ groups: [...stage.groups.values()].map((standings) => ({ standings })) }));
-    const first = finalPlacements(ordered).find((p) => p.position === 1);
-    const m = meta.get(tid);
-    if (first && m) out.push({ teamId: first.teamId, ...m });
+    const stored = new Map(
+      finalPlacements(ordered).map((p) => [p.teamId, p.position]),
+    );
+    const spans = placeSpans(stored);
+    const places = new Map(
+      [...stored].map(([teamId, position]) => [
+        teamId,
+        spans.get(position)?.from ?? position,
+      ]),
+    );
+    out.set(tid, { meta: m, places });
+  }
+  return out;
+}
+
+/**
+ * The tournaments that were won, and by whom.
+ *
+ * Every team sharing the best place, not the first one found: a tournament that
+ * ended level ended level, which is how the bracket page reads it too
+ * (`tournamentOutcome`), and picking one of them was picking whichever row the
+ * database returned first.
+ */
+function winnersFrom(placed: Map<number, Placed>): Win[] {
+  const out: Win[] = [];
+  for (const { meta, places } of placed.values()) {
+    for (const [teamId, place] of places) {
+      if (place === 1) out.push({ teamId, ...meta });
+    }
   }
   return out;
 }
@@ -223,7 +269,85 @@ function winValues(wins: Win[]) {
 }
 
 /**
- * Refresh the honours of everyone a tournament involved, players and clans.
+ * How many rows one statement carries. The archive write places 148,675 teams
+ * on EU, which is one `VALUES` list no statement should be handed, while the
+ * per-tournament write is a few hundred and fits in one.
+ */
+const WRITE_CHUNK = 2000;
+
+function chunks<T>(items: T[], size: number): T[][] {
+  const out: T[][] = [];
+  for (let i = 0; i < items.length; i += size) out.push(items.slice(i, i + size));
+  return out;
+}
+
+/**
+ * Write where every team finished, and stamp the tournaments it was read from.
+ *
+ * `scope` is the tournaments being rewritten, which is NOT the same as the ones
+ * that have a placement: a bracket that changed can take a place away as well
+ * as give one, so the scope is cleared first and only then filled, or a team
+ * demoted out of the deciding stage would keep a place nothing supports.
+ *
+ * The stamp separates "no final place" from "not read yet", which the tables
+ * reading this column depend on: a team knocked out in the pools really has
+ * none, and labelling an unread tournament the same way would publish its
+ * champion as a group winner.
+ */
+async function writeFinalPlaces(
+  region: Region,
+  placed: Map<number, Placed>,
+  scope: number[] | null,
+): Promise<void> {
+  const teams = tournamentTeamsByRegion[region];
+  const tournaments = tournamentsByRegion[region];
+
+  if (scope === null) {
+    await db.execute(sql`
+      UPDATE ${teams} SET ${sql.raw(teams.finalPlace.name)} = NULL
+      WHERE ${sql.raw(teams.finalPlace.name)} IS NOT NULL
+    `);
+  } else if (scope.length > 0) {
+    await db.execute(sql`
+      UPDATE ${teams} SET ${sql.raw(teams.finalPlace.name)} = NULL
+      WHERE ${sql.raw(teams.tournamentId.name)} IN (${sql.join(scope.map((id) => sql`${id}`), sql`, `)})
+        AND ${sql.raw(teams.finalPlace.name)} IS NOT NULL
+    `);
+  }
+
+  const rows: { teamId: number; place: number }[] = [];
+  for (const { places } of placed.values()) {
+    for (const [teamId, place] of places) rows.push({ teamId, place });
+  }
+  for (const batch of chunks(rows, WRITE_CHUNK)) {
+    await db.execute(sql`
+      WITH placed(team_id, place) AS (VALUES ${sql.join(
+        batch.map((r) => sql`(${r.teamId}::bigint, ${r.place}::int)`),
+        sql`, `,
+      )})
+      UPDATE ${teams} t
+      SET ${sql.raw(teams.finalPlace.name)} = p.place
+      FROM placed p
+      WHERE t.${sql.raw(teams.id.name)} = p.team_id
+    `);
+  }
+
+  // Stamped even for a tournament whose brackets decided nothing: the read
+  // happened, and its teams' absent places are an answer rather than a gap.
+  for (const batch of chunks([...placed.keys()], WRITE_CHUNK)) {
+    await db.execute(sql`
+      UPDATE ${tournaments} SET ${sql.raw(tournaments.placementsAt.name)} = now()
+      WHERE ${sql.raw(tournaments.id.name)} IN (${sql.join(
+        batch.map((id) => sql`${id}`),
+        sql`, `,
+      )})
+    `);
+  }
+}
+
+/**
+ * Refresh the honours of everyone a tournament involved, players and clans, and
+ * record where each of its teams finished.
  *
  * Scoped to the tournament rather than to its winners: a bracket that changed
  * can take a win away as well as give one, and the losing side has to be
@@ -250,20 +374,31 @@ export async function recordTournamentWinners(
   `;
   // Every win those accounts and clans hold, not just this tournament's, since
   // the write replaces the counter rather than adding to it.
-  const wins = await winnersOf(region);
+  const placed = await placementsOf(region);
+  const own = placed.get(tournamentId);
+  await writeFinalPlaces(
+    region,
+    own ? new Map([[tournamentId, own]]) : new Map(),
+    [tournamentId],
+  );
+  const wins = winnersFrom(placed);
   await writePlayerHonours(region, accountScope, wins);
   await writeClanHonours(region, clanScope, wins);
 }
 
-/** Rebuild every account's and every clan's honours from the whole archive. */
+/** Rebuild every account's and every clan's honours, and every team's finishing
+ * place, from the whole archive. */
 export async function backfillTournamentWins(
   region: Region,
-): Promise<{ accounts: number; clans: number }> {
+): Promise<{ accounts: number; clans: number; placedTeams: number }> {
   const players = playersByRegion[region];
   const clans = clansByRegion[region];
   const teams = tournamentTeamsByRegion[region];
   const teamPlayers = tournamentTeamPlayersByRegion[region];
-  const wins = await winnersOf(region);
+  const placed = await placementsOf(region);
+  const wins = winnersFrom(placed);
+
+  await writeFinalPlaces(region, placed, null);
 
   // Everyone who ever entered, plus anyone holding a count the brackets no
   // longer support, so a run always leaves the column agreeing with them.
@@ -297,5 +432,7 @@ export async function backfillTournamentWins(
     .select({ n: sql<number>`count(*)::int` })
     .from(clans)
     .where(gt(clans.tournamentWins, 0));
-  return { accounts: p?.n ?? 0, clans: c?.n ?? 0 };
+  let placedTeams = 0;
+  for (const { places } of placed.values()) placedTeams += places.size;
+  return { accounts: p?.n ?? 0, clans: c?.n ?? 0, placedTeams };
 }

@@ -53,11 +53,13 @@ export function TournamentsTab({
   const { locale } = useLocale();
   const { t } = useTranslation("components/players/detail/tournaments/index");
   const entries = data?.entries ?? [];
-  // A podium is a top-three finish in any of the tournament's brackets, so a
-  // qualifier group counts. Placement is per bracket, not per tournament, which
-  // is the only way the source expresses it.
+  // A podium is a top-three finish IN THE TOURNAMENT, by the rule its bracket
+  // page draws. It used to be a top-three in any one group of any stage, which
+  // a qualifier drawn into hundreds of pools hands out hundreds of times, and
+  // the figure it produced sat beside a winner's crest that refuses exactly
+  // that.
   const podiums = entries.filter(
-    (e) => e.bestPosition !== null && e.bestPosition <= 3,
+    (e) => e.finalPlace !== null && e.finalPlace <= 3,
   ).length;
 
   return (

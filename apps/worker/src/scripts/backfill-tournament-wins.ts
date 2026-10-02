@@ -1,4 +1,5 @@
-// Rebuild every player's and every clan's tournament honours from the brackets.
+// Rebuild every player's and every clan's tournament honours from the brackets,
+// and every team's finishing place with them.
 //
 //   pnpm --filter @unicum.gg/worker backfill-tournament-wins [eu|na|asia]
 //
@@ -12,9 +13,10 @@ import { backfillTournamentWins } from "@unicum.gg/core/tournaments/winners";
 async function main(): Promise<void> {
   for (const region of regionArgs()) {
     const at = Date.now();
-    const { accounts, clans } = await backfillTournamentWins(region);
+    const { accounts, clans, placedTeams } = await backfillTournamentWins(region);
     console.log(
       `[tournament-wins-${region}] done in ${Math.round((Date.now() - at) / 1000)}s: ` +
+        `${placedTeams} teams placed, ` +
         `${accounts} accounts and ${clans} clans hold at least one win`,
     );
   }

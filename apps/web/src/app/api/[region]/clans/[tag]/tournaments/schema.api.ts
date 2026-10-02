@@ -38,9 +38,13 @@ export const clanTournamentEntry = z
       description:
         "How many of the roster were in this clan on the day. A team is attributed at a quarter of the format's team size, so a low count against a large format is a thin attribution.",
     }),
-    bestPosition: z.number().nullable().meta({
+    finalPlace: z.number().nullable().meta({
       description:
-        "Best placement the team reached across the tournament's stages. Null when nothing placed it: a team that never got past registration, and every team in a double-elimination bracket, which records no placement at all.",
+        "Where the team finished in the tournament, by the same rule its bracket page draws, written as a ranking is written so a tie takes its best place. Null when the tournament placed nothing on it: a team knocked out before the deciding stage, a team that never got past registration, and every team in a double-elimination bracket, which records no placement at all.",
+    }),
+    groupPlace: z.number().nullable().meta({
+      description:
+        "The best place the team reached in any ONE group, for a team the tournament placed nowhere: a pool won, a qualifier topped. It is not a tournament result and must not be read as one. Null whenever finalPlace is set, and null for a settled tournament whose brackets have not been read yet.",
     }),
   })
   .meta({

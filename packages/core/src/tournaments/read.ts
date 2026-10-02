@@ -9,6 +9,7 @@ import {
   type TeamClan,
 } from "./clans";
 import { sanitizeTournamentHtml } from "./sanitize";
+import { isArchived } from "./archived";
 import {
   clanMembersByRegion,
   clansByRegion,
@@ -575,12 +576,23 @@ export type PlayerTournamentEntry = {
   /** Whether this player registered the team. */
   isCaptain: boolean;
   /**
-   * Best placement the team reached in this tournament, across its stages, or
-   * null when nothing placed it: a team that never got past registration, and
-   * every team in a double-elimination bracket, which records no placement at
-   * all.
+   * Where the team finished IN THE TOURNAMENT, by the same rule the bracket
+   * page draws and the winner's crest is awarded on, and written as a ranking
+   * is written, so a tie takes its best place.
+   *
+   * Null when the tournament placed nothing on it: a team knocked out in the
+   * pools, a team that never got past registration, and every team in a
+   * double-elimination bracket, which records no placement at all.
    */
-  bestPosition: number | null;
+  finalPlace: number | null;
+  /**
+   * The best place reached in any one group, for a team the tournament never
+   * placed: a pool won, a qualifier topped. Null when the team HAS a final
+   * place, so the two are never both shown, and null as well for a settled
+   * tournament whose brackets have not been read yet, where "no final place"
+   * would be a guess rather than an answer.
+   */
+  groupPlace: number | null;
 };
 
 /**
@@ -630,6 +642,24 @@ export type PlayerTournamentRecord = {
 /** How many teammates the tab shows. Past this the list stops being "who do you
  * play with" and becomes a directory of everyone met once. */
 const TEAMMATE_LIMIT = 24;
+
+/**
+ * Whether a team's group place is worth reading, for a team the tournament
+ * placed nowhere.
+ *
+ * Two different absences hide behind a null final place. A tournament still
+ * being played has placed nobody yet, and there the best group place is simply
+ * where the team stands, which is the honest answer and the one its players
+ * want on the evening. A SETTLED tournament whose brackets have not been read
+ * yet has placed nobody either, champion included, and announcing that team as
+ * having topped a group would be the very mistake this column was added to end.
+ */
+function groupPlaceReadable(row: {
+  placementsAt: Date | null;
+  settled: boolean;
+}): boolean {
+  return row.placementsAt !== null || !row.settled;
+}
 
 /**
  * How many tournaments an account has entered, without reading any of them.
@@ -711,6 +741,14 @@ export async function getPlayerTournaments(
       teamId: teams.id,
       teamTitle: teams.title,
       teamStatus: teams.status,
+      // Where the team finished, written by the winners pass off the same rule
+      // the bracket page draws (see tournaments/winners). `placementsAt` is
+      // what makes an absent place readable: it says the brackets HAVE been
+      // read, so a null place is "knocked out before the decider" rather than
+      // "nobody has worked it out yet".
+      finalPlace: teams.finalPlace,
+      placementsAt: t.placementsAt,
+      settled: sql<boolean>`${isArchived(t)}`,
       role: rosters.role,
     })
     .from(rosters)
@@ -719,27 +757,35 @@ export async function getPlayerTournaments(
     .where(eq(rosters.accountId, accountId))
     .orderBy(desc(t.startAt));
 
-  // Placements in one query for every team at once, rather than per entry: a
-  // regular here has hundreds of entries, and one round trip each would make the
-  // tab's cost grow with how much the player competes.
   const teamIds = rows.map((r) => Number(r.teamId));
+  // Group places in one query for every team that needs one, rather than per
+  // entry: a regular here has hundreds of entries, and one round trip each
+  // would make the tab's cost grow with how much the player competes.
+  //
+  // Only for the teams the tournament placed nowhere, which is what this is: a
+  // consolation reading, the best any one group of any stage put them at. Asked
+  // for every team it was the ONLY reading, and a pool won in a 561-pool
+  // qualifier published as winning the tournament (see tournaments/winners).
+  const needGroup = rows
+    .filter((r) => r.finalPlace === null && groupPlaceReadable(r))
+    .map((r) => Number(r.teamId));
   const standings = tournamentStandingsByRegion[region];
-  const placements = teamIds.length
+  const placements = needGroup.length
     ? await db
         .select({
           teamId: standings.teamId,
           best: sql<number | null>`min(${standings.position})`,
         })
         .from(standings)
-        .where(inArray(standings.teamId, teamIds))
+        .where(inArray(standings.teamId, needGroup))
         .groupBy(standings.teamId)
     : [];
-  const bestByTeam = new Map(
+  const groupByTeam = new Map(
     placements.map((p) => [Number(p.teamId), p.best === null ? null : Number(p.best)]),
   );
 
   // The teams are named by a subquery rather than by the `teamIds` array above,
-  // which the placements read a few lines up can afford and this one cannot. A
+  // which the group-place read a few lines up can afford and this one cannot. A
   // regular here has thousands of entries (the busiest EU account has 4,491),
   // so the array form ships one bind parameter per team and would eventually
   // meet the driver's parameter ceiling; the subquery is also the faster plan,
@@ -833,18 +879,19 @@ export async function getPlayerTournaments(
     teamTitle: r.teamTitle,
     teamStatus: r.teamStatus as TournamentTeamStatus,
     isCaptain: r.role === "owner",
-    bestPosition: bestByTeam.get(Number(r.teamId)) ?? null,
+    finalPlace: r.finalPlace,
+    groupPlace: r.finalPlace === null ? groupByTeam.get(Number(r.teamId)) ?? null : null,
   }));
 
   return {
     accountId,
     nickname: player.nickname,
     entries,
-    // The denormalised counter, which is the crest's own number, and NOT a
-    // count of `bestPosition === 1`: that is the best place reached in ANY
-    // group of any stage, so topping one pool of a four-group qualifier scores
-    // as a win. The crest refuses exactly that (see tournaments/winners), and
-    // the summary strip sits on the same screen as the crest.
+    // The denormalised counter, which is the crest's own number. It agrees with
+    // `finalPlace === 1` on the entries beside it, both being written by the
+    // winners pass off one rule, and it is still read from the player row: the
+    // crest counts a player's whole record, and this strip sits on the same
+    // screen as the crest.
     wins: player.tournamentWins,
     teammates,
   };
@@ -1004,8 +1051,13 @@ export type ClanTournamentEntry = {
   /** How many of the roster were in the clan on the day, so a reader can judge
    * how much of this was really the clan. */
   clanMembers: number | null;
-  /** Best placement the team reached, or null when nothing placed it. */
-  bestPosition: number | null;
+  /** Where the team finished in the tournament, by the rule the bracket page
+   * draws, or null when the tournament placed nothing on it. */
+  finalPlace: number | null;
+  /** The best place reached in any one group, for a team the tournament never
+   * placed. Null when there IS a final place, and when the brackets have not
+   * been read yet. */
+  groupPlace: number | null;
 };
 
 /**
@@ -1153,28 +1205,34 @@ export async function getClanTournaments(
       teamTitle: teams.title,
       teamStatus: teams.status,
       clanMembers: teams.clanMembers,
+      finalPlace: teams.finalPlace,
+      placementsAt: t.placementsAt,
+      settled: sql<boolean>`${isArchived(t)}`,
     })
     .from(teams)
     .innerJoin(t, eq(t.id, teams.tournamentId))
     .where(eq(teams.clanId, clanId))
     .orderBy(desc(t.startAt));
 
-  // Placements for every team at once, like the player record: a clan that
-  // competes weekly has hundreds of entries, and one round trip each would make
-  // the tab cost grow with how much the clan plays.
-  const teamIds = rows.map((r) => Number(r.teamId));
+  // Group places for every team that needs one, like the player record: a clan
+  // that competes weekly has hundreds of entries, and one round trip each would
+  // make the tab cost grow with how much the clan plays. Only the teams the
+  // tournament placed nowhere, for the reason spelled out there.
+  const needGroup = rows
+    .filter((r) => r.finalPlace === null && groupPlaceReadable(r))
+    .map((r) => Number(r.teamId));
   const standings = tournamentStandingsByRegion[region];
-  const placements = teamIds.length
+  const placements = needGroup.length
     ? await db
         .select({
           teamId: standings.teamId,
           best: sql<number | null>`min(${standings.position})`,
         })
         .from(standings)
-        .where(inArray(standings.teamId, teamIds))
+        .where(inArray(standings.teamId, needGroup))
         .groupBy(standings.teamId)
     : [];
-  const bestByTeam = new Map(
+  const groupByTeam = new Map(
     placements.map((p) => [Number(p.teamId), p.best === null ? null : Number(p.best)]),
   );
 
@@ -1195,7 +1253,8 @@ export async function getClanTournaments(
     teamTitle: r.teamTitle,
     teamStatus: r.teamStatus as TournamentTeamStatus,
     clanMembers: r.clanMembers,
-    bestPosition: bestByTeam.get(Number(r.teamId)) ?? null,
+    finalPlace: r.finalPlace,
+    groupPlace: r.finalPlace === null ? groupByTeam.get(Number(r.teamId)) ?? null : null,
   }));
 
   // The clan's current roster crossed with the tournament rosters. Members who

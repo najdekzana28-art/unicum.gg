@@ -1,13 +1,12 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
-import { useOrdinal } from "@/hooks/use-ordinal";
 import { useTranslation } from "@/hooks/use-translation";
 import useSWR from "swr";
 import Link from "@/components/link";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { PanelSeparator } from "@/components/panel";
-import { RankMedal } from "@/components/rank-medal";
+import { TournamentResult } from "@/components/tournaments/result";
 import { TournamentStatusBadge } from "@/components/tournaments/status-badge";
 import ROUTES from "@/constants/routes";
 import { useSession } from "@/lib/auth-client";
@@ -38,7 +37,6 @@ const DATE_PATTERN = "d MMM yyyy" /* UTC */;
 export function MyTournaments() {
   const { date } = useFormat();
   const { t } = useTranslation("components/tournaments/list/mine");
-  const ord = useOrdinal();
   const { data: session } = useSession();
   const identity = wgIdentityFromEmail(session?.user.email);
   const nickname = session?.user.name ?? null;
@@ -102,19 +100,12 @@ export function MyTournaments() {
                 >
                   {e.teamTitle}
                 </Link>
-                {e.bestPosition === null ? (
-                  <TournamentStatusBadge status={e.status} />
-                ) : (
-                  <span className="flex items-center gap-1 text-xs tabular-nums">
-                    {e.bestPosition <= 3 && (
-                      <RankMedal
-                        rank={e.bestPosition as 1 | 2 | 3}
-                        className="h-4"
-                      />
-                    )}
-                    {ord(e.bestPosition)}
-                  </span>
-                )}
+                <TournamentResult
+                  finalPlace={e.finalPlace}
+                  groupPlace={e.groupPlace}
+                  className="text-xs"
+                  fallback={<TournamentStatusBadge status={e.status} />}
+                />
               </span>
             </div>
           ))}

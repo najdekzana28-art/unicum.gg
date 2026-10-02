@@ -1,13 +1,12 @@
 "use client";
 
 import { useFormat } from "@/hooks/use-format";
-import { useOrdinal } from "@/hooks/use-ordinal";
 import { useTranslation } from "@/hooks/use-translation";
 import { CrownSimpleIcon, StarIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "@/components/link";
 import { tierBand } from "@/components/tournaments/tier-label";
-import { RankMedal } from "@/components/rank-medal";
+import { TournamentResult } from "@/components/tournaments/result";
 import { TablePager, usePagination } from "@/components/table-pager";
 import {
   Table,
@@ -46,29 +45,6 @@ const DASH = "—";
 const HIDE = styles.hiddenColumn;
 
 const DATE_PATTERN = "d MMM yyyy" /* UTC */;
-
-/** The tier band as a player reads it: "X", or "VI-X" when the format spans. */
-/**
- * A placement, weighted by what it took. The top three carry the site's rank
- * medal, everything below reads as a plain ordinal.
- *
- * A null placement is not a last place: a double-elimination bracket records no
- * placement at all, and a team that never made it out of registration was never
- * placed either. Both read as a dash rather than as a result.
- */
-function Result({ position }: { position: number | null }) {
-  const ord = useOrdinal();
-  if (position === null) return <span className="text-fd-muted-foreground">{DASH}</span>;
-  if (position <= 3) {
-    return (
-      <span className="flex items-center justify-end gap-1.5">
-        <RankMedal rank={position as 1 | 2 | 3} className="h-4" />
-        <span className="tabular-nums">{ord(position)}</span>
-      </span>
-    );
-  }
-  return <span className="tabular-nums">{ord(position)}</span>;
-}
 
 /** The battle size, with the registrable roster behind it when a team may bring
  * a bench. */
@@ -207,7 +183,10 @@ export function PlayerTournamentsTable({
                 </span>
               </TableCell>
               <TableCell className="text-end">
-                <Result position={e.bestPosition} />
+                <TournamentResult
+                  finalPlace={e.finalPlace}
+                  groupPlace={e.groupPlace}
+                />
               </TableCell>
             </TableRow>
           ))}

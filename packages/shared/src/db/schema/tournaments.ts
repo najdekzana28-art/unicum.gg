@@ -87,6 +87,13 @@ export function makeTournamentsTable(region: string) {
       // that is merely listed from a row that is fully mirrored, and what the
       // backfill claims its next batch on.
       detailSyncedAt: timestamp("detail_synced_at", { withTimezone: true }),
+      // When the finishing order was last read off this tournament's brackets
+      // and written onto its teams. Null is "not worked out yet", which is a
+      // different answer from a team holding no final place (knocked out before
+      // the deciding stage), and the two have to stay separable: read alike, a
+      // tournament nobody has evaluated would publish its champion as a pool
+      // winner. Same split as `clanResolvedAt` on the team row.
+      placementsAt: timestamp("placements_at", { withTimezone: true }),
       syncedAt: timestamp("synced_at", { withTimezone: true }).notNull().defaultNow(),
     },
     (t) => [
@@ -144,6 +151,17 @@ export function makeTournamentTeamsTable(region: string) {
       // is the real answer "no clan" rather than "not looked at yet", and it is
       // what lets the backfill claim only what it has not done.
       clanResolvedAt: timestamp("clan_resolved_at", { withTimezone: true }),
+      // Where this team finished IN THE TOURNAMENT, by the one rule the bracket
+      // page and the winner's crest already share (`finalPlacements`), and as a
+      // ranking is written, so a tie takes its best place. Null for a team that
+      // never reached the deciding stage.
+      //
+      // Denormalised because the alternative is what it replaced: the player and
+      // clan tables read `min(position)` across every group a team appears in,
+      // which is the best place reached in ANY pool of any stage, so topping one
+      // group of a 561-group qualifier was published as winning the tournament.
+      // 178,330 EU teams showed a first place against at most 13,170 real ones.
+      finalPlace: integer("final_place"),
       updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
     },
     (t) => [

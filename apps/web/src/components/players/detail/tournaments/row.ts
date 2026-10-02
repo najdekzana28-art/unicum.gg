@@ -31,7 +31,13 @@ export type PlayerTournamentEntry = {
   teamTitle: string;
   teamStatus: TournamentTeamStatus;
   isCaptain: boolean;
-  bestPosition: number | null;
+  /** Where the team finished in the tournament, by the rule its bracket page
+   * draws. Null when the tournament placed nothing on it. */
+  finalPlace: number | null;
+  /** The best place reached in any ONE group, for a team the tournament placed
+   * nowhere. Not a tournament result: it is a pool won, or a qualifier topped.
+   * Null whenever `finalPlace` is set. */
+  groupPlace: number | null;
 };
 
 /** Someone this player has shared a tournament roster with. */
