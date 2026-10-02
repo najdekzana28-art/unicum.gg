@@ -25,7 +25,7 @@
   "spots": "Avistamientos",
   "survival": "Supervivencia",
   "tank-id-expected-values-are": "Tanque con ID {tankId}. Los valores esperados proceden de los conjuntos de datos comunitarios de WN8 / WNX y se actualizan automáticamente.",
-  "top-tank-players-by": "Mejores jugadores con {tank} por {by} {metric}",
+  "top-tank-players-by": "Mejores jugadores con {tank} {by} {metric}",
   "win-rate": "Tasa de victorias",
   "with-battles": ", {battles} batallas, mín. 100 cada uno"
 }

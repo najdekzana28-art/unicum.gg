@@ -25,7 +25,7 @@
   "spots": "Avvistamenti",
   "survival": "Sopravvivenza",
   "tank-id-expected-values-are": "ID del carro: {tankId}. I valori attesi provengono dai set di dati WN8 / WNX della comunità e vengono aggiornati automaticamente.",
-  "top-tank-players-by": "Migliori giocatori con {tank} per {metric} {by}",
+  "top-tank-players-by": "Migliori giocatori con {tank} {by} {metric}",
   "win-rate": "Percentuale di vittorie",
   "with-battles": ", {battles} battaglie, min. 100 a testa"
 }

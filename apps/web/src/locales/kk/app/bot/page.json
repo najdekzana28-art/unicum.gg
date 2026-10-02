@@ -20,7 +20,7 @@
   "hero": "{player}, {clan}, {tank} және {maps} статистикасы, тікелей Discord ішінде",
   "og-subtitle": "/player · /clan · /tank · /maps",
   "og-title": "Discord боты",
-  "one-click-adds": "Бір басу ботты серверіңізге қосып, сізді Discord-ымызға кіргізеді: {discord}.",
+  "one-click-adds": "Бір басу ботты серверіңізге қосып, сізді {discord}-ымызға кіргізеді.",
   "player-stats": "Ойыншы статистикасы",
   "private-then-shareable": "Алдымен жеке, кейін бөлісуге болады",
   "replies-are-ephemeral-by-default-one-click-s": "Жауаптар әдепкі бойынша уақытша болады. Бір рет басу арқылы картаны Discord арнасына бөлісуге болады.",

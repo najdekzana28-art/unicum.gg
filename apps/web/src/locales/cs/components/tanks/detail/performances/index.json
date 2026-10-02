@@ -25,7 +25,7 @@
   "spots": "Sledování",
   "survival": "Životnost",
   "tank-id-expected-values-are": "Tank má ID {tankId}. Očekávané hodnoty pocházejí z komunitních datových sad WN8 / WNX a automaticky se aktualizují.",
-  "top-tank-players-by": "Nejlepší hráči pro tank: {tank} podle {by} {metric}",
+  "top-tank-players-by": "Nejlepší hráči pro tank: {tank} {by} {metric}",
   "win-rate": "Míra výher",
   "with-battles": ", celkem bitev: {battles}, min. 100 na každého"
 }
