@@ -1,6 +1,8 @@
 import { numberFormat } from "@/lib/format";
 import type { Metadata } from "next";
 import type { TranslateFunction } from "@onruntime/translations";
+import { cn } from "@/lib/utils";
+import { clanAddress } from "@unicum.gg/shared";
 import { localizePath } from "@/lib/translations";
 import { notFound, redirect } from "next/navigation";
 import { ClanProfile } from "@/components/clans/detail/view";
@@ -50,10 +52,7 @@ async function loadOverview(region: Region, tag: string) {
       tournamentFeaturedWins,
       tournamentBestTitle,
       tournamentCount,
-    } = await unicum
-      .region(region)
-      .clans(tag)
-      .overview();
+    } = await unicum.region(region).clans(tag).overview();
     return {
       clan: clan as unknown as ClanFullInfo,
       ratings: ratings as unknown as ClanRatings,
@@ -128,7 +127,7 @@ export async function clanMetadata(
   if (!overview) {
     const copy = viewCopy(view, "", decoded, regionLabel, "", t);
     return constructMetadata({
-    locale,
+      locale,
       title: copy.title.replace("[" + decoded + "]  ", "[" + decoded + "] "),
       description: t("missing.description", {
         tag: decoded,
@@ -143,6 +142,12 @@ export async function clanMetadata(
     });
   }
   const { clan } = overview;
+  // A disbanded clan keeps its page: every link already pointing at it still
+  // resolves, and the last roster it had is the part worth keeping. It is not
+  // offered to a search engine though, because it describes a clan that no
+  // longer exists, and WG frees its tag, so the same name may already belong to
+  // one that does.
+  if (clan.isDisbanded) noIndex = true;
   // The Videos tab is shown even empty (it invites the clan's first tactic),
   // but an empty one is thin content: keep it out of the index until it holds a
   // tactic. Same fetch the page makes, so it is deduped within this render.
@@ -155,18 +160,16 @@ export async function clanMetadata(
     noIndex = videos.length === 0;
   }
   const members = numberFormat(locale, INT_FORMAT).format(clan.membersCount);
-  const copy = viewCopy(
-    view,
-    clan.name, clan.tag, regionLabel, members,
-    t,
-  );
+  const copy = viewCopy(view, clan.name, clan.tag, regionLabel, members, t);
   return constructMetadata({
     locale,
     title: copy.title,
     description: copy.description,
-    ogImage: `/api/og/${region}/clans/${encodeURIComponent(clan.tag)}`,
+    ogImage: `/api/og/${region}/clans/${encodeURIComponent(clanAddress(clan))}`,
     // Static (ISR) page: canonical must be explicit (see the not-found branch).
-    canonical: clanViewHref(ROUTES.CLAN(region, clan.tag), view),
+    // The address rather than the tag, so an archive's canonical is the one URL
+    // that keeps meaning it after its tag has been taken by another clan.
+    canonical: clanViewHref(ROUTES.CLAN(region, clanAddress(clan)), view),
     noIndex,
   });
 }
@@ -196,10 +199,10 @@ export default async function ClanPage({
 }
 
 // Render the profile inline (blocking on the clan fetches) rather than
-  // streaming it behind a Suspense skeleton: force-static prerenders the whole
-  // page, so the real stats land in the cached HTML. That keeps the `.md` twin
-  // and non-JS crawlers complete (a Suspense boundary would leave only the
-  // skeleton in `#page-content`, with the stats streamed into a hidden node only
+// streaming it behind a Suspense skeleton: force-static prerenders the whole
+// page, so the real stats land in the cached HTML. That keeps the `.md` twin
+// and non-JS crawlers complete (a Suspense boundary would leave only the
+// skeleton in `#page-content`, with the stats streamed into a hidden node only
 // JS swaps in). `view` comes from the route segment, so only that view renders
 // and its metadata match what is on screen.
 export function renderClanPage(
@@ -238,16 +241,22 @@ async function ClanProfileServer({
   if (!overview) notFound();
   const { clan, ratings } = overview;
 
-  // Send the visitor to the tag this clan actually carries: a different casing
-  // (the lookup is case-insensitive) or a tag the clan has since dropped, which
-  // the repository resolves through the rename history instead of 404ing.
-  // Temporary, like the player one: a freed tag can be taken by another clan.
-  if (clan.tag !== decoded) {
+  // Send the visitor to the address this clan actually answers at: a different
+  // casing (the lookup is case-insensitive), a tag the clan has since dropped,
+  // which the repository resolves through the rename history instead of 404ing,
+  // or the bare tag of a clan that has ended, which belongs to whoever holds it
+  // today and so cannot be the archive's own address. Temporary, like the player
+  // one: a freed tag can be taken by another clan.
+  const address = clanAddress(clan);
+  if (address !== decoded) {
     redirect(
-      localizePath(clanViewHref(ROUTES.CLAN(region, clan.tag), view), locale),
+      localizePath(clanViewHref(ROUTES.CLAN(region, address), view), locale),
     );
   }
-  const clanApi = unicum.region(region).clans(clan.tag);
+  // Every sub-fetch goes through the ADDRESS, never the tag. For an archive
+  // whose tag has since been taken, the tag resolves to the clan playing under
+  // it now, so the page would draw this clan's header above that one's members.
+  const clanApi = unicum.region(region).clans(address);
 
   // The Overview modes (Random Battles, Stronghold, Clan Wars) are always
   // loaded so switching between them is an instant client toggle with no
@@ -300,17 +309,35 @@ async function ClanProfileServer({
     ? (tournaments as unknown as ClanTournamentRecord)
     : null;
 
-  const basePath = ROUTES.CLAN(region, clan.tag);
+  // The tabs, and everything else that builds a URL under this page, hang off
+  // the address: on an archive whose tag has been retaken, a basePath built from
+  // the tag would make every tab a link to the clan playing under it now.
+  const basePath = ROUTES.CLAN(region, clanAddress(clan));
 
   return (
-    <div className="mx-auto w-full max-w-7xl">
+    <div
+      className={cn(
+        "mx-auto w-full max-w-7xl",
+        // A disbanded clan's page is an archive, and the whole of it reads as
+        // one. Everything on it is still true, of the day the clan ended: the
+        // roster, the ratings, the colour bands that rank a member against the
+        // playerbase. Left in colour, all of that reads as a live comparison
+        // with players who are still playing, which it is not, and the one word
+        // saying so sits in a header a reader has usually scrolled past.
+        //
+        // `grayscale` rather than a dimmer opacity because the colour IS the
+        // claim here: our tables encode a rating as a hue, so draining the hue
+        // is what withdraws the claim while leaving every figure legible.
+        clan.isDisbanded && "grayscale",
+      )}
+    >
       <JsonLd
         data={clanSchema({
           tag: clan.tag,
           name: clan.name,
           region: region.toUpperCase(),
           membersCount: clan.membersCount,
-          url: `${APP.URL}${ROUTES.CLAN(region, clan.tag)}`,
+          url: `${APP.URL}${ROUTES.CLAN(region, clanAddress(clan))}`,
           description: `${clan.name} [${clan.tag}] World of Tanks clan on ${region.toUpperCase()}: ${clan.membersCount} members, WN8/WNX ratings, member rankings, recent join/leave activity.`,
           logo: clan.emblem,
         })}
@@ -321,13 +348,13 @@ async function ClanProfileServer({
           { name: "Clans", url: `${APP.URL}${ROUTES.CLANS(region)}` },
           {
             name: `[${clan.tag}] ${clan.name}`,
-            url: `${APP.URL}${ROUTES.CLAN(region, clan.tag)}`,
+            url: `${APP.URL}${ROUTES.CLAN(region, clanAddress(clan))}`,
           },
         ])}
       />
       <ClanProfile
         region={region}
-        tag={clan.tag}
+        address={address}
         color={clan.color}
         basePath={basePath}
         activeSection={section}

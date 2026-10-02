@@ -1,6 +1,7 @@
 import { and, eq, lt, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { clanRefreshQueueByRegion, clansByRegion } from "@unicum.gg/shared";
+import { getClanIdByAddress } from "@unicum.gg/core/clans/address";
+import { clanRefreshQueueByRegion } from "@unicum.gg/shared";
 import {
   LIVE_CLAN_REFRESH_PRIORITY,
   enqueueClanRefresh,
@@ -38,17 +39,10 @@ export async function POST(
   if (!isRegion(region)) {
     return new Response("invalid_region", { status: 400 });
   }
-  const decoded = decodeURIComponent(tag).toLowerCase();
-  const clans = clansByRegion[region];
-  const [row] = await db
-    .select({ id: clans.id })
-    .from(clans)
-    .where(eq(clans.tagLower, decoded))
-    .limit(1);
-  if (!row) {
+  const clanId = await getClanIdByAddress(region, decodeURIComponent(tag));
+  if (clanId === null) {
     return new Response("not_found", { status: 404 });
   }
-  const clanId = Number(row.id);
   await enqueueClanRefresh(region, [clanId], {
     priority: LIVE_CLAN_REFRESH_PRIORITY,
   });

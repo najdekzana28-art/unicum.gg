@@ -4,7 +4,10 @@ import { useRouter } from "@/hooks/use-router";
 import { useEffect } from "react";
 import useSWR from "swr";
 import { ExpandableDescription } from "@/components/clans/detail/description";
-import { ClanModeNav, ClanSectionNav } from "@/components/clans/detail/tabs-nav";
+import {
+  ClanModeNav,
+  ClanSectionNav,
+} from "@/components/clans/detail/tabs-nav";
 import {
   ClanMode,
   ClanSection,
@@ -50,6 +53,10 @@ export type ClanTabsInitialData = {
 export type ClanTabsViewProps = {
   region: Region;
   tag: string;
+  /** The clan's URL segment, which is `TAG-<id>` for a clan that has ended.
+   * Fetching and cache keys use this; `tag` above is what the tabs DISPLAY, and
+   * the two differ on an archive. */
+  address: string;
   clanId: number;
   // Materialized distinct-vehicle count from the overview, so "Tanks (N)" shows
   // before the (heavy) vehicles aggregation loads. Null until first computed.
@@ -84,6 +91,7 @@ export type ClanTabsViewProps = {
 export function ClanTabsView({
   region,
   tag,
+  address,
   clanId,
   vehiclesCount,
   tournamentCount,
@@ -118,7 +126,7 @@ export function ClanTabsView({
   // which hits our own API and revives dates. SWR keys stay the endpoint URLs
   // (stable cache identities); the `as unknown as` casts restore the rich
   // domain types the tables expect (the API schemas are intentionally loose).
-  const clanApi = unicum.region(region).clans(tag);
+  const clanApi = unicum.region(region).clans(address);
 
   // Only the Tanks section needs an on-demand fetch. The key is the request's
   // own `.url()`, and only runs when Tanks is active (null key = no request).
@@ -126,9 +134,7 @@ export function ClanTabsView({
   const { data: vehicles } = useSWR(
     section === ClanSection.Tanks ? clanApi.vehicles().url() : null,
     () =>
-      clanApi
-        .vehicles()
-        .then((r) => r.vehicles as unknown as ClanVehicleRow[]),
+      clanApi.vehicles().then((r) => r.vehicles as unknown as ClanVehicleRow[]),
     {
       fallbackData: initialVehicles ?? undefined,
       // When the server already rendered Tanks (`initialVehicles` seeds the
@@ -151,9 +157,7 @@ export function ClanTabsView({
   const { data: clanTournaments } = useSWR(
     onTournaments ? clanApi.tournaments().url() : null,
     () =>
-      clanApi
-        .tournaments()
-        .then((r) => r as unknown as ClanTournamentRecord),
+      clanApi.tournaments().then((r) => r as unknown as ClanTournamentRecord),
     {
       fallbackData: initialTournaments ?? undefined,
       revalidateOnMount: !seededTournaments,
@@ -161,8 +165,9 @@ export function ClanTabsView({
   );
 
   const { data: videos } = useSWR(
-    `clan-videos:${region}:${tag}`,
-    () => clanApi.videos().then((r) => r.videos as unknown as TankVideoCardData[]),
+    `clan-videos:${region}:${address}`,
+    () =>
+      clanApi.videos().then((r) => r.videos as unknown as TankVideoCardData[]),
     { fallbackData: initialVideos },
   );
 
@@ -174,9 +179,7 @@ export function ClanTabsView({
   const { data: membersData, mutate: mutateMembers } = useSWR(
     clanApi.members().url(),
     () =>
-      clanApi
-        .members()
-        .then((r) => r.members as unknown as ClanMemberStats[]),
+      clanApi.members().then((r) => r.members as unknown as ClanMemberStats[]),
     { fallbackData: initialData.members, revalidateOnMount: false },
   );
   const { data: previousClansData, mutate: mutatePrevious } = useSWR(
@@ -190,9 +193,7 @@ export function ClanTabsView({
   const { data: eventsData, mutate: mutateActivity } = useSWR(
     clanApi.activity().url(),
     () =>
-      clanApi
-        .activity()
-        .then((r) => r.events as unknown as ClanRecentEvent[]),
+      clanApi.activity().then((r) => r.events as unknown as ClanRecentEvent[]),
     { fallbackData: initialData.events, revalidateOnMount: false },
   );
   const members = membersData ?? initialData.members;
@@ -282,7 +283,11 @@ export function ClanTabsView({
           <PanelSeparator />
           <Panel>
             <PanelHeader className="px-0! py-0!" screenLines={false}>
-              <ClanModeNav basePath={basePath} mode={mode} onSelect={selectMode} />
+              <ClanModeNav
+                basePath={basePath}
+                mode={mode}
+                onSelect={selectMode}
+              />
             </PanelHeader>
           </Panel>
         </>

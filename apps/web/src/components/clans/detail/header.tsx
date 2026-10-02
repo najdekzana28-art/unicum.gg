@@ -79,7 +79,10 @@ function metricCell(
   };
 }
 
-function computeMetrics(num: NumberFormatter, r: ClanRatings): {
+function computeMetrics(
+  num: NumberFormatter,
+  r: ClanRatings,
+): {
   recent: MetricSet;
   lifetime: MetricSet;
   avgWinrate: MetricCell;
@@ -97,7 +100,10 @@ function computeMetrics(num: NumberFormatter, r: ClanRatings): {
     },
     avgWinrate: {
       label: "Avg winrate",
-      value: r.avgWinrate === null ? "—" : `${num(PCT_FORMAT).format(r.avgWinrate)}%`,
+      value:
+        r.avgWinrate === null
+          ? "—"
+          : `${num(PCT_FORMAT).format(r.avgWinrate)}%`,
       color: r.avgWinrate === null ? null : winrateColor(r.avgWinrate / 100),
     },
   };
@@ -157,13 +163,29 @@ export function ClanHeader(
         )}
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="flex min-h-16 min-w-0 flex-1 items-center gap-3 px-4 py-2 sm:h-16 sm:flex-none sm:py-0">
-            <h1 className="min-w-0 font-heading font-bold tracking-tight">
+            <h1
+              className={cn(
+                "min-w-0 font-heading font-bold tracking-tight",
+                // Struck through for a clan that has ended, the way a name no
+                // longer in use is struck anywhere else. The page around it is
+                // drained of colour (see the clan page's wrapper), which says
+                // archive, and this says which name the archive is of: nobody
+                // plays under this tag any more, and WG has freed it for the
+                // next clan that wants it.
+                clan.isDisbanded && "text-muted-foreground",
+              )}
+            >
               <AutoFitText maxPx={36} minPx={18} allowWrap className="w-full">
+                {/* The strike goes on the tag itself rather than on the `h1`:
+                    `AutoFitText` measures its content inside an
+                    `overflow-hidden` block, which stops the heading's own
+                    decoration from being drawn across it. */}
                 <ClanTag
                   tag={clan.tag}
                   color={clan.color}
                   name={clan.name}
                   nameClassName="ml-2"
+                  className={cn(clan.isDisbanded && "line-through")}
                 />
               </AutoFitText>
             </h1>
@@ -196,6 +218,7 @@ export function ClanHeader(
                   color: clan.color,
                   membersCount: clan.membersCount,
                   emblem: clan.emblem,
+                  isDisbanded: clan.isDisbanded,
                 }}
               />
             </span>
@@ -290,12 +313,14 @@ function InfoRow({
         className="flex flex-col items-start gap-y-0.5 px-4 py-1 text-xs text-muted-foreground sm:flex-row sm:flex-nowrap sm:items-center sm:gap-x-2 sm:py-0 sm:whitespace-nowrap"
       >
         <span>
-          <span className="font-medium">{t("members")}</span> {clan.membersCount}
+          <span className="font-medium">{t("members")}</span>{" "}
+          {clan.membersCount}
         </span>
         <span className="hidden sm:inline">·</span>
         <span>
           <span className="font-medium">{t("created")}</span>{" "}
-          {format(clan.createdAt, DAY_FORMAT, { locale: dateLocale(locale) })} by{" "}
+          {format(clan.createdAt, DAY_FORMAT, { locale: dateLocale(locale) })}{" "}
+          by{" "}
           <PlayerName
             region={region}
             player={{ nickname: clan.creatorName }}
@@ -314,7 +339,16 @@ function InfoRow({
         {clan.isDisbanded && (
           <>
             <span className="hidden sm:inline">·</span>
-            <span className="font-medium text-destructive">{t("disbanded")}</span>
+            {/* Outlined rather than merely red. The page around it is drained of
+                colour (see the clan page's wrapper), so a marker that reads by
+                hue alone reads as nothing, and this is the one line that says
+                why everything else is grey. The border carries it instead.
+                Deliberately not `uppercase`: this string is translated into 36
+                languages and CSS capitalisation drops the accents in several of
+                them. */}
+            <span className="rounded border border-destructive/60 px-1.5 font-medium text-destructive">
+              {t("disbanded")}
+            </span>
           </>
         )}
         {clan.updatedAt && (
@@ -324,7 +358,9 @@ function InfoRow({
               <span className="font-medium">{t("updated")}</span>{" "}
               <RelativeTime
                 date={clan.updatedAt}
-                title={format(clan.updatedAt, "d MMM yyyy 'at' HH:mm:ss", { locale: dateLocale(locale) })}
+                title={format(clan.updatedAt, "d MMM yyyy 'at' HH:mm:ss", {
+                  locale: dateLocale(locale),
+                })}
               />
             </span>
           </>

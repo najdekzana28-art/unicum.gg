@@ -54,7 +54,11 @@ export type ResolvedClan = {
   languages: string[];
   countries: (string | null)[];
   languageSource: LanguageSource | null;
-  ratings: { total: RatingWindow; recent: RatingWindow; avgWinrate: number | null };
+  ratings: {
+    total: RatingWindow;
+    recent: RatingWindow;
+    avgWinrate: number | null;
+  };
   updatedAt: Date | null;
 };
 
@@ -162,7 +166,11 @@ export async function resolveEntities(
  * source, which is how it differs from one we hold nothing at all for: that one
  * is absent from the response entirely. */
 function attachLanguages(
-  row: { languages: string[]; countries: (string | null)[]; languageSource: LanguageSource | null },
+  row: {
+    languages: string[];
+    countries: (string | null)[];
+    languageSource: LanguageSource | null;
+  },
   resolved: ResolvedLanguages | undefined,
 ): void {
   if (!resolved) return;
@@ -181,10 +189,15 @@ async function resolveTags(
   if (tags.length === 0) return {};
   const clans = clansByRegion[region];
   const lowered = tags.map((t) => t.toLowerCase());
+  // Live clans only. `tag_lower` stopped being globally unique when the index
+  // behind it became partial (a clan that ends frees its tag, so the same value
+  // can be held by the clan playing under it and by every clan that ended under
+  // it), and the map below keeps whichever row came back last. Without this a
+  // roster's tag would resolve to a dead clan's id on the planner's whim.
   const rows = await db
     .select({ id: clans.id, tagLower: clans.tagLower })
     .from(clans)
-    .where(inArray(clans.tagLower, lowered));
+    .where(and(inArray(clans.tagLower, lowered), eq(clans.isDisbanded, false)));
 
   const byLower = new Map(rows.map((r) => [r.tagLower, Number(r.id)]));
   const out: Record<string, number> = {};
@@ -243,7 +256,11 @@ async function loadPlayers(
       nickname: r.nickname,
       clan:
         r.clanId != null && r.clanTag
-          ? { id: Number(r.clanId), tag: r.clanTag, color: r.clanColor ?? "#4a4a4a" }
+          ? {
+              id: Number(r.clanId),
+              tag: r.clanTag,
+              color: r.clanColor ?? "#4a4a4a",
+            }
           : null,
       languages: [],
       countries: [],

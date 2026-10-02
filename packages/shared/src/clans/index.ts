@@ -1,3 +1,4 @@
+export * from "./address";
 export * from "./badges";
 export * from "./player-history";
 export * from "./ratings";

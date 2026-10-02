@@ -36,7 +36,7 @@ import type { Region } from "@unicum.gg/wargaming";
  */
 export function ClanProfile({
   region,
-  tag,
+  address,
   color,
   basePath,
   activeSection,
@@ -57,7 +57,12 @@ export function ClanProfile({
   initialNameHistory,
 }: {
   region: Region;
-  tag: string;
+  /** The clan's own URL segment, which for a clan that has ended is
+   * `TAG-<id>` and not its bare tag (see `clanAddress`). Everything fetched
+   * from the client is keyed by it: the bare tag of an ended clan belongs to
+   * whoever holds that name today, so fetching by it would swap this page's
+   * contents for that clan's as soon as the browser hydrated. */
+  address: string;
   color: string;
   basePath: string;
   activeSection: ClanSection;
@@ -81,21 +86,21 @@ export function ClanProfile({
   initialTournamentBestTitle: string | null;
   initialTournamentCount: number;
 }) {
-  const overviewReq = () => unicum.region(region).clans(tag).overview();
+  const overviewReq = () => unicum.region(region).clans(address).overview();
   const { data: overview, mutate: mutateOverview } = useSWR(
     overviewReq().url(),
     () =>
       overviewReq().then((r) => ({
-          clan: r.clan as unknown as ClanFullInfo,
-          ratings: r.ratings as unknown as ClanRatings,
-          nameHistory: r.nameHistory as unknown as ClanNameHistoryEntry[],
-          vehiclesCount: r.vehiclesCount ?? null,
-          badges: (r.badges ?? []) as unknown as ClanRankBadgeData[],
-          tournamentWins: r.tournamentWins ?? 0,
-          tournamentFeaturedWins: r.tournamentFeaturedWins ?? 0,
-          tournamentBestTitle: r.tournamentBestTitle ?? null,
-          tournamentCount: r.tournamentCount ?? 0,
-        })),
+        clan: r.clan as unknown as ClanFullInfo,
+        ratings: r.ratings as unknown as ClanRatings,
+        nameHistory: r.nameHistory as unknown as ClanNameHistoryEntry[],
+        vehiclesCount: r.vehiclesCount ?? null,
+        badges: (r.badges ?? []) as unknown as ClanRankBadgeData[],
+        tournamentWins: r.tournamentWins ?? 0,
+        tournamentFeaturedWins: r.tournamentFeaturedWins ?? 0,
+        tournamentBestTitle: r.tournamentBestTitle ?? null,
+        tournamentCount: r.tournamentCount ?? 0,
+      })),
     {
       fallbackData: {
         clan: initialClan,
@@ -130,8 +135,8 @@ export function ClanProfile({
   // Memoized so LiveSync only re-subscribes when the target clan changes.
   const liveSubscribe = useCallback(
     (onUpdate: (event: LiveUpdate) => void) =>
-      unicum.region(region).clans(tag).live(onUpdate),
-    [region, tag],
+      unicum.region(region).clans(address).live(onUpdate),
+    [region, address],
   );
 
   return (
@@ -142,7 +147,7 @@ export function ClanProfile({
           void mutateOverview();
           setLiveVersion((v) => v + 1);
         }}
-        subject={tag}
+        subject={address}
       />
       <Panel>
         <PanelContent className="p-0">
@@ -163,7 +168,8 @@ export function ClanProfile({
 
       <ClanTabsView
         region={region}
-        tag={tag}
+        tag={clan.tag}
+        address={address}
         clanId={clan.id}
         vehiclesCount={vehiclesCount}
         tournamentCount={tournamentCount}
@@ -182,7 +188,7 @@ export function ClanProfile({
       {activeSection === ClanSection.Overview && nameHistory.length > 0 && (
         <>
           <PanelSeparator />
-          <ClanNameHistory history={nameHistory} tag={tag} color={color} />
+          <ClanNameHistory history={nameHistory} tag={clan.tag} color={color} />
         </>
       )}
     </>

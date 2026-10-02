@@ -1,6 +1,4 @@
-import { eq } from "drizzle-orm";
-import { db } from "@unicum.gg/core/db";
-import { clansByRegion } from "@unicum.gg/shared";
+import { getClanIdByAddress } from "@unicum.gg/core/clans/address";
 import { clanChannel, subscribe } from "@unicum.gg/core/live/pubsub";
 import { isRegion } from "@unicum.gg/wargaming";
 
@@ -24,18 +22,10 @@ export async function GET(
   if (!isRegion(region)) {
     return new Response("invalid_region", { status: 400 });
   }
-  const tagLower = decodeURIComponent(tag).toLowerCase();
-
-  const clans = clansByRegion[region];
-  const [row] = await db
-    .select({ id: clans.id })
-    .from(clans)
-    .where(eq(clans.tagLower, tagLower))
-    .limit(1);
-  if (!row) {
+  const clanId = await getClanIdByAddress(region, decodeURIComponent(tag));
+  if (clanId === null) {
     return new Response("not_found", { status: 404 });
   }
-  const clanId = Number(row.id);
   const channel = clanChannel(region, clanId);
 
   const encoder = new TextEncoder();
@@ -47,7 +37,9 @@ export async function GET(
       function send(event: string, data: unknown) {
         try {
           controller.enqueue(
-            encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`),
+            encoder.encode(
+              `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`,
+            ),
           );
         } catch {
           // controller closed

@@ -21,6 +21,7 @@ import { ShareModal } from "@/components/share-modal";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
+import { clanAddress } from "@unicum.gg/shared";
 import { REGION_PORTAL_HOST, type Region } from "@unicum.gg/wargaming";
 import { unicumPublic } from "@/services/sdk";
 
@@ -42,6 +43,7 @@ export function ClanActionsMenu({
     color: string;
     membersCount: number;
     emblem: string | null;
+    isDisbanded?: boolean;
   };
 }) {
   const { t } = useTranslation("components/clans/detail/actions-menu");
@@ -62,7 +64,11 @@ export function ClanActionsMenu({
     },
   };
   const fav = isFavorite(favoriteItem);
-  const url = `${APP.URL}${ROUTES.CLAN(region, clan.tag)}`;
+  // By address: a clan that has ended lives at `TAG-<id>`, so a share link
+  // built from its bare tag would send whoever opens it to the clan holding
+  // that name today.
+  const address = clanAddress(clan);
+  const url = `${APP.URL}${ROUTES.CLAN(region, address)}`;
 
   return (
     <>
@@ -113,7 +119,7 @@ export function ClanActionsMenu({
           name: clan.name,
           app: APP.NAME,
         })}
-        ogImage={unicumPublic.og.region(region).clans(clan.tag).url()}
+        ogImage={unicumPublic.og.region(region).clans(address).url()}
       />
     </>
   );

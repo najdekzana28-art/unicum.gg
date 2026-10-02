@@ -1,6 +1,7 @@
 import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { resolveArenaRefs } from "@unicum.gg/core/wargaming/wot/maps";
+import { getClanIdByAddress } from "@unicum.gg/core/clans/address";
 import type { MapMarker, MapPoi } from "@unicum.gg/shared";
 import {
   resolveAccountClans,
@@ -1082,19 +1083,19 @@ export async function getClanTournaments(
   region: Region,
   tag: string,
 ): Promise<ClanTournamentRecord | null> {
+  // Resolved through the shared address lookup rather than by tag here: an
+  // ended clan's page is addressed `TAG-<id>`, which matches no tag at all, and
+  // its bare tag may belong to a different clan entirely.
+  const clanId = await getClanIdByAddress(region, tag);
+  if (clanId === null) return null;
+
   const clans = clansByRegion[region];
   const [clan] = await db
-    .select({
-      id: clans.id,
-      tag: clans.tag,
-      tournamentWins: clans.tournamentWins,
-    })
+    .select({ tag: clans.tag, tournamentWins: clans.tournamentWins })
     .from(clans)
-    .where(sql`UPPER(${clans.tag}) = UPPER(${tag})`)
+    .where(eq(clans.id, clanId))
     .limit(1);
   if (!clan) return null;
-
-  const clanId = Number(clan.id);
 
   const t = tournamentsByRegion[region];
   // Started here rather than after the entries read, because it needs nothing
