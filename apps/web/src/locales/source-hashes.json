@@ -2781,6 +2781,8 @@
   "components/tournaments/list/schedule:times-in-your-own-time": "d1f51e3d349e",
   "components/tournaments/list/schedule:today": "24345a14377f",
   "components/tournaments/list/schedule:tomorrow": "1948bf2dfa8f",
+  "components/tournaments/result:in-group": "940f398b0085",
+  "components/tournaments/result:in-group-hint": "f831cc8bfdac",
   "components/tournaments/team/result:average-over-rated": "78a61f483723",
   "components/tournaments/team/result:average-over-recent": "b28c25fb7714",
   "components/tournaments/team/result:avg-metric": "e8affed97a47",
