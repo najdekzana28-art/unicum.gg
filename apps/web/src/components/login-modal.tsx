@@ -5,6 +5,7 @@ import { useTranslation } from "@/hooks/use-translation";
 import {
   ArrowRightIcon,
   ArrowSquareOutIcon,
+  DeviceMobileIcon,
   GithubLogoIcon,
   type Icon,
   KeyIcon,
@@ -134,6 +135,19 @@ function Assurances() {
         {t("you-sign-in-on-wargaming", { NAME: APP.NAME })}</Assurance>
       <Assurance icon={KeyIcon}>
         {t("what-wargaming-hands-back-is")}</Assurance>
+      {/* The one line on Wargaming's own confirmation screen that reads as a
+          reason to back out. Their list of what the token grants includes the
+          "availability of associated phone number", which is the boolean
+          `private.is_bound_to_phone`, and several of their translations render
+          it as the service being able to ADD a phone number to the account
+          (French reads "possibilité d'associer un numéro de téléphone"). No
+          method in the public API can do that, and we never read that block at
+          all, but the player meets their wording after they have left our page
+          and there is nothing there to correct it, so it is answered here
+          before they click. Deliberately says nothing about which language is
+          wrong: this string is read in 36 of them. */}
+      <Assurance icon={DeviceMobileIcon}>
+        {t("wargamings-own-confirmation-screen")}</Assurance>
       <Assurance icon={GithubLogoIcon}>
         <Interpolate
           template={tCopy("open-source")}
