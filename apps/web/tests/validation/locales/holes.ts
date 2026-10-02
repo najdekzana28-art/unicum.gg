@@ -3,6 +3,8 @@ import test, { describe } from "node:test";
 import ts from "typescript";
 import fs from "node:fs";
 import path from "node:path";
+import { interpolations } from "../../../scripts/interpolations";
+import { echoedFill } from "../../../scripts/translation-rules";
 
 const EN = "src/locales/en";
 function files(dir: string, ext: string): string[] {
@@ -27,6 +29,32 @@ for (const f of files(EN, ".json")) {
   const ns = path.relative(EN, f).replace(/\.json$/, "");
   dict.set(ns, flat(JSON.parse(fs.readFileSync(f, "utf8"))));
 }
+
+const LOCALES = "src/locales";
+const locales = fs
+  .readdirSync(LOCALES, { withFileTypes: true })
+  .filter((e) => e.isDirectory() && e.name !== "generated")
+  .map((e) => e.name);
+
+/** One namespace in one language, read on demand: the call sites name a handful
+ * of namespaces and reading all 352 of them in 36 languages to check seven
+ * would cost more than every other test here put together. */
+const read = (() => {
+  const cache = new Map<string, Record<string, string> | null>();
+  return (locale: string, ns: string) => {
+    const key = `${locale}/${ns}`;
+    if (!cache.has(key)) {
+      const file = path.join(LOCALES, locale, `${ns}.json`);
+      cache.set(
+        key,
+        fs.existsSync(file)
+          ? flat(JSON.parse(fs.readFileSync(file, "utf8")))
+          : null,
+      );
+    }
+    return cache.get(key) ?? null;
+  };
+})();
 
 
 /**
@@ -95,6 +123,31 @@ export function holesTests() {
         bad,
         [],
         "These call sites pass no values for a key that has holes. Pass them, or give the sentence a key of its own.",
+      );
+    });
+
+    test("no translation spells out the word its own placeholder supplies", () => {
+      const bad: string[] = [];
+      for (const { template, fills } of interpolations("src")) {
+        for (const locale of locales) {
+          if (locale === "en") continue;
+          const sentence = read(locale, template.ns)?.[template.key];
+          if (typeof sentence !== "string") continue;
+          const words = fills.flatMap((fill) => {
+            const word = read(locale, fill.ns)?.[fill.key];
+            return typeof word === "string" ? [{ hole: fill.hole, word }] : [];
+          });
+          const echo = echoedFill(sentence, words);
+          if (echo)
+            bad.push(
+              `${locale}/${template.ns}: ${template.key} = "${sentence}" also spells out {${echo.hole}} ("${echo.word}")`,
+            );
+        }
+      }
+      assert.deepStrictEqual(
+        bad,
+        [],
+        "These translations write out the word their own placeholder already fills in, so a reader gets it twice. Build the sentence around the hole.",
       );
     });
   });

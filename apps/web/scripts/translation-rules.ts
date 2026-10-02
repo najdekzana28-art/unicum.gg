@@ -351,3 +351,57 @@ export function duplicatedGameName(
     (name) => holes.includes(name.token) && carriesName(bare, name.own),
   );
 }
+
+/**
+ * The scripts that write without spaces between words, where a repetition has
+ * no boundary to be found at: Thai sets its own word for a badge flush against
+ * the next one.
+ */
+const UNSPACED =
+  /[\p{sc=Thai}\p{sc=Han}\p{sc=Hiragana}\p{sc=Katakana}\p{sc=Lao}\p{sc=Khmer}\p{sc=Myanmar}]/u;
+
+/** Below this, an echo says more about chance than about the translation. */
+const MIN_ECHO = 3;
+
+/**
+ * Whether a sentence spells out a word its own placeholder already supplies.
+ *
+ * The cost of building a heading from two keys, and it is invisible to every
+ * other rule here: the placeholder survives, so `holes` passes, the key exists,
+ * so `completeness` passes, and what a reader gets is the word twice. French
+ * answered "Tous les badges {badge} et comment les obtenir" for "Every {badge}
+ * and how to earn it", which renders as "Tous les badges badge", and five
+ * languages wrote the preposition of "Top {tank} players {by} {metric}" into
+ * the template as well as leaving it in the hole.
+ *
+ * Anchored at the START of the word and loose at its end, which is what the two
+ * failures either side need: Italian's "cannone" is not an echo of "none", and
+ * French's "badges" IS one of "badge". Four letters of ending is where a
+ * declension stops and a different word begins ("article" is not "art").
+ */
+export function echoesFilledWord(sentence: string, word: string): boolean {
+  if (word.length < MIN_ECHO) return false;
+  const text = sentence.toLowerCase();
+  const needle = word.toLowerCase();
+  if (UNSPACED.test(word)) return text.includes(needle);
+  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?<!\\p{L})${escaped}(?!\\p{L}{4})`, "u").test(text);
+}
+
+/**
+ * The word a translation repeats, out of the holes it is handed.
+ *
+ * `fills` is what the component really puts in each hole, in this language.
+ * Its own braces come out of the sentence first, or every one of these would
+ * report itself.
+ */
+export function echoedFill(
+  sentence: string,
+  fills: Iterable<{ hole: string; word: string }>,
+): { hole: string; word: string } | undefined {
+  for (const fill of fills) {
+    const bare = sentence.split(`{${fill.hole}}`).join(" ");
+    if (echoesFilledWord(bare, fill.word)) return fill;
+  }
+  return undefined;
+}

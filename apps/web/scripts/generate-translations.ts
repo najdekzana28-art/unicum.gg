@@ -20,6 +20,7 @@ import {
   carriesWord,
   catalogueFilledPlaceholders,
   duplicatedGameName,
+  echoedFill,
   gameNames,
   isGameNamespace,
   missingGameName,
@@ -27,6 +28,7 @@ import {
   typographic,
   type GameName,
 } from "./translation-rules";
+import { interpolations, type Fill } from "./interpolations";
 import { dirname, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { config } from "dotenv-flow";
@@ -338,6 +340,7 @@ Rules:
 - An ICU argument, "{count, plural, one {# item} other {# items}}" or "{gender, select, m {...} other {...}}", is structure rather than words: keep the argument name, the keyword and the # exactly, and translate ONLY the text inside each branch.
 - Give a plural argument the branches YOUR language needs, which may be more or fewer than English has. English and French need one and other, Polish and Russian need one, few and many, Arabic needs zero, one, two, few, many and other, Japanese and Chinese need only other. Always write an other branch. Getting this wrong is not a style problem: two branches in Polish prints the five-and-above form on every count from two upwards.
 - A {placeholder} stands for a name that will be dropped in. Build the sentence your language would build around it, including any preposition or article it needs: "Top {mode} players" is "Meilleurs joueurs de {mode}" in French, never "Meilleurs {mode} joueurs".
+- The word a {placeholder} holds is dropped in before a reader sees the sentence, so never write that word out as well: "Every {badge} and how to earn it" is "Tous les {badge} et comment les obtenir" in French, never "Tous les badges {badge} et comment les obtenir", which prints the word twice. This applies to a preposition in a hole as much as to a noun.
 - A heading that begins with a {placeholder} in English begins with a real word in most languages, because the name moves. Capitalise whatever ends up first: "{name} directive" is "Directive {name}" in French, never "directive {name}".
 - When a {placeholder} holds a PROPER NOUN (a vehicle, a player, a clan, a map), write a real sentence around it rather than an apposition: "Tech tree branch of the {tank}" is "Branche technologique du {tank}" in French, not "Branche technologique : {tank}".
 - Never leave a bare definite article immediately before that placeholder. "le {tank}" reads as "le IS-7" for one vehicle and wants "l'IS-7" for another, and you cannot know which: the article is the one word that would have to change with the name. Use a preposition that contracts ("du {tank}", "dell'{tank}" becomes "del {tank}"), or word the sentence so nothing stands directly in front of the name.
@@ -521,6 +524,72 @@ function duplicatedGameNameIn(
 ): GameName | undefined {
   if (isGameNamespace(namespace) || namespace === "terms") return undefined;
   return duplicatedGameName(source, current, gameNamesFor(locale), filledHoles());
+}
+
+/**
+ * A sentence a component builds out of two keys, and what fills its holes.
+ *
+ * Read off the call sites rather than listed, so a heading split in two
+ * tomorrow is covered without anyone remembering to say so.
+ */
+let assembled: Map<string, Fill[]> | undefined;
+
+function assembledSentences(): Map<string, Fill[]> {
+  if (assembled) return assembled;
+  assembled = new Map();
+  for (const { template, fills } of interpolations(join(webRoot, "src"))) {
+    const key = `${template.ns}:${template.key}`;
+    assembled.set(key, [...(assembled.get(key) ?? []), ...fills]);
+  }
+  return assembled;
+}
+
+const localeStrings = new Map<string, Record<string, string>>();
+
+/** One namespace in one language, flattened, read once. */
+function stringsOf(locale: Locale, namespace: string): Record<string, string> {
+  const cacheKey = `${locale}/${namespace}`;
+  let held = localeStrings.get(cacheKey);
+  if (!held) {
+    const json = readJson(join(localesRoot, locale, `${namespace}.json`));
+    held = json ? flatten(json) : {};
+    localeStrings.set(cacheKey, held);
+  }
+  return held;
+}
+
+/**
+ * A translation that writes out the word its own placeholder already supplies.
+ *
+ * The same failure as `duplicatedGameNameIn` one level out: that one is a hole
+ * filled from the catalogue, this one a hole filled from another key, and a
+ * model reading only the sentence has no way of knowing either is coming. It
+ * answered "Tous les badges {badge} et comment les obtenir" for "Every {badge}
+ * and how to earn it", and left the preposition of "Top {tank} players {by}
+ * {metric}" in the template in five languages.
+ *
+ * Judged against what the OTHER key currently says in this language, which is
+ * what the reader will see beside it. Only `isStale` can ask: by the time a
+ * batch reaches `translate` its namespace is the KIND rather than the path, so
+ * the pair cannot be looked up there. A string that fails is therefore asked
+ * about again rather than refused on the spot, and one that passes is left
+ * alone, so a hand correction settles it for good.
+ */
+function echoedFillIn(
+  namespace: string,
+  key: string,
+  current: string,
+  locale: Locale,
+): { hole: string; word: string } | undefined {
+  const fills = assembledSentences().get(`${namespace}:${key}`);
+  if (!fills) return undefined;
+  return echoedFill(
+    current,
+    fills.flatMap((fill) => {
+      const word = stringsOf(locale, fill.ns)[fill.key];
+      return word === undefined ? [] : [{ hole: fill.hole, word }];
+    }),
+  );
 }
 
 /** Which placeholders the components fill from the catalogue, read once. */
@@ -833,6 +902,7 @@ function isStale(
   // of knowing. Both leave a page saying two things for one mode.
   if (missingGameNameIn(source, current, namespace, locale)) return true;
   if (duplicatedGameNameIn(source, current, namespace, locale)) return true;
+  if (echoedFillIn(namespace, key, current, locale)) return true;
   if (seeding) return false;
   const recorded = hashes[`${namespace}:${key}`];
   return recorded !== undefined && recorded !== hashOf(source);
