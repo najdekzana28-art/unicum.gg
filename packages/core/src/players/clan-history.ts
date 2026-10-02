@@ -1,4 +1,4 @@
-import { eq, inArray, sql } from "drizzle-orm";
+import { and, eq, inArray, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
   clansByRegion,
@@ -7,6 +7,7 @@ import {
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { getClansShortRefBatch } from "@unicum.gg/core/wargaming/wot/clans/info";
+import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
 import {
   type ClanRef,
   type ClanStint,
@@ -68,7 +69,9 @@ export function deserializeClanHistory(
   data: SerializedClanHistory,
 ): PlayerClanHistoryFull {
   return {
-    currentStint: data.currentStint ? deserializeStint(data.currentStint) : null,
+    currentStint: data.currentStint
+      ? deserializeStint(data.currentStint)
+      : null,
     pastStints: data.pastStints.map(deserializeStint),
     totalClans: data.totalClans,
     timeInClansSeconds: data.timeInClansSeconds,
@@ -145,9 +148,11 @@ export async function getPlayerCurrentClanByNickname(
   const playerClanHistory = playerClanHistoryByRegion[region];
   const [row] = await db
     .select({
-      clan: sql<
-        { tag: string; name: string; color: string } | null
-      >`${playerClanHistory.data} -> 'currentStint' -> 'clan'`,
+      clan: sql<{
+        tag: string;
+        name: string;
+        color: string;
+      } | null>`${playerClanHistory.data} -> 'currentStint' -> 'clan'`,
     })
     .from(players)
     .innerJoin(
@@ -197,12 +202,26 @@ async function resolveClanRefs(
   }
 
   // 2. For anything still missing, batch-fetch from WG (no portal hop).
-  //    Disbanded/ghost clans simply stay missing — caller filters them.
+  //    A disbanded clan stays missing here, because the public API blanks its
+  //    tag, and the caller drops a stint it cannot name.
   const missing = unique.filter((id) => !out.has(id));
   if (missing.length > 0) {
     const fetched = await getClansShortRefBatch(region, missing);
     for (const [id, ref] of fetched) out.set(id, ref);
   }
+
+  // 3. Queue whatever is STILL missing, which is the disbanded clans. They are
+  //    nameable, just not from here: the refresh reads their identity off the
+  //    clan portal, which keeps it indefinitely, and stores the row, so the
+  //    next render of this page resolves them from step 1 and the stint
+  //    reappears. Measured over 40 EU players, every clan their histories named
+  //    that we did not hold was a disbanded one, and 5 of those 40 were missing
+  //    at least one stint because of it.
+  //
+  //    Queued rather than fetched: this runs on a page render, crawlers
+  //    included, and the portal is a 1 rps budget per region.
+  const unresolved = unique.filter((id) => !out.has(id));
+  if (unresolved.length > 0) discoverClansBackground(region, unresolved);
   return out;
 }
 
@@ -274,12 +293,18 @@ export async function loadPlayerClanHistoryFromWG(
 
   const nowMs = Date.now();
   const currentDurationS = enrichedCurrent
-    ? Math.max(0, Math.floor((nowMs - enrichedCurrent.joinedAt.getTime()) / 1000))
+    ? Math.max(
+        0,
+        Math.floor((nowMs - enrichedCurrent.joinedAt.getTime()) / 1000),
+      )
     : 0;
   const pastDurationS = pastStints.reduce(
     (sum, s) =>
       sum +
-      Math.max(0, Math.floor((s.leftAt!.getTime() - s.joinedAt.getTime()) / 1000)),
+      Math.max(
+        0,
+        Math.floor((s.leftAt!.getTime() - s.joinedAt.getTime()) / 1000),
+      ),
     0,
   );
 
@@ -340,6 +365,47 @@ function mergeClanHistory(
     pastStints,
     totalClans: pastStints.length + (fresh.currentStint ? 1 : 0),
     timeInClansSeconds: currentDurationS + pastDurationS,
+  };
+}
+
+/**
+ * Stamp each stint's clan with whether that clan is disbanded TODAY.
+ *
+ * Resolved on read and deliberately never stored, because it is a fact about
+ * the clan and not about the stint. Written into the history when it is fetched,
+ * it would freeze: a clan that ends AFTER a player's history was last written
+ * keeps reading as alive until that player is next refreshed, which is most of
+ * them, since a history is only rewritten when the player is. That is not a
+ * corner case, it is the ordinary one, a clan disbands long after its former
+ * members last moved.
+ *
+ * One indexed lookup over a handful of ids, on a payload that is already cached
+ * for a minute, so it costs nothing worth measuring.
+ */
+export async function withDisbandedFlags(
+  region: Region,
+  history: PlayerClanHistoryFull,
+): Promise<PlayerClanHistoryFull> {
+  const ids = history.pastStints.map((s) => s.clan.id);
+  if (history.currentStint) ids.push(history.currentStint.clan.id);
+  if (ids.length === 0) return history;
+
+  const clans = clansByRegion[region];
+  const rows = await db
+    .select({ id: clans.id })
+    .from(clans)
+    .where(and(inArray(clans.id, ids), eq(clans.isDisbanded, true)));
+  if (rows.length === 0) return history;
+
+  const disbanded = new Set(rows.map((r) => Number(r.id)));
+  const stamp = (stint: ClanStint): ClanStint =>
+    disbanded.has(stint.clan.id)
+      ? { ...stint, clan: { ...stint.clan, isDisbanded: true } }
+      : stint;
+  return {
+    ...history,
+    currentStint: history.currentStint ? stamp(history.currentStint) : null,
+    pastStints: history.pastStints.map(stamp),
   };
 }
 

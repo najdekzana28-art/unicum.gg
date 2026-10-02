@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { clanAddress } from "@unicum.gg/shared";
 import { useMemo } from "react";
 import ROUTES from "@/constants/routes";
 import {
@@ -56,7 +57,9 @@ export function PlayerClansTimeline({
   nowMs: number;
 }) {
   const { locale } = useLocale();
-  const { t } = useTranslation("components/players/detail/overview/clans-timeline");
+  const { t } = useTranslation(
+    "components/players/detail/overview/clans-timeline",
+  );
   const { t: tRoles } = useTranslation("game/clan-roles");
   const start = useMemo(() => {
     const oldest = stints.reduce<number>(
@@ -90,7 +93,9 @@ export function PlayerClansTimeline({
             const showLabel = width > 4;
             const showEmblem = width > 8;
             const tag = s.clan.tag;
-            const clanHref = ROUTES.CLAN(region, tag);
+            // By address, not by tag: a clan that has ended keeps its page at
+            // `TAG-<id>`, and the bare tag belongs to whoever holds it today.
+            const clanHref = ROUTES.CLAN(region, clanAddress(s.clan));
             return (
               <Tooltip key={`${s.clan.id}-${stintStartMs}`}>
                 <TooltipTrigger asChild>
@@ -104,7 +109,7 @@ export function PlayerClansTimeline({
                       color: textColor,
                     }}
                   >
-                    {showEmblem && (
+                    {showEmblem && s.clan.emblem && (
                       <Image
                         src={s.clan.emblem}
                         alt=""
@@ -118,21 +123,25 @@ export function PlayerClansTimeline({
                 </TooltipTrigger>
                 <TooltipContent>
                   <div className="flex items-center gap-2 text-xs">
-                    <Image
-                      src={s.clan.emblem}
-                      alt={`${tag} emblem`}
-                      width={32}
-                      height={32}
-                      className="size-8 shrink-0 rounded"
-                    />
+                    {s.clan.emblem && (
+                      <Image
+                        src={s.clan.emblem}
+                        alt={`${tag} emblem`}
+                        width={32}
+                        height={32}
+                        className="size-8 shrink-0 rounded"
+                      />
+                    )}
                     <div className="grid gap-0.5">
                       <div className="font-semibold">
-                        <ClanTag tag={tag} color={s.clan.color} />{" "}
-                        {s.clan.name}
+                        <ClanTag tag={tag} color={s.clan.color} /> {s.clan.name}
                       </div>
                       <div>{clanRoleName(s.role, tRoles)}</div>
                       <div className="tabular-nums text-muted-foreground">
-                        {format(s.joinedAt, "d MMM yyyy", { locale: dateLocale(locale) })} —{" "}
+                        {format(s.joinedAt, "d MMM yyyy", {
+                          locale: dateLocale(locale),
+                        })}{" "}
+                        —{" "}
                         {s.leftAt
                           ? format(s.leftAt, DATE_PATTERN, {
                               locale: dateLocale(locale),
@@ -155,7 +164,9 @@ export function PlayerClansTimeline({
         </div>
 
         <div className="relative mt-1 h-4 w-full text-[10px] text-muted-foreground">
-          <span className="absolute left-0">{format(start, "MMM yyyy", { locale: dateLocale(locale) })}</span>
+          <span className="absolute left-0">
+            {format(start, "MMM yyyy", { locale: dateLocale(locale) })}
+          </span>
           {ticks.map((t) => {
             const p = pct(t.getTime());
             if (p < 6 || p > 94) return null;

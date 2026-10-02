@@ -3,6 +3,7 @@ import { LanguageSource } from "@unicum.gg/shared";
 import Image from "next/image";
 import Link from "@/components/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { clanAddress } from "@unicum.gg/shared";
 import { buildPlayerBadges } from "@/components/entity/badges/player-badges";
 import { BadgeCluster } from "@/components/entity/badges/badge-cluster";
 import { CompareWithButton } from "@/components/players/detail/compare-with-button";
@@ -20,7 +21,6 @@ import type { ClanStint } from "@unicum.gg/shared";
 import { Interpolate } from "@/components/interpolate";
 import { DateShape, useDateFormat } from "@/components/local-date";
 import { useTranslation } from "@/hooks/use-translation";
-
 
 export function PlayerHeader(
   props:
@@ -49,7 +49,9 @@ export function PlayerHeader(
   const { t } = useTranslation("components/players/detail/header");
   const { t: tRoles } = useTranslation("game/clan-roles");
   const { t: tGame } = useTranslation("game/vocabulary");
-  const { t: tBadges } = useTranslation("components/entity/badges/player-badges");
+  const { t: tBadges } = useTranslation(
+    "components/entity/badges/player-badges",
+  );
   const formatDate = useDateFormat();
   if ("loading" in props) {
     return <PlayerHeaderSkeleton nickname={props.nickname} />;
@@ -181,7 +183,11 @@ export function PlayerHeader(
       </div>
       {currentStint && (
         <Link
-          href={ROUTES.CLAN(region, currentStint.clan.tag)}
+          // By address, not by tag. WG can still report a player as a member of
+          // a clan that has ended, and its bare tag belongs to whoever holds
+          // that name today, so the most prominent clan link on the page would
+          // open a clan this player was never in.
+          href={ROUTES.CLAN(region, clanAddress(currentStint.clan))}
           className="flex items-stretch border-t border-fd-border text-sm hover:opacity-80 sm:border-l sm:border-t-0"
         >
           <div className="flex min-w-0 flex-1 flex-col justify-center p-4 sm:flex-none sm:whitespace-nowrap sm:text-right">

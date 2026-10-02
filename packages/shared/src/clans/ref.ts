@@ -8,4 +8,9 @@ export type ClanRef = {
   emblem: string;
   // Empty `[]` from the public API (no languages there); enriched by callers.
   languages: string[];
+  /** Whether the clan has since been disbanded. Optional because only the
+   * lookups that read our own table know it: the public API blanks a disbanded
+   * clan entirely, so a ref built from it cannot say. Absent reads as "not
+   * known to be disbanded", which is what every caller rendered before. */
+  isDisbanded?: boolean;
 };

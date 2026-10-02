@@ -238,6 +238,14 @@ const clanStint = z
         color: z.string(),
         emblem: z.string(),
         languages: z.array(z.string()),
+        // Whether the clan has since been disbanded, resolved per request
+        // rather than stored on the stint. Documented rather than left to
+        // `.loose()`: the front draws the stint struck through from it and
+        // links it by `TAG-<id>` instead of the bare tag, so an undocumented
+        // field would be missing from the generated SDK types and one
+        // tightening away from silently turning every archive link back into a
+        // tag that now belongs to someone else.
+        isDisbanded: z.boolean().optional(),
       })
       .loose(),
     joinedAt: z.coerce.date(),

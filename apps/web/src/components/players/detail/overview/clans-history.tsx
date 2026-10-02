@@ -1,21 +1,14 @@
 "use client";
 
-import { useLocale } from "@onruntime/translations/react";
-import { dateLocale } from "@/lib/date-locale";
 import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
-import { clanRoleName } from "@/components/game-name";
 import { useTranslation } from "@/hooks/use-translation";
 import {
   CaretDownIcon,
   CaretUpDownIcon,
   CaretUpIcon,
 } from "@phosphor-icons/react";
-import { format, formatDistanceStrict } from "date-fns";
-import Image from "next/image";
-import Link from "@/components/link";
-import { ClanTag } from "@/components/entity/clan-tag";
+import { ClanHistoryRow } from "@/components/players/detail/overview/clans-history-row";
 import { useState } from "react";
-import ROUTES from "@/constants/routes";
 import {
   Panel,
   PanelContent,
@@ -36,12 +29,6 @@ import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanStint, PlayerClanHistoryFull } from "@unicum.gg/shared";
-
-const DAY_FORMAT = "d MMM yyyy";
-
-function formatDuration(from: Date, to: Date | null): string {
-  return formatDistanceStrict(from, to ?? new Date());
-}
 
 function formatTotalDuration(seconds: number): string {
   const days = Math.floor(seconds / 86400);
@@ -151,7 +138,10 @@ function SortableHead({
       </span>
       <Icon
         weight="bold"
-        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
+        className={cn(
+          "size-3.5 shrink-0",
+          active ? "opacity-100" : "opacity-40",
+        )}
       />
     </button>
   );
@@ -177,9 +167,9 @@ export function PlayerClansHistory(
         nowMs: number;
       },
 ) {
-  const { locale } = useLocale();
-  const { t } = useTranslation("components/players/detail/overview/clans-history");
-  const { t: tRoles } = useTranslation("game/clan-roles");
+  const { t } = useTranslation(
+    "components/players/detail/overview/clans-history",
+  );
   // Hook runs unconditionally (rules of hooks); the loading branch returns after.
   const [sort, setSort] = useState<SortState>(null);
 
@@ -214,13 +204,21 @@ export function PlayerClansHistory(
           <PanelTitle>{t("clans-history", { nickname })}</PanelTitle>
           {stints.length > 0 && (
             <p className="text-xs text-muted-foreground tabular-nums">
-              {t("clans-in-clans", { totalClans: clanHistory.totalClans, timeInClansSeconds: formatTotalDuration(clanHistory.timeInClansSeconds) })}</p>
+              {t("clans-in-clans", {
+                totalClans: clanHistory.totalClans,
+                timeInClansSeconds: formatTotalDuration(
+                  clanHistory.timeInClansSeconds,
+                ),
+              })}
+            </p>
           )}
         </div>
       </PanelHeader>
       <PanelContent className="p-0">
         {stints.length === 0 ? (
-          <p className="p-4 text-sm text-muted-foreground">{t("no-clan-history")}</p>
+          <p className="p-4 text-sm text-muted-foreground">
+            {t("no-clan-history")}
+          </p>
         ) : (
           <>
             <div className="p-4">
@@ -240,82 +238,62 @@ export function PlayerClansHistory(
               className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!"
             >
               <TableHeader>
-              <TableRow>
-                <SortableHead column={SortColumn.Tag} state={sort} onToggle={toggleSort}>
-                  {t("tag")}
-                </SortableHead>
-                <SortableHead column={SortColumn.Name} state={sort} onToggle={toggleSort}>
-                  {t("name")}</SortableHead>
-                <SortableHead
-                  column={SortColumn.Role}
-                  state={sort}
-                  onToggle={toggleSort}
-                  hideOnMobile
-                >
-                  {t("role")}</SortableHead>
-                <SortableHead
-                  column={SortColumn.From}
-                  state={sort}
-                  onToggle={toggleSort}
-                  hideOnMobile
-                >
-                  {t("from")}</SortableHead>
-                <SortableHead column={SortColumn.To} state={sort} onToggle={toggleSort}>
-                  {t("to")}
-                </SortableHead>
-                <SortableHead
-                  column={SortColumn.Duration}
-                  state={sort}
-                  onToggle={toggleSort}
-                  align="end"
-                >
-                  {t("duration")}</SortableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {sortedStints.map((s) => {
-                const clanHref = ROUTES.CLAN(region, s.clan.tag);
-                return (
-                  <TableRow key={`${s.clan.id}-${s.joinedAt.getTime()}`}>
-                    <TableCell className="font-semibold">
-                      <Link href={clanHref} className="hover:underline">
-                        <ClanTag tag={s.clan.tag} color={s.clan.color} />
-                      </Link>
-                    </TableCell>
-                    <TableCell>
-                      <Link
-                        href={clanHref}
-                        className="flex items-center gap-2 whitespace-nowrap hover:underline"
-                      >
-                        <Image
-                          src={s.clan.emblem}
-                          alt={`${s.clan.tag} emblem`}
-                          width={20}
-                          height={20}
-                          className="size-5 shrink-0 rounded-sm"
-                        />
-                        {s.clan.name}
-                      </Link>
-                    </TableCell>
-                    <TableCell className={styles.hiddenColumn}>
-                      {clanRoleName(s.role, tRoles)}
-                    </TableCell>
-                    <TableCell className={cn("whitespace-nowrap tabular-nums", styles.hiddenColumn)}>
-                      {format(s.joinedAt, DAY_FORMAT, { locale: dateLocale(locale) })}
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap tabular-nums">
-                      {s.leftAt ? (
-                        format(s.leftAt, DAY_FORMAT, { locale: dateLocale(locale) })
-                      ) : (
-                        <span className="text-muted-foreground">{t("current")}</span>
-                      )}
-                    </TableCell>
-                    <TableCell className="text-right whitespace-nowrap tabular-nums">
-                      {formatDuration(s.joinedAt, s.leftAt)}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                <TableRow>
+                  <SortableHead
+                    column={SortColumn.Tag}
+                    state={sort}
+                    onToggle={toggleSort}
+                  >
+                    {t("tag")}
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Name}
+                    state={sort}
+                    onToggle={toggleSort}
+                  >
+                    {t("name")}
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Role}
+                    state={sort}
+                    onToggle={toggleSort}
+                    hideOnMobile
+                  >
+                    {t("role")}
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.From}
+                    state={sort}
+                    onToggle={toggleSort}
+                    hideOnMobile
+                  >
+                    {t("from")}
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.To}
+                    state={sort}
+                    onToggle={toggleSort}
+                  >
+                    {t("to")}
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Duration}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="end"
+                  >
+                    {t("duration")}
+                  </SortableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sortedStints.map((s) => (
+                  <ClanHistoryRow
+                    key={`${s.clan.id}-${s.joinedAt.getTime()}`}
+                    region={region}
+                    stint={s}
+                  />
+                ))}
               </TableBody>
             </Table>
           </>
@@ -328,7 +306,9 @@ export function PlayerClansHistory(
 /** The loading twin: same panel + real title + the same table headers, with a
  * placeholder timeline and rows. */
 function ClansHistoryLoading({ nickname }: { nickname: string }) {
-  const { t } = useTranslation("components/players/detail/overview/clans-history");
+  const { t } = useTranslation(
+    "components/players/detail/overview/clans-history",
+  );
   const HEADS = [
     t("tag"),
     t("name"),

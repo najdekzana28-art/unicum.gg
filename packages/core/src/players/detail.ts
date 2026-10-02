@@ -1,4 +1,20 @@
-import { RatingMetric, buildPlayerDerivedStats, type PeriodStats, type PlayerDerivedStats, buildLiftDrag, type LiftDrag, buildPlayerTankRows, type PlayerTankRow, type Player, type PlayerSnapshot, type PlayerClanHistoryFull, EMPTY_CLAN_HISTORY, type PlayerDetailData, type StrongholdModeData, lastBattleOrNull } from "@unicum.gg/shared";
+import {
+  RatingMetric,
+  buildPlayerDerivedStats,
+  type PeriodStats,
+  type PlayerDerivedStats,
+  buildLiftDrag,
+  type LiftDrag,
+  buildPlayerTankRows,
+  type PlayerTankRow,
+  type Player,
+  type PlayerSnapshot,
+  type PlayerClanHistoryFull,
+  EMPTY_CLAN_HISTORY,
+  type PlayerDetailData,
+  type StrongholdModeData,
+  lastBattleOrNull,
+} from "@unicum.gg/shared";
 import {
   cwAbsoluteStatsFromSnapshot,
   cwChampionStatsFromSnapshot,
@@ -16,8 +32,14 @@ import {
   type StrongholdStats,
 } from "@unicum.gg/core/players";
 import { tracedSync } from "@unicum.gg/core/lib/perf-trace";
-import { getAccountSubscription, isActiveStatus } from "@unicum.gg/core/subscription";
-import { getAccountTwitchLogin, isAccountVerified } from "@unicum.gg/core/players/badges";
+import {
+  getAccountSubscription,
+  isActiveStatus,
+} from "@unicum.gg/core/subscription";
+import {
+  getAccountTwitchLogin,
+  isAccountVerified,
+} from "@unicum.gg/core/players/badges";
 import { getPlayerNameHistory } from "@unicum.gg/core/players/name-history";
 import { resolveAccountByNickname } from "@unicum.gg/core/players/resolve-account";
 import {
@@ -28,10 +50,14 @@ import {
   getRatingHistory,
   type RatingHistoryPoint,
 } from "@unicum.gg/core/players/rating-history";
-import { diffTanks, tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
+import {
+  diffTanks,
+  tankSnapshotsToTankStats,
+} from "@unicum.gg/core/players/tanks";
 import {
   loadPlayerClanHistoryFromWG,
   storePlayerClanHistory,
+  withDisbandedFlags,
 } from "@unicum.gg/core/players/clan-history";
 import {
   getAccountWTR,
@@ -72,10 +98,15 @@ export async function buildPlayerDetail(args: {
   clanHistory: PlayerClanHistoryFull;
   initial: PlayerInitialData;
 }): Promise<PlayerDetailData> {
-  const { region, accountId, player, latest, tanks, clanHistory, initial } =
-    args;
+  const { region, accountId, player, latest, tanks, initial } = args;
 
   const [
+    // Whether each of those clans still exists is resolved here rather than
+    // taken from the stored history, which was written whenever this player was
+    // last refreshed and cannot know about a clan that ended since. In the
+    // parallel block because this is the busiest endpoint on the site and the
+    // lookup has nothing to wait for.
+    clanHistory,
     encyclopedia,
     wn8Expected,
     wnxExpected,
@@ -89,6 +120,7 @@ export async function buildPlayerDetail(args: {
     tournamentCount,
     moeThresholds,
   ] = await Promise.all([
+    withDisbandedFlags(region, args.clanHistory),
     getVehicleEncyclopedia(region),
     getWN8ExpectedValues(),
     getWNXExpectedValues(),
@@ -262,9 +294,27 @@ export async function buildPlayerDetail(args: {
     valuation: computePlayerValuation(vehicles, region),
     markProgress,
     liftDrag: tracedSync("liftDrag", () => ({
-      wn7: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn7),
-      wn8: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn8),
-      wnx: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wnx),
+      wn7: buildLiftDrag(
+        tanks,
+        encyclopedia,
+        wn8Expected,
+        wnxExpected,
+        RatingMetric.Wn7,
+      ),
+      wn8: buildLiftDrag(
+        tanks,
+        encyclopedia,
+        wn8Expected,
+        wnxExpected,
+        RatingMetric.Wn8,
+      ),
+      wnx: buildLiftDrag(
+        tanks,
+        encyclopedia,
+        wn8Expected,
+        wnxExpected,
+        RatingMetric.Wnx,
+      ),
     })),
     ratingHistory: ratingHistory.points,
     clanHistory,
