@@ -18,36 +18,55 @@ import {
 import {
   deltaColor,
   formatSpecValue,
+  isBetter,
   hiddenRowIndexes,
   rowDelta,
   specValue,
   type SpecColumn,
 } from "@/components/tanks/detail/specifications/characteristics/format";
 import { categoryScore, MAX_SCORE } from "@/components/tanks/compare/score";
+import { bestOf } from "@/components/compare/cells";
 import { cn } from "@/lib/utils";
 
 /** A column of the comparison, the same shape a tank page's own table reads. */
 export type CompareColumnSpecs = SpecColumn;
 
-/** The indices holding the best value of a row, respecting its direction.
- * Everything ties on a neutral row (nothing to win), so nothing is marked. */
+/** The indices holding the best value of a row, respecting its direction and
+ * judged at the precision the row prints. A neutral row has nothing to win (a
+ * bigger calibre is not "better"), so nothing is marked on one. */
 function bestIndices(values: (number | null)[], row: Row): Set<number> {
   if (row.neutral) return new Set();
-  const present = values
-    .map((v, i) => ({ v, i }))
-    .filter((e): e is { v: number; i: number } => e.v != null);
-  if (present.length < 2) return new Set();
-  const best = present.reduce(
-    (acc, e) => (row.lowerBetter ? Math.min(acc, e.v) : Math.max(acc, e.v)),
-    present[0].v,
-  );
-  // Compared at display precision: two values that print the same number are the
-  // same value here, whatever the float32 storage says.
-  const d = row.digits ?? 0;
-  const same = (a: number, b: number) => a.toFixed(d) === b.toFixed(d);
-  return new Set(present.filter((e) => same(e.v, best)).map((e) => e.i));
+  const digits = row.digits ?? 0;
+  return bestOf(values, {
+    lowerBetter: row.lowerBetter,
+    same: (a, b) => a.toFixed(digits) === b.toFixed(digits),
+  });
 }
 
+/**
+ * One value, and the two things the comparison says about it.
+ *
+ * **Colour says one thing only: how this reads against the reference column.**
+ * Green is better than it, red is worse, and the reference itself is left plain
+ * because it is the point everything is measured from rather than a competitor.
+ * It used to say two: the value went green for winning its row while the little
+ * delta beside it went green or red against the reference, so one row could
+ * carry both greens meaning different things, and a column could be green with
+ * nothing red facing it (nothing marks "lost a row", and the reference carries
+ * no delta at all, so it can never be red). Unpinning every column leaves the
+ * table with no colour, which is the honest answer: with no reference there is
+ * nothing for a colour to mean.
+ *
+ * **Weight says the other: who holds the best value of the row.** It earns its
+ * own channel because at three or four columns it is not derivable from the
+ * colours, and it must not be an ink that already means something else.
+ *
+ * The arrow carries the judgement, not the sign of the subtraction: the `+` and
+ * `-` already say which way the number moved, so pointing the arrow the same way
+ * doubled that and contradicted the colour instead, a longer reload rising in
+ * red. Pointing it at better/worse doubles the colour, which is what a reader
+ * who cannot separate green from red needs.
+ */
 function ValueCell({
   value,
   row,
@@ -70,26 +89,23 @@ function ValueCell({
   // Same delta and same colouring the tank page shows against stock, read
   // against the pinned column instead.
   const delta = rowDelta(value, reference, row);
+  const better = isBetter(value, reference, row);
+  const color = deltaColor(value, reference, row);
   const secondary = row.secondary ? specs?.[row.secondary] : null;
   return (
     <span className="inline-flex items-baseline justify-end gap-1.5 whitespace-nowrap">
       {delta != null && (
-        <span
-          className={cn(
-            "inline-flex items-center text-[0.6875rem]",
-            deltaColor(value, reference, row),
-          )}
-        >
+        <span className={cn("inline-flex items-center text-[0.6875rem]", color)}>
           {delta > 0 ? "+" : ""}
           {formatSpecValue(locale, delta, row.digits)}
-          {delta > 0 ? (
+          {better ? (
             <TrendUpIcon className="size-3" weight="bold" />
           ) : (
             <TrendDownIcon className="size-3" weight="bold" />
           )}
         </span>
       )}
-      <span className={cn("font-medium", isBest && "text-emerald-500")}>
+      <span className={cn("font-medium", isBest && "font-semibold", color)}>
         {formatSpecValue(locale, value, row.digits)}
         {typeof secondary === "number" && (
           <span className="text-fd-muted-foreground/70">
@@ -206,7 +222,11 @@ function SpecGroupRows({
   const heading = tankParamName(tankHeadingKey(group.title), group.title, tParams);
   const hidden = hiddenRowIndexes(group, columns);
   const scores = columns.map((c) => categoryScore(c.specs, group, ranges));
-  const bestScore = Math.max(...scores.map((s) => s ?? -1));
+  // Read exactly like the rows under it: colour against the reference column,
+  // weight for the best of the row. A score is plain higher-is-better and whole,
+  // so it needs none of a row's direction or precision to be judged.
+  const best = bestOf(scores);
+  const referenceScore = pinned != null ? scores[pinned] : null;
 
   return (
     <tbody className="border-b border-fd-border last:border-b-0">
@@ -229,7 +249,13 @@ function SpecGroupRows({
               <span
                 className={cn(
                   "font-semibold",
-                  score === bestScore && columns.length > 1 && "text-emerald-500",
+                  best.has(i) && "font-bold",
+                  pinned !== i &&
+                    referenceScore != null &&
+                    score !== referenceScore &&
+                    (score > referenceScore
+                      ? "text-emerald-500"
+                      : "text-red-500"),
                 )}
               >
                 {score}

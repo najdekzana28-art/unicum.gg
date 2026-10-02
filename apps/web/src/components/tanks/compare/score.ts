@@ -1,6 +1,7 @@
 import { normalizeSpec, type SpecRange, type TankSpec } from "@unicum.gg/shared";
 import type { SpecRanges } from "@unicum.gg/core/wargaming/wot/tanks/spec-ranges";
 import { GROUPS, type Group, type Row } from "@/components/tanks/detail/specifications/characteristics/rows";
+import { bestOf } from "@/components/compare/cells";
 
 /** The scale category scores are reported on, matching the game's own four-digit
  * figures closely enough to read the same way. */
@@ -93,12 +94,8 @@ export function overallScore(
 
 /** The columns holding the highest overall score, so the comparison can say
  * which vehicle comes out on top the way the player and clan comparisons mark
- * their best rating. Empty when nothing can be scored, or on a lone column. */
+ * their best rating. The shared rule, so nothing is crowned when every column
+ * scores the same, which two setups of one vehicle do until one is changed. */
 export function bestOverall(scores: (number | null)[]): Set<number> {
-  const present = scores
-    .map((score, i) => ({ score, i }))
-    .filter((e): e is { score: number; i: number } => e.score != null);
-  if (present.length < 2) return new Set();
-  const best = Math.max(...present.map((e) => e.score));
-  return new Set(present.filter((e) => e.score === best).map((e) => e.i));
+  return bestOf(scores);
 }

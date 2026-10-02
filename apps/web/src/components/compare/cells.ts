@@ -89,22 +89,52 @@ export function ratingCell(
   };
 }
 
+/**
+ * Which columns win a row, and the one rule every comparison on the site marks
+ * its winner by.
+ *
+ * Two cases deliberately mark nothing, because in both of them nothing was won
+ * and the ink would say otherwise:
+ *
+ * - **Fewer than two values to compare.** A column cannot beat a dash.
+ * - **Every value ties.** Marking them all reads as "they all win", in exactly
+ *   the same green as "this one wins", so a row the columns agree on looks like
+ *   a row one of them took. It is not a rare case: two tier X heavies tie on a
+ *   dozen rows, and two columns on the same vehicle tie on every row there is
+ *   until one of their setups is touched.
+ *
+ * `same` compares at the precision the reader actually sees, so two values that
+ * print the same number are the same value here whatever the storage says.
+ */
+export function bestOf(
+  values: (number | null | undefined)[],
+  options: {
+    lowerBetter?: boolean;
+    same?: (a: number, b: number) => boolean;
+  } = {},
+): Set<number> {
+  const present = values
+    .map((value, i) => ({ value, i }))
+    .filter((e): e is { value: number; i: number } =>
+      typeof e.value === "number" && Number.isFinite(e.value),
+    );
+  if (present.length < 2) return new Set();
+  const best = present.reduce(
+    (acc, e) => (options.lowerBetter ? Math.min(acc, e.value) : Math.max(acc, e.value)),
+    present[0].value,
+  );
+  const same = options.same ?? ((a: number, b: number) => a === b);
+  const winners = present.filter((e) => same(e.value, best));
+  if (winners.length === present.length) return new Set();
+  return new Set(winners.map((e) => e.i));
+}
+
 export function bestIndex(
   cells: MetricCell[],
   kind: MetricKind,
 ): Set<number> {
-  const numerics: { idx: number; value: number }[] = [];
-  for (let i = 0; i < cells.length; i++) {
-    const v = cells[i].numeric;
-    if (v === null) continue;
-    numerics.push({ idx: i, value: v });
-  }
-  if (numerics.length === 0) return new Set();
-  numerics.sort((a, b) =>
-    kind === "higher" ? b.value - a.value : a.value - b.value,
-  );
-  const bestValue = numerics[0].value;
-  return new Set(
-    numerics.filter((n) => n.value === bestValue).map((n) => n.idx),
+  return bestOf(
+    cells.map((c) => c.numeric),
+    { lowerBetter: kind === "lower" },
   );
 }

@@ -292,10 +292,14 @@ export function TankCompareColumnHeader({
           <TooltipTrigger asChild>
             <div className="flex w-fit cursor-help items-baseline gap-1.5">
               <span className="text-xs text-fd-muted-foreground">{t("overall")}</span>
+              {/* Weight rather than colour, like the table below: green there
+                  means "better than the reference column", and this score has
+                  no reference to be read against. The dot beside the name is
+                  what says this column comes out on top. */}
               <span
                 className={cn(
                   "text-sm font-semibold tabular-nums",
-                  isBest && "text-emerald-500",
+                  isBest && "font-bold",
                 )}
               >
                 {score}

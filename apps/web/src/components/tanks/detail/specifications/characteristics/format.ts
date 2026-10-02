@@ -25,21 +25,40 @@ export function specValue(
   return typeof raw === "number" ? raw * (row.scale ?? 1) : null;
 }
 
+/**
+ * Whether a value beats a baseline, by the row's own sense of direction: a
+ * lower reload and a higher DPM are both better. Null when there is nothing to
+ * judge, which covers no baseline, a row with no direction (`neutral`), and the
+ * two being equal at display precision, the last of which is what keeps
+ * float32-storage noise from judging a value that shows the same number.
+ *
+ * Separate from the colour below because the judgement is read on two channels:
+ * the colour, and the arrow that points with it. They came apart once, where the
+ * arrow followed the sign of the subtraction instead, so a reload six seconds
+ * longer rose in red.
+ */
+export function isBetter(
+  value: number,
+  baseline: number | null | undefined,
+  row: Row,
+): boolean | null {
+  if (baseline == null || row.neutral) return null;
+  const d = row.digits ?? 0;
+  const a = Number(value.toFixed(d));
+  const b = Number(baseline.toFixed(d));
+  if (a === b) return null;
+  return row.lowerBetter ? a < b : a > b;
+}
+
 /** emerald when the value beats the baseline (respecting the row's direction),
- * red when worse, undefined when equal at display precision or not comparable.
- * Comparing at display precision avoids float32-storage noise lighting up a
- * value that shows the same number. */
+ * red when worse, undefined when equal at display precision or not comparable. */
 export function deltaColor(
   value: number,
   baseline: number | null | undefined,
   row: Row,
 ): string | undefined {
-  if (baseline == null || row.neutral) return undefined;
-  const d = row.digits ?? 0;
-  const a = Number(value.toFixed(d));
-  const b = Number(baseline.toFixed(d));
-  if (a === b) return undefined;
-  const better = row.lowerBetter ? a < b : a > b;
+  const better = isBetter(value, baseline, row);
+  if (better == null) return undefined;
   return better ? "text-emerald-500" : "text-red-500";
 }
 

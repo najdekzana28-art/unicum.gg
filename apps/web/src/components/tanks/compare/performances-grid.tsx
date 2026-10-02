@@ -117,13 +117,16 @@ export function TankComparePerformancesGrid({
                               ? "font-normal text-fd-muted-foreground"
                               : // Without a rating scale of its own, the best
                                 // value of the row is marked the way the
-                                // characteristics are.
-                                isBest && "text-emerald-500",
+                                // characteristics are: weight, not colour.
+                                // Green is spoken for across this board, where
+                                // it means "better than the reference column".
+                                isBest && "font-semibold",
                         )}
                       >
                         {value == null ? "—" : row.format(value, locale)}
-                        {/* On a coloured cell the green would be invisible, so
-                            the winner keeps the dot the other comparisons use. */}
+                        {/* On a coloured cell the weight is hard to read against
+                            the band, so the winner keeps the dot the other
+                            comparisons use. */}
                         {color && isBest && (
                           <span
                             aria-hidden
