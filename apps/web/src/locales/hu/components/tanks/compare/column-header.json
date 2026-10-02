@@ -1,10 +1,12 @@
 {
+  "a-second-column-on-the-same": "A másodperc oszlop ugyanazon a járművön, ezt az összeállítást cipelve, hogy változás történjen az egyik oldalon, és a kettőt egymással ellen lehessen mérni",
   "ammunition-equipment-consumables-directives-crew": "Lőszer, felszerelés, fogyócikkek, direktívák, legénység és fejlődés ehhez az oszlophoz. Minden változtatás módosítja az összehasonlításban mögötte látható jellemzőket.",
   "ammunition-equipment-crew-and-progression": "Lőszer, felszerelés, legénység és fejlődés",
   "apply-to-every-column": "Alkalmazás minden oszlopra",
   "compare-against": "Összehasonlítás ezzel: {tank}",
   "compare-the-others-against-this-one": "A többi összehasonlítása ezzel",
   "configure-tank": "{tank} beállítása",
+  "duplicate-tank": "Összehasonlít: {tank} tankot maga ellen",
   "highest-overall-score": "Legmagasabb összesített pontszám",
   "highest-overall-score-of-this": "Az összehasonlítás legmagasabb összesített pontszáma",
   "is-the-reference": "Referencia: {tank}",
@@ -13,8 +15,10 @@
   "remove-tank": "{tank} eltávolítása",
   "reset-all": "Mindent visszaállít",
   "setup": "Beállítás",
+  "setup-n": "Összeállítás {n}",
   "stock": "Alapállapot",
   "tank-setup": "{tank} összeállítása",
+  "the-same-vehicle-under-a-setup": "Ugyanaz a jármű a saját összeállítása szerint",
   "top": "Legjobb",
   "where-this-vehicle-sits-across": "A jármű helye a teljes katalógusban, {MAXSCORE} közül. Az itt beállított négy kategóriapontszám átlaga. Összefoglaló, nem ítélet, egy felderítő és egy nehéz tank is elérheti ugyanazt a számot különböző erősségekkel."
 }

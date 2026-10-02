@@ -1,10 +1,12 @@
 {
+  "a-second-column-on-the-same": "O a doua coloană pentru același vehicul, care face carry cu această configurație, pentru schimbarea unei părți și compararea celor două una împotriva celeilalte",
   "ammunition-equipment-consumables-directives-crew": "Muniție, echipament, consumabile, directive, echipaj și progres pentru această coloană. Fiecare schimbare îi modifică caracteristicile în comparația din spate.",
   "ammunition-equipment-crew-and-progression": "Muniție, echipament, echipaj și progres",
   "apply-to-every-column": "Aplică fiecărei coloane",
   "compare-against": "Comparare împotriva {tank}",
   "compare-the-others-against-this-one": "Compară-le pe celelalte împotriva acestuia",
   "configure-tank": "Configurează {tank}",
+  "duplicate-tank": "Compară {tank} împotriva lui în sine",
   "highest-overall-score": "Cel mai mare scor general",
   "highest-overall-score-of-this": "Cel mai mare scor general al acestei comparații",
   "is-the-reference": "Referință: {tank}",
@@ -13,8 +15,10 @@
   "remove-tank": "Elimină {tank}",
   "reset-all": "Resetează tot",
   "setup": "Configurare",
+  "setup-n": "Configurația {n}",
   "stock": "Stoc",
   "tank-setup": "Configurație: {tank}",
+  "the-same-vehicle-under-a-setup": "Același vehicul cu propria configurație",
   "top": "Cei mai buni",
   "where-this-vehicle-sits-across": "Poziția acestui vehicul în întregul catalog, din {MAXSCORE}: media celor patru scoruri de categorie, configurate aici. Un rezumat, nu un verdict, un cercetaș și un tanc greu pot ajunge la același număr fiind buni la lucruri diferite."
 }

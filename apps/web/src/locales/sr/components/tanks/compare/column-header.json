@@ -1,10 +1,12 @@
 {
+  "a-second-column-on-the-same": "A секунда колона za isto возило, koja će izneti ovu konfiguracija, za promena jedne strana i poređenje dveju protiv druge",
   "ammunition-equipment-consumables-directives-crew": "Municija, oprema, potrošni materijal, direktive, posada i napredovanje za ovu kolonu. Svaka promena pomera njegove karakteristike u poređenju iza.",
   "ammunition-equipment-crew-and-progression": "Municija, oprema, posada i napredovanje",
   "apply-to-every-column": "Primeni na svaku kolonu",
   "compare-against": "Poredi sa {tank}",
   "compare-the-others-against-this-one": "Poredi ostale sa ovim",
   "configure-tank": "Konfiguriši {tank}",
+  "duplicate-tank": "Poredi {tank} protiv samo sebe",
   "highest-overall-score": "Najviši ukupni rezultat",
   "highest-overall-score-of-this": "Najviši ukupni rezultat ovog poređenja",
   "is-the-reference": "{tank} je referenca",
@@ -13,8 +15,10 @@
   "remove-tank": "Ukloni {tank}",
   "reset-all": "Resetuj sve",
   "setup": "Podešavanje",
+  "setup-n": "Konfiguracija {n}",
   "stock": "Zaliha",
   "tank-setup": "Konfiguracija za {tank}",
+  "the-same-vehicle-under-a-setup": "Isto возило sa sopstvenom konfiguracija",
   "top": "Najbolji",
   "where-this-vehicle-sits-across": "Gde se ovo vozilo nalazi u celom katalogu, od {MAXSCORE}: prosečna vrednost njegova četiri kategorijska rezultata, prema ovde podešenim opcijama. Sažetak, a ne presuda. Izviđač i teški tenk mogu doći do istog broja tako što su dobri u različitim stvarima."
 }

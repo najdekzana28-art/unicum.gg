@@ -665,7 +665,8 @@
     "price": "السعر",
     "published": "منشور",
     "publishes": "ينشر",
-    "taken": "المُتلقّى"
+    "taken": "المُتلقّى",
+    "setup": "التجهيز"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1332,7 +1333,8 @@
     "price": "цана",
     "published": "апублікавана",
     "publishes": "публікуе",
-    "taken": "атрыманы"
+    "taken": "атрыманы",
+    "setup": "камплектацыя"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2202,7 +2204,8 @@
     "price": "цена",
     "published": "публикувано",
     "publishes": "публикува",
-    "taken": "взети"
+    "taken": "взети",
+    "setup": "конфигурация"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -2877,7 +2880,8 @@
     "price": "cijena",
     "published": "objavljeno",
     "publishes": "objavljuje",
-    "taken": "preuzeto"
+    "taken": "preuzeto",
+    "setup": "konfiguracija"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3758,7 +3762,8 @@
     "price": "cena",
     "published": "zveřejněno",
     "publishes": "zveřejňuje",
-    "taken": "obdržené"
+    "taken": "obdržené",
+    "setup": "konfigurace"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4644,7 +4649,8 @@
     "price": "pris",
     "published": "offentliggjort",
     "publishes": "udgiver",
-    "taken": "taget"
+    "taken": "taget",
+    "setup": "opsætning"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5524,7 +5530,8 @@
     "price": "Preis",
     "published": "veröffentlicht",
     "publishes": "veröffentlicht",
-    "taken": "genommen"
+    "taken": "genommen",
+    "setup": "Konfiguration"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6409,7 +6416,8 @@
     "price": "τιμή",
     "published": "δημοσιευμένο",
     "publishes": "δημοσιεύει",
-    "taken": "ληφθεί"
+    "taken": "ληφθεί",
+    "setup": "διαμόρφωση"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7274,7 +7282,8 @@
     "price": "precio",
     "published": "publicado",
     "publishes": "publica",
-    "taken": "recibido"
+    "taken": "recibido",
+    "setup": "configuración"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8164,7 +8173,8 @@
     "price": "hinta",
     "published": "julkaistu",
     "publishes": "julkaisee",
-    "taken": "otettu"
+    "taken": "otettu",
+    "setup": "kokoonpano"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9033,7 +9043,8 @@
     "price": "prix",
     "published": "publié",
     "publishes": "publie",
-    "taken": "pris"
+    "taken": "pris",
+    "setup": "configuration"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -9701,7 +9712,8 @@
     "price": "कीमत",
     "published": "प्रकाशित",
     "publishes": "प्रकाशित करता है",
-    "taken": "लिया गया"
+    "taken": "लिया गया",
+    "setup": "सेटअप"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -10585,7 +10597,8 @@
     "price": "cijena",
     "published": "objavljeno",
     "publishes": "objavljuje",
-    "taken": "uzeto"
+    "taken": "uzeto",
+    "setup": "konfiguracija"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -11471,7 +11484,8 @@
     "price": "ár",
     "published": "közzétéve",
     "publishes": "közzétesz",
-    "taken": "elszenvedett"
+    "taken": "elszenvedett",
+    "setup": "összeállítás"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -12352,7 +12366,8 @@
     "price": "prezzo",
     "published": "pubblicato",
     "publishes": "pubblica",
-    "taken": "subiti"
+    "taken": "subiti",
+    "setup": "configurazione"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -13240,7 +13255,8 @@
     "price": "価格",
     "published": "公開済み",
     "publishes": "公開",
-    "taken": "取得"
+    "taken": "取得",
+    "setup": "セットアップ"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -13912,7 +13928,8 @@
     "price": "баға",
     "published": "жарияланған",
     "publishes": "жариялайды",
-    "taken": "алынған"
+    "taken": "алынған",
+    "setup": "жинақтама"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -14805,7 +14822,8 @@
     "price": "가격",
     "published": "게시됨",
     "publishes": "게시함",
-    "taken": "받음"
+    "taken": "받음",
+    "setup": "세팅"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -15695,7 +15713,8 @@
     "price": "kaina",
     "published": "paskelbta",
     "publishes": "skelbia",
-    "taken": "paimta"
+    "taken": "paimta",
+    "setup": "sąranka"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -16569,7 +16588,8 @@
     "price": "cena",
     "published": "publicēts",
     "publishes": "publicē",
-    "taken": "paņemts"
+    "taken": "paņemts",
+    "setup": "konfigurācija"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -17459,7 +17479,8 @@
     "price": "prijs",
     "published": "gepubliceerd",
     "publishes": "publiceert",
-    "taken": "genomen"
+    "taken": "genomen",
+    "setup": "configuratie"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -18341,7 +18362,8 @@
     "price": "pris",
     "published": "publisert",
     "publishes": "publiserer",
-    "taken": "tatt"
+    "taken": "tatt",
+    "setup": "oppsett"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -19219,7 +19241,8 @@
     "price": "cena",
     "published": "opublikowano",
     "publishes": "publikuje",
-    "taken": "otrzymane"
+    "taken": "otrzymane",
+    "setup": "konfiguracja"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -20090,7 +20113,8 @@
     "price": "preço",
     "published": "publicado",
     "publishes": "publica",
-    "taken": "recebido"
+    "taken": "recebido",
+    "setup": "configuração"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -20961,7 +20985,8 @@
     "price": "preț",
     "published": "publicat",
     "publishes": "publică",
-    "taken": "primit"
+    "taken": "primit",
+    "setup": "configurație"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -21820,7 +21845,8 @@
     "price": "цена",
     "published": "опубликовано",
     "publishes": "публикует",
-    "taken": "получено"
+    "taken": "получено",
+    "setup": "сборка"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -22494,7 +22520,8 @@
     "price": "cena",
     "published": "zverejnené",
     "publishes": "zverejňuje",
-    "taken": "prijaté"
+    "taken": "prijaté",
+    "setup": "postavitev"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -23380,7 +23407,8 @@
     "price": "cena",
     "published": "objavljeno",
     "publishes": "objavljuje",
-    "taken": "uzeto"
+    "taken": "uzeto",
+    "setup": "konfiguracija"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -24270,7 +24298,8 @@
     "price": "pris",
     "published": "publicerad",
     "publishes": "publicerar",
-    "taken": "tagna"
+    "taken": "tagna",
+    "setup": "konfiguration"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -25156,7 +25185,8 @@
     "price": "ราคา",
     "published": "เผยแพร่แล้ว",
     "publishes": "เผยแพร่",
-    "taken": "ได้รับ"
+    "taken": "ได้รับ",
+    "setup": "การจัดชุด"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -25829,7 +25859,8 @@
     "price": "presyo",
     "published": "na-publish",
     "publishes": "nagpa-publish",
-    "taken": "natanggap"
+    "taken": "natanggap",
+    "setup": "configurasyon"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -26712,7 +26743,8 @@
     "price": "fiyat",
     "published": "yayınlandı",
     "publishes": "yayınlar",
-    "taken": "alınan"
+    "taken": "alınan",
+    "setup": "kurulum"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -27588,7 +27620,8 @@
     "price": "ціна",
     "published": "опубліковано",
     "publishes": "публікує",
-    "taken": "отримано"
+    "taken": "отримано",
+    "setup": "комплектація"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -28453,7 +28486,8 @@
     "price": "giá",
     "published": "đã đăng",
     "publishes": "đăng",
-    "taken": "đã lấy"
+    "taken": "đã lấy",
+    "setup": "cấu hình"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -29339,6 +29373,7 @@
     "price": "价格",
     "published": "已发布",
     "publishes": "发布",
-    "taken": "承受"
+    "taken": "承受",
+    "setup": "配置"
   }
 }

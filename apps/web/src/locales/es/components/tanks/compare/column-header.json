@@ -1,10 +1,12 @@
 {
+  "a-second-column-on-the-same": "Una segunda columna del mismo vehículo que lleva esta configuración, para cambiar un lado y comparar un lado contra el otro",
   "ammunition-equipment-consumables-directives-crew": "Munición, equipamiento, consumibles, directivas, tripulación y progresión de esta columna. Cada cambio desplaza sus características en la comparación que hay detrás.",
   "ammunition-equipment-crew-and-progression": "Munición, equipamiento, tripulación y progreso",
   "apply-to-every-column": "Aplicar a todas las columnas",
   "compare-against": "Comparar contra {tank}",
   "compare-the-others-against-this-one": "Comparar los demás contra este",
   "configure-tank": "Configurar {tank}",
+  "duplicate-tank": "Comparar {tank} contra sí mismo",
   "highest-overall-score": "Puntuación General más alta",
   "highest-overall-score-of-this": "Puntuación General más alta de esta comparación",
   "is-the-reference": "{tank} es la referencia",
@@ -13,8 +15,10 @@
   "remove-tank": "Eliminar {tank}",
   "reset-all": "Restablecer todo",
   "setup": "Configuración",
+  "setup-n": "Configuración {n}",
   "stock": "Stock",
   "tank-setup": "Configuración: {tank}",
+  "the-same-vehicle-under-a-setup": "El mismo vehículo con una configuración propia",
   "top": "Mejores",
   "where-this-vehicle-sits-across": "Posición de este vehículo en todo el catálogo, sobre {MAXSCORE}: la media de las puntuaciones de sus cuatro categorías, según la configuración elegida aquí. Es un resumen, no un veredicto: un ligero y un pesado pueden alcanzar la misma puntuación por rendir bien en aspectos distintos."
 }

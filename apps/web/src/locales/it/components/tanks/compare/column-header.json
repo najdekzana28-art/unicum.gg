@@ -1,10 +1,12 @@
 {
+  "a-second-column-on-the-same": "Una seconda colonna sullo stesso veicolo, con questa configurazione, per modificare un lato e confrontare i due",
   "ammunition-equipment-consumables-directives-crew": "Munizioni, equipaggiamento, consumabili, direttive, equipaggio e progressione per questa colonna. Ogni modifica aggiorna le relative caratteristiche nel confronto sottostante.",
   "ammunition-equipment-crew-and-progression": "Munizioni, equipaggiamento, equipaggio e progressione",
   "apply-to-every-column": "Applica a tutte le colonne",
   "compare-against": "Confronta contro {tank}",
   "compare-the-others-against-this-one": "Confronta gli altri contro questo",
   "configure-tank": "Configura {tank}",
+  "duplicate-tank": "Confronta {tank} con lo stesso veicolo",
   "highest-overall-score": "Punteggio complessivo più alto",
   "highest-overall-score-of-this": "Punteggio complessivo più alto di questo confronto",
   "is-the-reference": "{tank} è il riferimento",
@@ -13,8 +15,10 @@
   "remove-tank": "Rimuovi {tank}",
   "reset-all": "Ripristina tutto",
   "setup": "Setup",
+  "setup-n": "Configurazione {n}",
   "stock": "Stock",
   "tank-setup": "Configurazione di {tank}",
+  "the-same-vehicle-under-a-setup": "Lo stesso veicolo con una propria configurazione",
   "top": "Migliori",
   "where-this-vehicle-sits-across": "Posizione di questo veicolo nell’intero catalogo, su {MAXSCORE}: la media dei punteggi delle sue quattro categorie, in base alla configurazione impostata qui. È un riepilogo, non un verdetto: un veicolo da ricognizione e un carro pesante possono ottenere lo stesso punteggio eccellendo in ambiti diversi."
 }
