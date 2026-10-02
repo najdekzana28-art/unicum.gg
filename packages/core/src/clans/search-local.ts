@@ -1,4 +1,4 @@
-import { desc, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { clansByRegion } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -39,7 +39,16 @@ export async function searchClansLocal(
       emblem: clans.emblem,
     })
     .from(clans)
-    .where(sql`${clans.tagLower} like ${likePrefix(prefix)}`)
+    // Live clans only. A disbanded one keeps its row as an archive, but
+    // suggesting it is offering a page about a clan nobody can join, and when
+    // its freed tag has been taken by someone else the suggestion competes with
+    // the clan actually playing under that tag.
+    .where(
+      and(
+        eq(clans.isDisbanded, false),
+        sql`${clans.tagLower} like ${likePrefix(prefix)}`,
+      ),
+    )
     .orderBy(desc(clans.membersCount))
     .limit(limit);
 

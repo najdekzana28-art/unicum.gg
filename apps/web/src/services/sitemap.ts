@@ -98,7 +98,11 @@ export async function getSitemapCounts(): Promise<RegionCounts> {
       const [clans, players, tanks, tournaments] = await Promise.all([
         db
           .execute<{ count: string }>(
-            sql`SELECT COUNT(*)::text AS count FROM ${clansByRegion[region]}`,
+            // Live clans only, matching the stream's own filter: a disbanded
+            // clan keeps an archive page but it is deliberately not submitted
+            // for indexing, and the two halves have to agree or the index
+            // advertises sitemaps the paged route answers 404 for.
+            sql`SELECT COUNT(*)::text AS count FROM ${clansByRegion[region]} WHERE is_disbanded = false`,
           )
           .then((rows) => Number(rows[0]?.count ?? 0)),
         db

@@ -1,4 +1,4 @@
-import { asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
+import { and, asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
 import { clansByRegion } from "@unicum.gg/shared";
@@ -45,9 +45,12 @@ async function pickStaleForRegion(
   limit: number,
 ): Promise<{ clanIds: number[]; staleCount: number }> {
   const clans = clansByRegion[region];
-  const where = or(
-    isNull(clans.lastRefreshedAt),
-    lt(clans.lastRefreshedAt, cutoff),
+  // Disbanded clans are out: a WG clan id that has ended never comes back, so
+  // re-asking changes nothing, and they are 770 of the 160,380 clans we hold
+  // (584 EU, 137 NA, 49 Asia), each of which cost a slot of every sweep.
+  const where = and(
+    eq(clans.isDisbanded, false),
+    or(isNull(clans.lastRefreshedAt), lt(clans.lastRefreshedAt, cutoff)),
   );
   const [rows, [{ staleCount }]] = await Promise.all([
     db
@@ -92,8 +95,10 @@ export async function refreshDueClansForRegion(
     const info = infos.get(clanId);
     if (!info) {
       failed += 1;
-      // Bump lastRefreshedAt so a ghost clan goes to the back of the line
-      // instead of being picked up again on the next tick.
+      // Either the batch failed or the clan has ended. A disbanded one was
+      // already marked by `refreshClansByIdsBatch` and the `where` above will
+      // not pick it again, so this is only the back-of-the-line bump for a clan
+      // whose fetch failed.
       await db
         .update(clans)
         .set({ lastRefreshedAt: sql`NOW()` })

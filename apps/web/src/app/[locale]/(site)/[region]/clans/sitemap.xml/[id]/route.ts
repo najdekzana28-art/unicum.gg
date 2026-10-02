@@ -1,5 +1,5 @@
 import { generateSitemapXml } from "@onruntime/next-sitemap";
-import { asc } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import ROUTES from "@/constants/routes";
 import { db } from "@unicum.gg/core/db";
 import { clansByRegion } from "@unicum.gg/shared";
@@ -37,6 +37,12 @@ export async function GET(
       lastRefreshedAt: clans.lastRefreshedAt,
     })
     .from(clans)
+    // Live clans only. A disbanded clan keeps its page as an archive, reachable
+    // by every link that already points at it, but it is not submitted for
+    // indexing: it describes a clan that no longer exists, and its tag may
+    // since have been taken by one that does. The index's own count applies the
+    // same filter, or it would advertise pages this route 404s.
+    .where(eq(clans.isDisbanded, false))
     .orderBy(asc(clans.id))
     .offset(sitemapId * URLS_PER_SITEMAP)
     .limit(URLS_PER_SITEMAP);
