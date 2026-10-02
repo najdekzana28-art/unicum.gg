@@ -28,9 +28,44 @@ export type PortalClanMember = {
   d28: ClanMemberPeriodStats | null;
 };
 
+/**
+ * The clan's own record as the portal holds it.
+ *
+ * Worth modelling in full because this endpoint outlives the public API's answer
+ * for the same clan: `wot/clans/info` blanks every visible field once a clan is
+ * disbanded (empty `tag`, empty `name`, no emblems), while the portal keeps all
+ * of them. Measured on EU clan 500302081, disbanded, which the API returns with
+ * `tag: ""` and the portal with `tag: "04K0-"` and its full name.
+ */
+export type PortalClanRecord = {
+  id: number;
+  tag: string;
+  name: string;
+  color: string;
+  motto: string;
+  description: string;
+  raw_description: string;
+  members_count: number;
+  max_members_count: number;
+  /** ISO 8601 with no zone marker, and the instant is UTC: it matches the
+   * public API's `created_at` epoch to the second on clans created in both
+   * winter and summer, so the missing marker is an omission and not an offset. */
+  created_at: string;
+  is_disbanded: boolean;
+  recruiting_policy: string;
+  is_suited_for_autorecruiting: boolean;
+  /** Site-relative, e.g. `/clans/media/clans/emblems/cl_081/<id>/emblem_195x195.png`. */
+  huge_emblem_url: string | null;
+  large_emblem_url: string | null;
+  recruiting_restrictions?: { win_rate: number; battles_count: number };
+};
+
 /** Raw clan profile payload from the portal `claninfo` endpoint. */
 export type PortalClanProfile = {
-  clanview?: { profiles?: Array<{ type?: string; languages_list?: string[] }> };
+  clanview?: {
+    clan?: PortalClanRecord;
+    profiles?: Array<{ type?: string; languages_list?: string[] }>;
+  };
 };
 
 export type ClanRecentEvent = {
@@ -61,7 +96,9 @@ type PortalMemberRaw = {
   is_press: boolean;
 };
 
-function periodStatsFromRaw(raw: PortalMemberRaw): ClanMemberPeriodStats | null {
+function periodStatsFromRaw(
+  raw: PortalMemberRaw,
+): ClanMemberPeriodStats | null {
   if (
     raw.battles_count === null ||
     raw.wins_percentage === null ||
@@ -83,7 +120,10 @@ function periodStatsFromRaw(raw: PortalMemberRaw): ClanMemberPeriodStats | null 
 }
 
 type NewsfeedAdditional =
-  | { old_role: { rank: number; name: string; localized: string }; new_role: { rank: number; name: string; localized: string } }
+  | {
+      old_role: { rank: number; name: string; localized: string };
+      new_role: { rank: number; name: string; localized: string };
+    }
   | { transaction_id: number; joining_method: string }
   | { transaction_id: number; last_role_name: string };
 type NewsfeedItem = {
@@ -134,7 +174,10 @@ export class PortalClansResource {
     return this.t.portalFetch<PortalClanProfile>(this.region, url);
   }
 
-  async #timeframe(clanId: number, timeframe: "all" | "28"): Promise<PortalMemberRaw[]> {
+  async #timeframe(
+    clanId: number,
+    timeframe: "all" | "28",
+  ): Promise<PortalMemberRaw[]> {
     const url = new URL(
       `https://${REGION_PORTAL_HOST[this.region]}/clans/wot/${clanId}/api/players/`,
     );
@@ -143,10 +186,10 @@ export class PortalClansResource {
     url.searchParams.set("order", "-personal_rating");
     url.searchParams.set("timeframe", timeframe);
     url.searchParams.set("battle_type", "default");
-    const body = await this.t.portalFetch<{ status: string; items: PortalMemberRaw[] }>(
-      this.region,
-      url,
-    );
+    const body = await this.t.portalFetch<{
+      status: string;
+      items: PortalMemberRaw[];
+    }>(this.region, url);
     return body.items ?? [];
   }
 
@@ -171,7 +214,9 @@ export class PortalClansResource {
         // oriented like every other producer of this type.
         roleRank: clanRoleOrder(m.role.name),
         daysInClan: m.days_in_clan ?? 0,
-        lastBattleTime: m.last_battle_time ? new Date(m.last_battle_time * 1000) : null,
+        lastBattleTime: m.last_battle_time
+          ? new Date(m.last_battle_time * 1000)
+          : null,
         personalRating: m.personal_rating,
         overall: periodStatsFromRaw(m),
         d28: d28 ? periodStatsFromRaw(d28) : null,
@@ -190,11 +235,17 @@ export class PortalClansResource {
     const url = new URL(
       `https://${REGION_PORTAL_HOST[this.region]}/clans/wot/${clanId}/newsfeed/api/events/`,
     );
-    url.searchParams.set("date_until", new Date().toISOString().replace(/\.\d+Z$/, "+00:00"));
+    url.searchParams.set(
+      "date_until",
+      new Date().toISOString().replace(/\.\d+Z$/, "+00:00"),
+    );
     url.searchParams.set("offset", "0");
     let body: { items: NewsfeedItem[] };
     try {
-      body = await this.t.portalFetch<{ items: NewsfeedItem[] }>(this.region, url);
+      body = await this.t.portalFetch<{ items: NewsfeedItem[] }>(
+        this.region,
+        url,
+      );
     } catch {
       return [];
     }
@@ -208,7 +259,9 @@ export class PortalClansResource {
         continue;
       }
       const createdAt = parseNewsfeedDate(item.created_at);
-      for (const [accountIdStr, infos] of Object.entries(item.additional_info)) {
+      for (const [accountIdStr, infos] of Object.entries(
+        item.additional_info,
+      )) {
         const accountId = Number(accountIdStr);
         const accountInfo = item.accounts_info[accountIdStr] ?? {};
         for (const info of infos) {
@@ -228,7 +281,9 @@ export class PortalClansResource {
     }
     out.sort((a, b) => {
       const dt = b.createdAt.getTime() - a.createdAt.getTime();
-      return dt !== 0 ? dt : EVENT_TYPE_ORDER[b.type] - EVENT_TYPE_ORDER[a.type];
+      return dt !== 0
+        ? dt
+        : EVENT_TYPE_ORDER[b.type] - EVENT_TYPE_ORDER[a.type];
     });
     return out.slice(0, maxItems);
   }
