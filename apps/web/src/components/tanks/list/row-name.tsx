@@ -28,6 +28,11 @@ export function TankRowName({
   return (
     <Link
       href={ROUTES.TANK(region, tank.slug)}
+      // **A catalogue is a list of links, not a link.** A tank page is one of
+      // the heaviest on the site and the table puts dozens of them on screen,
+      // so prefetching on sight bought 930 KB of tank pages for the one row a
+      // reader opens. See `prefetch` in `@/components/link`.
+      prefetch="intent"
       className="flex items-center gap-2 hover:underline"
     >
       <TankIcon
