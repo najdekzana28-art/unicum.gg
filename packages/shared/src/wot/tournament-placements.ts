@@ -15,29 +15,46 @@ export type PlacementStage = {
 };
 
 /**
- * The range of places each stored position covers: `from` is the best place of
- * the tie and `to` its worst, so a place only one team holds has `from === to`.
+ * The range of places a stored position covers: `from` is the best place of the
+ * tie and `to` its worst, so a place only one team holds has `from === to`.
  *
- * A knockout records a NON-DENSE placement: everyone out in the same round ties,
- * so a 30-team bracket's stored places run 1, 2, 4, 4, 8, 8, 8, 8, 13... That is
- * the result, not a numbering bug, and renumbering them 1..n would invent a
- * ranking the tournament never decided.
- *
- * The stored number is the LOWEST place of the tie: the two beaten
- * semi-finalists take places 3 and 4 and are both recorded as 4. Wargaming
- * reads it that way too, banding its rewards as "3rd-4th place", "5th-8th
- * place". Checking it adds up is what catches an inverted span: 1 + 1 + 2 + 4 +
- * 5 + 17 covers exactly the 30 teams that entered.
- *
- * Shown, though, a tie takes its BEST place, which is how a ranking is normally
+ * Shown, a tie takes its BEST place, which is how a ranking is normally
  * written: two teams tied for third are both 3rd and the next one is 5th, not
- * "3-4" twice. So the stored 4 displays as 3, the stored 8 as 5, and so on.
- *
- * The worst place is kept rather than thrown away because it is what says how
- * far a tie reaches, and a reward band can only be claimed for a tie that fits
- * inside it.
+ * "3-4" twice. The worst place is kept rather than thrown away because it is
+ * what says how far a tie reaches, and a reward band can only be claimed for a
+ * tie that fits inside it.
  */
 export type PlaceSpan = { from: number; to: number };
+
+/**
+ * Whether a set of standings numbers its ties by their WORST place.
+ *
+ * A knockout does: everyone out in the same round ties, and a 30-team bracket
+ * stores 1, 2, 4, 4, 8, 8, 8, 8, 13... That is the result rather than a
+ * numbering bug, and renumbering it 1..n would invent a ranking the tournament
+ * never decided. The two beaten semi-finalists take places 3 and 4 and are both
+ * recorded as 4, which is how Wargaming reads it too, banding its rewards as
+ * "3rd-4th place" and "5th-8th place".
+ *
+ * A round robin does NOT. A league stage with three teams level at the top
+ * stores 1, 1, 1, 4, 4, 4, 4: the position IS the rank, already the best place
+ * of the tie. Asia's tournament 2000000490 is exactly that, and read as a
+ * knockout its four bottom teams came out sharing first place with the three
+ * that actually led it, each of them a gold medal on a profile page.
+ *
+ * Which one it is falls out of the numbers, so nothing has to be told: under
+ * the knockout convention the teams placed at or above any stored place number
+ * exactly that place. A field with no ties at all satisfies both readings and
+ * is numbered identically by either, so there is nothing to choose.
+ */
+function tiesAtWorstPlace(counts: Map<number, number>): boolean {
+  let covered = 0;
+  for (const place of [...counts.keys()].sort((a, b) => a - b)) {
+    covered += counts.get(place)!;
+    if (covered !== place) return false;
+  }
+  return true;
+}
 
 export function placeSpans(
   placements: Map<number, number>,
@@ -46,12 +63,22 @@ export function placeSpans(
   for (const place of placements.values()) {
     counts.set(place, (counts.get(place) ?? 0) + 1);
   }
+  // Standings that answer to neither convention are read as ranks, which is the
+  // reading that never moves a team UP: inventing a place is the failure that
+  // reaches a reader as a medal, and a team shown at the number its own
+  // tournament recorded cannot be wrong about more than its ties.
+  const worst = tiesAtWorstPlace(counts);
   const spans = new Map<number, PlaceSpan>();
   for (const [place, held] of counts) {
-    // Floored at 1: a tie can only run back to first, and a caller that hands in
-    // per-group standings (several teams recorded as 1st) would otherwise
-    // produce a place of zero or less.
-    spans.set(place, { from: Math.max(1, place - held + 1), to: place });
+    spans.set(
+      place,
+      // Floored on the knockout side all the same: the convention check makes
+      // it unreachable, and a place of zero is the one answer no caller can do
+      // anything sensible with.
+      worst
+        ? { from: Math.max(1, place - held + 1), to: place }
+        : { from: place, to: place + held - 1 },
+    );
   }
   return spans;
 }
@@ -109,6 +136,25 @@ export function finalPlacements(
       .filter((s) => s.position !== null)
       .map((s) => [s.teamId, s.position!]),
   );
+
+  // A stage that separated nobody placed nobody, and Wargaming leaves two kinds
+  // of those behind. A bracket drawn and never played stores every team at the
+  // place its first match would have decided and nobody at first: Asia's
+  // "Tuesday's 1v1 Tier V" of 12 July 2022 has eleven teams in its HK playoff,
+  // eight recorded at 8 and three at 11. A round robin nobody played stores its
+  // whole field level at the top: the HK stage of Asia's 2000001168 has six
+  // teams, all of them 1st. Read as finishing orders, which is what they look
+  // like, the first hands eight teams a share of first place and the second
+  // hands it to six, each one a gold medal beside a profile whose winner's
+  // crest refuses it.
+  //
+  // So an order has to put somebody first and has to tell somebody apart.
+  // Refused here rather than downstream, because by then it is indistinguishable
+  // from a result, and refused for every reader of this rule at once. Those
+  // teams are left unplaced rather than placed wrongly, which is the honest
+  // reading of a bracket nobody played.
+  const distinct = new Set(placed.values());
+  if (!distinct.has(1) || distinct.size < 2) return [];
 
   if (decider) {
     // The tie runs from `shared - n + 1` to `shared`, since a stored place is
