@@ -42,5 +42,6 @@ export * from "./subscription";
 export * from "./streamers";
 export * from "./game-links";
 export * from "./server-online";
+export * from "./player-activity";
 export * from "./player-distribution";
 export * from "./tier-winrate";

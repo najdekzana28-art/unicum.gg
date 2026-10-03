@@ -9,6 +9,7 @@ export * from "./ratings";
 export * from "./onslaught-ranks";
 export * from "./server-online";
 export * from "./server-stats";
+export * from "./player-activity";
 export * from "./player-distribution";
 export * from "./tier-winrate";
 export * from "./tank-ratings";
