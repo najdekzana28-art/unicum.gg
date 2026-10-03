@@ -66,13 +66,6 @@ async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
  * and the specs derived from them): server stats, marks and top players stay on
  * the region's live client, because a test server has no players to measure.
  */
-/**
- * The one vehicle the markup names its files for, while that is being proven.
- *
- * Empty string lifts the gate and gives it to the whole catalogue.
- */
-const FIRST_PAINT_VEHICLE = "G56_E-100";
-
 export async function assembleTankDetail(
   region: Region,
   slug: string,
@@ -149,25 +142,10 @@ export async function assembleTankDetail(
     // rather than left to the viewer, which has only the geometry mirror to go
     // on and that mirror answers with a wardrobe either way.
     safe(() => getTankPaintLock(region, tankId, branch), null as PaintLock | null),
-    // The files the hero's first picture is made of, named here so the page can
-    // ask for them in its markup. The viewer works all of this out for itself,
-    // but only once its own JavaScript has arrived and React has handed it a
-    // canvas: measured, the first byte of geometry was asked for a second after
-    // the HTML had landed. Named in the markup instead, the browser fetches
-    // them while it is still parsing, and the viewer finds them waiting.
-    //
-    // **One vehicle, until it is proven in the open.** This shipped once and
-    // came back: the addresses were raised as preload hints, React carries
-    // those in the payload and replays them the moment it arrives, and Next
-    // prefetches the payload of every link in view, so each page quietly pulled
-    // its four tech-tree neighbours as well. Twenty megabytes against three.
-    // The fix is to render the addresses as elements instead, which do nothing
-    // until the route they belong to is rendered, and it cannot be verified
-    // anywhere but in production: Next does not prefetch in development. So it
-    // goes out on one tank, is measured there, and the gate comes off.
-    meta.tag === FIRST_PAINT_VEHICLE
-      ? safe(() => getVehicleFirstPaint(meta.tag, branch), null)
-      : null,
+    // Which build of the mirror the hero should read this vehicle at, so it
+    // uses the one this payload was resolved against instead of resolving its
+    // own and downloading everything a second time.
+    safe(() => getVehicleFirstPaint(meta.tag, branch), null),
   ]);
 
   // The crests, folded into the payload rather than attached per request: this

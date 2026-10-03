@@ -12,7 +12,6 @@ import {
   loadTankDetail,
   loadTankVideos,
 } from "@/app/[locale]/(site)/[region]/tanks/[slug]/detail";
-import { VehicleFirstPaint } from "@/components/tanks/detail/viewer/first-paint";
 import { heroShells } from "@/components/tanks/detail/viewer/shell-rules";
 
 /**
@@ -63,11 +62,6 @@ export default async function TankLayout({
 
   return (
     <>
-      {/* Named before anything else in the markup, since what it is worth is
-          entirely how early the browser reads it. Defaulted like the fields
-          above: the payload is cached for a day and served by an API that can
-          be a deploy behind this render. */}
-      <VehicleFirstPaint model={detail.model ?? null} />
       <JsonLd
         data={tankSchema({
           name: meta.name,

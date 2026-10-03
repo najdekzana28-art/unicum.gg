@@ -214,7 +214,7 @@ export const TankDetailResponse = z
       .object({
         root: z.string().meta({
           description:
-            "The build of the geometry mirror this vehicle should be read at, as a CDN root pinned to a commit. The viewer uses this one rather than resolving a build of its own: the addresses below are pinned to it, and two answers that drift apart mean the vehicle is downloaded twice.",
+            "The build of the geometry mirror this vehicle should be read at, as a CDN root pinned to a commit. The viewer uses this one rather than resolving a build of its own: two answers that drift apart mean the vehicle is downloaded twice.",
         }),
         path: z.string().meta({
           description:
@@ -224,19 +224,11 @@ export const TankDetailResponse = z
           description:
             "The 3D style this vehicle is issued already wearing, where it is issued one. Most reward vehicles ship no geometry of their own, so `path` points at the tank underneath and this is the rest of the answer.",
         }),
-        geometry: z.array(z.string()).meta({
-          description:
-            "The vehicle's meshes, as absolute URLs on the geometry mirror, pinned to the build they were read at.",
-        }),
-        textures: z.array(z.string()).meta({
-          description:
-            "The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it.",
-        }),
       })
       .nullable()
       .meta({
         description:
-          "Everything the 3D hero reads before it can draw, so a page can ask for it in its markup rather than waiting for the viewer's own JavaScript to work it out. Null for a vehicle the geometry mirror does not carry, which is drawn from a photograph.",
+          "Which build of the geometry mirror the 3D hero should read this vehicle at, so it uses the one this payload was resolved against instead of resolving its own. Two answers that drift apart mean the vehicle is downloaded twice. Null for a vehicle the mirror does not carry, which is drawn from a photograph.",
       }),
   })
   .meta({

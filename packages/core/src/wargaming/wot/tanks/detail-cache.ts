@@ -65,12 +65,16 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  *     read the same one. v21 shipped without it and was reverted, which is why
  *     this is a new number rather than a correction of that one: entries from
  *     it are still in Redis and carry only half the block.
- * v23: the same block, now given to one vehicle at a time while the way it is
- *     emitted is proven. A new number for the same reason again: v22 entries
- *     written while this was unrestricted are still in Redis, and served under
- *     that key they would hand the block to vehicles the gate excludes.
+ * v23: the same block, given to one vehicle while the way it was emitted was
+ *     tried in the open. It failed, so v24 drops the file lists it carried and
+ *     keeps only the build: an address in the payload is acted on the moment
+ *     the payload arrives, and Next prefetches the payload of every link in
+ *     view, so naming files there pulled a neighbour's whole vehicle.
+ * v24: the build alone. Entries from v23 carry the lists and would be served
+ *     under their own key, which is why this is a new number rather than a
+ *     correction.
  */
-const SHAPE_VERSION = 23;
+const SHAPE_VERSION = 24;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

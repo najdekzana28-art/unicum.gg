@@ -1,11 +1,9 @@
 import {
   MODELS_BRANCH,
   MODELS_REPO,
-  firstPaintFiles,
   MIRROR_SKIN_FOLDER,
   modelsCdn,
   modelUrl,
-  type MirrorModel,
   type WotSrcBranch,
   modelsRefFor,
 } from "@unicum.gg/wargaming";
@@ -109,31 +107,23 @@ export function getModelsMirror(branch?: WotSrcBranch): Promise<MirrorBuild> {
 }
 
 /**
- * How long a vehicle's first-paint list is held.
+ * Which build of the mirror a vehicle should be read at, and where it sits.
  *
- * Keyed by the build it was read at, so what it names can never change: what
- * expires is only our willingness to keep it, and a build that moves on writes
- * under a different key anyway.
- */
-const FIRST_PAINT_SECONDS = 24 * 60 * 60;
-
-/** How long the mirror is given to answer for one manifest. */
-const MANIFEST_PATIENCE_MS = 5000;
-
-/**
- * One build of the mirror, and everything the hero reads out of it.
+ * **One answer, so the page and the viewer cannot name two.** They did: the
+ * page resolved a build while assembling a payload cached for a day, the viewer
+ * resolved its own through a ten minute entry, and the commit is part of every
+ * path under the root. For most of the day they named different ones and the
+ * vehicle came down twice, 10.4 MB on the wire for 5.2 MB of tank.
  *
- * **One answer, carried whole.** The preload in the markup and the viewer that
- * uses it have to name the same build, and the only way to be sure of that is
- * for there to be a single answer rather than two that agree. They were two:
- * the page froze the build into a payload cached for a day while the viewer
- * re-resolved it every ten minutes, so for most of the day they named different
- * commits, the commit is part of the path, and the vehicle came down twice.
- * Measured on the T-54: 10.4 MB on the wire for 5.2 MB of tank.
+ * So the build travels with the vehicle. A page served from an older cache
+ * entry simply draws an older build, which is complete and immutable.
  *
- * So the build travels with the addresses. A page served from an older cache
- * entry simply draws an older build of the mirror, which is complete, immutable
- * and exactly what its own preloads point at.
+ * **It deliberately names no files.** Naming them in the markup is what the
+ * hero would gain most from, and it cannot be done from here: an address in the
+ * payload, raised as a hint or rendered as an element, is acted on the moment
+ * the payload reaches the browser, and Next prefetches the payload of every
+ * link in view. Measured on the live site: opening the E 75 pulled the whole of
+ * the E 100 because its page is one link away. Both forms were tried.
  */
 export type VehicleFirstPaint = {
   /** The root the viewer should read, pinned to the build this was resolved at. */
@@ -142,30 +132,13 @@ export type VehicleFirstPaint = {
   path: string;
   /** The style it is issued wearing, where it is issued one. */
   worn: string | null;
-  /** The geometry, which a viewer pulls through `fetch`. */
-  geometry: string[];
-  /** The maps it wears, which arrive as images. */
-  textures: string[];
 };
 
 /**
- * Where to find everything the hero draws before it draws anything.
- *
- * **Read from the folder the vehicle is actually drawn from.** A vehicle issued
- * wearing a 3D style ships no geometry of its own worth drawing: the index
- * points at the tank underneath and the viewer builds from
- * `<tank>/_skins/<style>/`, a different set of meshes and a different set of
- * maps. Naming the tank's own files for those thirty-seven vehicles would
- * preload a complete second vehicle that is never drawn, which is worse than
- * naming nothing at all.
- *
- * **Absolute, because the caller is markup rather than code.** What reads this
- * puts the addresses in a `<link rel="preload">` and has no business rebuilding
- * a path from a root and a folder, and an address assembled twice is an address
- * that can differ twice.
+ * The build the hero should read this vehicle at.
  *
  * Null for a vehicle the mirror does not carry, which is drawn from a
- * photograph and has nothing to fetch.
+ * photograph and has nothing to read.
  */
 export async function getVehicleFirstPaint(
   code: string,
@@ -175,42 +148,9 @@ export async function getVehicleFirstPaint(
   const { sha, vehicles, worn } = await getModelsMirror(branch);
   const path = vehicles[code];
   if (!path) return null;
-  // Pinned to the commit the index was read at, so the manifest, the files it
-  // names and the preload that names them all describe one build.
-  const root = sha ? modelsCdn(sha) : modelsCdn(ref);
-  const dressed = worn[code] ?? null;
-  const folder = dressed ? `${path}/${MIRROR_SKIN_FOLDER}/${dressed}` : path;
-
-  // **The derived list is cached, not the manifest it came from.** A manifest is
-  // seventy kilobytes and what survives reading it is about two: held whole, a
-  // sweep of the catalogue would write tens of megabytes into a two gigabyte
-  // store shared with the page cache, which this project has filled once
-  // already.
-  const files = await cachedInRedis<{ geometry: string[]; textures: string[] } | null>(
-    `models:firstpaint:${sha ?? ref}:${folder}`,
-    (held) => (held ? FIRST_PAINT_SECONDS : 60),
-    async () => {
-      try {
-        const r = await fetch(`${root}/vehicles/${folder}/model.json`, {
-          // Every other outbound fetch in here carries one. Without it a mirror
-          // that accepts the connection and never answers hangs the tank detail
-          // endpoint with it, since this sits inside its assembly.
-          signal: AbortSignal.timeout(MANIFEST_PATIENCE_MS),
-        });
-        if (!r.ok) return null;
-        return firstPaintFiles((await r.json()) as MirrorModel);
-      } catch {
-        return null;
-      }
-    },
-  );
-  if (!files) return null;
   return {
-    root,
+    root: sha ? modelsCdn(sha) : modelsCdn(ref),
     path,
-    worn: dressed,
-    geometry: files.geometry.map((at) => `${root}/vehicles/${folder}/${at}`),
-    // Already mirror-relative, in a skin's manifest as in a vehicle's own.
-    textures: files.textures.map((at) => `${root}/${at}`),
+    worn: worn[code] ?? null,
   };
 }
