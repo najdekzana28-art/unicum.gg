@@ -25,6 +25,7 @@ import {
 } from "@unicum.gg/shared/constants/stronghold";
 import { MarkWindow } from "@unicum.gg/shared/players/mark-progress";
 import { SessionGranularity } from "@unicum.gg/shared/players/sessions";
+import { ActivityWindow } from "@unicum.gg/shared/wot/player-activity";
 import { ServerStatsRange } from "@unicum.gg/shared/wot/server-stats";
 import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
 import { TankClient } from "@unicum.gg/shared/wot/tanks/common-test";
@@ -106,6 +107,7 @@ export const OPENAPI_ENUM_SOURCES = {
   SESSION_GRANULARITY: Object.values(SessionGranularity),
   MARK_WINDOW: Object.values(MarkWindow),
   SERVER_STATS_RANGE: Object.values(ServerStatsRange),
+  ACTIVITY_WINDOW: Object.values(ActivityWindow),
   VEHICLE_TYPE: Object.values(VehicleType),
   FEEDBACK_TOPIC: Object.values(FeedbackTopic),
   FEEDBACK_SENTIMENT: Object.values(FeedbackSentiment),

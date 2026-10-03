@@ -13,6 +13,8 @@ import {
   RatingConsensus,
   RatingMetric,
   ReviewOutcome,
+  ActivityWindow,
+  DEFAULT_ACTIVITY_WINDOW,
   ServerStatsRange,
   SessionGranularity,
   SpawnDirection,
@@ -92,6 +94,26 @@ export const playerSessionsQuery = z.object({
  * doc's defaults and examples are keyed by parameter name across the whole API,
  * so two endpoints sharing a name would have to share its default too.
  */
+/** Which window `/{region}/players/activity` measures over. Named `window`
+ * rather than `period` or `range`, both of which this API already owns with
+ * different value sets (the leaderboards' `period` carries an `overall` that is
+ * a career rather than a span, and `range` is how far back a series reads, which
+ * here is a separate axis from how far back "active" looks). */
+export const playerActivityQuery = z.object({
+  // `.optional()` here at the use site, never folded into the field: the
+  // generator reads these off the AST, so optionality baked in elsewhere comes
+  // out `required: true` and documents a window a caller must send. The doc's
+  // default comes from `QUERY_PARAM_DEFAULTS`, since `.default()` is not
+  // serialised either.
+  window: z
+    .enum(ActivityWindow)
+    .optional()
+    .meta({
+      description: "How far back an account counts as active.",
+      "x-enum-source": "ACTIVITY_WINDOW",
+    } as EnumMeta),
+});
+
 export const serverStatsQuery = z.object({
   range: z.enum(ServerStatsRange).default(ServerStatsRange.Day).meta({
     description: "How far back the population series reads.",
@@ -544,6 +566,7 @@ export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
   metric: DEFAULT_RATING_METRIC,
   granularity: SessionGranularity.Daily,
   range: ServerStatsRange.Day,
+  window: DEFAULT_ACTIVITY_WINDOW,
   client: TankClient.Live,
   limit: String(TOURNAMENTS_PAGE_SIZE),
   offset: "0",
