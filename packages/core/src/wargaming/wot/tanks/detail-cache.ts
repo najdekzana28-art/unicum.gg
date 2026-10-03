@@ -73,8 +73,11 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  * v24: the build alone. Entries from v23 carry the lists and would be served
  *     under their own key, which is why this is a new number rather than a
  *     correction.
+ * v25: the lists again, for a third way of emitting them: an inline script,
+ *     which a prefetch fetches without running. A new number because v24
+ *     entries carry only the build.
  */
-const SHAPE_VERSION = 24;
+const SHAPE_VERSION = 25;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

@@ -1,9 +1,11 @@
 import {
   MODELS_BRANCH,
   MODELS_REPO,
+  firstPaintFiles,
   MIRROR_SKIN_FOLDER,
   modelsCdn,
   modelUrl,
+  type MirrorModel,
   type WotSrcBranch,
   modelsRefFor,
 } from "@unicum.gg/wargaming";
@@ -132,10 +134,23 @@ export type VehicleFirstPaint = {
   path: string;
   /** The style it is issued wearing, where it is issued one. */
   worn: string | null;
+  /** The geometry, which a viewer pulls through `fetch`. */
+  geometry: string[];
+  /** The maps it wears, which arrive as images. */
+  textures: string[];
 };
 
 /**
- * The build the hero should read this vehicle at.
+ * How long a vehicle's first-paint list is held. Keyed by the build it was read
+ * at, so what it names can never change.
+ */
+const FIRST_PAINT_SECONDS = 24 * 60 * 60;
+
+/** How long the mirror is given to answer for one manifest. */
+const MANIFEST_PATIENCE_MS = 5000;
+
+/**
+ * The build the hero should read this vehicle at, and the files it opens on.
  *
  * Null for a vehicle the mirror does not carry, which is drawn from a
  * photograph and has nothing to read.
@@ -148,9 +163,37 @@ export async function getVehicleFirstPaint(
   const { sha, vehicles, worn } = await getModelsMirror(branch);
   const path = vehicles[code];
   if (!path) return null;
+  const root = sha ? modelsCdn(sha) : modelsCdn(ref);
+  const dressed = worn[code] ?? null;
+  const folder = dressed ? `${path}/${MIRROR_SKIN_FOLDER}/${dressed}` : path;
+  // **The derived list is cached, not the manifest it came from.** A manifest
+  // is seventy kilobytes and what survives reading it is about two: held whole,
+  // a sweep of the catalogue would write tens of megabytes into a two gigabyte
+  // store shared with the page cache, which this project has filled once.
+  const files = await cachedInRedis<{ geometry: string[]; textures: string[] } | null>(
+    `models:firstpaint:${sha ?? ref}:${folder}`,
+    (held) => (held ? FIRST_PAINT_SECONDS : 60),
+    async () => {
+      try {
+        const r = await fetch(`${root}/vehicles/${folder}/model.json`, {
+          // Every other outbound fetch in here carries one, and this sits
+          // inside the tank detail assembly: a mirror that accepts the
+          // connection and never answers would hang the endpoint with it.
+          signal: AbortSignal.timeout(MANIFEST_PATIENCE_MS),
+        });
+        if (!r.ok) return null;
+        return firstPaintFiles((await r.json()) as MirrorModel);
+      } catch {
+        return null;
+      }
+    },
+  );
   return {
-    root: sha ? modelsCdn(sha) : modelsCdn(ref),
+    root,
     path,
-    worn: worn[code] ?? null,
+    worn: dressed,
+    geometry: (files?.geometry ?? []).map((at) => `${root}/vehicles/${folder}/${at}`),
+    // Already mirror-relative, in a skin's manifest as in a vehicle's own.
+    textures: (files?.textures ?? []).map((at) => `${root}/${at}`),
   };
 }

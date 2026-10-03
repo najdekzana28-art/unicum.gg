@@ -12,6 +12,7 @@ import {
   loadTankDetail,
   loadTankVideos,
 } from "@/app/[locale]/(site)/[region]/tanks/[slug]/detail";
+import { VehicleFirstPaint } from "@/components/tanks/detail/viewer/first-paint";
 import { heroShells } from "@/components/tanks/detail/viewer/shell-rules";
 
 /**
@@ -62,6 +63,12 @@ export default async function TankLayout({
 
   return (
     <>
+      {/* Only this one while the way it is emitted is being proven: the two
+          previous forms both reached readers who never opened the page, and
+          each answer cost one page rather than the catalogue. */}
+      {meta.tag === "G56_E-100" ? (
+        <VehicleFirstPaint model={detail.model ?? null} />
+      ) : null}
       <JsonLd
         data={tankSchema({
           name: meta.name,

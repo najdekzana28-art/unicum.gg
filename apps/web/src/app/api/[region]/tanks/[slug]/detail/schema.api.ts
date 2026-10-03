@@ -224,6 +224,14 @@ export const TankDetailResponse = z
           description:
             "The 3D style this vehicle is issued already wearing, where it is issued one. Most reward vehicles ship no geometry of their own, so `path` points at the tank underneath and this is the rest of the answer.",
         }),
+        geometry: z.array(z.string()).meta({
+          description:
+            "The vehicle's meshes, as absolute URLs on the build above. Empty when the mirror would not answer for its manifest, which costs the head start and nothing else.",
+        }),
+        textures: z.array(z.string()).meta({
+          description:
+            "The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it.",
+        }),
       })
       .nullable()
       .meta({
