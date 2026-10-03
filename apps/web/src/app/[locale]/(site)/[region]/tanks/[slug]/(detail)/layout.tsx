@@ -63,12 +63,11 @@ export default async function TankLayout({
 
   return (
     <>
-      {/* Only this one while the way it is emitted is being proven: the two
-          previous forms both reached readers who never opened the page, and
-          each answer cost one page rather than the catalogue. */}
-      {meta.tag === "G56_E-100" ? (
-        <VehicleFirstPaint model={detail.model ?? null} />
-      ) : null}
+      {/* Named before anything else in the markup, since what it is worth is
+          entirely how early the browser reads it. Defaulted like the fields
+          below: the payload is cached for a day and served by an API that can
+          be a deploy behind this render. */}
+      <VehicleFirstPaint model={detail.model ?? null} />
       <JsonLd
         data={tankSchema({
           name: meta.name,
