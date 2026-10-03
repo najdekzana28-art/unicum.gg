@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import { cn } from "@/lib/utils";
+import { HERO_COLUMN } from "@/components/tanks/detail/viewer/column";
 import type { RefObject } from "react";
 import type { MediaPlayerInstance } from "@vidstack/react";
 import { youtubeWatchUrl } from "@unicum.gg/shared";
@@ -378,6 +379,14 @@ export function TankVideoPlayerProvider({
  * edges of the screen. It takes the video's shape instead, growing by the
  * difference. Its children stay server-rendered: they come through as
  * `children`, so this only decides the box.
+ *
+ * **And it keeps to the page's column while it does.** The band bleeds to the
+ * window because the studio is a room the vehicle stands in, which stops being
+ * true the moment a recording covers it: a video is something to read, like the
+ * title and the panels under it, so it belongs where they are. Shrinking the
+ * box rather than the player is what makes the height right as well as the
+ * width, since the aspect is then taken against the column's 1280 and not
+ * against the window, where a wide screen gave the hero a 900px band to fill.
  */
 export function TankHero({
   className,
@@ -395,7 +404,7 @@ export function TankHero({
         // Repeated at both breakpoints on purpose: the base classes set the
         // aspect under `sm:`, and tailwind-merge only drops a class the
         // override actually matches.
-        player?.current && "aspect-video min-h-0 sm:aspect-video",
+        player?.current && `${HERO_COLUMN} aspect-video min-h-0 sm:aspect-video`,
       )}
     >
       {children}
