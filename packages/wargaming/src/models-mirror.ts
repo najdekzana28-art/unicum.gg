@@ -14,6 +14,14 @@ export const MODELS_REPO = "unicum-gg/wot.models";
  * the geometry does not differ between them. */
 export const MODELS_BRANCH = "WG";
 
+/**
+ * The folder a vehicle keeps its 3D styles in, one full set of pieces per name.
+ *
+ * A vehicle issued wearing a style is drawn entirely from here rather than from
+ * its own folder, so anything naming the files of such a vehicle has to know it.
+ */
+export const MIRROR_SKIN_FOLDER = "_skins";
+
 /** The Common Test branch, where a vehicle's model exists weeks before it does
  * anywhere else. */
 export const MODELS_BRANCH_CT = "WG_CT";

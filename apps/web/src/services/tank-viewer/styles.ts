@@ -30,7 +30,10 @@ let named: Promise<Record<string, SkinFace>> | null = null;
  * viewer: a style is reached exactly the way the vehicle is, from one folder
  * deeper.
  */
-export const SKIN_FOLDER = "_skins";
+// One definition, in the package that models the mirror's layout: the server
+// names a worn vehicle's files too, and a folder spelled twice is a folder that
+// can be spelled differently twice.
+export { MIRROR_SKIN_FOLDER as SKIN_FOLDER } from "@unicum.gg/wargaming";
 
 /** A vehicle the mirror has no wardrobe for: offered nothing, tuned nothing. */
 const BARE: MirrorStylePatch = { offers: [], tiling: [] };

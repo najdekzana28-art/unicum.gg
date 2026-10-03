@@ -37,15 +37,29 @@ const CEILING = 80;
  * build that follows fetches the same files for real with its own error
  * handling. A style whose warming failed is simply warmed again next time.
  */
-export async function warmSkin(code: string, folder: string): Promise<void> {
+export async function warmSkin(
+  code: string,
+  folder: string,
+  /**
+   * The build the page pinned, where it pinned one.
+   *
+   * **It has to be the build the click will read, not a build of our own.** The
+   * commit is part of every path under the root, so warming at one and building
+   * at another means every byte pulled on the hover is pulled again on the
+   * click: the whole point of the hover, spent, and the style downloaded in
+   * full anyway.
+   */
+  pinned?: { root: string; path: string } | null,
+): Promise<void> {
   const key = `${code}/${folder}`;
   if (warmed.has(key)) return;
   warmed.add(key);
   try {
-    const { root, vehicles } = await mirror();
-    const at = vehicles[code];
-    if (!at) return;
-    const base = `${root}/vehicles/${at}/${SKIN_FOLDER}/${folder}`;
+    const resolved = pinned
+      ? { root: pinned.root, at: pinned.path }
+      : await mirror().then((m) => ({ root: m.root, at: m.vehicles[code] }));
+    if (!resolved.at) return;
+    const base = `${resolved.root}/vehicles/${resolved.at}/${SKIN_FOLDER}/${folder}`;
     const answer = await fetch(`${base}/model.json`);
     if (!answer.ok) return;
     const model = (await answer.json()) as MirrorModel;
@@ -58,7 +72,7 @@ export async function warmSkin(code: string, folder: string): Promise<void> {
     // fetching both would double a hover for a picture nobody asked for.
     for (const material of model.materials ?? []) {
       for (const texture of Object.values(material.textures ?? {})) {
-        if (texture?.path) files.add(`${root}/${texture.path}`);
+        if (texture?.path) files.add(`${resolved.root}/${texture.path}`);
       }
     }
     for (const file of [...files].slice(0, CEILING)) {
