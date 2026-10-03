@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Podíl pásma se měří vůči účtům, které jsme přečetli v okně, nikoli vůči všem účtům, které udržujeme. U účtu, který jsme nedávno nekontrolovali, nevíme, zda je neaktivní, a jeho započítání by popisovalo spíše naše tempo obnovování než hráče. Toto slepé místo představuje na horním konci stupnice 4 ze 100 účtů a na dolním konci 13 ze 100. Bitvy za účet představují průměr pro účty, které hrály, a započítávají se pouze ty, u kterých máme záznam před i po, což představuje 96 až 99 ze sta.",
+  "band": "Pásmo",
+  "battles-each": "Bitvy za",
+  "chart-label": "Podíl každého pásma hodnocení {label}, ve kterém se hrálo, podle dnů",
+  "how-it-has-moved": "Jak se to přesunulo",
+  "metric-band": "Pásmo metriky {metric}",
+  "nothing-recorded": "Proti metrice {metric} zatím není zaznamenáno nic. Časová řada se zapisuje každou hodinu.",
+  "of-observed-accounts": "z {observed} pozorovaných účtů, {blind} nezkontrolovaných",
+  "played-in-window": "Odehráno za poslední {window}",
+  "region-wide-rate": "{rate} napříč všemi pásmy",
+  "series-just-started": "Zatím je zaznamenán pouze jeden den, takže ještě není možné vykreslit křivku. Historie začíná v okamžiku, kdy začalo zaznamenávání, a roste po jednom dni. Oba údaje se měří zpětně od okamžiku, kdy se zobrazí, takže den, který nebyl zaznamenán, už žádné pozdější spuštění nedokáže doplnit.",
+  "who-still-plays": "Kdo stále hraje na serveru {label}"
+}

@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Luokan osuus mitataan ikkunan aikana luettujen tilien perusteella, ei kaikkien hallussamme olevien tilien perusteella: tiliä, jota ei ole äskettäin tarkistettu, ei tiedetä toimettomaksi, ja sen laskeminen sellaiseksi kuvaisi pelaajien sijaan meidän päivitystahtiamme. Tämä sokea piste on asteikon yläpäässä 4 tiliä sadasta ja alapäässä 13 tiliä sadasta. Taistelua kussakin on niiden tilien keskiarvo, jotka pelasivat, ja mukaan lasketaan vain ne tilit, joista meillä on tiedot ennen ja jälkeen. Näitä on 96:sta 99:ään sadasta.",
+  "band": "Luokka",
+  "battles-each": "Taistelua kussakin",
+  "chart-label": "Kunkin {label}-arvosanaluokan pelanneiden osuus päivittäin",
+  "how-it-has-moved": "Miten se on siirretty",
+  "metric-band": "{metric}-luokka",
+  "nothing-recorded": "Mittarille {metric} ei ole vielä tallennettu mitään. Sarja kirjoitetaan tunnittain.",
+  "of-observed-accounts": "{observed} nähtyä, {blind} tarkistamatta",
+  "played-in-window": "Pelatut {window} tarkastelujaksolla",
+  "region-wide-rate": "{rate} yli kaikkien luokkien",
+  "series-just-started": "Toistaiseksi on tallennettu vain yksi päivä, joten käyrää ei vielä voi piirtää. Historia alkaa tallennuksen aloituksesta ja kasvaa päivä kerrallaan: molemmat luvut mitataan taaksepäin siitä hetkestä, kun ne luetaan, joten tallentamatta jäänyt päivä on päivä, jota mikään myöhempi ajo ei voi enää hakea takaisin.",
+  "who-still-plays": "Ketkä vielä pelaavat palvelimella {label}"
+}

@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Het aandeel van een band wordt gemeten tegenover de accounts die we binnen het venster lezen, niet tegenover elk account dat we vasthouden. Van een account dat onlangs niemand heeft gecontroleerd, weten we niet of het inactief is. Het als zodanig meetellen zou eerder ons eigen vernieuwtempo beschrijven dan de spelers. Die blinde vlek bedraagt 4 op 100 accounts aan de bovenkant van de schaal en 13 op 100 aan de onderkant. Gevechten per is het gemiddeld voor de accounts die wel speelden, en telt alleen de accounts mee waarvoor we een waarde vóór en na vasthouden. Dat zijn 96 tot 99 van elke honderd.",
+  "band": "Band",
+  "battles-each": "Gevechten per",
+  "chart-label": "Aandeel van elke {label}-beoordelingsband dat per dag speelde",
+  "how-it-has-moved": "Hoe het is verplaatst",
+  "metric-band": "Band voor {metric}",
+  "nothing-recorded": "Niets geregistreerd voor {metric} tot nu toe. De reeks wordt elk uur geschreven.",
+  "of-observed-accounts": "van de {observed} waargenomen accounts, {blind} niet gecontroleerd",
+  "played-in-window": "Gespeeld in de afgelopen {window}",
+  "region-wide-rate": "{rate} over elke band",
+  "series-just-started": "Er is tot nu toe één dag geregistreerd, dus er is nog geen curve om te tekenen. De geschiedenis begint wanneer de registratie begon en groeit dag voor dag. Beide cijfers worden terug gerekend vanaf het moment waarop ze worden gelezen, dus een dag die niet werd geregistreerd, kan door geen enkele latere uitvoering terug worden gehaald.",
+  "who-still-plays": "Wie nog speelt op {label}"
+}

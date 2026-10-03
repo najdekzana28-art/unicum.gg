@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Ang bahagi ng isang hanay ay sinusukat laban sa mga account na nabasa namin sa loob ng window, hindi laban sa lahat ng account na hawak namin. Ang account na walang nagsuri kamakailan ay hindi natin matitiyak na walang aktibidad, at ang pagbilang dito ay maglalarawan sa sarili naming bilis ng pag-refresh sa halip na sa mga manlalaro. Ang bahaging hindi natin nakikita ay 4 sa bawat 100 account sa itaas ng iskala at 13 sa bawat 100 sa ibaba. Ang Mga laban bawat isa ay ang karaniwan para sa mga account na naglaro, at binibilang lamang ang mga account na hawak namin bago at pagkatapos nito, na 96 hanggang 99 sa bawat isandaang account.",
+  "band": "Hanay",
+  "battles-each": "Mga laban bawat isa",
+  "chart-label": "Bahagi ng bawat hanay ng rating ng {label} na naglaro, ayon sa araw",
+  "how-it-has-moved": "Paano ito gumalaw",
+  "metric-band": "Hanay ng {metric}",
+  "nothing-recorded": "Wala pang naitala laban sa {metric}. Isinusulat ang serye bawat oras.",
+  "of-observed-accounts": "sa {observed} na nakita, {blind} na hindi nasuri",
+  "played-in-window": "Nilaro sa nakaraang {window}",
+  "region-wide-rate": "{rate} sa lahat ng hanay",
+  "series-just-started": "Isang araw pa lamang ang naitala, kaya wala pang kurbang maiguguhit. Nagsisimula ang kasaysayan nang magsimula ang pagtatala at nadaragdagan ng isang araw bawat pagkakataon. Parehong sinusukat pabalik ang dalawang bilang mula sa sandaling binabasa ang mga ito, kaya ang araw na hindi naitala ay araw na hindi na mababalikan ng anumang susunod na pagtakbo.",
+  "who-still-plays": "Sino pa rin ang naglalaro sa {label}"
+}

@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Egy sáv Megosztását az ablakon belül olvasott fiókokhoz képest mérjük, nem az összes általunk tartott fiókhoz képest. Egy olyan fiókról, amelyet legutóbb senki nem ellenőrzött, nem tudható, hogy tétlen, és ha annak számítanánk, az a saját frissítési tempónkat írná le a játékosok helyett. Ez a vakfolt a skála tetején 100 fiókból 4, az alján pedig 100 fiókból 13. A Csaták egyenként az adott időszakban játszó fiókok átlaga, és csak azokat számolja, amelyekről előtte és utána is van adatunk, ez pedig minden százból 96–99 fiók.",
+  "band": "Sáv",
+  "battles-each": "Csaták egyenként",
+  "chart-label": "Az egyes {label} értékelési sávok Megosztása, a naponta játszók szerint",
+  "how-it-has-moved": "A mozgás alakulása",
+  "metric-band": "{metric} sávja",
+  "nothing-recorded": "A(z) {metric} ellen még Semmi sincs rögzítve. A sorozat óránként íródik.",
+  "of-observed-accounts": "{observed} megfigyelt fiókból {blind} ellenőrizetlen",
+  "played-in-window": "Az utolsó {window} alatt játszott",
+  "region-wide-rate": "{rate} szerte az összes sávban",
+  "series-just-started": "Eddig csak egy rögzített nap van, ezért még nincs kirajzolható görbe. Az előzmények a rögzítés kezdetekor kezdődnek, és napról napra bővülnek. Mindkét adatot attól a pillanattól visszafelé mérjük, amikor olvassuk őket, ezért egy olyan nap, amikor nem ment a rögzítés, olyan nap, amelyért egy későbbi futtatás már nem tud visszamenni.",
+  "who-still-plays": "Kik játszanak még {label} környezetében"
+}

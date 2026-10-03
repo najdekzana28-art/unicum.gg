@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Et intervals andel måles mod de konti, vi har læst inden for vinduet, ikke mod alle de konti, vi har. En konto, som ingen har kontrolleret for nylig, vides ikke at være inaktiv, og at tælle den som sådan ville beskrive vores eget opdateringstempo snarere end spillerne. Denne blinde plet er 4 ud af 100 konti øverst på skalaen og 13 ud af 100 nederst. Kampe pr. er gennemsnittet for de konti, der faktisk har spillet, og tæller kun dem, vi har data for både før og efter, hvilket er 96 til 99 ud af hver 100.",
+  "band": "Interval",
+  "battles-each": "Kampe pr.",
+  "chart-label": "Andel af hvert {label}-vurderingsinterval, der har spillet, pr. dag",
+  "how-it-has-moved": "Sådan har det flyttet sig",
+  "metric-band": "{metric}-interval",
+  "nothing-recorded": "Intet registreret for {metric} endnu. Serien registreres hver time.",
+  "of-observed-accounts": "af {observed} sete konti, {blind} ikke kontrollerede",
+  "played-in-window": "Spillet inden for de seneste {window}",
+  "region-wide-rate": "{rate} på tværs af alle intervaller",
+  "series-just-started": "Der er kun registreret én dag indtil videre, så der er endnu ingen kurve at tegne. Historikken starter, da registreringen begyndte, og vokser med én dag ad gangen. Begge tal måles bagud fra det øjeblik, de læses, så en dag, der ikke blev registreret, er en dag, som ingen senere kørsel kan gå tilbage og hente.",
+  "who-still-plays": "Hvem spiller stadig på {label}"
+}

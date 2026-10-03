@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Bir aralığın payı, pencere içinde okuduğumuz hesaplara göre ölçülür, elimizdeki her hesaba göre değil. Yakın zamanda kimsenin kontrol etmediği bir hesabın boşta olduğu bilinmez ve onu öyle saymak oyuncuları değil, kendi yenileme tempomuzu tanımlardı. Bu kör nokta, ölçeğin üst kısmında 100 hesabın 4’ü, alt kısmında ise 100 hesabın 13’üdür. Savaş başına, oynayan hesapların ortalamasıdır ve yalnızca öncesi ve sonrası elimizde bulunan hesapları sayar. Bu da her yüz hesabın 96 ila 99’udur.",
+  "band": "Aralık",
+  "battles-each": "Savaş başına",
+  "chart-label": "Her {label} puan aralığında oynayanların günlük payı",
+  "how-it-has-moved": "Nasıl hareket etti",
+  "metric-band": "{metric} puan aralığı",
+  "nothing-recorded": "Şu ana kadar {metric} için kaydedilen bir şey yok. Seri saatlik olarak yazılır.",
+  "of-observed-accounts": "Görülen {observed} hesabın {blind} tanesi kontrol edilmedi",
+  "played-in-window": "Son {window} penceresinde oynananlar",
+  "region-wide-rate": "Tüm aralıklar genelinde {rate}",
+  "series-just-started": "Şimdiye kadar yalnızca bir gün kaydedildi, bu nedenle henüz çizilecek bir eğri yok. Geçmiş, kaydın başladığı anda başlar ve her seferinde bir gün büyür. Her iki değer de okundukları andan geriye doğru ölçülür, bu nedenle kaydedilmeden geçen bir gün, sonraki hiçbir çalışmanın geri dönüp kaydedemeyeceği bir gündür.",
+  "who-still-plays": "{label} üzerinde hâlâ kim oynuyor"
+}

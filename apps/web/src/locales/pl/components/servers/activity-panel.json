@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Udział danego przedziału jest mierzony względem kont, które odczytujemy w oknie, a nie względem wszystkich kont, które mamy. Konto, którego ostatnio nikt nie sprawdzał, nie jest znane jako nieaktywne, a uznanie go za takie opisywałoby nasze własne tempo odświeżania, a nie graczy. Ten martwy punkt obejmuje 4 na 100 kont na górze skali i 13 na 100 na dole. Liczba bitew na konto to średnia dla kont, które rzeczywiście grały, i uwzględnia tylko te, dla których mamy dane sprzed i po, czyli od 96 do 99 na każde sto.",
+  "band": "Przedział",
+  "battles-each": "bitew na",
+  "chart-label": "Udział każdego przedziału oceny {label}, w którym rozegrano bitwy, według dni",
+  "how-it-has-moved": "Jak to się zmieniało",
+  "metric-band": "Przedział oceny {metric}",
+  "nothing-recorded": "Nic nie zarejestrowano jeszcze przeciwko {metric}. Seria jest zapisywana co godzinę.",
+  "of-observed-accounts": "z {observed} zaobserwowanych kont, {blind} niesprawdzonych",
+  "played-in-window": "Rozegrane w ciągu ostatnich {window}",
+  "region-wide-rate": "{rate} w całym zakresie przedziałów",
+  "series-just-started": "Jak dotąd zarejestrowano jeden dzień, więc nie ma jeszcze krzywej do narysowania. Historia rozpoczyna się wraz z rozpoczęciem rejestrowania i rośnie po jednym dniu. Obie liczby są mierzone wstecz od momentu ich odczytu, więc dzień, który nie został zarejestrowany, jest dniem, do którego żadne późniejsze uruchomienie nie może już wrócić.",
+  "who-still-plays": "Kto nadal gra na {label}"
+}

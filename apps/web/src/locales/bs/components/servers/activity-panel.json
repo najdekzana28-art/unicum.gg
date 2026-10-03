@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Udio jednog raspona mjeri se u odnosu na naloge koje smo pročitali unutar prozora, a ne u odnosu na svaki račun koji zadržavamo. Za račun koji niko nedavno nije provjerio ne može se znati da je neaktivan, a njegovo ubrajanje u takve račune opisivalo bi naš tempo osvježavanja, a ne igrače. Ta slijepa tačka iznosi 4 od 100 naloga na vrhu skale i 13 od 100 na dnu. Bitaka po računu je prosjek za naloge koji su igrali i uključuje samo one za koje imamo podatke prije i poslije, što je od 96 do 99 na svakih stotinu.",
+  "band": "Raspon",
+  "battles-each": "Bitaka po",
+  "chart-label": "Udio svakog raspona rejtinga za {label} koji je igrao, po danima",
+  "how-it-has-moved": "Kako se pomjeralo",
+  "metric-band": "Raspon za {metric}",
+  "nothing-recorded": "Ništa još nije zabilježeno protiv {metric}. Serija se zapisuje svakog sata.",
+  "of-observed-accounts": "Od {observed} viđenih, {blind} neprovjerenih",
+  "played-in-window": "Odigrano u posljednjem prozoru od {window}",
+  "region-wide-rate": "{rate} širom svih raspona",
+  "series-just-started": "Do sada je zabilježen jedan dan, pa još nema krive koju možemo nacrtati. Historija počinje kada je počelo zabilježavanje i raste po jedan dan. Oba podatka mjere se unazad od trenutka kada su pročitana, pa je dan koji je ostao nezabilježen onaj do kojeg se nijedno kasnije pokretanje ne može vratiti.",
+  "who-still-plays": "Ko još igra na {label}"
+}

@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Intervalo dalis matuojama pagal paskyras, kurias perskaitome lange, o ne pagal visas mūsų laikomas paskyras: apie paskyrą, kurios niekas pastaruoju metu netikrino, nežinoma, kad ji neaktyvi, o laikant ją tokia būtų apibūdinamas mūsų pačių atnaujinimo tempas, o ne žaidėjai. Ši akloji zona sudaro 4 iš 100 paskyrų skalės viršuje ir 13 iš 100 apačioje. Mūšių kiekvienam rodiklis yra žaidusių paskyrų vidurkis ir skaičiuoja tik tas, kurių duomenis turime prieš ir po. Tai sudaro nuo 96 iki 99 iš šimto.",
+  "band": "Intervalas",
+  "battles-each": "Mūšių kiekvienam",
+  "chart-label": "Kiekvieno {label} reitingo intervalo žaidusiųjų dalis pagal dienas",
+  "how-it-has-moved": "Kaip ji perkelta",
+  "metric-band": "{metric} intervalas",
+  "nothing-recorded": "Kol kas pagal {metric} nieko neužfiksuota. Serija įrašoma kas valandą.",
+  "of-observed-accounts": "Iš {observed} matytų paskyrų {blind} nepatikrintos",
+  "played-in-window": "Sužaista per {window} iki dabar",
+  "region-wide-rate": "{rate} visoje intervalų skalėje",
+  "series-just-started": "Kol kas užfiksuota viena diena, todėl dar nėra kreivės, kurią būtų galima nubraižyti. Istorija prasideda pradėjus įrašymą ir auga po vieną dieną. Abu skaičiai matuojami atgal nuo akimirkos, kai juos perskaitote, todėl neįrašyta diena yra tokia, kurios joks vėlesnis paleidimas nebegali atkurti.",
+  "who-still-plays": "Kas vis dar žaidžia per {label}"
+}

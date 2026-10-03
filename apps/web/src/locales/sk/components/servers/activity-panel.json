@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Podiel pásma sa meria vzhľadom na účty, ktoré čítame v okne, nie vzhľadom na každý účet, ktorý držíme. O účte, ktorý nikto nedávno nekontroloval, nevieme, že je neaktívny, a počítať ho medzi neaktívne by opisovalo skôr naše tempo obnovovania než hráčov. Toto slepé miesto predstavuje 4 zo 100 účtov na hornom konci lestvice a 13 zo 100 na dolnom konci. Bitk na každého je priemer pre účty, ktoré hrali, a počíta iba tie, pri ktorých máme záznam pred hraním aj po ňom, čo predstavuje 96 až 99 zo každých sto.",
+  "band": "Pásmo",
+  "battles-each": "Bitk na",
+  "chart-label": "Podiel každého pásma hodnotenia {label}, v ktorom sa hráči zapojili do hry, podľa dní",
+  "how-it-has-moved": "Ako sa to presunulo",
+  "metric-band": "Pásmo hodnoty {metric}",
+  "nothing-recorded": "Nič ešte nebolo zaznamenané proti {metric}. Séria sa zapisuje každú hodinu.",
+  "of-observed-accounts": "z {observed} videných, {blind} neoverených",
+  "played-in-window": "Odigrano za posledných {window}",
+  "region-wide-rate": "{rate} po všetkých pásmach",
+  "series-just-started": "Zatiaľ bol zaznamenaný iba jeden deň, takže ešte nie je čo vykresliť ako krivulku. História začína v okamihu, keď sa začína záznam, a pribúda po jednom dni. Obe hodnoty sa merajú spätne od okamihu, keď ich čítame, takže deň, ktorý nebol zaznamenaný, už žiadne neskoršie spustenie nedokáže získať nazad.",
+  "who-still-plays": "Kto ešte hrá na {label}"
+}

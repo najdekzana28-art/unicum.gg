@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "La quota di una fascia viene misurata rispetto agli account che leggiamo all’interno della finestra, non rispetto a tutti gli account che possediamo: un account che non è stato controllato di recente non è noto come inattivo, e conteggiarlo come tale descriverebbe il nostro ritmo di aggiornamento, piuttosto che i giocatori. Questo punto cieco è di 4 account su 100 nella parte alta della scala e di 13 su 100 nella parte bassa. Le Battaglie per ciascuno sono la media degli account che hanno giocato e conteggiano solo quelli per i quali abbiamo un dato stabile prima e dopo, ovvero da 96 a 99 ogni cento.",
+  "band": "Fascia",
+  "battles-each": "Battaglie per ciascuno",
+  "chart-label": "Quota di ogni fascia di valutazione {label} che ha giocato, per giorno",
+  "how-it-has-moved": "Come si è spostata",
+  "metric-band": "Fascia {metric}",
+  "nothing-recorded": "Niente è ancora stato registrato contro {metric}. La serie viene scritta ogni ora.",
+  "of-observed-accounts": "Dei {observed} osservati, {blind} non controllati",
+  "played-in-window": "Giocate negli ultimi {window}",
+  "region-wide-rate": "{rate} attraverso ogni fascia",
+  "series-just-started": "Finora è stato registrato un solo giorno, quindi non c’è ancora alcuna curva da tracciare. La cronologia inizia quando inizia la registrazione e cresce di un giorno alla volta: entrambe le cifre vengono misurate a ritroso dal momento in cui vengono lette, quindi un giorno che non è stato registrato è un giorno che nessuna esecuzione successiva può recuperare.",
+  "who-still-plays": "Chi gioca ancora su {label}"
+}

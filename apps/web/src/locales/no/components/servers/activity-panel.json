@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Andelen for et band måles mot kontoene vi leser innenfor vinduet, ikke mot alle kontoene vi har. En konto ingen nylig har sjekket, er ikke kjent for å være inaktiv, og å telle den som det ville beskrive vårt eget oppdateringstempo heller enn spillerne. Denne blindsonen er 4 av 100 kontoer øverst på skalaen og 13 av 100 nederst. Kamper per konto er gjennomsnittet for kontoene som faktisk spilte, og teller bare de vi har data for både før og etter. Det gjelder 96 til 99 av hvert hundre.",
+  "band": "Band",
+  "battles-each": "Kamper per",
+  "chart-label": "Andel av hvert vurderingsband for {label} som spilte, per dag",
+  "how-it-has-moved": "Hvordan den har flyttet seg",
+  "metric-band": "Band for {metric}",
+  "nothing-recorded": "Ingenting er registrert mot {metric} ennå. Serien skrives hver time.",
+  "of-observed-accounts": "av {observed} observerte kontoer, {blind} ukontrollerte",
+  "played-in-window": "Spilt de siste {window}",
+  "region-wide-rate": "{rate} på tvers av alle band",
+  "series-just-started": "Én dag er registrert så langt, så det finnes ingen kurve å tegne ennå. Historikken starter da registreringen startet og vokser én dag om gangen: begge tallene måles bakover fra øyeblikket de leses, så en dag som gikk uten registrering, er en dag ingen senere kjøring kan gå tilbake for.",
+  "who-still-plays": "Hvem som fortsatt spiller på {label}"
+}

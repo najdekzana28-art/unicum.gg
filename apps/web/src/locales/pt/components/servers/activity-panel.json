@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "O Compartilhar de uma faixa é medido em relação às contas que conseguimos ler dentro da janela, não contra todas as contas que mantemos: uma conta que ninguém consultou recentemente não é conhecida como inativa, e contá-la assim descreveria nosso próprio ritmo de atualização em vez disso, não os jogadores. Esse ponto cego é de 4 em 100 contas no topo da escala e de 13 em 100 na base. Batalhas por é a média das contas que jogaram, e conta apenas aquelas para as quais mantemos dados de antes e depois, o que representa de 96 a 99 em cada 100.",
+  "band": "Faixa",
+  "battles-each": "Batalhas por",
+  "chart-label": "Parcela de cada faixa de classificação de {label} que jogou, por dia",
+  "how-it-has-moved": "Como foi o movimento",
+  "metric-band": "Faixa de {metric}",
+  "nothing-recorded": "Nada registrado para {metric} ainda. A série é registrada de hora em hora.",
+  "of-observed-accounts": "de {observed} observadas, {blind} não verificadas",
+  "played-in-window": "Jogadas na última janela de {window}",
+  "region-wide-rate": "{rate} em toda a parte, em todas as faixas",
+  "series-just-started": "Apenas um dia foi registrado até agora, portanto ainda não há uma curva para desenhar. O histórico começa quando o registro começa e cresce um dia por vez: ambas as figuras são medidas retroativamente a partir do momento em que são lidas, então um dia que não foi registrado é um dia ao qual nenhuma execução posterior pode voltar.",
+  "who-still-plays": "Quem ainda joga em {label}"
+}

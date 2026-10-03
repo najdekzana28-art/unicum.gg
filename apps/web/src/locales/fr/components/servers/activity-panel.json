@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "La part d’une tranche est mesurée par rapport aux comptes que nous avons lus pendant la fenêtre, et non par rapport à tous les comptes que nous détenons : un compte que personne n’a vérifié récemment n’est pas connu comme étant inactif, et le compter comme tel décrirait notre propre rythme d’actualisation plutôt que les joueurs. Cet angle mort représente 4 comptes sur 100 au sommet de l’échelle et 13 sur 100 au bas de l’échelle. Batailles par compte correspond à la moyenne pour les comptes qui ont joué, et ne compte que ceux pour lesquels nous détenons une valeur avant et après, soit 96 à 99 comptes sur cent.",
+  "band": "Tranche",
+  "battles-each": "Batailles par",
+  "chart-label": "Part de chaque tranche de notation de {label} ayant joué, par jour",
+  "how-it-has-moved": "Son évolution",
+  "metric-band": "Tranche de {metric}",
+  "nothing-recorded": "Rien n’a encore été enregistré pour {metric}. La série est écrite toutes les heures.",
+  "of-observed-accounts": "sur {observed} observés, {blind} non vérifiés",
+  "played-in-window": "Jouées au cours des {window} dernières",
+  "region-wide-rate": "{rate} sur toutes les tranches",
+  "series-just-started": "Une seule journée a été enregistrée pour le moment, il n’y a donc pas encore de courbe à tracer. L’historique commence lorsque l’enregistrement débute et s’allonge jour après jour : les deux chiffres sont mesurés en remontant depuis le moment où ils sont lus, donc une journée qui n’a pas été enregistrée est une journée à laquelle aucune exécution ultérieure ne peut revenir.",
+  "who-still-plays": "Qui joue encore sur {label}"
+}

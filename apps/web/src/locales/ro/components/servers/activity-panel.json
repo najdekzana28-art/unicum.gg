@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Ponderea unui interval este măsurată în raport cu conturile pe care le citim în fereastră, nu cu toate conturile pe care le menținem: un cont verificat recent de nimeni nu este cunoscut ca fiind inactiv, iar numărarea lui ca atare ar descrie mai degrabă ritmul nostru de reîmprospătare decât jucătorii. Acest punct orb reprezintă 4 din 100 de conturi în partea de sus a scării și 13 din 100 în partea de jos. Bătălii fiecare reprezintă medie pentru conturile care au jucat și numără doar acelea pentru care avem date înainte și după, adică între 96 și 99 din fiecare sută.",
+  "band": "Interval",
+  "battles-each": "Bătălii fiecare",
+  "chart-label": "Ponderea fiecărui interval de rating {label} care a jucat, pe zile",
+  "how-it-has-moved": "Cum s-a mutat",
+  "metric-band": "Intervalul pentru {metric}",
+  "nothing-recorded": "Nimic nu a fost încă înregistrat împotriva {metric}. Seria este scrisă din oră în oră.",
+  "of-observed-accounts": "din cele {observed} observate, {blind} neverificate",
+  "played-in-window": "Jucate în ultimele {window}",
+  "region-wide-rate": "{rate} în toate intervalele",
+  "series-just-started": "Până acum a fost înregistrată o singură zi, așa că nu există încă o curbă de desenat. Istoricul începe când începe înregistrarea și crește cu câte o zi: ambele valori sunt măsurate înapoi de la momentul la care sunt citite, astfel că o zi care nu a fost înregistrată este una la care nicio rulare ulterioară nu se mai poate întoarce.",
+  "who-still-plays": "Cine mai joacă pe {label}"
+}

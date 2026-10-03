@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "El Compartir de una banda se mide contra las cuentas que hemos leído dentro de la ventana, no contra todas las cuentas que mantenemos: no se sabe que una cuenta que nadie ha comprobado recientemente esté inactiva, y contarla como tal describiría nuestro propio ritmo de actualización, más bien que a los jugadores. Ese punto ciego es de 4 de cada 100 cuentas en la parte superior de la escala y de 13 de cada 100 en la inferior. Batallas cada una es el promedio de las cuentas que sí jugaron, y solo cuenta las que mantenemos antes y después, que son entre 96 y 99 de cada cien.",
+  "band": "Banda",
+  "battles-each": "Batallas cada",
+  "chart-label": "Compartir de cada banda de valoración de {label} que jugó, por día",
+  "how-it-has-moved": "Cómo se ha movido",
+  "metric-band": "Banda de {metric}",
+  "nothing-recorded": "Nada registrado contra {metric} todavía. La serie se escribe cada hora.",
+  "of-observed-accounts": "De {observed} cuentas vistas, {blind} sin comprobar",
+  "played-in-window": "Jugadas en la ventana de {window}",
+  "region-wide-rate": "{rate} en todo el conjunto de bandas",
+  "series-just-started": "Solo hay un día registrado hasta ahora, así que todavía no hay una curva que dibujar. El historial comienza cuando comenzó el registro y crece un día cada vez: ambas cifras se miden hacia atrás desde el momento en que se leen, por lo que un día que no se registró es uno al que ninguna ejecución posterior puede volver.",
+  "who-still-plays": "Quién sigue jugando en {label}"
+}

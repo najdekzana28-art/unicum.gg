@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Joslas daļa tiek mērīta pret kontiem, kurus nolasām logā, nevis pret visiem kontiem, kas mums ir. Konts, kuru neviens nesen nav pārbaudījis, nav zināms kā neaktīvs, un tā skaitīšana šādā statusā raksturotu mūsu atsvaidzināšanas tempu, nevis spēlētājus. Šis nezināmais apjoms ir 4 no 100 kontiem skalas augšdaļā un 13 no 100 apakšdaļā. Kaujas katrā ir vidējais rādītājs kontiem, kas spēlēja, un tiek skaitīti tikai tie, kuriem mums ir dati pirms un pēc, tas ir, 96 līdz 99 no katriem simts.",
+  "band": "Josla",
+  "battles-each": "Kaujas katrā",
+  "chart-label": "Katras {label} vērtējuma joslas kontu daļa, kas spēlēja, pa dienām",
+  "how-it-has-moved": "Kā tas ir pārvietots",
+  "metric-band": "{metric} josla",
+  "nothing-recorded": "Nekas vēl nav reģistrēts pret {metric}. Sērija tiek pierakstīta katru stundu.",
+  "of-observed-accounts": "No {observed} redzētajiem kontiem {blind} nav pārbaudīti",
+  "played-in-window": "Izspēlēts logā, kas aptver pēdējās {window}",
+  "region-wide-rate": "{rate} visā diapazonā",
+  "series-just-started": "Pagaidām ir reģistrēta tikai viena diena, tāpēc līkni vēl nav iespējams uzzīmēt. Vēsture sākas, kad sākās ierakstīšana, un pieaug par vienu dienu vienlaikus. Abi skaitļi tiek mērīti atpakaļ no brīža, kad tos nolasām, tāpēc diena, kas netika reģistrēta, ir diena, pie kuras neviens vēlāks palaides laiks vairs nevar atgriezties.",
+  "who-still-plays": "Kas joprojām spēlē sadaļā {label}"
+}

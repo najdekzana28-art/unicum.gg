@@ -668,7 +668,18 @@
     "taken": "المُتلقّى",
     "setup": "التجهيز",
     "linked": "مرتبط",
-    "appears": "يظهر"
+    "appears": "يظهر",
+    "24 hours": "24 ساعة",
+    "30 days": "30 يومًا",
+    "7 days": "7 أيام",
+    "Battles each": "المعارك لكل منها",
+    "Played": "المُلعَبة",
+    "curve": "المنحنى",
+    "hold": "الاحتفاظ",
+    "moved": "انتقل",
+    "scale": "المقياس",
+    "those": "أولئك",
+    "went": "ذهب"
   },
   "be": {
     "(optional)": "(па-жаданні)",
@@ -1338,7 +1349,18 @@
     "taken": "атрыманы",
     "setup": "камплектацыя",
     "linked": "звязаны",
-    "appears": "з'яўляецца"
+    "appears": "з'яўляецца",
+    "24 hours": "24 гадзіны",
+    "30 days": "30 дзён",
+    "7 days": "7 дзён",
+    "Battles each": "Баёў на кожнага",
+    "Played": "Згуляна",
+    "curve": "крывая",
+    "hold": "утрыманне",
+    "moved": "перамешчана",
+    "scale": "маштаб",
+    "those": "тыя",
+    "went": "пайшоў"
   },
   "bg": {
     "(optional)": "(по желание)",
@@ -2211,7 +2233,16 @@
     "taken": "взети",
     "setup": "конфигурация",
     "linked": "свързан",
-    "appears": "появява се"
+    "appears": "появява се",
+    "24 hours": "24 часа",
+    "Battles each": "Битки за всяка",
+    "Played": "Изиграни",
+    "curve": "крива",
+    "hold": "задържане",
+    "moved": "преместени",
+    "scale": "скала",
+    "those": "тези",
+    "went": "отиде"
   },
   "bs": {
     "(optional)": "(opcionalno)",
@@ -2889,7 +2920,18 @@
     "taken": "preuzeto",
     "setup": "konfiguracija",
     "linked": "povezano",
-    "appears": "pojavljuje se"
+    "appears": "pojavljuje se",
+    "24 hours": "24 sata",
+    "30 days": "30 dana",
+    "7 days": "7 dana",
+    "Battles each": "Bitaka po",
+    "Played": "Odigrano",
+    "curve": "kriva",
+    "hold": "zadržavanje",
+    "moved": "pomjereno",
+    "scale": "skala",
+    "those": "oni",
+    "went": "otišao"
   },
   "cs": {
     "(optional)": "(volitelné)",
@@ -3773,7 +3815,16 @@
     "taken": "obdržené",
     "setup": "konfigurace",
     "linked": "propojeno",
-    "appears": "zobrazuje se"
+    "appears": "zobrazuje se",
+    "24 hours": "24 hodin",
+    "Battles each": "Bitvy za",
+    "Played": "Odehráno",
+    "curve": "křivka",
+    "hold": "udržet",
+    "moved": "přesunuto",
+    "scale": "stupnice",
+    "those": "ti",
+    "went": "šel"
   },
   "da": {
     "(optional)": "(valgfrit)",
@@ -4662,7 +4713,16 @@
     "taken": "taget",
     "setup": "opsætning",
     "linked": "tilknyttet",
-    "appears": "vises"
+    "appears": "vises",
+    "24 hours": "24 timer",
+    "Battles each": "Kampe pr.",
+    "Played": "Spillet",
+    "curve": "kurve",
+    "hold": "hold",
+    "moved": "flyttet",
+    "scale": "skala",
+    "those": "de",
+    "went": "gik"
   },
   "de": {
     "(optional)": "(optional)",
@@ -5545,7 +5605,16 @@
     "taken": "genommen",
     "setup": "Konfiguration",
     "linked": "verknüpft",
-    "appears": "erscheint"
+    "appears": "erscheint",
+    "24 hours": "24 Stunden",
+    "Battles each": "Gefechte je",
+    "Played": "Gespielt",
+    "curve": "Kurve",
+    "hold": "halten",
+    "moved": "verschoben",
+    "scale": "Skala",
+    "those": "diese",
+    "went": "ging"
   },
   "el": {
     "(optional)": "(προαιρετικό)",
@@ -6433,7 +6502,16 @@
     "taken": "ληφθεί",
     "setup": "διαμόρφωση",
     "linked": "συνδεδεμένο",
-    "appears": "εμφανίζεται"
+    "appears": "εμφανίζεται",
+    "24 hours": "24 ώρες",
+    "Battles each": "Μάχες ανά",
+    "Played": "Παίχτηκαν",
+    "curve": "καμπύλη",
+    "hold": "κρατά",
+    "moved": "μετακινήθηκε",
+    "scale": "κλίμακα",
+    "those": "εκείνοι",
+    "went": "πήγε"
   },
   "es": {
     "(optional)": "(opcional)",
@@ -7301,7 +7379,16 @@
     "taken": "recibido",
     "setup": "configuración",
     "linked": "vinculado",
-    "appears": "aparece"
+    "appears": "aparece",
+    "24 hours": "24 horas",
+    "Battles each": "Batallas cada",
+    "Played": "Jugadas",
+    "curve": "curva",
+    "hold": "mantener",
+    "moved": "movido",
+    "scale": "escala",
+    "those": "esos",
+    "went": "fue"
   },
   "fi": {
     "(optional)": "(valinnainen)",
@@ -8194,7 +8281,16 @@
     "taken": "otettu",
     "setup": "kokoonpano",
     "linked": "linkitetty",
-    "appears": "näkyy"
+    "appears": "näkyy",
+    "24 hours": "24 tuntia",
+    "Battles each": "Taistelua kussakin",
+    "Played": "Pelatut",
+    "curve": "käyrä",
+    "hold": "pidä",
+    "moved": "siirretty",
+    "scale": "asteikko",
+    "those": "ne",
+    "went": "meni"
   },
   "fr": {
     "(optional)": "(optionnel)",
@@ -9066,7 +9162,16 @@
     "taken": "pris",
     "setup": "configuration",
     "linked": "lié",
-    "appears": "apparaît"
+    "appears": "apparaît",
+    "24 hours": "24 heures",
+    "Battles each": "Batailles par",
+    "Played": "Jouées",
+    "curve": "courbe",
+    "hold": "maintenir",
+    "moved": "déplacée",
+    "scale": "échelle",
+    "those": "ceux",
+    "went": "est allé"
   },
   "hi": {
     "(optional)": "(optional)",
@@ -9737,7 +9842,18 @@
     "taken": "लिया गया",
     "setup": "सेटअप",
     "linked": "जुड़ा हुआ",
-    "appears": "दिखाई देता है"
+    "appears": "दिखाई देता है",
+    "24 hours": "24 घंटे",
+    "30 days": "30 दिन",
+    "7 days": "7 दिन",
+    "Battles each": "प्रति खिलाड़ी लड़ाइयाँ",
+    "Played": "खेले गए",
+    "curve": "वक्र",
+    "hold": "पकड़",
+    "moved": "स्थानांतरित",
+    "scale": "पैमाना",
+    "those": "वे",
+    "went": "गया"
   },
   "hr": {
     "(optional)": "(opcionalno)",
@@ -10624,7 +10740,16 @@
     "taken": "uzeto",
     "setup": "konfiguracija",
     "linked": "povezano",
-    "appears": "pojavljuje se"
+    "appears": "pojavljuje se",
+    "24 hours": "24 sata",
+    "Battles each": "Bitaka po",
+    "Played": "Odigrano",
+    "curve": "krivulja",
+    "hold": "držati",
+    "moved": "premješteno",
+    "scale": "skala",
+    "those": "oni",
+    "went": "otišli"
   },
   "hu": {
     "(optional)": "(opcionális)",
@@ -11513,7 +11638,16 @@
     "taken": "elszenvedett",
     "setup": "összeállítás",
     "linked": "összekapcsolva",
-    "appears": "megjelenik"
+    "appears": "megjelenik",
+    "24 hours": "24 óra",
+    "Battles each": "Csaták egyenként",
+    "Played": "Lejátszott",
+    "curve": "görbe",
+    "hold": "tartás",
+    "moved": "áthelyezve",
+    "scale": "skála",
+    "those": "azok",
+    "went": "ment"
   },
   "it": {
     "(optional)": "(opzionale)",
@@ -12397,7 +12531,16 @@
     "taken": "subiti",
     "setup": "configurazione",
     "linked": "collegato",
-    "appears": "appare"
+    "appears": "appare",
+    "24 hours": "24 ore",
+    "Battles each": "Battaglie per ciascuno",
+    "Played": "Giocate",
+    "curve": "curva",
+    "hold": "stabile",
+    "moved": "spostata",
+    "scale": "scala",
+    "those": "quelli",
+    "went": "andato"
   },
   "ja": {
     "(optional)": "(オプショナル)",
@@ -13288,7 +13431,16 @@
     "taken": "取得",
     "setup": "セットアップ",
     "linked": "連携済み",
-    "appears": "表示"
+    "appears": "表示",
+    "24 hours": "24時間",
+    "Battles each": "各戦闘",
+    "Played": "プレイ済み",
+    "curve": "曲線",
+    "hold": "保持",
+    "moved": "移動",
+    "scale": "スケール",
+    "those": "それら",
+    "went": "行った"
   },
   "kk": {
     "(optional)": "(міндетті емес)",
@@ -13963,7 +14115,18 @@
     "taken": "алынған",
     "setup": "жинақтама",
     "linked": "байланыстырылған",
-    "appears": "көрінеді"
+    "appears": "көрінеді",
+    "24 hours": "24 сағат",
+    "30 days": "30 күн",
+    "7 days": "7 күн",
+    "Battles each": "Әрқайсысындағы шайқастар",
+    "Played": "Ойналған",
+    "curve": "қисық сызық",
+    "hold": "ұстау",
+    "moved": "ауыстырылды",
+    "scale": "шкала",
+    "those": "солар",
+    "went": "кетті"
   },
   "ko": {
     "(optional)": "(선택 사항)",
@@ -14859,7 +15022,16 @@
     "taken": "받음",
     "setup": "세팅",
     "linked": "연결됨",
-    "appears": "등장"
+    "appears": "등장",
+    "24 hours": "24시간",
+    "Battles each": "전투당",
+    "Played": "플레이함",
+    "curve": "곡선",
+    "hold": "보유",
+    "moved": "이동됨",
+    "scale": "척도",
+    "those": "해당",
+    "went": "진행됨"
   },
   "lt": {
     "(optional)": "(neprivaloma)",
@@ -15752,7 +15924,16 @@
     "taken": "paimta",
     "setup": "sąranka",
     "linked": "susieta",
-    "appears": "rodoma"
+    "appears": "rodoma",
+    "24 hours": "24 valandos",
+    "Battles each": "Mūšių kiekvienam",
+    "Played": "Sužaista",
+    "curve": "kreivė",
+    "hold": "laikymas",
+    "moved": "perkelta",
+    "scale": "skalė",
+    "those": "tie",
+    "went": "įvyko"
   },
   "lv": {
     "(optional)": "(pēc izvēles)",
@@ -16629,7 +16810,16 @@
     "taken": "paņemts",
     "setup": "konfigurācija",
     "linked": "saistīts",
-    "appears": "parādās"
+    "appears": "parādās",
+    "24 hours": "24 stundas",
+    "Battles each": "Kaujas katrā",
+    "Played": "Izspēlēts",
+    "curve": "līkne",
+    "hold": "turēt",
+    "moved": "pārvietots",
+    "scale": "mērogs",
+    "those": "tie",
+    "went": "aizgāja"
   },
   "nl": {
     "(optional)": "(optioneel)",
@@ -17522,7 +17712,16 @@
     "taken": "genomen",
     "setup": "configuratie",
     "linked": "gekoppeld",
-    "appears": "verschijnt"
+    "appears": "verschijnt",
+    "24 hours": "24 uur",
+    "Battles each": "Gevechten per",
+    "Played": "Gespeeld",
+    "curve": "curve",
+    "hold": "vasthouden",
+    "moved": "verplaatst",
+    "scale": "schaal",
+    "those": "die",
+    "went": "gegaan"
   },
   "no": {
     "(optional)": "(valgfritt)",
@@ -18407,7 +18606,16 @@
     "taken": "tatt",
     "setup": "oppsett",
     "linked": "koblet",
-    "appears": "vises"
+    "appears": "vises",
+    "24 hours": "24 timer",
+    "Battles each": "Kamper per",
+    "Played": "Spilt",
+    "curve": "kurve",
+    "hold": "lag",
+    "moved": "flyttet",
+    "scale": "skala",
+    "those": "disse",
+    "went": "gikk"
   },
   "pl": {
     "(optional)": "(opcjonalnie)",
@@ -19288,7 +19496,16 @@
     "taken": "otrzymane",
     "setup": "konfiguracja",
     "linked": "powiązane",
-    "appears": "pojawia się"
+    "appears": "pojawia się",
+    "24 hours": "24 godziny",
+    "Battles each": "bitew na",
+    "Played": "Rozegrane",
+    "curve": "krzywa",
+    "hold": "utrzymanie",
+    "moved": "przeniesiono",
+    "scale": "skala",
+    "those": "te",
+    "went": "poszło"
   },
   "pt": {
     "(optional)": "(opcional)",
@@ -20162,7 +20379,16 @@
     "taken": "recebido",
     "setup": "configuração",
     "linked": "vinculado",
-    "appears": "aparece"
+    "appears": "aparece",
+    "24 hours": "24 horas",
+    "Battles each": "Batalhas por",
+    "Played": "Jogadas",
+    "curve": "curva",
+    "hold": "manter",
+    "moved": "movido",
+    "scale": "escala",
+    "those": "esses",
+    "went": "foi"
   },
   "ro": {
     "(optional)": "(opțional)",
@@ -21036,7 +21262,16 @@
     "taken": "primit",
     "setup": "configurație",
     "linked": "asociat",
-    "appears": "apare"
+    "appears": "apare",
+    "24 hours": "24 de ore",
+    "Battles each": "Bătălii fiecare",
+    "Played": "Jucate",
+    "curve": "curbă",
+    "hold": "menținere",
+    "moved": "mutat",
+    "scale": "scară",
+    "those": "acelea",
+    "went": "a mers"
   },
   "ru": {
     "(optional)": "(опционально)",
@@ -21898,7 +22133,16 @@
     "taken": "получено",
     "setup": "сборка",
     "linked": "связанный",
-    "appears": "появляется"
+    "appears": "появляется",
+    "24 hours": "24 часа",
+    "Battles each": "Боёв за каждый",
+    "Played": "Сыграно",
+    "curve": "кривая",
+    "hold": "удержание",
+    "moved": "перемещено",
+    "scale": "шкала",
+    "those": "те",
+    "went": "пошло"
   },
   "sk": {
     "(optional)": "(možné)",
@@ -22575,7 +22819,18 @@
     "taken": "prijaté",
     "setup": "postavitev",
     "linked": "povezano",
-    "appears": "prikaže se"
+    "appears": "prikaže se",
+    "24 hours": "24 ur",
+    "30 days": "30 dni",
+    "7 days": "7 dni",
+    "Battles each": "Bitk na",
+    "Played": "Odigrano",
+    "curve": "krivulja",
+    "hold": "držati",
+    "moved": "premaknjeno",
+    "scale": "lestvica",
+    "those": "tisti",
+    "went": "šlo"
   },
   "sr": {
     "(optional)": "(opciono)",
@@ -23464,7 +23719,16 @@
     "taken": "uzeto",
     "setup": "konfiguracija",
     "linked": "povezano",
-    "appears": "појављује се"
+    "appears": "појављује се",
+    "24 hours": "24 часа",
+    "Battles each": "Битака по",
+    "Played": "Одиграно",
+    "curve": "крива",
+    "hold": "задржи",
+    "moved": "померено",
+    "scale": "скала",
+    "those": "они",
+    "went": "пошло"
   },
   "sv": {
     "(optional)": "(valfritt)",
@@ -24357,7 +24621,16 @@
     "taken": "tagna",
     "setup": "konfiguration",
     "linked": "länkad",
-    "appears": "visas"
+    "appears": "visas",
+    "24 hours": "24 timmar",
+    "Battles each": "Strider vardera",
+    "Played": "Spelade",
+    "curve": "kurva",
+    "hold": "håll",
+    "moved": "flyttade",
+    "scale": "skala",
+    "those": "de",
+    "went": "gick"
   },
   "th": {
     "(optional)": "(ไม่จำเป็น)",
@@ -25246,7 +25519,16 @@
     "taken": "ได้รับ",
     "setup": "การจัดชุด",
     "linked": "เชื่อมโยง",
-    "appears": "ปรากฏ"
+    "appears": "ปรากฏ",
+    "24 hours": "24 ชั่วโมง",
+    "Battles each": "การรบทุก",
+    "Played": "เล่นแล้ว",
+    "curve": "เส้นโค้ง",
+    "hold": "รักษา",
+    "moved": "ย้ายแล้ว",
+    "scale": "มาตราส่วน",
+    "those": "เหล่านั้น",
+    "went": "ไปแล้ว"
   },
   "tl": {
     "(optional)": "(optional)",
@@ -25922,7 +26204,18 @@
     "taken": "natanggap",
     "setup": "configurasyon",
     "linked": "naka-link",
-    "appears": "lumilitaw"
+    "appears": "lumilitaw",
+    "24 hours": "24 na oras",
+    "30 days": "30 araw",
+    "7 days": "7 araw",
+    "Battles each": "Mga laban bawat isa",
+    "Played": "Nilaro",
+    "curve": "kurba",
+    "hold": "hawak",
+    "moved": "inilipat",
+    "scale": "iskala",
+    "those": "mga iyon",
+    "went": "nagpunta"
   },
   "tr": {
     "(optional)": "(isteğe bağlı)",
@@ -26808,7 +27101,16 @@
     "taken": "alınan",
     "setup": "kurulum",
     "linked": "bağlantılı",
-    "appears": "görünür"
+    "appears": "görünür",
+    "24 hours": "24 saat",
+    "Battles each": "Savaş başına",
+    "Played": "Oynanan",
+    "curve": "eğri",
+    "hold": "tut",
+    "moved": "taşındı",
+    "scale": "ölçek",
+    "those": "bunlar",
+    "went": "gitti"
   },
   "uk": {
     "(optional)": "(додатково)",
@@ -27687,7 +27989,16 @@
     "taken": "отримано",
     "setup": "комплектація",
     "linked": "прив’язано",
-    "appears": "з'являється"
+    "appears": "з'являється",
+    "24 hours": "24 години",
+    "Battles each": "Боїв за",
+    "Played": "Зіграно",
+    "curve": "крива",
+    "hold": "утримувати",
+    "moved": "переміщено",
+    "scale": "шкала",
+    "those": "ті",
+    "went": "пішло"
   },
   "vi": {
     "(optional)": "(tùy chọn)",
@@ -28555,7 +28866,16 @@
     "taken": "đã lấy",
     "setup": "cấu hình",
     "linked": "đã liên kết",
-    "appears": "xuất hiện"
+    "appears": "xuất hiện",
+    "24 hours": "24 giờ",
+    "Battles each": "Số trận mỗi",
+    "Played": "Đã chơi",
+    "curve": "đường cong",
+    "hold": "giữ",
+    "moved": "đã chuyển",
+    "scale": "thang đo",
+    "those": "những",
+    "went": "đã xảy ra"
   },
   "zh": {
     "(optional)": "（可选）",
@@ -29444,6 +29764,15 @@
     "taken": "承受",
     "setup": "配置",
     "linked": "已关联",
-    "appears": "出现"
+    "appears": "出现",
+    "24 hours": "24小时",
+    "Battles each": "场均战斗",
+    "Played": "已进行",
+    "curve": "曲线",
+    "hold": "保持",
+    "moved": "已移动",
+    "scale": "评分标准",
+    "those": "这些",
+    "went": "出错"
   }
 }

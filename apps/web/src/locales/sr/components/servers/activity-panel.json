@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Udeo opsega meri se u odnosu na naloge koje smo pročitali unutar prozora, a ne u odnosu na svaki nalog koji imamo: nalog koji niko nedavno nije proverio ne može se smatrati neaktivnim, a njegovo ubrajanje u takve naloge opisalo bi naš sopstveni tempo osvežavanja, a ne igrače. Ta slepa tačka iznosi 4 od 100 naloga na vrhu skale i 13 od 100 na dnu. Битака по je prosečan broj za naloge koji jesu igrali i obuhvata samo one za koje imamo podatke pre i posle, što je 96 do 99 od svakih sto.",
+  "band": "Opseg",
+  "battles-each": "Битака по",
+  "chart-label": "Udeo svakog {label} opsega rejtinga koji je igrao, po danima",
+  "how-it-has-moved": "Kako se pomeralo",
+  "metric-band": "Opseg {metric}",
+  "nothing-recorded": "Ništa još nije забележено za {metric}. Serija se beleži na svakih sat vremena.",
+  "of-observed-accounts": "od {observed} viđenih naloga, {blind} neproverenih",
+  "played-in-window": "Одиграно tokom poslednjih {window}",
+  "region-wide-rate": "{rate} širom svakog opsega",
+  "series-just-started": "Za sada je забележено samo za jedan dan, pa još nema krive za crtanje. Istorija počinje kada i beleženje i raste po jedan dan: obe brojke mere se unazad od trenutka kada se pročitaju, pa je dan koji je prošao bez beleženja onaj do kojeg nijedno kasnije pokretanje ne može da se vrati.",
+  "who-still-plays": "Ko još igra na {label}"
+}

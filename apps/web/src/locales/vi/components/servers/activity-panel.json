@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Tỷ lệ của một nhóm được đo dựa trên các tài khoản mà chúng tôi đọc được trong cửa sổ này, không phải dựa trên mọi tài khoản chúng tôi đang giữ: một tài khoản không được kiểm tra gần đây không thể được xác định là không hoạt động, và tính tài khoản đó vào số này sẽ mô tả tốc độ làm mới của chúng tôi thay vì người chơi. Điểm mù này là 4 trên 100 tài khoản ở đầu thang đo và 13 trên 100 ở cuối thang đo. Số trận mỗi là mức trung bình của các tài khoản đã chơi, và chỉ tính những tài khoản mà chúng tôi có dữ liệu trước và sau, chiếm 96 đến 99 trên mỗi 100 tài khoản.",
+  "band": "Nhóm",
+  "battles-each": "Số trận mỗi",
+  "chart-label": "Tỷ lệ của mỗi nhóm chỉ số đánh giá {label} đã chơi, theo ngày",
+  "how-it-has-moved": "Đã thay đổi như thế nào",
+  "metric-band": "Nhóm {metric}",
+  "nothing-recorded": "Chưa có gì được ghi nhận đối với {metric}. Chuỗi dữ liệu được ghi theo giờ.",
+  "of-observed-accounts": "trong số {observed} được thấy, {blind} chưa được kiểm tra",
+  "played-in-window": "Đã chơi trong {window} vừa qua",
+  "region-wide-rate": "{rate} trên khắp mọi nhóm",
+  "series-just-started": "Mới chỉ ghi nhận được một ngày, nên chưa có đường cong để vẽ. Lịch sử bắt đầu từ khi việc ghi nhận bắt đầu và tăng thêm từng ngày: cả hai con số đều được đo ngược từ khoảnh khắc chúng được đọc, vì một ngày không được ghi nhận là ngày mà không lần chạy nào sau đó có thể quay lại lấy dữ liệu.",
+  "who-still-plays": "Ai vẫn còn chơi ở {label}"
+}

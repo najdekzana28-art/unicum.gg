@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Ett bands andel mäts mot de konton vi läser inom fönstret, inte mot varje konto vi har. Ett konto som ingen nyligen kontrollerat är inte känt för att vara inaktivt, och att räkna det som sådant skulle beskriva vårt eget uppdateringstempo hellre än spelarna. Den blinda fläcken är 4 av 100 konton högst upp på skalan och 13 av 100 längst ner. Strider vardera är genomsnittet för de konton som faktiskt spelade, och räknar bara de som vi har värden för både före och efter, vilket är 96 till 99 av varje hundratal.",
+  "band": "Band",
+  "battles-each": "Strider vardera",
+  "chart-label": "Andelen av varje betygsband för {label} som spelade, per dag",
+  "how-it-has-moved": "Hur det har flyttat sig",
+  "metric-band": "Band för {metric}",
+  "nothing-recorded": "Inget registrerat mot {metric} ännu. Serien skrivs varje timme.",
+  "of-observed-accounts": "av {observed} sedda, {blind} okontrollerade",
+  "played-in-window": "Spelade under de senaste {window}",
+  "region-wide-rate": "{rate} över alla band",
+  "series-just-started": "En dag har registrerats hittills, så det finns ännu ingen kurva att rita. Historiken börjar när registreringen startar och växer med en dag i taget. Båda siffrorna mäts bakåt från det ögonblick då de läses, så en dag som gick utan registrering är en dag som ingen senare körning kan gå tillbaka efter.",
+  "who-still-plays": "Vilka som fortfarande spelar på {label}"
+}

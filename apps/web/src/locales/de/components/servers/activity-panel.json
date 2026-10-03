@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "Der Anteil eines Bands wird anhand der Konten gemessen, die wir innerhalb des Fensters Lesen, und nicht anhand aller Konten, die wir halten: Bei einem Konto, das kürzlich niemand geprüft hat, ist nicht bekannt, ob es inaktiv ist. Es als inaktiv zu zählen, würde unser eigenes Aktualisierungstempo beschreiben und nicht die Spieler. Dieser blinde Fleck beträgt am oberen Ende der Skala 4 von 100 Konten und am unteren Ende 13 von 100. Gefechte je ist der Durchschnitt für die Konten, die tatsächlich gespielt haben, und berücksichtigt nur diejenigen, für die wir einen Wert davor und danach halten. Das sind 96 bis 99 von jeweils 100.",
+  "band": "Band",
+  "battles-each": "Gefechte je",
+  "chart-label": "Anteil jedes {label}-Wertungsbands, das pro Tag gespielt hat",
+  "how-it-has-moved": "Wie es sich verschoben hat",
+  "metric-band": "{metric}-Band",
+  "nothing-recorded": "Für {metric} wurde bisher Nichts Aufgezeichnet. Die Reihe wird stündlich geschrieben.",
+  "of-observed-accounts": "Von {observed} gesehenen Konten sind {blind} ungeprüft",
+  "played-in-window": "Gespielt in den letzten {window}",
+  "region-wide-rate": "{rate} über jedes Band",
+  "series-just-started": "Bisher wurde nur ein Tag aufgezeichnet, daher gibt es noch keine Kurve zum Zeichnen. Der Verlauf beginnt mit der Aufzeichnung und wächst Tag für Tag: Beide Werte werden rückblickend ab dem Moment gemessen, in dem sie gelesen werden. Ein Tag, an dem nichts aufgezeichnet wurde, kann von keinem späteren Lauf zurückgeholt werden.",
+  "who-still-plays": "Wer auf {label} noch Spielen"
+}
