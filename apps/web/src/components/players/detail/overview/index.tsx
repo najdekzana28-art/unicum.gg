@@ -1,8 +1,16 @@
 "use client";
 
 import { useLocale } from "@onruntime/translations/react";
+import { ChartLine } from "lucide-react";
 import dynamic from "next/dynamic";
 import { MountOnVisible } from "@/components/mount-on-visible";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import {
   Panel,
   PanelContent,
@@ -98,6 +106,14 @@ export function OverallTab({
   const { t } = useTranslation(
     "components/players/detail/overview/index",
   );
+  // A line needs two points. Below that the chart draws one lone dot over an
+  // empty grid, which reads as something broken rather than as an account the
+  // pipeline has only sampled once. Counted the way the tank panel counts it:
+  // a snapshot carrying no value for the current metric draws nothing, so what
+  // matters is the points that would actually be plotted.
+  const chartable = ratingData.filter(
+    (point) => point.lifetime[metric] !== null,
+  ).length;
 
   return (
     <>
@@ -149,7 +165,7 @@ export function OverallTab({
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
-          {ratingData.length > 0 ? (
+          {chartable >= 2 ? (
             <>
               <div className={`p-4 ${styles.mutedDescription}`}>
                 {t("progression-blurb", { metric: metricLabel })}
@@ -166,9 +182,22 @@ export function OverallTab({
               </MountOnVisible>
             </>
           ) : (
-            <div className={`p-4 ${styles.mutedDescription}`}>
-              {t("progression-empty")}
-            </div>
+            <Empty className="md:p-8">
+              <EmptyHeader>
+                <EmptyMedia variant="icon">
+                  <ChartLine />
+                </EmptyMedia>
+                <EmptyTitle>{t("progression-empty-title")}</EmptyTitle>
+                {/* Which of the two it is tells the reader where they stand:
+                    one snapshot is a curve that starts on the next refresh,
+                    none is an account we have not sampled at all. */}
+                <EmptyDescription>
+                  {chartable === 1
+                    ? t("progression-single")
+                    : t("progression-empty")}
+                </EmptyDescription>
+              </EmptyHeader>
+            </Empty>
           )}
         </PanelContent>
       </Panel>
