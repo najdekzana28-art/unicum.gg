@@ -3,5 +3,7 @@
   "progression-title": "Tiến trình {metric} của {nickname}",
   "lift-drag-title": "Xe tăng định hình chỉ số đánh giá của {nickname}",
   "progression-blurb": "Dòng liền là {metric} tổng thể, khớp với cột Tổng ở trên, thay đổi chậm theo thời gian khi các trận đấu mới được cộng dồn. Dòng nét đứt là {metric} theo từng phiên, được tính từ các trận đấu đã chơi kể từ ảnh chụp nhanh trước đó. Dòng này cho thấy các chuỗi phong độ cao và thấp. Màu dòng tuân theo bậc chỉ số đánh giá.",
-  "progression-empty": "Chưa đủ lịch sử. Cần ít nhất một ảnh chụp nhanh để vẽ đường cong. Hãy quay lại sau."
+  "progression-empty-title": "Chưa có đủ lịch sử",
+  "progression-empty": "Đường cong được vẽ từ lịch sử của tài khoản này, hiện chúng tôi không có dữ liệu nào. Đường cong xuất hiện khi có hai ảnh chụp.",
+  "progression-single": "Một đường cong cần hai điểm, và tài khoản này hiện mới có một điểm. Đường cong xuất hiện khi có ảnh chụp nhanh tiếp theo."
 }

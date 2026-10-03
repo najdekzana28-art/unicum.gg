@@ -3,5 +3,7 @@
   "progression-title": "{nickname}s {metric}-udvikling",
   "lift-drag-title": "Kampvogne, der former {nickname}s vurdering",
   "progression-blurb": "Den fuldt optrukne linje er samlet {metric} (matcher kolonnen I alt ovenfor) og ændrer sig langsomt, efterhånden som nye kampe bliver tilføjet. Den stiplede linje er {metric} pr. session, beregnet ud fra kampene, der er spillet siden det forrige øjebliksbillede. Den viser varme og kolde perioder. Linjens farve følger vurderingsniveauet.",
-  "progression-empty": "Der er ikke nok historik endnu. Vi skal bruge mindst ét øjebliksbillede for at tegne kurven. Tjek tilbage snart."
+  "progression-empty-title": "Der er endnu ikke nok historik",
+  "progression-empty": "Kurven tegnes ud fra denne kontos egen historik, og vi har endnu ingen af den. Den vises, når to øjebliksbilleder er registreret.",
+  "progression-single": "En kurve kræver to point, og denne konto har indtil videre ét. Den vises, når det næste øjebliksbillede er registreret."
 }

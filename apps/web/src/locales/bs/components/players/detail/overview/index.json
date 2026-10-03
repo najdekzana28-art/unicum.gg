@@ -3,5 +3,7 @@
   "progression-title": "Napredak igrača {nickname} po parametru {metric}",
   "lift-drag-title": "Tenkovi koji oblikuju rejting igrača {nickname}",
   "progression-blurb": "Puna linija prikazuje ukupni {metric}, što odgovara koloni Ukupno iznad, i polako se mijenja kako se dodaju nove bitke. Isprekidana linija prikazuje {metric} po sesiji, izračunat iz bitki odigranih od prethodnog snimka. Prikazuje nizove dobre i loše forme. Boja linije prati nivo rejtinga.",
-  "progression-empty": "Još nema dovoljno historije. Potreban nam je najmanje jedan snimak za crtanje krive. Provjerite ponovo uskoro."
+  "progression-empty-title": "Još nema dovoljno historije",
+  "progression-empty": "Kriva se crta na osnovu historije ovog računa, a mi je još nemamo. Pojavljuje se čim stignu dva snimka.",
+  "progression-single": "Za krivu su potrebna dva boda, a ovaj račun zasad ima jedan. Pojavljuje se čim stigne sljedeći snimak."
 }

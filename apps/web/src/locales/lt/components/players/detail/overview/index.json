@@ -3,5 +3,7 @@
   "progression-title": "{nickname} {metric} raida",
   "lift-drag-title": "Tankai, formuojantys {nickname} reitingą",
   "progression-blurb": "Ištisinė eilutė rodo bendrą {metric}, atitinkantį aukščiau esantį stulpelį „Iš viso“, ir pamažu kintantį kaupiantis naujiems mūšiams. Brūkšninė eilutė rodo vieno seanso {metric}, apskaičiuotą pagal mūšius, žaistus nuo ankstesnės momentinės kopijos. Ji parodo gerus ir blogus žaidimo ruožus. Eilutės spalva priklauso nuo reitingo lygio.",
-  "progression-empty": "Istorijos dar nepakanka. Kreivei nubraižyti reikia bent vienos momentinės kopijos. Netrukus patikrinkite dar kartą."
+  "progression-empty-title": "Kol kas istorijos nepakanka",
+  "progression-empty": "Kreivė sudaroma remiantis šios paskyros istorija, o kol kas jos dar neturime. Ji rodoma, kai gaunamos dvi momentinės kopijos.",
+  "progression-single": "Kreivei reikia dviejų taškų, o kol kas ši paskyra turi tik vieną. Ji rodoma, kai gaunama kita momentinė kopija."
 }
