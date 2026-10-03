@@ -14,6 +14,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import type {
   MirrorModel,
 } from "@unicum.gg/wargaming";
+import { piecesOf } from "@unicum.gg/wargaming";
 
 import { partOf } from "./decals";
 import { studio } from "./lighting";
@@ -165,23 +166,13 @@ export async function loadVisual({
   // two meet here: choose the E 100's 15 cm gun and the viewer draws `Gun_06`.
   // Falls back to the first of each, which is the stock loadout and is what a
   // page with no choice made on it shows.
-  const names = Object.keys(model.pieces).sort();
-  const chosen = (slot: keyof Mounted) => {
-    const key = mounted?.[slot];
-    const piece = key ? model.modules?.[key] : undefined;
-    return piece && model.pieces[piece] ? piece : undefined;
-  };
-  const first = (prefix: string) => {
-    const slot =
-      prefix === "Gun" ? "gun" : prefix === "Turret" ? "turret" : prefix === "Chassis" ? "chassis" : null;
-    return (slot ? chosen(slot) : undefined) ?? names.find((n) => n.startsWith(prefix));
-  };
-  const pieces = [
-    first("Hull"),
-    first("Chassis"),
-    first("Turret"),
-    first("Gun"),
-  ].filter((n): n is string => n !== undefined);
+  // **The same rule the page preloads from**, rather than a second copy of it.
+  // The server names these files in the markup so they are on their way before
+  // this runs, and a selection that drifts by one piece is not an error anybody
+  // sees: the browser fetches what was asked for, this asks for something else,
+  // and the bytes are paid for twice.
+  const pieces = piecesOf(model, mounted);
+  const first = (prefix: string) => pieces.find((n) => n.startsWith(prefix));
 
   const parts: THREE.Object3D[] = [];
   let triangles = 0;

@@ -34,6 +34,9 @@ const TankViewer = dynamic(
  */
 export function TankStage({
   code,
+  pinnedRoot,
+  pinnedPath,
+  pinnedWorn,
   shells,
   builds,
   mechanic,
@@ -42,6 +45,10 @@ export function TankStage({
   children,
 }: {
   code: string;
+  /** Passed straight through: which build of the mirror the page resolved. */
+  pinnedRoot?: string | null;
+  pinnedPath?: string | null;
+  pinnedWorn?: string | null;
   /** Passed straight through: the stage owns the swap, not the armour. */
   shells?: Record<string, HeroShell[]>;
   /**
@@ -127,6 +134,9 @@ export function TankStage({
       {afterLoad ? (
         <TankViewer
           code={code}
+          pinnedRoot={pinnedRoot}
+          pinnedPath={pinnedPath}
+          pinnedWorn={pinnedWorn}
           shells={shells}
           builds={builds}
           mechanic={mechanic}

@@ -59,8 +59,18 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  *     reader would otherwise keep being served the English one, not a crash.
  * v20: why the game refuses to dress this vehicle, which the hero reads to stop
  *     offering a wardrobe on the hundred and eleven that cannot be painted.
+ * v21: the addresses the hero's first picture is made of, so the page can name
+ *     them in its markup instead of waiting for the viewer to work them out.
+ * v22: the build those addresses are pinned to, beside them, so the viewer can
+ *     read the same one. v21 shipped without it and was reverted, which is why
+ *     this is a new number rather than a correction of that one: entries from
+ *     it are still in Redis and carry only half the block.
+ * v23: the same block, now given to one vehicle at a time while the way it is
+ *     emitted is proven. A new number for the same reason again: v22 entries
+ *     written while this was unrestricted are still in Redis, and served under
+ *     that key they would hand the block to vehicles the gate excludes.
  */
-const SHAPE_VERSION = 20;
+const SHAPE_VERSION = 23;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

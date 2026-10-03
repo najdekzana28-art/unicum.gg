@@ -1,6 +1,6 @@
 "use client";
 
-import { type RefObject, useEffect, useRef, useState } from "react";
+import { type RefObject, useEffect, useRef, useState, useMemo } from "react";
 
 import type { PaintLock } from "@unicum.gg/shared";
 
@@ -34,6 +34,9 @@ import type { Shot } from "@/services/tank-viewer/armour";
 
 export function TankViewer({
   code,
+  pinnedRoot,
+  pinnedPath,
+  pinnedWorn,
   shells,
   builds,
   mechanic,
@@ -43,6 +46,20 @@ export function TankViewer({
 }: {
   /** The code the game gives it, which is the folder's name, `R45_IS-7`. */
   code: string;
+  /**
+   * The build of the geometry mirror to read, as the page resolved it.
+   *
+   * **Taken in three fields rather than one object** because this drives the
+   * effect that builds the whole scene: an object rebuilt on every render would
+   * tear the vehicle down and raise it again each time anything else on the
+   * page moved.
+   *
+   * Absent wherever a viewer is mounted by something that did not resolve the
+   * mirror server-side, which then falls back to resolving it in the browser.
+   */
+  pinnedRoot?: string | null;
+  pinnedPath?: string | null;
+  pinnedWorn?: string | null;
   /**
    * The shells the live view can answer for, by the gun that loads them, the
    * standard one first within each.
@@ -149,7 +166,18 @@ export function TankViewer({
     // the cursor answers for the new one.
     fire.current?.(shell);
   }, [shell]);
-  const dressing = useHeroDress({ code, opening });
+  // **Memoised on its three fields, not rebuilt per render.** It feeds the
+  // effect that raises the whole vehicle and a callback the wardrobe holds, so
+  // a fresh object each render would tear the tank down and raise it again
+  // every time anything else on the page moved.
+  const pinned = useMemo(
+    () =>
+      pinnedRoot && pinnedPath
+        ? { root: pinnedRoot, path: pinnedPath, worn: pinnedWorn ?? null }
+        : null,
+    [pinnedRoot, pinnedPath, pinnedWorn],
+  );
+  const dressing = useHeroDress({ code, pinned, opening });
   /** The dial's own updater, filled by it and called once an ask is taken. */
   const aiming = useHeroAim({ deployed, mechanic, engage });
   const { aim, watch, takeAim, aimed } = aiming;
@@ -193,6 +221,7 @@ export function TankViewer({
       },
       {
         code,
+        pinned,
         skin: dressing.skin,
         fitted,
         liked,
@@ -231,6 +260,7 @@ export function TankViewer({
     aiming.applyStance,
     dressing.handles,
     code,
+    pinned,
     column,
     dressing.skin,
     undress,
