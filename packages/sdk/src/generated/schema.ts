@@ -4946,19 +4946,6 @@ export interface components {
                 votes: number;
                 reviewCount: number;
             };
-            /** @description Everything the 3D hero reads before it can draw, so a page can ask for it in its markup rather than waiting for the viewer's own JavaScript to work it out. Null for a vehicle the geometry mirror does not carry, which is drawn from a photograph. */
-            model: {
-                /** @description The build of the geometry mirror this vehicle should be read at, as a CDN root pinned to a commit. The viewer uses this one rather than resolving a build of its own: the addresses below are pinned to it, and two answers that drift apart mean the vehicle is downloaded twice. */
-                root: string;
-                /** @description Where the vehicle's files sit under `vehicles/`. Unguessable from the code: the nation folder is not the nation the scripts name, and a quarter of the catalogue draws from another vehicle's meshes. */
-                path: string;
-                /** @description The 3D style this vehicle is issued already wearing, where it is issued one. Most reward vehicles ship no geometry of their own, so `path` points at the tank underneath and this is the rest of the answer. */
-                worn: string | null;
-                /** @description The vehicle's meshes, as absolute URLs on the geometry mirror, pinned to the build they were read at. */
-                geometry: string[];
-                /** @description The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it. */
-                textures: string[];
-            } | null;
         };
         /** @description Everything the tank page renders: identity, best players per rating metric, server averages, WN8/WNX expected values, combat specs, Marks of Excellence/Mastery (current and history) and the research path. */
         TankDetailResponse: {
@@ -5055,19 +5042,6 @@ export interface components {
                 votes: number;
                 reviewCount: number;
             };
-            /** @description Everything the 3D hero reads before it can draw, so a page can ask for it in its markup rather than waiting for the viewer's own JavaScript to work it out. Null for a vehicle the geometry mirror does not carry, which is drawn from a photograph. */
-            model: {
-                /** @description The build of the geometry mirror this vehicle should be read at, as a CDN root pinned to a commit. The viewer uses this one rather than resolving a build of its own: the addresses below are pinned to it, and two answers that drift apart mean the vehicle is downloaded twice. */
-                root: string;
-                /** @description Where the vehicle's files sit under `vehicles/`. Unguessable from the code: the nation folder is not the nation the scripts name, and a quarter of the catalogue draws from another vehicle's meshes. */
-                path: string;
-                /** @description The 3D style this vehicle is issued already wearing, where it is issued one. Most reward vehicles ship no geometry of their own, so `path` points at the tank underneath and this is the rest of the answer. */
-                worn: string | null;
-                /** @description The vehicle's meshes, as absolute URLs on the geometry mirror, pinned to the build they were read at. */
-                geometry: string[];
-                /** @description The maps those meshes wear, at the standard definition the hero opens on. The client's shared micro-grain is deliberately absent: it is six megabytes, every vehicle names it, and the viewer stands the tank up without it. */
-                textures: string[];
-            } | null;
         };
         /** @description A tank's economics: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1 (cheapest path, prerequisite modules included). */
         TankEconomics: {

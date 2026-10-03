@@ -60,13 +60,6 @@ export async function openStage(
     skin?: string | null;
     fitted?: Mounted;
     liked: { centred: boolean };
-    /**
-     * The build of the mirror to read, and where this vehicle sits in it.
-     *
-     * Absent on every surface that does not render it server-side, which then
-     * resolves the mirror for itself as before.
-     */
-    pinned?: { root: string; path: string; worn: string | null } | null;
     opening: {
       view?: string;
       hullDown?: boolean;
@@ -103,24 +96,11 @@ export async function openStage(
     import("@/services/tank-viewer"),
   ]);
   handles.setShown(false);
-  // **The build the page named, where it named one.** The address is pinned to
-  // a commit, so the commit is part of every path under it: a page that preloads
-  // one build while this resolves another names the same files at two addresses
-  // and the vehicle comes down twice, which is what it did. The page decides,
-  // and what it decided is what its own preloads point at.
-  //
-  // Resolved here only where nothing was handed over, which is every surface
-  // that is not the tank page: the comparison, and anything else that mounts a
-  // viewer of its own.
-  // **Ignored when the viewer is reading a tree on disk.** A developer can point
-  // it at a freshly generated catalogue, and what the page pinned is the
-  // published mirror: honoured here, the one page the local tree exists for
-  // would be the one page that quietly ignores it. The markup emits no preloads
-  // in that case either, so the two still name the same place.
-  const pinned = process.env.NEXT_PUBLIC_MODELS_ROOT ? null : (from.pinned ?? null);
-  const fromIndex = pinned ? null : await mirror();
-  const root = pinned ? pinned.root : fromIndex!.root;
-  const at = pinned ? pinned.path : fromIndex!.vehicles[from.code];
+  // The address and the index together: the address is pinned to the commit
+  // the index was read at, so a patch landing mid-session cannot pair one
+  // vehicle's manifest with another build's meshes.
+  const { root, vehicles, worn } = await mirror();
+  const at = vehicles[from.code];
   if (!live()) return;
   // **Read after the first await, not before it.** Moving between vehicles
   // is a router transition: the new page is rendered while the old one is
@@ -174,8 +154,7 @@ export async function openStage(
   // A style the reader picked still wins, which costs nothing: the vehicles
   // that are issued wearing one are exactly the vehicles no wardrobe is offered
   // on, so the two can never both be set.
-  const dressed =
-    from.skin ?? (pinned ? pinned.worn : fromIndex?.worn[from.code]) ?? null;
+  const dressed = from.skin ?? worn[from.code] ?? null;
 
   const made = await buildStage({
     surface,

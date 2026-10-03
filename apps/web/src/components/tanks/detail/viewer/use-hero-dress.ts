@@ -19,13 +19,10 @@ import type { MirrorStyle } from "@unicum.gg/wargaming";
 /** How a vehicle is dressed, and everything the picture is told about it. */
 export function useHeroDress({
   code,
-  pinned,
   opening,
 }: {
   /** The vehicle, so a livery chosen for one is not worn by the next. */
   code: string;
-  /** The build the page pinned, so a hover warms what the click will read. */
-  pinned?: { root: string; path: string } | null;
   opening: { marks?: number; cut?: string; season?: string };
 }) {
   /**
@@ -113,9 +110,9 @@ export function useHeroDress({
    */
   const warmCut = useCallback(
     (name: string) => {
-      void warmSkin(code, name, pinned);
+      void warmSkin(code, name);
     },
-    [code, pinned],
+    [code],
   );
   const wear = useCallback((style: MirrorStyle | null) => {
     setWorn(style);

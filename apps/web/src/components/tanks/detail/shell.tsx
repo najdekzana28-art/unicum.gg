@@ -60,7 +60,6 @@ export function TankShell({
   slug,
   tankId,
   meta,
-  model,
   specs,
   videos,
   available,
@@ -76,12 +75,6 @@ export function TankShell({
   slug: string;
   tankId: number;
   meta: VehicleMeta;
-  /**
-   * Which build of the geometry mirror this page resolved, handed to the hero
-   * so it reads the same one the markup preloaded rather than resolving its
-   * own. Absent for a vehicle the mirror does not carry.
-   */
-  model?: { root: string; path: string; worn: string | null } | null;
   /** For the price badge in the hero corner. */
   specs: TankSpec | null;
   /** Approved community videos, plus the reader's own queued ones once the
@@ -225,9 +218,6 @@ export function TankShell({
               carry has nothing else to show. */}
                   <TankStage
                     code={meta.tag}
-                    pinnedRoot={model?.root}
-                    pinnedPath={model?.path}
-                    pinnedWorn={model?.worn}
                     shells={shells}
                     builds={builds}
                     mechanic={mechanic}
