@@ -1,0 +1,14 @@
+{
+  "a-band-s-share-is": "A band’s share is measured against the accounts we read inside the window, not against every account we hold: an account nobody checked recently is not known to be idle, and counting it as such would describe our own refresh pace rather than the players. That blind spot is 4 in 100 accounts at the top of the scale and 13 in 100 at the bottom. Battles each is the average for the accounts that did play, and only counts those we hold a before and after for, which is 96 to 99 of every hundred.",
+  "band": "Band",
+  "battles-each": "Battles each",
+  "chart-label": "Share of each {label} rating band that played, by day",
+  "how-it-has-moved": "How it has moved",
+  "metric-band": "{metric} band",
+  "nothing-recorded": "Nothing recorded against {metric} yet. The series is written hourly.",
+  "of-observed-accounts": "of {observed} seen, {blind} unchecked",
+  "played-in-window": "Played in the last {window}",
+  "region-wide-rate": "{rate} across every band",
+  "series-just-started": "One day recorded so far, so there is no curve to draw yet. The history starts when the recording did and grows by a day at a time: both figures are measured backwards from the moment they are read, so a day that went unrecorded is one no later run can go back for.",
+  "who-still-plays": "Who still plays on {label}"
+}

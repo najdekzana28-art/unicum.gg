@@ -35,3 +35,8 @@ export const DistributionChart = dynamic(
   () => import("./distribution-chart").then((m) => m.DistributionChart),
   { ssr: false, loading: () => <div className="h-64 w-full" /> },
 );
+
+export const ActivityChart = dynamic(
+  () => import("./activity-chart").then((m) => m.ActivityChart),
+  { ssr: false, loading: () => <div className="h-64 w-full" /> },
+);

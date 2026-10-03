@@ -1,6 +1,8 @@
 import { Interpolate } from "@/components/interpolate";
 import { getTranslation } from "@/lib/translations.server";
 import {
+  DEFAULT_ACTIVITY_WINDOW,
+  type PlayerActivity,
   type PlayerDistribution,
   type ServerComparison,
   type ServerStats,
@@ -16,6 +18,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { buildSafe, unicum } from "@/services/sdk";
+import { ActivityPanel } from "./activity-panel";
 import { BattleShares } from "./battle-shares";
 import { ServersDashboard } from "./dashboard";
 import { DistributionPanel } from "./distribution-panel";
@@ -57,32 +60,41 @@ function emptyStats(region: Region): ServerStats {
 
 export async function ServersView({ region, locale }: { region: Region; locale: string }) {
   const { t } = await getTranslation("components/servers/index", locale);
-  const [stats, comparison, distribution, tierWinrate] = await Promise.all([
-    buildSafe(
-      () => unicum.region(region).server.stats(DEFAULT_RANGE),
-      emptyStats(region),
-    ) as Promise<ServerStats>,
-    buildSafe(() => unicum.servers.compare(DEFAULT_RANGE), {
-      range: DEFAULT_RANGE,
-      regions: [],
-    }) as Promise<ServerComparison>,
-    // The endpoint answers 404 until the hourly cron has run for this region,
-    // which is a state the page can render rather than an error it should fail
-    // on, so the whole call degrades to null. A blip degrades the same way: the
-    // rest of the page is about live population and does not depend on this.
-    unicum
-      .region(region)
-      .players.distribution()
-      .then((d) => d as unknown as PlayerDistribution)
-      .catch(() => null),
-    // Same deal: 404 until the nightly pass has rebuilt the grid for this
-    // region, which is a state the page renders by leaving the panel out.
-    unicum
-      .region(region)
-      .players.winrateByTier()
-      .then((g) => g as unknown as TierWinrate)
-      .catch(() => null),
-  ]);
+  const [stats, comparison, distribution, tierWinrate, activity] =
+    await Promise.all([
+      buildSafe(
+        () => unicum.region(region).server.stats(DEFAULT_RANGE),
+        emptyStats(region),
+      ) as Promise<ServerStats>,
+      buildSafe(() => unicum.servers.compare(DEFAULT_RANGE), {
+        range: DEFAULT_RANGE,
+        regions: [],
+      }) as Promise<ServerComparison>,
+      // The endpoint answers 404 until the hourly cron has run for this region,
+      // which is a state the page can render rather than an error it should fail
+      // on, so the whole call degrades to null. A blip degrades the same way: the
+      // rest of the page is about live population and does not depend on this.
+      unicum
+        .region(region)
+        .players.distribution()
+        .then((d) => d as unknown as PlayerDistribution)
+        .catch(() => null),
+      // Same deal: 404 until the nightly pass has rebuilt the grid for this
+      // region, which is a state the page renders by leaving the panel out.
+      unicum
+        .region(region)
+        .players.winrateByTier()
+        .then((g) => g as unknown as TierWinrate)
+        .catch(() => null),
+      // Same deal again: 404 until the hourly cron has recorded this region, and
+      // the series itself is empty for its first day, which the panel states
+      // rather than hides.
+      unicum
+        .region(region)
+        .players.activity(DEFAULT_ACTIVITY_WINDOW)
+        .then((a) => a as unknown as PlayerActivity)
+        .catch(() => null),
+    ]);
 
   const label = REGION_LABEL[region];
 
@@ -148,6 +160,14 @@ export async function ServersView({ region, locale }: { region: Region; locale: 
               />
             </PanelContent>
           </Panel>
+        </>
+      ) : null}
+
+      {activity ? (
+        <>
+          <PanelSeparator />
+
+          <ActivityPanel activity={activity} region={region} />
         </>
       ) : null}
 
