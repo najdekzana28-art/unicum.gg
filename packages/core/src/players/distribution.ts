@@ -21,6 +21,7 @@ import {
 import { REGIONS, type Region, type VehicleType } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
+import { recordPlayerActivity } from "./activity";
 
 /**
  * How the region's players are spread across win rate and WNX, and how its
@@ -261,6 +262,12 @@ export async function loadPlayerDistribution(
  * Recompute every region SEQUENTIALLY, like the coverage trends: the point of
  * moving these scans off the request path is not to have three of them stack on
  * the shared pool instead. One region's failure is logged, not fatal.
+ *
+ * The activity series rides this loop rather than a cron of its own: it reads
+ * the same population over the same player table, so it belongs on the same
+ * cadence and in the same sequence, where it cannot land beside one of these
+ * scans. It is recorded in its own try, since the two answers are independent
+ * and a failure to record a day must not cost the histograms their hour.
  */
 export async function refreshPlayerDistributions(): Promise<number> {
   let ok = 0;
@@ -274,6 +281,18 @@ export async function refreshPlayerDistributions(): Promise<number> {
       );
     } catch (err) {
       console.error(`[player-distribution-cron] ${region} failed:`, err);
+    }
+    try {
+      const start = Date.now();
+      const rows = await recordPlayerActivity(region);
+      console.log(
+        `[player-distribution-cron] ${region} activity: ${rows} rows in ${Date.now() - start}ms`,
+      );
+    } catch (err) {
+      console.error(
+        `[player-distribution-cron] ${region} activity failed:`,
+        err,
+      );
     }
   }
   return ok;
