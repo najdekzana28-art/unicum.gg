@@ -467,6 +467,8 @@ class TwitchChannelClient {
 }
 
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
+  /** Player activity by band */
+  activity(window?: NonNullable<QueryOf<"/{region}/players/activity">>["window"]): RequestHandle<Data<"/{region}/players/activity">>;
   /** Compare players */
   compare(names: NonNullable<QueryOf<"/{region}/players/compare">>["names"]): RequestHandle<Data<"/{region}/players/compare">>;
   /** Player distribution */
@@ -578,6 +580,14 @@ class RegionClient {
   get players(): PlayersNamespace {
     const ns = ((nickname: string) =>
       new PlayerClient(this.api, this.baseUrl, this.region, nickname)) as PlayersNamespace;
+    ns.activity = (window) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/activity", { region: this.region }, { window }),
+        () =>
+          this.api.GET("/{region}/players/activity", {
+            params: { path: { region: this.region }, query: { window } },
+          }),
+      );
     ns.compare = (names) =>
       handle(
         buildUrl(this.baseUrl, "/{region}/players/compare", { region: this.region }, { names }),
