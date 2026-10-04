@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import {
   BattleFormat,
   BattleResult,
+  isCompetitiveFormat,
   parseYoutubeUrl,
   storedTeamSize,
   storedTier,
@@ -226,6 +227,10 @@ export async function editTankVideo(
   const previousStatus = row.status as TankVideoStatus;
   const requeued = previousStatus !== TankVideoStatus.Pending;
 
+  // Whether the corrected format has a clan to credit at all, named once so the
+  // row, the placement it answers with and the card cannot disagree.
+  const credited = isCompetitiveFormat(edit.format);
+
   const updated = await db
     .update(tankVideos)
     .set({
@@ -245,8 +250,14 @@ export async function editTankVideo(
         edit.format === BattleFormat.Random ? edit.combinedDamage : null,
       teamSize: storedTeamSize(edit.format, edit.teamSize),
       tier: storedTier(edit.format, edit.tier),
-      clanRegion: edit.clanRegion ?? null,
-      clanId: edit.clanId ?? null,
+      // And the credit goes with it, for the same reason: a clan's page
+      // publishes the tactics it called, so a random battle has nothing to be
+      // credited for. The form hides the field when the format stops offering
+      // it, which does not clear the state behind it, and a correction that
+      // moves a tactic into a random battle would otherwise leave the clan on a
+      // row that page will never show.
+      clanRegion: credited ? (edit.clanRegion ?? null) : null,
+      clanId: credited ? (edit.clanId ?? null) : null,
       status: TankVideoStatus.Pending,
       reviewedAt: null,
       reviewedBy: null,
@@ -272,8 +283,8 @@ export async function editTankVideo(
     after: placement({
       tankId: edit.tankId,
       arenaId: edit.arenaId,
-      clanRegion: edit.clanRegion ?? null,
-      clanId: edit.clanId ?? null,
+      clanRegion: credited ? (edit.clanRegion ?? null) : null,
+      clanId: credited ? (edit.clanId ?? null) : null,
     }),
     requeued,
     // The row the diff compares against is the one just replaced, so `row` is
@@ -337,7 +348,7 @@ async function refreshModerationCard(
       edit.format === BattleFormat.Random ? edit.combinedDamage : null,
     teamSize: edit.teamSize ?? null,
     tier: edit.tier ?? null,
-    clanTag: edit.clanTag ?? null,
+    clanTag: isCompetitiveFormat(edit.format) ? (edit.clanTag ?? null) : null,
     // The card names who is waiting on the review, which is the submitter and
     // not whoever corrected it.
     submitterName: await submitterName(row.submittedBy),

@@ -118,10 +118,16 @@ export function VideoEditFields({
   const competitive = isCompetitiveFormat(format);
   const fixedSize = FORMAT_TEAM_SIZE[format];
   const fixedTier = FORMAT_TIER[format];
-  // The two fields the format decides the existence of, named once so the
+  // The three fields the format decides the existence of, named once so the
   // inputs below and the body above cannot disagree about them.
   const showsTeamSize = competitive && fixedSize === undefined;
   const showsTier = competitive && fixedTier === undefined;
+  // The credit belongs to a tactic. A random battle is one player's game, filed
+  // under the vehicle it was played in, and neither submission form offers a
+  // clan on one: the field was here for every row because an edit cannot know
+  // which form it came through, which put a credit on the one kind of video the
+  // clan tab does not publish.
+  const showsClan = competitive;
   // A random battle has nowhere to live without its vehicle, and the endpoint
   // says so; the button says it first by staying disabled.
   const complete =
@@ -151,7 +157,7 @@ export function VideoEditFields({
         // endpoint stores whatever a random battle is sent.
         teamSize: showsTeamSize && teamSize ? Number(teamSize) : undefined,
         tier: showsTier && tier ? Number(tier) : undefined,
-        clanTag: clan?.tag,
+        clanTag: showsClan ? clan?.tag : undefined,
       });
       setSaved(true);
       // The author's own queue is what shows a pending row on the pages it
@@ -296,12 +302,14 @@ export function VideoEditFields({
           </label>
         )}
 
-        <ClanField
-          region={region}
-          clan={clan}
-          onPick={setClan}
-          onClear={() => setClan(null)}
-        />
+        {showsClan && (
+          <ClanField
+            region={region}
+            clan={clan}
+            onPick={setClan}
+            onClear={() => setClan(null)}
+          />
+        )}
       </div>
 
       {error && <p className="text-sm text-red-500">{error}</p>}

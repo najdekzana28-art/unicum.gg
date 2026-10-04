@@ -2,6 +2,7 @@ import { and, eq } from "drizzle-orm";
 import {
   BattleFormat,
   BattleResult,
+  isCompetitiveFormat,
   parseYoutubeUrl,
   storedTeamSize,
   storedTier,
@@ -213,8 +214,16 @@ export async function submitTankVideo(
       // depends on someone having typed 15 and X correctly.
       teamSize: storedTeamSize(submission.format, submission.teamSize),
       tier: storedTier(submission.format, submission.tier),
-      clanRegion: submission.clanRegion ?? null,
-      clanId: submission.clanId ?? null,
+      // And the credit with them: a clan's page publishes the tactics it
+      // called, so a random battle has nothing to be credited for. Neither form
+      // offers the field on one, which is why this is about the request nobody
+      // filled in a form to send.
+      clanRegion: isCompetitiveFormat(submission.format)
+        ? (submission.clanRegion ?? null)
+        : null,
+      clanId: isCompetitiveFormat(submission.format)
+        ? (submission.clanId ?? null)
+        : null,
       status: TankVideoStatus.Pending,
       submittedBy: submission.userId,
     })
