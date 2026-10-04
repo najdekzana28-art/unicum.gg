@@ -1,6 +1,8 @@
 import { APP_IDENTITY, BRAND_COLOR_INT, youtubeThumbnailUrl } from "@unicum.gg/shared";
-import { sendDirectMessage } from "@unicum.gg/core/discord";
-import { getDiscordUserId } from "@unicum.gg/core/discord/supporter-role";
+import {
+  REJECTED_COLOR,
+  sendAuthorNotice,
+} from "@unicum.gg/core/tanks/author-notice";
 
 /**
  * Telling a submitter what became of their suggestion.
@@ -16,10 +18,6 @@ import { getDiscordUserId } from "@unicum.gg/core/discord/supporter-role";
  * fail a review or hold one up.
  */
 
-/** Red rather than the brand colour, so the two verdicts do not read alike in a
- * glance at a notification. */
-const REJECTED_COLOR = 0xef4444;
-
 export type AuthorNotice = {
   /** Better Auth id of the submitter. Null once the account is deleted, which
    * takes nobody to tell. */
@@ -33,16 +31,7 @@ export type AuthorNotice = {
   note?: string | null;
 };
 
-/**
- * Best-effort, and silent on every ordinary miss: an author who never linked
- * Discord, a bot that shares no server with them, DMs refused. Only a genuine
- * failure is logged, and even that is swallowed by the caller.
- */
 export async function notifyVideoAuthor(notice: AuthorNotice): Promise<void> {
-  if (!notice.userId) return;
-  const discordUserId = await getDiscordUserId(notice.userId);
-  if (!discordUserId) return;
-
   const fields = notice.approved
     ? notice.url
       ? [{ name: "Where it is", value: notice.url, inline: false }]
@@ -66,16 +55,18 @@ export async function notifyVideoAuthor(notice: AuthorNotice): Promise<void> {
         },
       ];
 
-  await sendDirectMessage(discordUserId, {
-    title: notice.approved
-      ? "Your video is live"
-      : "Your video was not published",
-    description: notice.title,
-    color: notice.approved ? BRAND_COLOR_INT : REJECTED_COLOR,
-    thumbnail: { url: youtubeThumbnailUrl(notice.videoId) },
-    fields,
-    footer: { text: APP_IDENTITY.NAME },
-  }).catch((err) =>
-    console.error("[tank-videos] author notice failed:", err),
-  );
+  await sendAuthorNotice({
+    userId: notice.userId,
+    scope: "tank-videos",
+    embed: {
+      title: notice.approved
+        ? "Your video is live"
+        : "Your video was not published",
+      description: notice.title,
+      color: notice.approved ? BRAND_COLOR_INT : REJECTED_COLOR,
+      thumbnail: { url: youtubeThumbnailUrl(notice.videoId) },
+      fields,
+      footer: { text: APP_IDENTITY.NAME },
+    },
+  });
 }
