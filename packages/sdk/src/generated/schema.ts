@@ -6657,9 +6657,9 @@ export interface operations {
     };
     "get-{region}-players-{nickname}-sessions": {
         parameters: {
-            query: {
+            query?: {
                 /** @description Bucket size for the sessions. */
-                granularity: "daily" | "weekly" | "monthly";
+                granularity?: "daily" | "weekly" | "monthly";
             };
             header?: never;
             path: {
@@ -8100,9 +8100,9 @@ export interface operations {
     };
     "get-{region}-server-stats": {
         parameters: {
-            query: {
+            query?: {
                 /** @description How far back the population series reads. */
-                range: "day" | "week" | "month" | "year";
+                range?: "day" | "week" | "month" | "year";
             };
             header?: never;
             path: {
@@ -8126,9 +8126,9 @@ export interface operations {
     };
     "get-servers-compare": {
         parameters: {
-            query: {
+            query?: {
                 /** @description How far back the population series reads. */
-                range: "day" | "week" | "month" | "year";
+                range?: "day" | "week" | "month" | "year";
             };
             header?: never;
             path?: never;

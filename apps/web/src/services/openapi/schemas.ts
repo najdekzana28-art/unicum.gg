@@ -79,9 +79,10 @@ export const playerLiveParams = z.object({
 
 /** How a player's sessions are bucketed. */
 export const playerSessionsQuery = z.object({
+  // `.optional()`, never `.default()`: see `QUERY_PARAM_DEFAULTS` below.
   granularity: z
     .enum(SessionGranularity)
-    .default(SessionGranularity.Daily)
+    .optional()
     .meta({
       description: "Bucket size for the sessions.",
       "x-enum-source": "SESSION_GRANULARITY",
@@ -100,11 +101,7 @@ export const playerSessionsQuery = z.object({
  * a career rather than a span, and `range` is how far back a series reads, which
  * here is a separate axis from how far back "active" looks). */
 export const playerActivityQuery = z.object({
-  // `.optional()` here at the use site, never folded into the field: the
-  // generator reads these off the AST, so optionality baked in elsewhere comes
-  // out `required: true` and documents a window a caller must send. The doc's
-  // default comes from `QUERY_PARAM_DEFAULTS`, since `.default()` is not
-  // serialised either.
+  // `.optional()`, never `.default()`: see `QUERY_PARAM_DEFAULTS` below.
   window: z
     .enum(ActivityWindow)
     .optional()
@@ -115,7 +112,9 @@ export const playerActivityQuery = z.object({
 });
 
 export const serverStatsQuery = z.object({
-  range: z.enum(ServerStatsRange).default(ServerStatsRange.Day).meta({
+  // `.optional()`, never `.default()`: see `QUERY_PARAM_DEFAULTS` below for why
+  // the default lives there instead.
+  range: z.enum(ServerStatsRange).optional().meta({
     description: "How far back the population series reads.",
     "x-enum-source": "SERVER_STATS_RANGE",
   } as EnumMeta),
@@ -561,6 +560,14 @@ export const onslaughtHistoryQuery = z.object({
 // next-openapi-gen doesn't serialize `.default()` on enum params, so the doc
 // defaults are applied when serving the spec (see `api/openapi.json/route.ts`),
 // keyed by query-param name. Sourced from the app constants so they can't drift.
+//
+// Which is why a param with a default is written `.optional()` and never
+// `.default()`. The generator reads these objects off the AST and treats a field
+// that is not optional as REQUIRED, so `.default()` buys nothing (it is dropped)
+// and costs the one thing that matters: the doc then tells every caller they
+// must send a parameter the handler already falls back on, and the SDK generates
+// a mandatory argument for it. Both halves are silent, since the endpoint keeps
+// answering fine for anyone who ignores the doc.
 export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
   period: TopPlayersPeriod.Overall,
   metric: DEFAULT_RATING_METRIC,

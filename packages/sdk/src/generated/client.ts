@@ -83,7 +83,7 @@ class PlayerClient {
   }
 
   /** Player sessions */
-  sessions(granularity: NonNullable<QueryOf<"/{region}/players/{nickname}/sessions">>["granularity"]) {
+  sessions(granularity?: NonNullable<QueryOf<"/{region}/players/{nickname}/sessions">>["granularity"]) {
     const path = { region: this.region, nickname: this.nickname };
     return handle(
       buildUrl(this.baseUrl, "/{region}/players/{nickname}/sessions", path, { granularity }),
@@ -559,7 +559,7 @@ type TournamentsNamespace = ((id: string) => TournamentClient) & {
 
 type ServerNamespace = {
   /** Server population */
-  stats(range: NonNullable<QueryOf<"/{region}/server/stats">>["range"]): RequestHandle<Data<"/{region}/server/stats">>;
+  stats(range?: NonNullable<QueryOf<"/{region}/server/stats">>["range"]): RequestHandle<Data<"/{region}/server/stats">>;
   /** Live count of players online for this region (SSE). Browser-only. */
   online(
     onData: (payload: OnlinePayload) => void,
@@ -1100,7 +1100,7 @@ type StreamersNamespace = {
 
 type ServersNamespace = {
   /** Compare regions */
-  compare(range: NonNullable<QueryOf<"/servers/compare">>["range"]): RequestHandle<Data<"/servers/compare">>;
+  compare(range?: NonNullable<QueryOf<"/servers/compare">>["range"]): RequestHandle<Data<"/servers/compare">>;
 };
 
 type SupportNamespace = {
