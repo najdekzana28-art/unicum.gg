@@ -1013,6 +1013,7 @@
   "components/maps/detail/history/index:update": "42fd7840ff10",
   "components/maps/detail/history/version-map:after": "79ba5e1b3f99",
   "components/maps/detail/history/version-map:before": "74f39697ac32",
+  "components/maps/detail/history/version-map:enlarge": "5aa3d1e5aeef",
   "components/maps/detail/minimap-viewer:after": "13f2d652f709",
   "components/maps/detail/minimap-viewer:after-the-event": "d19889e3f47d",
   "components/maps/detail/minimap-viewer:base": "077fe9c54ed5",

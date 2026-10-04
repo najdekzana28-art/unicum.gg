@@ -1,4 +1,5 @@
 {
   "after": "Na",
-  "before": "Voor"
+  "before": "Voor",
+  "enlarge": "Vergroot de minimap van {map}"
 }
