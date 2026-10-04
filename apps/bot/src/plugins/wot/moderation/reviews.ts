@@ -103,7 +103,7 @@ export async function handleRatingReview(
         ? data?.url
           ? `Published. It is live: ${data.url}`
           : "Published. It is live on the tank page."
-        : "Rejected. The text stays down; their stars still count towards the average.",
+        : "Rejected. The author is told, their stars still count towards the average, and they can write another from the tank page.",
     );
     await interaction.message.edit({
       components: [settledRow(`${label} by ${interaction.user.username}`)],

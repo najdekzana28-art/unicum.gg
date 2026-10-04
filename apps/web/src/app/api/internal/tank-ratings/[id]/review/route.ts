@@ -4,7 +4,8 @@ import {
   ReviewDecision,
   reviewTankRating,
 } from "@unicum.gg/core/tanks/ratings-moderation";
-import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
+import { notifyRatingAuthor } from "@unicum.gg/core/tanks/rating-author-notice";
+import { getTanksByIds } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { REGIONS } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 
@@ -56,24 +57,46 @@ export async function POST(
     return Response.json({ error: reviewed.decision }, { status: 409 });
   }
 
+  // Resolved from the catalogue rather than carried on the card: the press may
+  // land weeks after it was posted, and this is the one place both the slug and
+  // the vehicle's name are needed, the first to drop the pages and the second
+  // to name the tank in the author's notice. A vehicle that has left the
+  // catalogue resolves to neither, which is why nothing below assumes one.
+  const [tank] = await getTanksByIds(REGIONS[0], [reviewed.tankId!]).catch(
+    () => [],
+  );
   // Tanks are the same on every region and the votes are global, so all three
   // copies of the page carry the review and all three are dropped. Done on a
   // rejection too: the tab is cached and a review pulled down has to actually
   // disappear from it.
-  const slug = await getTankSlug(REGIONS[0], reviewed.tankId!).catch(() => null);
-  if (slug) {
+  if (tank) {
     for (const region of REGIONS) {
-      revalidatePath(`${ROUTES.TANK(region, slug)}/community`);
-      revalidatePath(ROUTES.TANK(region, slug));
+      revalidatePath(`${ROUTES.TANK(region, tank.slug)}/community`);
+      revalidatePath(ROUTES.TANK(region, tank.slug));
     }
   }
+
+  // The Community tab, which is where a published opinion now shows and where a
+  // rejected one is rewritten, so both verdicts can point at it.
+  const communityUrl = tank
+    ? `${APP_IDENTITY.URL}${ROUTES.TANK(REGIONS[0], tank.slug)}/community`
+    : null;
+
+  // Told after the decision is recorded and the pages are dropped, so a notice
+  // never describes a state the site has not reached. Awaited rather than fired
+  // off, since the route dies with the response, but its own failures are
+  // swallowed: an author who cannot be reached must not fail a review.
+  await notifyRatingAuthor({
+    userId: reviewed.userId ?? null,
+    tankName: tank?.name ?? null,
+    review: reviewed.review ?? null,
+    approved: body.approved,
+    url: communityUrl,
+  });
 
   return Response.json({
     status: reviewed.status,
     nickname: reviewed.nickname,
-    url:
-      body.approved && slug
-        ? `${APP_IDENTITY.URL}${ROUTES.TANK(REGIONS[0], slug)}/community`
-        : null,
+    url: body.approved ? communityUrl : null,
   });
 }

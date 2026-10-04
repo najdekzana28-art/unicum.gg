@@ -38,3 +38,18 @@ export async function sendAuthorNotice(notice: {
     console.error(`[${notice.scope}] author notice failed:`, err),
   );
 }
+
+/**
+ * The author's own words, quoted back so a notice names which of them it is
+ * about.
+ *
+ * Markdown-quoted line by line: Discord's blockquote only covers the line it
+ * starts, so a paragraph break would drop out of the quote and read as the
+ * notice talking rather than the author.
+ */
+export function quoteBack(text: string): string {
+  return text
+    .split("\n")
+    .map((line) => `> ${line}`)
+    .join("\n");
+}

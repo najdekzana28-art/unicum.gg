@@ -41,6 +41,14 @@ export type ReviewedRating = {
   tankId?: number;
   nickname?: string;
   status?: TankReviewStatus;
+  /** The author, so they can be told what became of their text. Read back from
+   * the same statement that settled it rather than queried after: the row is
+   * deleted with the account, so a second read can come back empty for an
+   * author who was there a moment ago. */
+  userId?: string;
+  /** What they wrote, quoted back to them in that notice. Unchanged by the
+   * update, which only touches the review's status. */
+  review?: string | null;
 };
 
 /**
@@ -86,6 +94,8 @@ export async function reviewTankRating(
     .returning({
       tankId: tankRatings.tankId,
       nickname: tankRatings.nickname,
+      userId: tankRatings.userId,
+      review: tankRatings.review,
     });
 
   if (row) return { decision: ReviewDecision.Settled, ...row, status };
