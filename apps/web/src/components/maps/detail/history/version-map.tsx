@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowsOutSimpleIcon } from "@phosphor-icons/react/dist/ssr";
 import { useId } from "react";
 import { useTranslation } from "@/hooks/use-translation";
 import {
@@ -7,95 +8,31 @@ import {
   MAP_AREA_ONSLAUGHT,
   MAP_VARIANT_PREFIX,
   mapChangeArea,
-  splitVariantField,
   type MapChangeArea,
   type MapVariantLayout,
-  MapPoiType,
   MARKER_MOVE_THRESHOLD_M,
   matchMarkers,
   type MapDetail,
   type MapHistoryPoint,
 } from "@unicum.gg/shared";
-import Image from "next/image";
+import { mapName } from "@/components/game-name";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { buildArrows } from "@/components/maps/detail/history/arrows";
+import { areaLabel } from "@/components/maps/detail/history/areas";
 import {
-  BASE,
-  CONTROL_POINT,
-  poiUrl,
-  spawnUrl,
-} from "@/components/maps/detail/minimap-overlay";
+  HistoryMarker,
+  iconFor,
+} from "@/components/maps/detail/history/marker";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 import type { FormattedMapChange } from "@/components/maps/change-format";
-
-/** The gameplay token a geometry field belongs to (`geometry:comp7:spawns:team1`). */
-// A change recorded on a variant arena carries a `variant:<battleType>:` prefix,
-// which sits in front of the key these read, so it comes off first.
-const stripVariant = (field: string) =>
-  splitVariantField(field)?.field ?? field;
-
-/** The marker family a geometry field describes (`bases:team1`, `controlPoint`,
- * `pointsOfInterest:recon`, ...). */
-const familyOf = (field: string) =>
-  stripVariant(field).split(":").slice(2).join(":");
-
-/**
- * The game's own minimap icon for a marker family.
- *
- * The same ones the map's viewer draws, so a base reads as a base and a spawn as
- * a spawn here too: a row of identical dots says something moved without ever
- * saying what. Spawns are numbered 1..4 in game, so each takes its own numeral.
- */
-function iconFor(field: string, index: number): string {
-  const family = familyOf(field);
-  if (family === "bases:team1") return BASE.team1;
-  if (family === "bases:team2") return BASE.team2;
-  if (family === "spawns:team1") return spawnUrl("team1", index);
-  if (family === "spawns:team2") return spawnUrl("team2", index);
-  if (family === "pointsOfInterest:recon") return poiUrl(MapPoiType.CommsCenter);
-  if (family === "pointsOfInterest:flare") {
-    return poiUrl(MapPoiType.ObservationPost);
-  }
-  if (family.startsWith("pointsOfInterest")) {
-    return poiUrl(MapPoiType.ArtilleryHeadquarters);
-  }
-  return CONTROL_POINT;
-}
-
-/** Marker size on this small map, in pixels: the viewer's own markers are sized
- * for a full-width minimap and would swamp a 16rem one. */
-const ICON = 22;
-
-/** One marker of a version's before/after overlay, drawn with the game's icon.
- * The old position is ghosted and the new one solid, which is the whole reading
- * of the pair. */
-function HistoryMarker({
-  src,
-  at,
-  ghost,
-}: {
-  src: string;
-  at: { left: string; top: string };
-  ghost?: boolean;
-}) {
-  return (
-    <span
-      className="absolute -translate-x-1/2 -translate-y-1/2"
-      style={{ ...at, width: "max-content" }}
-    >
-      <Image
-        src={src}
-        alt=""
-        width={ICON}
-        height={ICON}
-        className={
-          ghost
-            ? "opacity-45 grayscale drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-            : "drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-        }
-      />
-    </span>
-  );
-}
 
 /**
  * What this area's minimap would draw, or null when there is nothing to draw.
@@ -145,6 +82,8 @@ function plan(
   return { geometry, onslaught: space, width, height };
 }
 
+type VersionPlan = NonNullable<ReturnType<typeof plan>>;
+
 /** Whether this area has a minimap to draw for these changes. */
 export function hasVersionMinimap(
   detail: MapDetail,
@@ -155,32 +94,25 @@ export function hasVersionMinimap(
 }
 
 /**
- * Where a version's markers were and where they went, drawn over the map.
+ * The drawing itself, rendered twice: in the history panel's column and
+ * enlarged in its dialog.
  *
- * The one thing a list of coordinates cannot say: a spawn moving 200 m across
- * Prokhorovka means nothing as a number and everything as a position. The old
- * places are hollow, the new ones solid, so the move reads at a glance.
- *
- * Positions are stored in metres from the play area's bottom-left corner, and
- * projected here against the map's *current* area. A map whose area was re-cut
- * since therefore shows its old markers slightly off; that is the same
- * compromise as drawing them on today's minimap at all, which is the only one
- * we have.
+ * One component for both, so the enlarged view is the same drawing rather than a
+ * second one that can disagree with it. Everything it places is a percentage of
+ * the box (positions, marker sizes, arrow widths), so the only thing `large`
+ * changes is the legend's own type size, which does not scale with an image.
  */
-export function VersionMinimap({
+function VersionMinimapCanvas({
   detail,
-  changes,
-  area,
+  drawn,
+  large,
 }: {
   detail: MapDetail;
-  changes: FormattedMapChange[];
-  /** Which of the map's two play areas to draw. */
-  area: MapChangeArea;
+  drawn: VersionPlan;
+  large?: boolean;
 }) {
   const { t } = useTranslation("components/maps/detail/history/version-map");
   const arrowId = useId();
-  const drawn = plan(detail, changes, area);
-  if (!drawn) return null;
   const { geometry, onslaught, width, height } = drawn;
 
   // Percent of the image, clamped: a marker whose play area was re-cut since can
@@ -223,7 +155,9 @@ export function VersionMinimap({
         src={onslaught?.minimapUrl ?? detail.minimapUrl}
         arenaId={onslaught?.arenaId ?? detail.arenaId}
         alt={`${detail.name} minimap`}
-        sizes="(max-width: 1024px) 100vw, 20rem"
+        sizes={
+          large ? "(max-width: 1024px) 95vw, 900px" : "(max-width: 1024px) 100vw, 20rem"
+        }
         className="opacity-70"
       />
       {arrows.length > 0 ? (
@@ -292,16 +226,97 @@ export function VersionMinimap({
           );
         });
       })}
-      <div className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-4 bg-black/55 py-1 text-[11px] text-white">
+      <div
+        className={cn(
+          "absolute inset-x-0 bottom-0 flex items-center justify-center gap-4 bg-black/55 py-1 text-white",
+          large ? "gap-6 py-2 text-sm" : "text-[11px]",
+        )}
+      >
         <span className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-white/45" />
+          <span
+            className={cn("rounded-full bg-white/45", large ? "size-3" : "size-2.5")}
+          />
           {t("before")}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="size-2.5 rounded-full bg-white" />
+          <span
+            className={cn("rounded-full bg-white", large ? "size-3" : "size-2.5")}
+          />
           {t("after")}
         </span>
       </div>
     </div>
+  );
+}
+
+/**
+ * Where a version's markers were and where they went, drawn over the map.
+ *
+ * The one thing a list of coordinates cannot say: a spawn moving 200 m across
+ * Prokhorovka means nothing as a number and everything as a position. The old
+ * places are hollow, the new ones solid, so the move reads at a glance.
+ *
+ * The panel draws it in a 16rem column, which is enough to see that something
+ * moved and not always enough to see where to: it is a button onto the same
+ * drawing at full size. The dialog names the map, the update and the area it is
+ * showing, since a reader who opens it loses the rows that said so.
+ *
+ * Positions are stored in metres from the play area's bottom-left corner, and
+ * projected here against the map's *current* area. A map whose area was re-cut
+ * since therefore shows its old markers slightly off; that is the same
+ * compromise as drawing them on today's minimap at all, which is the only one
+ * we have.
+ */
+export function VersionMinimap({
+  detail,
+  changes,
+  area,
+  context,
+}: {
+  detail: MapDetail;
+  changes: FormattedMapChange[];
+  /** Which of the map's two play areas to draw. */
+  area: MapChangeArea;
+  /** What the rows beside it are, named by the panel that holds them (an update,
+   * or the running test build), for the enlarged view's own heading. */
+  context?: string;
+}) {
+  const { t } = useTranslation("components/maps/detail/history/version-map");
+  const { t: tGame } = useTranslation("game/vocabulary");
+  const { t: tMaps } = useTranslation("game/maps");
+  const drawn = plan(detail, changes, area);
+  if (!drawn) return null;
+  // The map is named as the reader's own game names it, like everywhere else a
+  // map is shown.
+  const name = mapName(detail.arenaId, detail.name, tMaps);
+  const subtitle = [context, areaLabel(area, tGame)]
+    .filter((part) => part)
+    .join(" · ");
+
+  return (
+    <Dialog>
+      <DialogTrigger
+        // `block` because a button is inline by default, which would leave the
+        // square map sitting on a text baseline inside the column.
+        className="group relative block w-full cursor-zoom-in"
+        aria-label={t("enlarge", { map: name })}
+      >
+        <VersionMinimapCanvas detail={detail} drawn={drawn} />
+        <span className="pointer-events-none absolute top-2 right-2 flex size-7 items-center justify-center rounded-full bg-black/55 text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+          <ArrowsOutSimpleIcon className="size-4" />
+        </span>
+      </DialogTrigger>
+      {/* Sized off the viewport's shorter side, less the heading's own height,
+          so the square never pushes the dialog taller than the screen. */}
+      <DialogContent className="w-[min(95vw,calc(95vh-5.5rem))] max-w-[min(95vw,calc(95vh-5.5rem))] gap-0 p-0 sm:max-w-[min(95vw,calc(95vh-5.5rem))]">
+        <DialogHeader className="px-4 pt-4 pr-14 pb-3">
+          <DialogTitle>{name}</DialogTitle>
+          {subtitle ? <DialogDescription>{subtitle}</DialogDescription> : null}
+        </DialogHeader>
+        <div className="border-t border-fd-border">
+          <VersionMinimapCanvas detail={detail} drawn={drawn} large />
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

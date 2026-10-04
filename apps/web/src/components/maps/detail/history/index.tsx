@@ -1,5 +1,3 @@
-import type { TranslateFunction } from "@onruntime/translations";
-import { battleTypeName } from "@/components/game-name";
 import { useTranslation } from "@/hooks/use-translation";
 import { useFormat } from "@/hooks/use-format";
 import { Fragment } from "react";
@@ -16,50 +14,20 @@ import {
   type FormattedMapChange,
 } from "@/components/maps/change-format";
 import {
+  areaLabel,
+  areaRank,
+} from "@/components/maps/detail/history/areas";
+import {
   hasVersionMinimap,
   VersionMinimap,
 } from "@/components/maps/detail/history/version-map";
 import {
   MAP_HISTORY_TRACKING_START,
-  BATTLE_TYPE_LABEL,
-  BattleType,
   MAP_AREA_MAP,
-  MAP_AREA_ONSLAUGHT,
-  MAP_VARIANT_PREFIX,
   mapChangeArea,
   type MapChangeArea,
   type MapDetail,
 } from "@unicum.gg/shared";
-
-/** The map's own rows first, then its Onslaught area, then the variants, so a
- * version reads from the ground everyone plays outwards. */
-function areaRank(area: MapChangeArea): number {
-  if (area === MAP_AREA_MAP) return 0;
-  if (area === MAP_AREA_ONSLAUGHT) return 1;
-  return 2;
-}
-
-/** What to call an area above its rows. A variant area carries its battle type,
- * so it names itself.
- *
- * The name is the game's own, in the reader's language: `BATTLE_TYPE_LABEL` is
- * the English catalogue the key space is built from, and `game/vocabulary` is
- * what Wargaming calls it. A French player reads "Offensive", never "Onslaught".
- */
-function areaLabel(
-  area: MapChangeArea,
-  tGame: TranslateFunction,
-): string {
-  const battleType =
-    area === MAP_AREA_ONSLAUGHT
-      ? BattleType.Onslaught
-      : area.slice(MAP_VARIANT_PREFIX.length);
-  if (!(battleType in BATTLE_TYPE_LABEL)) return battleType;
-  const name = battleTypeName(battleType, tGame);
-  return name === `battle-types.${battleType}`
-    ? BATTLE_TYPE_LABEL[battleType as BattleType]
-    : name;
-}
 
 const DATE_PATTERN = "d MMM yyyy";
 
@@ -77,15 +45,22 @@ function MinimapColumn({
   detail,
   changes,
   area,
+  context,
 }: {
   detail: MapDetail;
   changes: FormattedMapChange[];
   area: MapChangeArea;
+  context?: string;
 }) {
   if (!hasVersionMinimap(detail, changes, area)) return null;
   return (
     <div className="border-t border-fd-border sm:border-t-0 sm:border-l">
-      <VersionMinimap detail={detail} changes={changes} area={area} />
+      <VersionMinimap
+        detail={detail}
+        changes={changes}
+        area={area}
+        context={context}
+      />
     </div>
   );
 }
@@ -104,9 +79,13 @@ function MinimapColumn({
 function VersionChanges({
   detail,
   changes,
+  context,
 }: {
   detail: MapDetail;
   changes: FormattedMapChange[];
+  /** Which update (or test build) these rows are, for the enlarged minimap's
+   * heading: the dialog covers the panel that says so. */
+  context?: string;
 }) {
   const { t: tGame } = useTranslation("game/vocabulary");
   // The areas a version actually touched, in the order the rows come in: the map
@@ -137,7 +116,12 @@ function VersionChanges({
                 <ChangeRow key={change.field} change={change} />
               ))}
             </ul>
-            <MinimapColumn detail={detail} changes={rows} area={area} />
+            <MinimapColumn
+              detail={detail}
+              changes={rows}
+              area={area}
+              context={context}
+            />
           </div>
         </div>
       ))}
@@ -249,7 +233,13 @@ export function MapChangesHistory({
             <p className="px-4 py-3 text-xs text-fd-muted-foreground">
               {t("not-released-wargaming-can-still")}</p>
             <div className="border-t border-fd-border">
-              <VersionChanges detail={detail} changes={pending} />
+              <VersionChanges
+                detail={detail}
+                changes={pending}
+                context={[tGame("features.common-test"), testVersion]
+                  .filter((part) => part)
+                  .join(" ")}
+              />
             </div>
           </PanelContent>
         </Panel>
@@ -273,7 +263,11 @@ export function MapChangesHistory({
               </span>
             </PanelHeader>
             <PanelContent className="p-0">
-              <VersionChanges detail={detail} changes={changes} />
+              <VersionChanges
+                detail={detail}
+                changes={changes}
+                context={t("update", { version: version.gameVersion })}
+              />
             </PanelContent>
           </Panel>
         </Fragment>
