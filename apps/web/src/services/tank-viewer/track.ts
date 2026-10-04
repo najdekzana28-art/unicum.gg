@@ -67,13 +67,28 @@ export function pathOf(points: number[][]) {
  * run, skywards on the top one. So the link's own up axis faces out of the
  * loop, and the belt turns over correctly at each end.
  *
- * A link is laid on the **chord** to the next one, not on the tangent under its
- * own centre. A link is a rigid bar between two pins, and pins sit a straight
+ * A link is laid on the **chord its own ends span**, not on the tangent under
+ * its centre. A link is a rigid bar between two pins, and pins sit a straight
  * line apart, so a chord is what it actually spans. Sitting it on the tangent
  * instead lifts both its ends off the curve, by 25 mm on a wheel as small as an
  * idler, and every joint round that wheel opens a gap you can see through. On
  * the chord the ends land back on the curve and consecutive links overlap by a
  * few millimetres, which is what a real track does at the pin.
+ *
+ * **And never further than the link is long.** The chord used to run to the
+ * next link whatever the link measured, which is the same thing only while the
+ * two agree. They usually do, or near enough: 740 of the 990 link models are
+ * longer than the step that lays them, which is the overlap at the pin, and
+ * there the chord still stops at the step, because that is where the next pin
+ * is. **213 are shorter**, and those were laid on a chord they do not span and
+ * carried to the middle of it, which is deeper into every turn than their own
+ * ends could ever reach. The BT-5's plate is 285 mm on a 507 mm step, so each
+ * one sat 84 mm inside a wheel of 408: both idlers came out through the belt
+ * and the band read as a polygon thrown round them. Every Christie suspension
+ * is in that group, which is what makes it a family rather than one vehicle.
+ * Stopping the chord at the plate puts the BT-5 back to 11 mm, the sagitta a
+ * rigid plate of that length genuinely has on a wheel that small, and leaves
+ * the other 740 exactly where they were.
  */
 export function layTrack(
   geometry: THREE.BufferGeometry,
@@ -88,27 +103,41 @@ export function layTrack(
   // division: laying exactly that many leaves no part link at the join.
   const count = links ?? Math.max(1, Math.round(total / linkLength));
   const mesh = new THREE.InstancedMesh(geometry, material, count);
+  // What the link itself measures, and where its middle sits. Measured about
+  // that middle rather than about the origin, so a link modelled off centre
+  // does not slide half its asymmetry along the belt.
+  geometry.computeBoundingBox();
+  const box = geometry.boundingBox;
+  const span = box ? box.max.z - box.min.z : linkLength;
+  const middle = box ? (box.max.z + box.min.z) / 2 : 0;
   const basis = new THREE.Matrix4();
   const at = new THREE.Vector3();
   const along = new THREE.Vector3();
+  const behind = new THREE.Vector3();
   const ahead = new THREE.Vector3();
   const outward = new THREE.Vector3();
   const side = new THREE.Vector3();
   // Read here rather than at import: the module must not touch the window to
   // be loaded, and one belt's links all face the same way anyway.
   const facing = linkFacing();
+  /** Back onto the loop, since a link's ends read past either end of it. */
+  const loop = (u: number) => ((u % 1) + 1) % 1;
   // Sliding every link by the same distance is how the game runs a track: the
   // belt moves, the path does not.
   const place = (offset: number) => {
+    // Read here rather than above, since a reshaped path is a new length and
+    // the links spread over it: the count is what the chassis said it has.
+    const reach = Math.min(span, total / count) / 2;
+    const tail = middle - reach;
+    const nose = middle + reach;
     for (let i = 0; i < count; i++) {
       // A tank rolling forward drives its belt backwards along the top run,
       // which is the direction the loop is wound in, so the offset subtracts.
-      const t = (((i / count + start / total - offset / total) % 1) + 1) % 1;
-      const next = (t + 1 / count) % 1;
-      curve.getPointAt(t, at);
-      curve.getPointAt(next, ahead);
-      along.subVectors(ahead, at).normalize();
-      at.lerp(ahead, 0.5);
+      const t = i / count + start / total - offset / total;
+      curve.getPointAt(loop(t + tail / total), behind);
+      curve.getPointAt(loop(t + nose / total), ahead);
+      along.subVectors(ahead, behind).normalize();
+      at.lerpVectors(behind, ahead, 0.5).addScaledVector(along, -middle);
       // Which way is out of the loop. The link is modelled with its centre
       // guide on one side and its shoe on the other, so this is what decides
       // whether the guide rides between the road wheels or sticks out into the
