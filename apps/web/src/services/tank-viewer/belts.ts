@@ -78,7 +78,12 @@ export async function layBelts({
       piece && model.pieces[piece] ? piece : instead;
     const runs: { piece: string; start: number; side: string }[] = [];
     for (const side of Object.keys(tracks.paths)) {
-      const right = side === "right";
+      // **Any run down the right, not only the first.** A vehicle with more
+      // than one belt a side names the outer ones `right1`, `right2`, and the
+      // link a shoe plate puts on the right belongs on all of them: the Object
+      // 279 (e) carries two a side. Matched on the prefix, which is what the
+      // mirror keys them by.
+      const right = side.startsWith("right");
       runs.push({
         piece: held(right ? tracks.segmentRight : undefined, tracks.segment),
         start: opening,
